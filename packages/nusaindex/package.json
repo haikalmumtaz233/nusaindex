@@ -32,6 +32,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./holiday": {
+      "types": "./dist/holiday.d.ts",
+      "default": "./dist/holiday.js"
+    },
     "./nik": {
       "types": "./dist/nik.d.ts",
       "default": "./dist/nik.js"
@@ -130,6 +134,12 @@
         "region"
       ],
       "limit": "16 kB",
+      "gzip": true
+    },
+    {
+      "name": "holiday",
+      "path": "dist/holiday.js",
+      "limit": "6 kB",
       "gzip": true
     }
   ]

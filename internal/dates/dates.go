@@ -25,6 +25,30 @@ func Valid(year, month, day int) bool {
 	return day <= DaysInMonth(year, month)
 }
 
+func ParseISO(s string) (year, month, day int, ok bool) {
+	if len(s) != 10 || s[4] != '-' || s[7] != '-' {
+		return 0, 0, 0, false
+	}
+	year, okYear := number(s[0:4])
+	month, okMonth := number(s[5:7])
+	day, okDay := number(s[8:10])
+	if !okYear || !okMonth || !okDay || !Valid(year, month, day) {
+		return 0, 0, 0, false
+	}
+	return year, month, day, true
+}
+
+func number(s string) (int, bool) {
+	v := 0
+	for i := 0; i < len(s); i++ {
+		if s[i] < '0' || s[i] > '9' {
+			return 0, false
+		}
+		v = v*10 + int(s[i]-'0')
+	}
+	return v, true
+}
+
 func ISODate(year, month, day int) string {
 	b := make([]byte, 0, 10)
 	b = appendPadded(b, year, 4)
