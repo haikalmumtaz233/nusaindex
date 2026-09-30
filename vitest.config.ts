@@ -6,7 +6,7 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       include: ["packages/*/src/**/*.ts"],
-      exclude: ["packages/*/src/index.ts"],
+      exclude: ["packages/*/src/index.ts", "packages/*/src/generated/**"],
       reporter: ["text-summary"],
       thresholds: {
         perFile: true,
