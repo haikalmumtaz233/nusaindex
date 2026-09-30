@@ -1,5 +1,5 @@
 {
-  "dataVersion": "2026.10.3",
+  "dataVersion": "2026.10.4",
   "datasets": {
     "regions.csv": {
       "source": [
@@ -45,6 +45,26 @@
       "retrievedAt": "2026-10-01",
       "sha256": "19b9120cd97c53fa7b575519ac3b07df00c17cb890ad27a4b52e056a0d13b2da",
       "rows": 387
+    },
+    "holidays.csv": {
+      "source": [
+        "https://inspektorat.madiunkota.go.id/wp-content/uploads/2020/12/486635801-SKB-3-Menteri-Tentang-Perubahan-Ke-4-Libnas-Cutber-2020.pdf",
+        "https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2021-06/SKB%203%20Menteri%20tentang%20Perubahan%20kedua%20Libur%20Nasional%20dan%20Cuti%20Bersama%202021.pdf",
+        "https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2021-09/SKB%20Libnas%20%26%20Cuti%20Bersama%20Tahun%202022.pdf",
+        "https://www.menpan.go.id/site/berita-terkini/skb-tiga-menteri-tetapkan-cuti-bersama-idulfitri-1443-h",
+        "https://kemenkopmk.go.id/sites/default/files/pengumuman/2022-10/SKB%20LibNas%20dan%20CuBer%202023_0.pdf",
+        "https://setda.kalteng.go.id/storage/app/media/uploaded-files/SKB%20Perubahan%20Harlibnas%20dan%20Cuti%20Bersama%202023-1.pdf",
+        "https://setkab.go.id/pemerintah-terbitkan-skb-perubahan-libur-nasional-dan-cuti-bersama-2023-2/",
+        "https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2024-02/SKB%20Perubahan%20Libur%20Nasional%20dan%20Cuti%20Bersama%202024%20_0.pdf",
+        "https://jdih.kemenkoinfra.go.id/cfind/source/files/2025skbmenpanrb003.pdf",
+        "https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2025-09/SKB%20Libur%20Nasional%20dan%20Cuti%20Bersama%20Tahun%202026.pdf",
+        "https://kemenkopmk.go.id/sites/default/files/pengumuman/2026-09/SKB%20Libur%20Nasional%20dan%20Cuti%20Bersama%20Tahun%202027.pdf",
+        "https://peraturan.bpk.go.id/Details/277337/keppres-no-10-tahun-2024"
+      ],
+      "regulation": "SKB 3 Menteri 2020-2027 beserta perubahannya; Keppres 22 Tahun 2020, 10 Tahun 2024, 33 Tahun 2024",
+      "retrievedAt": "2026-10-01",
+      "sha256": "fa1403348c0cf51bb97458c6702d1c48ddf26f269b4261e8732adeb070b86ac3",
+      "rows": 194
     }
   }
 }

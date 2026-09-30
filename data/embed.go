@@ -14,6 +14,9 @@ var plateCodes string
 //go:embed area_codes.csv
 var areaCodes string
 
+//go:embed holidays.csv
+var holidays string
+
 func Regions() string {
 	return regions
 }
@@ -28,4 +31,8 @@ func PlateCodes() string {
 
 func AreaCodes() string {
 	return areaCodes
+}
+
+func Holidays() string {
+	return holidays
 }
