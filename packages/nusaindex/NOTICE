@@ -30,3 +30,10 @@ Fixed-line area codes (data/area_codes.csv)
   Tabel II.2 to II.8. Each place named in the tables is mapped to the regency
   or city that contains it; four places that could not be located with
   confidence are left out.
+
+National holidays and collective leave (data/holidays.csv)
+  Keputusan Bersama Menteri Agama, Menteri Ketenagakerjaan, dan Menteri
+  Pendayagunaan Aparatur Negara dan Reformasi Birokrasi for 2020 to 2027 with
+  every amendment, and Keputusan Presiden Nomor 22 Tahun 2020, 10 Tahun 2024,
+  and 33 Tahun 2024 for election days. The basis column names the decree
+  behind each row.

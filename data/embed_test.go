@@ -9,10 +9,11 @@ import (
 
 func TestDatasetsHaveHeaders(t *testing.T) {
 	cases := map[string]string{
-		"code,name\n":                     data.Regions(),
-		"old_code,new_code,since,basis\n": data.RegionAliases(),
-		"code,region_code,basis\n":        data.PlateCodes(),
-		"code,region_code,place\n":        data.AreaCodes(),
+		"code,name\n":                       data.Regions(),
+		"old_code,new_code,since,basis\n":   data.RegionAliases(),
+		"code,region_code,basis\n":          data.PlateCodes(),
+		"code,region_code,place\n":          data.AreaCodes(),
+		"date,kind,name_id,name_en,basis\n": data.Holidays(),
 	}
 	for header, text := range cases {
 		if !strings.HasPrefix(text, header) {
