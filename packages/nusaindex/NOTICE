@@ -1,0 +1,19 @@
+NusaIndex
+Copyright (c) 2026 Haikal Mumtaz
+
+The reference data in data/ is compiled from public Indonesian regulations and
+official announcements, and is distributed under the same MIT License as the
+code. It is not an official publication of any government agency. The exact
+documents, retrieval dates, and checksums for every dataset are listed in
+data/manifest.json.
+
+Regions (data/regions.csv)
+  Keputusan Menteri Dalam Negeri Nomor 300.2.2-2138 Tahun 2025 as amended by
+  Nomor 300.2.2-2430 Tahun 2025. Names were normalized with the help of
+  cahyadsn/wilayah (https://github.com/cahyadsn/wilayah), Copyright (c) 2025
+  cahya dsn, MIT License, and checked code by code against the decree.
+
+Historical region codes (data/region_aliases.csv)
+  Undang-Undang Nomor 14, 15, 16, and 29 Tahun 2022 (Papua provinces),
+  Undang-Undang Nomor 20 Tahun 2012 (Kalimantan Utara), and Peraturan Menteri
+  Dalam Negeri Nomor 66 Tahun 2011 for the codes used before 2012.
