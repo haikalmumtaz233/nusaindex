@@ -72,6 +72,17 @@
     {"fn": "byAreaCode", "args": ["0"], "error": "length"},
     {"fn": "byAreaCode", "args": ["02a"], "error": "charset"},
     {"fn": "byAreaCode", "args": [""], "error": "length"},
-    {"fn": "byAreaCode", "args": ["+62274"], "error": "charset"}
+    {"fn": "byAreaCode", "args": ["+62274"], "error": "charset"},
+    {"fn": "fromNik", "args": ["3171014501909999"], "output": {"province": {"code": "31", "name": "Daerah Khusus Ibukota Jakarta", "level": "province"}, "regency": {"code": "31.71", "name": "Kota Administrasi Jakarta Pusat", "level": "regency", "parentCode": "31"}, "district": {"code": "31.71.01", "name": "Gambir", "level": "district", "parentCode": "31.71"}, "historical": false}},
+    {"fn": "fromNik", "args": ["9113360101909999"], "output": {"province": {"code": "95", "name": "Papua Pegunungan", "level": "province"}, "regency": {"code": "95.03", "name": "Kabupaten Yahukimo", "level": "regency", "parentCode": "95"}, "district": {"code": "95.03.34", "name": "Holuwon", "level": "district", "parentCode": "95.03"}, "historical": true}},
+    {"fn": "fromNik", "args": ["6404120101909998"], "output": {"province": {"code": "65", "name": "Kalimantan Utara", "level": "province"}, "regency": {"code": "65.01", "name": "Kabupaten Bulungan", "level": "regency", "parentCode": "65"}, "district": {"code": "65.01.10", "name": "Bunyu", "level": "district", "parentCode": "65.01"}, "historical": true}},
+    {"fn": "fromNik", "args": ["6404990101909997"], "output": {"province": {"code": "65", "name": "Kalimantan Utara", "level": "province"}, "regency": {"code": "65.01", "name": "Kabupaten Bulungan", "level": "regency", "parentCode": "65"}, "historical": true}},
+    {"fn": "fromNik", "args": ["3171990101909996"], "output": {"province": {"code": "31", "name": "Daerah Khusus Ibukota Jakarta", "level": "province"}, "regency": {"code": "31.71", "name": "Kota Administrasi Jakarta Pusat", "level": "regency", "parentCode": "31"}, "historical": false}},
+    {"fn": "fromNik", "args": ["1199990101909995"], "output": {"province": {"code": "11", "name": "Aceh", "level": "province"}, "historical": false}},
+    {"fn": "fromNik", "args": ["91.13.36.410190.9994"], "output": {"province": {"code": "95", "name": "Papua Pegunungan", "level": "province"}, "regency": {"code": "95.03", "name": "Kabupaten Yahukimo", "level": "regency", "parentCode": "95"}, "district": {"code": "95.03.34", "name": "Holuwon", "level": "district", "parentCode": "95.03"}, "historical": true}},
+    {"fn": "fromNik", "args": [""], "error": "length"},
+    {"fn": "fromNik", "args": ["317101450190999x"], "error": "charset"},
+    {"fn": "fromNik", "args": ["0071014501909999"], "error": "region"},
+    {"fn": "fromNik", "args": ["3171013201909999"], "error": "date"}
   ]
 }
