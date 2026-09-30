@@ -47,7 +47,7 @@ function buildRegions(): void {
   for (const province of provinces) {
     const lower = rows
       .filter(([code = ""]) => code.length > 5 && code.startsWith(`${province}.`))
-      .map(([code = "", name = ""]) => [code.slice(3), name]);
+      .map(([code = "", name = ""]) => [code.length > 8 ? code.slice(9) : code.slice(3), name]);
     const text = constant("shard", table(lower));
     const size = gzipSync(text).length;
     if (size > shardBudget) {

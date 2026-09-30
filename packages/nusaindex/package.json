@@ -23,7 +23,8 @@
     "node": ">=22.18.0"
   },
   "files": [
-    "dist"
+    "dist",
+    "NOTICE"
   ],
   "exports": {
     ".": {

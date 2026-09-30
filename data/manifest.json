@@ -1,4 +1,31 @@
 {
-  "dataVersion": "2026.10.0",
-  "datasets": {}
+  "dataVersion": "2026.10.1",
+  "datasets": {
+    "regions.csv": {
+      "source": [
+        "https://peraturan.bpk.go.id/Download/384753/Lampiran-Kepmen%20300.2.2-2138%20Tahun%202025.pdf",
+        "https://jdih.sumutprov.go.id/assets/reg/1753776905441_KEPMEN_NOMOR_300222430_TAHUN_2025.pdf",
+        "https://raw.githubusercontent.com/cahyadsn/wilayah/master/db/wilayah.sql"
+      ],
+      "regulation": "Kepmendagri 300.2.2-2138 Tahun 2025 (25-04-2025) jo. 300.2.2-2430 Tahun 2025 (23-06-2025)",
+      "retrievedAt": "2026-10-01",
+      "sha256": "3b73e36a6c38cf8d5f64dfde6a04fd7c50f154a87578da34ba1c98524fbaeb60",
+      "rows": 91599
+    },
+    "region_aliases.csv": {
+      "source": [
+        "https://peraturan.bpk.go.id/Details/217796/uu-no-14-tahun-2022",
+        "https://peraturan.bpk.go.id/Details/217798/uu-no-15-tahun-2022",
+        "https://peraturan.bpk.go.id/Details/217799/uu-no-16-tahun-2022",
+        "https://peraturan.bpk.go.id/Details/232726/uu-no-29-tahun-2022",
+        "https://peraturan.bpk.go.id/Details/39108/uu-no-20-tahun-2012",
+        "https://archive.org/details/Permendagri_No.66_Tahun_2011",
+        "https://raw.githubusercontent.com/cahyadsn/wilayah/master/db/archive/wilayah_2022.sql"
+      ],
+      "regulation": "UU 14, 15, 16, 29 Tahun 2022; UU 20 Tahun 2012; Permendagri 66 Tahun 2011",
+      "retrievedAt": "2026-10-01",
+      "sha256": "dab7c76fed2fcca69f7c419782cc09c1ce586a60f1fa105446e216f65086b20c",
+      "rows": 663
+    }
+  }
 }
