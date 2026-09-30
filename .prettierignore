@@ -1,0 +1,9 @@
+dist
+node_modules
+coverage
+pnpm-lock.yaml
+.astro
+.cache
+data
+testdata
+packages/*/src/generated
