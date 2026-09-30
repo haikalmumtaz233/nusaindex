@@ -7,6 +7,7 @@ export default defineConfig({
     normalize: "src/normalize/index.ts",
     npwp: "src/npwp/index.ts",
     phone: "src/phone/index.ts",
+    plate: "src/plate/index.ts",
   },
   format: "esm",
   platform: "neutral",

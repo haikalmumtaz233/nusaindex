@@ -1,0 +1,35 @@
+{
+  "module": "plate",
+  "cases": [
+    { "fn": "parse", "args": ["B 1234 ABC"], "output": { "region": "B", "number": "1234", "suffix": "ABC" } },
+    { "fn": "parse", "args": ["b1234abc"], "output": { "region": "B", "number": "1234", "suffix": "ABC" } },
+    { "fn": "parse", "args": ["AB-1-C"], "output": { "region": "AB", "number": "1", "suffix": "C" } },
+    { "fn": "parse", "args": ["  DK 9 XY  "], "output": { "region": "DK", "number": "9", "suffix": "XY" } },
+    { "fn": "parse", "args": ["RI 1"], "output": { "region": "RI", "number": "1", "suffix": "" } },
+    { "fn": "parse", "args": ["D 12"], "output": { "region": "D", "number": "12", "suffix": "" } },
+    { "fn": "parse", "args": [""], "error": "length" },
+    { "fn": "parse", "args": ["   "], "error": "length" },
+    {
+      "fn": "parse",
+      "args": ["B                                                              1234"],
+      "error": "length"
+    },
+    { "fn": "parse", "args": ["B 1234 ABCD"], "error": "format" },
+    { "fn": "parse", "args": ["ABC 1234"], "error": "format" },
+    { "fn": "parse", "args": ["B 12345"], "error": "format" },
+    { "fn": "parse", "args": ["B 0123 A"], "error": "format" },
+    { "fn": "parse", "args": ["B 12 34"], "error": "format" },
+    { "fn": "parse", "args": ["1234 AB"], "error": "format" },
+    { "fn": "parse", "args": ["B"], "error": "format" },
+    { "fn": "parse", "args": ["B 1234 AB 12"], "error": "format" },
+    { "fn": "parse", "args": ["B 1 A 2"], "error": "format" },
+    { "fn": "parse", "args": ["B_1234"], "error": "charset" },
+    { "fn": "parse", "args": ["B 1234 ÁBC"], "error": "charset" },
+    { "fn": "parse", "args": ["B.1234.ABC"], "error": "charset" },
+    { "fn": "isValid", "args": ["B 1234 ABC"], "output": true },
+    { "fn": "isValid", "args": ["B 12345"], "output": false },
+    { "fn": "format", "args": ["b-1234-abc"], "output": "B 1234 ABC" },
+    { "fn": "format", "args": ["RI1"], "output": "RI 1" },
+    { "fn": "format", "args": ["B 12 34"], "error": "format" }
+  ]
+}
