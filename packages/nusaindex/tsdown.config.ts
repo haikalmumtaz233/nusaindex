@@ -5,6 +5,7 @@ export default defineConfig({
     index: "src/index.ts",
     nik: "src/nik/index.ts",
     normalize: "src/normalize/index.ts",
+    npwp: "src/npwp/index.ts",
   },
   format: "esm",
   platform: "neutral",
