@@ -34,6 +34,8 @@
     {"fn": "search", "args": [""], "error": "length"},
     {"fn": "search", "args": ["  --  "], "error": "length"},
     {"fn": "search", "args": ["bándung"], "error": "charset"},
+    {"fn": "search", "args": ["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"], "error": "length"},
+    {"fn": "search", "args": ["éééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééééé"], "error": "charset"},
     {"fn": "search", "args": ["a", {"limit": 101}], "error": "options"},
     {"fn": "search", "args": ["a", {"limit": -1}], "error": "options"},
     {"fn": "search", "args": ["a", {"level": "city"}], "error": "options"},
@@ -46,6 +48,17 @@
     {"fn": "resolve", "args": ["31.71"], "output": {"code": "31.71", "name": "Kota Administrasi Jakarta Pusat", "level": "regency", "parentCode": "31"}},
     {"fn": "resolve", "args": ["91.13.36.2001"], "error": "unknown"},
     {"fn": "resolve", "args": ["zz"], "error": "charset"},
-    {"fn": "resolve", "args": ["1"], "error": "length"}
+    {"fn": "resolve", "args": ["1"], "error": "length"},
+    {"fn": "byPlate", "args": ["B"], "output": [{"code": "31.01", "name": "Kabupaten Administrasi Kepulauan Seribu", "level": "regency", "parentCode": "31"}, {"code": "31.71", "name": "Kota Administrasi Jakarta Pusat", "level": "regency", "parentCode": "31"}, {"code": "31.72", "name": "Kota Administrasi Jakarta Utara", "level": "regency", "parentCode": "31"}, {"code": "31.73", "name": "Kota Administrasi Jakarta Barat", "level": "regency", "parentCode": "31"}, {"code": "31.74", "name": "Kota Administrasi Jakarta Selatan", "level": "regency", "parentCode": "31"}, {"code": "31.75", "name": "Kota Administrasi Jakarta Timur", "level": "regency", "parentCode": "31"}, {"code": "32.16", "name": "Kabupaten Bekasi", "level": "regency", "parentCode": "32"}, {"code": "32.75", "name": "Kota Bekasi", "level": "regency", "parentCode": "32"}, {"code": "32.76", "name": "Kota Depok", "level": "regency", "parentCode": "32"}, {"code": "36.71", "name": "Kota Tangerang", "level": "regency", "parentCode": "36"}, {"code": "36.74", "name": "Kota Tangerang Selatan", "level": "regency", "parentCode": "36"}]},
+    {"fn": "byPlate", "args": ["py"], "output": [{"code": "96.01", "name": "Kabupaten Sorong", "level": "regency", "parentCode": "96"}, {"code": "96.02", "name": "Kabupaten Sorong Selatan", "level": "regency", "parentCode": "96"}, {"code": "96.03", "name": "Kabupaten Raja Ampat", "level": "regency", "parentCode": "96"}, {"code": "96.04", "name": "Kabupaten Tambrauw", "level": "regency", "parentCode": "96"}, {"code": "96.05", "name": "Kabupaten Maybrat", "level": "regency", "parentCode": "96"}, {"code": "96.71", "name": "Kota Sorong", "level": "regency", "parentCode": "96"}]},
+    {"fn": "byPlate", "args": [" D "], "output": [{"code": "32.04", "name": "Kabupaten Bandung", "level": "regency", "parentCode": "32"}, {"code": "32.17", "name": "Kabupaten Bandung Barat", "level": "regency", "parentCode": "32"}, {"code": "32.73", "name": "Kota Bandung", "level": "regency", "parentCode": "32"}, {"code": "32.77", "name": "Kota Cimahi", "level": "regency", "parentCode": "32"}]},
+    {"fn": "byPlate", "args": ["l"], "output": [{"code": "35.78", "name": "Kota Surabaya", "level": "regency", "parentCode": "35"}]},
+    {"fn": "byPlate", "args": ["RI"], "error": "unknown"},
+    {"fn": "byPlate", "args": ["XX"], "error": "unknown"},
+    {"fn": "byPlate", "args": ["ABC"], "error": "length"},
+    {"fn": "byPlate", "args": ["B1"], "error": "charset"},
+    {"fn": "byPlate", "args": [""], "error": "length"},
+    {"fn": "byPlate", "args": ["   "], "error": "length"},
+    {"fn": "byPlate", "args": ["é"], "error": "charset"}
   ]
 }

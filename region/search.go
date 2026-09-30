@@ -85,10 +85,10 @@ func Search(query string, opts SearchOptions) ([]Region, error) {
 }
 
 func searchQuery(query string) (string, error) {
-	if len(query) > maxQuery {
-		return "", ErrLength
-	}
 	for i := 0; i < len(query); i++ {
+		if i == maxQuery {
+			return "", ErrLength
+		}
 		if query[i] < ' ' || query[i] > '~' {
 			return "", ErrCharset
 		}

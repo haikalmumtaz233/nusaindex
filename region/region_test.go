@@ -28,6 +28,7 @@ func TestVectors(t *testing.T) {
 		"children": func(a []any) (any, error) { return region.Children(a[0].(string)) },
 		"search":   func(a []any) (any, error) { return region.Search(a[0].(string), searchOptions(a)) },
 		"resolve":  func(a []any) (any, error) { return region.Resolve(a[0].(string)) },
+		"byPlate":  func(a []any) (any, error) { return region.ByPlate(a[0].(string)) },
 	})
 }
 
