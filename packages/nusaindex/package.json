@@ -34,6 +34,10 @@
       "types": "./dist/nik.d.ts",
       "default": "./dist/nik.js"
     },
+    "./nip": {
+      "types": "./dist/nip.d.ts",
+      "default": "./dist/nip.js"
+    },
     "./normalize": {
       "types": "./dist/normalize.d.ts",
       "default": "./dist/normalize.js"
@@ -67,6 +71,12 @@
     {
       "name": "nik",
       "path": "dist/nik.js",
+      "limit": "2 kB",
+      "gzip": true
+    },
+    {
+      "name": "nip",
+      "path": "dist/nip.js",
       "limit": "2 kB",
       "gzip": true
     },
