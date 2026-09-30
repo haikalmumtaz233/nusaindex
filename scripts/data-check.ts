@@ -128,7 +128,7 @@ function checkPlates(rows: string[][]): void {
   }
   checkSorted(
     "plate_codes.csv",
-    rows.map((r) => `${r[0] ?? ""}|${r[1] ?? ""}`),
+    rows.map((r) => `${r[0] ?? ""} ${r[1] ?? ""}`),
     true,
   );
 }
@@ -145,7 +145,7 @@ function checkAreas(rows: string[][]): void {
   }
   checkSorted(
     "area_codes.csv",
-    rows.map((r) => `${r[0] ?? ""}|${r[1] ?? ""}`),
+    rows.map((r) => `${r[0] ?? ""} ${r[1] ?? ""}`),
     true,
   );
 }
@@ -173,7 +173,7 @@ function checkHolidays(rows: string[][]): void {
     rows.map((r) => r[0] ?? ""),
     false,
   );
-  const keys = rows.map((r) => `${r[0] ?? ""}|${r[1] ?? ""}|${r[2] ?? ""}`);
+  const keys = rows.map((r) => `${r[0] ?? ""} ${r[1] ?? ""} ${r[2] ?? ""}`);
   if (new Set(keys).size !== keys.length) {
     fail("holidays.csv: duplicated date, kind and name");
   }
@@ -192,7 +192,7 @@ function checkBanks(rows: string[][]): void {
   }
   checkSorted(
     "banks.csv",
-    rows.map((r) => `${r[0] ?? ""}|${r[1] ?? ""}|${r[2] ?? ""}`),
+    rows.map((r) => `${r[0] ?? ""} ${r[1] ?? ""} ${r[2] ?? ""}`),
     true,
   );
 }
