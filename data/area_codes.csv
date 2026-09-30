@@ -1,0 +1,388 @@
+code,region_code,place
+021,31,Jakarta
+022,32.04,Bandung
+022,32.73,Bandung
+0231,32.09,Cirebon
+0231,32.74,Cirebon
+0232,32.08,Kuningan
+0233,32.10,Majalengka
+0234,32.12,Indramayu
+024,33.22,Semarang
+024,33.74,Semarang
+0251,32.01,Bogor
+0251,32.71,Bogor
+0252,36.02,Rangkasbitung
+0253,36.01,Pandeglang
+0254,36.04,Serang
+0254,36.73,Serang
+0260,32.13,Subang
+0261,32.11,Sumedang
+0262,32.05,Garut/Pameungpeuk
+0263,32.03,Cianjur
+0264,32.14,Purwakarta
+0265,32.06,Tasikmalaya
+0265,32.78,Tasikmalaya
+0266,32.02,Sukabumi
+0266,32.72,Sukabumi
+0267,32.15,Karawang
+0271,33.72,Solo
+0272,33.10,Klaten
+0273,33.12,Wonogiri
+0274,34.71,Yogyakarta
+0275,33.06,Purworejo
+0276,33.09,Boyolali
+0280,33.01,Majenang
+0281,33.02,Purwokerto
+0282,33.01,Cilacap
+0283,33.28,Tegal
+0283,33.29,Brebes
+0283,33.76,Tegal
+0284,33.27,Pemalang
+0285,33.26,Pekalongan
+0285,33.75,Pekalongan
+0286,33.07,Wonosobo
+0287,33.05,Kebumen
+0289,33.29,Bumiayu
+0291,33.19,Kudus
+0292,33.15,Purwodadi
+0293,33.08,Magelang
+0293,33.71,Magelang
+0294,33.24,Kendal
+0295,33.18,Pati
+0296,33.16,Blora
+0297,33.20,Karimunjawa
+0298,33.73,Salatiga
+031,35.78,Surabaya
+0321,35.16,Mojokerto
+0321,35.76,Mojokerto
+0322,35.24,Lamongan
+0323,35.27,Sampang
+0324,35.28,Pamekasan
+0325,35.25,Sangkapura
+0327,35.29,Gayam/Pabean
+0328,35.29,Sumenep
+0331,35.09,Jember
+0332,35.11,Bondowoso
+0333,35.10,Banyuwangi
+0334,35.08,Lumajang
+0335,35.13,Probolinggo
+0335,35.74,Probolinggo
+0336,35.09,Tanggul
+0338,35.12,Situbondo
+0341,35.07,Malang
+0341,35.73,Malang
+0342,35.05,Blitar
+0342,35.72,Blitar
+0343,35.14,Pasuruan
+0343,35.75,Pasuruan
+0351,35.19,Madiun
+0351,35.77,Madiun
+0352,35.02,Ponorogo
+0353,35.22,Bojonegoro
+0354,35.06,Kediri
+0354,35.71,Kediri
+0355,35.04,Tulungagung
+0356,35.23,Tuban
+0357,35.01,Pacitan
+0358,35.18,Nganjuk
+0361,51.71,Denpasar
+0362,51.02,Pupuan
+0362,51.08,Singaraja
+0363,51.07,Amlapura
+0365,51.01,Negara
+0366,51.05,Klungkung
+0368,51.02,Baturiti
+0370,52.71,Mataram
+0371,52.04,Sumbawa Besar
+0372,52.04,Alas
+0373,52.05,Dompu
+0374,52.06,Bima
+0374,52.72,Bima
+0376,52.03,Selong
+0380,53.01,Kupang
+0380,53.71,Kupang
+0381,53.08,Ende
+0382,53.07,Maumere
+0383,53.06,Larantuka
+0384,53.09,Bajawa
+0385,53.10,Ruteng
+0386,53.05,Kalabahi
+0387,53.11,Waingapu
+0387,53.12,Waikabubak
+0388,53.02,Soe
+0388,53.03,Kefamananu
+0389,53.04,Atambua
+0401,74.71,Kendari
+0402,74.72,Baubau
+0403,74.03,Raha
+0404,74.07,Wanci
+0405,74.01,Kolaka
+0406,74.08,Malamala
+0408,74.02,Unaaha
+0409,72.06,Bungku
+0410,73.10,Pangkep
+0411,73.71,Ujung Pandang
+0413,73.03,Bantaeng
+0414,73.01,Benteng
+0415,73.01,Tanah jampea
+0417,73.06,Malino
+0418,73.05,Takalar
+0419,73.04,Jeneponto
+0420,73.16,Enrekang
+0421,73.72,Parepare
+0422,76.05,Majene
+0423,73.26,Rantepao
+0426,76.02,Mamuju
+0427,73.11,Barru
+0428,76.04,Polewali
+0429,76.06,Karosa
+0430,71.05,Amurang
+0431,71.71,Manado
+0432,71.03,Tahuna
+0433,71.04,Beo
+0434,71.74,Kotamobagu
+0435,75.01,Gorontalo
+0435,75.71,Gorontalo
+0438,71.72,Bitung
+0442,75.05,Kwandang
+0443,75.04,Marisa
+0444,75.02,Tilamuta
+0445,72.05,Buol/Paleleh
+0450,72.08,Parigi
+0451,72.71,Palu
+0452,72.02,Poso
+0453,72.04,Toli-toli
+0454,72.08,Tinombo
+0455,72.08,Moutong
+0456,76.01,Pasangkayu
+0457,72.03,Donggala
+0458,72.02,Tentena
+0461,72.01,Luwuk
+0462,72.01,Banggai
+0464,72.09,Ampana
+0465,72.12,Kolonedale
+0471,73.73,Palopo
+0472,73.13,Siwa
+0473,73.22,Masamba
+0474,73.24,Malili
+0475,73.24,Soroako
+0481,73.08,Watampone
+0482,73.07,Sinjai
+0484,73.12,Watansopeng
+0485,73.13,Sengkang
+0511,63.04,Marabahan
+0511,63.71,Banjarmasin
+0512,63.01,Pleihari
+0513,62.03,Kuala Kapuas
+0517,63.06,Kandangan
+0518,63.02,Kotabaru
+0518,63.10,Batu Licin
+0519,62.05,Muarateweh
+0522,62.13,Ampah
+0525,62.04,Buntok
+0526,63.09,Tanjung Tabalong
+0527,63.08,Amuntai
+0528,62.12,Purukcahu
+0531,62.02,Sampit
+0532,62.01,Pangkalan Bun
+0533,62.06,Tumbang samba
+0534,61.04,Ketapang
+0536,62.71,Palangkaraya
+0537,62.10,Kuala Kurun
+0538,62.07,Kuala Pembuang
+0539,62.02,Kuala Kuayan
+0541,64.72,Samarinda
+0542,64.71,Balikpapan
+0543,64.01,Tanah Grogot
+0544,64.11,Tiongohang
+0545,64.07,Longiram
+0546,64.02,Tabang
+0547,64.08,Sangkulirang
+0548,64.74,Bontang
+0549,64.08,Sangata
+0551,65.71,Tarakan
+0552,65.01,Tanjung Selor
+0553,65.02,Malinau
+0554,64.03,Tanjungredep
+0555,65.02,Longnawang
+0556,65.03,Nunukan
+0561,61.02,Mempawah
+0561,61.71,Pontianak
+0562,61.72,Singkawang
+0563,61.08,Ngabang
+0564,61.03,Balai Karangan/Sanggau
+0565,61.05,Sintang
+0567,61.06,Putussibau
+0568,61.01,Sambas
+0568,61.10,Nangapinoh
+0573,61.11,Sukadana
+0574,61.04,Nangatayap
+0575,61.11,Pd. Karimata
+0582,61.06,Semitau
+061,12.71,Medan
+0620,12.05,Pangk. Brandan
+0621,12.76,Tebingtinggi
+0622,12.72,Pg.Siantar
+0623,12.09,Kisaran
+0624,12.10,Rantau Prapat
+0625,12.08,Parapat
+0626,12.17,Pangururan
+0627,12.11,Sidikalang
+0628,12.06,Kabanjahe
+0629,11.02,Kutacane
+0630,12.14,Teluk Dalam
+0631,12.73,Sibolga
+0632,12.12,Balige
+0633,12.02,Tarutung
+0634,12.77,Pd. Sidempuan
+0635,12.20,Gunungtua
+0636,12.13,Natal/Panyabungan
+0638,12.01,Barus
+0639,12.78,Gunung Sitoli
+0641,11.74,Langsa
+0642,11.13,Blangkejeren
+0643,11.04,Takengon
+0644,11.11,Bireun
+0645,11.73,Lhok Seumawe
+0646,11.03,Idi
+0650,11.09,Sinabang
+0651,11.71,Banda Aceh
+0652,11.72,Sabang
+0653,11.07,Sigli
+0654,11.14,Calang
+0655,11.05,Meulaboh
+0656,11.01,Tapaktuan
+0657,11.01,Bakongan
+0658,11.10,Singkil
+0659,11.12,Blang Pidie
+0702,16.11,Tebing Tinggi
+0711,16.71,Palembang
+0712,16.02,Kayu Agung
+0713,16.74,Prabumulih
+0714,16.06,Sekayu
+0715,19.01,Belinyu
+0716,19.05,Mentok
+0717,19.71,Pangkal Pinang
+0718,19.04,Koba
+0719,19.02,Tanjung Pandan
+0721,18.10,Pringsewu
+0721,18.71,B. Lampung
+0722,18.06,Kota Agung
+0723,18.08,Blambangan umpu
+0724,18.03,Kotabumi
+0725,18.02,Bandar Jaya
+0725,18.72,Metro
+0726,18.05,Manggala
+0727,18.01,Kalianda
+0728,18.04,Liwa
+0728,18.13,Krui
+0729,18.10,Pringsewu
+0730,16.72,Pagaralam
+0731,16.04,Lahat
+0732,17.02,Curup
+0733,16.73,Lubuk Linggau
+0734,16.03,Muaraenim
+0735,16.01,Baturaja
+0736,17.71,Bengkulu
+0737,17.03,Argamakmur
+0738,17.07,Muara Aman
+0739,17.01,Manna
+0740,15.07,Mendara
+0740,16.06,Pangkalan Bulian
+0741,15.71,Jambi
+0742,15.06,Kuala Tungkal
+0743,15.04,Muarabulian
+0744,15.09,Muaratebo
+0745,15.03,Sarolangun
+0746,15.02,Bangko
+0747,15.08,Muarabungo
+0748,15.72,Sungai Penuh
+0751,13.71,Padang
+0752,13.75,Bukittinggi
+0753,13.08,Lubuk Sikaping
+0754,13.03,Sijunjung
+0755,13.02,Solok
+0755,13.72,Solok
+0756,13.01,Painan
+0757,13.01,Balaisalasa
+0758,13.09,Matobe
+0759,13.09,Muara Siberut
+0760,14.09,Teluk Kuantan
+0761,14.71,Pekanbaru
+0762,14.01,Bangkinang
+0763,14.10,Selat Panjang
+0764,14.08,Siak Sriindrapura
+0765,14.72,Dumai
+0766,14.03,Bengkalis
+0767,14.07,Bagan Siapiapi
+0768,14.04,Tembilahan
+0769,14.02,Rengat
+0770,21.01,Kawasan Khusus Batam - Bintan
+0770,21.71,Kawasan Khusus Batam - Bintan
+0771,21.72,Tanjung Pinang
+0772,21.05,Tareumpa
+0773,21.03,Ranai
+0774,21.03,Natuna Selatan
+0775,21.01,P. Tembelan
+0776,21.04,Dabosingkep
+0777,21.02,Tanjungbalai Karimun
+0778,21.71,Sekupang (Batam)
+0779,21.02,Tanjung Batu
+0901,94.04,Timika
+0902,93.04,Agat
+0903,94.03,Enarotali
+0910,81.01,Bandaneira
+0911,81.71,Ambon
+0912,81.06,Piru
+0913,81.04,Namlea
+0914,81.01,Masohi
+0915,81.05,Bula
+0916,81.72,Tual
+0917,81.07,Dobo
+0918,81.03,Saumlaki
+0919,81.08,Tepa
+0921,82.71,Ternate
+0921,82.72,Soasiu
+0922,82.01,Jailolo
+0923,82.07,Pitu (Morotai)
+0924,82.03,Tobelo
+0925,82.02,Weda
+0926,82.02,Umera
+0927,82.04,Labuha
+0928,82.04,Laiwui
+0929,82.05,Sanana
+0931,81.01,Saparua
+0950,92.06,Babo
+0951,96.01,Sorong
+0951,96.71,Sorong
+0952,96.02,Teminabuha
+0953,96.03,Kabare
+0955,92.06,Bintuni
+0956,92.03,Fak-Fak
+0957,92.08,Kaimana
+0958,96.01,Makbon
+0959,96.01,Seget
+0960,95.07,Tiom
+0962,94.05,Ilaga
+0963,95.04,Bokondini
+0964,91.03,Genyem
+0965,91.11,Senggi
+0966,91.10,Sarmi
+0967,91.03,Jayapura
+0967,91.71,Jayapura
+0969,95.01,Wamena
+0971,93.01,Kimaan/Merauke
+0972,93.01,Okaba
+0974,93.03,Bade
+0975,93.02,Tanah Merah
+0977,93.04,Kamur
+0978,93.02,Waropko
+0979,93.03,Senggo
+0980,92.11,Ransiki
+0981,91.06,Biak
+0982,91.15,Waren
+0983,91.05,Serui
+0984,94.01,Nabire
+0986,92.02,Manokwari
+0987,91.19,Korido
+0988,91.06,Numfor
