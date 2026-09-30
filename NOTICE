@@ -37,3 +37,9 @@ National holidays and collective leave (data/holidays.csv)
   every amendment, and Keputusan Presiden Nomor 22 Tahun 2020, 10 Tahun 2024,
   and 33 Tahun 2024 for election days. The basis column names the decree
   behind each row.
+
+Bank codes (data/banks.csv)
+  "Tabel Sandi Bank" as published by PT Bank Central Asia Tbk (updated
+  1 November 2024). Bank Indonesia does not publish a machine-readable list of
+  bank codes; this table is a participant bank's copy, not a Bank Indonesia
+  publication. Names cut off by the table's column width were completed.
