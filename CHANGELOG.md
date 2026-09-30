@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- `bank`: list banks and look them up by 3-digit bank code (including their sharia units) or by BIC.
 - `workday`: check a date, add or subtract working days, and count working days in a range, skipping weekends, national holidays and (optionally) collective leave. The weekend days are configurable.
 - `holiday`: national holidays and collective leave for 2020-2027 by year, date range or single date, each with its Indonesian and English name and the SKB or Keppres it comes from.
 - `region`: get, list children, search and resolve provinces, regencies, districts and villages from Kepmendagri 300.2.2-2138/2025 (as amended by 2430/2025), including historical codes from the 2012 Kalimantan Utara and 2022 Papua splits. `byPlate` lists the regencies registered under a vehicle plate code, and `byAreaCode` the province or regencies behind a fixed-line area code (Permenkominfo 14/2018). `fromNik` turns the district code in a NIK into current province, regency and district names, following renumbered codes and flagging them as historical. The TypeScript API is asynchronous and loads district and village data per province on demand.

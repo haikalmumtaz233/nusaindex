@@ -2,6 +2,7 @@ import { defineConfig } from "tsdown";
 
 export default defineConfig({
   entry: {
+    bank: "src/bank/index.ts",
     holiday: "src/holiday/index.ts",
     index: "src/index.ts",
     nik: "src/nik/index.ts",
