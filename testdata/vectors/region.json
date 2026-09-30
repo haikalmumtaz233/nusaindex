@@ -59,6 +59,19 @@
     {"fn": "byPlate", "args": ["B1"], "error": "charset"},
     {"fn": "byPlate", "args": [""], "error": "length"},
     {"fn": "byPlate", "args": ["   "], "error": "length"},
-    {"fn": "byPlate", "args": ["é"], "error": "charset"}
+    {"fn": "byPlate", "args": ["é"], "error": "charset"},
+    {"fn": "byAreaCode", "args": ["021"], "output": [{"code": "31", "name": "Daerah Khusus Ibukota Jakarta", "level": "province"}]},
+    {"fn": "byAreaCode", "args": ["0274"], "output": [{"code": "34.71", "name": "Kota Yogyakarta", "level": "regency", "parentCode": "34"}]},
+    {"fn": "byAreaCode", "args": ["274"], "output": [{"code": "34.71", "name": "Kota Yogyakarta", "level": "regency", "parentCode": "34"}]},
+    {"fn": "byAreaCode", "args": ["(0251)"], "output": [{"code": "32.01", "name": "Kabupaten Bogor", "level": "regency", "parentCode": "32"}, {"code": "32.71", "name": "Kota Bogor", "level": "regency", "parentCode": "32"}]},
+    {"fn": "byAreaCode", "args": ["0 3 1"], "output": [{"code": "35.78", "name": "Kota Surabaya", "level": "regency", "parentCode": "35"}]},
+    {"fn": "byAreaCode", "args": ["0387"], "output": [{"code": "53.11", "name": "Kabupaten Sumba Timur", "level": "regency", "parentCode": "53"}, {"code": "53.12", "name": "Kabupaten Sumba Barat", "level": "regency", "parentCode": "53"}]},
+    {"fn": "byAreaCode", "args": ["0407"], "error": "unknown"},
+    {"fn": "byAreaCode", "args": ["0999"], "error": "unknown"},
+    {"fn": "byAreaCode", "args": ["12345"], "error": "length"},
+    {"fn": "byAreaCode", "args": ["0"], "error": "length"},
+    {"fn": "byAreaCode", "args": ["02a"], "error": "charset"},
+    {"fn": "byAreaCode", "args": [""], "error": "length"},
+    {"fn": "byAreaCode", "args": ["+62274"], "error": "charset"}
   ]
 }

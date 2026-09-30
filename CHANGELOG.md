@@ -8,7 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
-- `region`: get, list children, search and resolve provinces, regencies, districts and villages from Kepmendagri 300.2.2-2138/2025 (as amended by 2430/2025), including historical codes from the 2012 Kalimantan Utara and 2022 Papua splits. `byPlate` lists the regencies registered under a vehicle plate code. The TypeScript API is asynchronous and loads district and village data per province on demand.
+- `region`: get, list children, search and resolve provinces, regencies, districts and villages from Kepmendagri 300.2.2-2138/2025 (as amended by 2430/2025), including historical codes from the 2012 Kalimantan Utara and 2022 Papua splits. `byPlate` lists the regencies registered under a vehicle plate code, and `byAreaCode` the province or regencies behind a fixed-line area code (Permenkominfo 14/2018). The TypeScript API is asynchronous and loads district and village data per province on demand.
 - `nip`: `parse` reports `kind` (`pns` or `pppk`) and, for PPPK numbers, the work `agreement` count.
 
 ### Changed

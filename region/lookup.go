@@ -8,10 +8,18 @@ import (
 	"github.com/haikalmumtaz233/nusaindex/internal/digits"
 )
 
-const maxPlateCode = 2
+const (
+	maxPlateCode   = 2
+	maxAreaCode    = 4
+	areaSeparators = " -()"
+)
 
 var plates = sync.OnceValue(func() map[string][]string {
 	return group(data.PlateCodes())
+})
+
+var areas = sync.OnceValue(func() map[string][]string {
+	return group(data.AreaCodes())
 })
 
 func group(text string) map[string][]string {
@@ -67,4 +75,31 @@ func regionsOf(codes []string) ([]Region, error) {
 		out = append(out, d.region(i))
 	}
 	return out, nil
+}
+
+func ByAreaCode(code string) ([]Region, error) {
+	c, err := areaCode(code)
+	if err != nil {
+		return nil, err
+	}
+	return regionsOf(areas()[c])
+}
+
+func areaCode(s string) (string, error) {
+	var buf [maxAreaCode]byte
+	n, status := digits.Collect(buf[:], s, areaSeparators)
+	if status == digits.Charset {
+		return "", ErrCharset
+	}
+	if status == digits.TooLong || n == 0 || n > maxAreaCode {
+		return "", ErrLength
+	}
+	c := string(buf[:n])
+	if c[0] != '0' {
+		c = "0" + c
+	}
+	if len(c) < 3 || len(c) > maxAreaCode {
+		return "", ErrLength
+	}
+	return c, nil
 }

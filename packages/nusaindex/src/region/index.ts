@@ -1,5 +1,6 @@
 import {
   aliases as aliasText,
+  areas as areaText,
   index as indexText,
   plates as plateText,
   shards,
@@ -38,6 +39,8 @@ const MAX_QUERY = 256;
 const DEFAULT_LIMIT = 10;
 const MAX_LIMIT = 100;
 const MAX_PLATE_CODE = 2;
+const MAX_AREA_CODE = 4;
+const AREA_SEPARATORS = " -()";
 const NAME_PREFIXES = ["kabupaten administrasi ", "kota administrasi ", "kabupaten ", "kota "];
 const LEVEL_SIZES: Readonly<Record<RegionLevel, number>> = {
   province: PROVINCE,
@@ -355,6 +358,7 @@ function groups(text: string): Map<string, string[]> {
 }
 
 const plateMap = once(() => groups(plateText));
+const areaMap = once(() => groups(areaText));
 
 function regionsOf(codes: readonly string[] | undefined): Result<Region[], RegionErrorCode> {
   if (codes === undefined) {
@@ -394,4 +398,22 @@ function plateCode(s: string): Result<string, RegionErrorCode> {
 export async function byPlate(code: string): Promise<Result<Region[], RegionErrorCode>> {
   const c = plateCode(code);
   return Promise.resolve(c.ok ? regionsOf(plateMap().get(c.value)) : c);
+}
+
+function areaCode(s: string): Result<string, RegionErrorCode> {
+  const collected = collect(s, AREA_SEPARATORS);
+  if (collected.status !== "ok") {
+    return failure(collected.status);
+  }
+  const d = collected.digits;
+  if (d === "" || d.length > MAX_AREA_CODE) {
+    return failure("length");
+  }
+  const c = d.startsWith("0") ? d : `0${d}`;
+  return c.length < 3 || c.length > MAX_AREA_CODE ? failure("length") : success(c);
+}
+
+export async function byAreaCode(code: string): Promise<Result<Region[], RegionErrorCode>> {
+  const c = areaCode(code);
+  return Promise.resolve(c.ok ? regionsOf(areaMap().get(c.value)) : c);
 }
