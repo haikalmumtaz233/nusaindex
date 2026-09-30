@@ -2,7 +2,10 @@ package plate
 
 import (
 	"strings"
+	"sync"
 
+	"github.com/haikalmumtaz233/nusaindex/data"
+	"github.com/haikalmumtaz233/nusaindex/internal/csvx"
 	"github.com/haikalmumtaz233/nusaindex/internal/digits"
 	"github.com/haikalmumtaz233/nusaindex/internal/errcode"
 )
@@ -17,12 +20,15 @@ const (
 	kindDigit    = 2
 	kindNone     = 0
 	upperToLower = 'a' - 'A'
+
+	registrationCode = "RI"
 )
 
 var (
 	ErrLength  error = errcode.New("plate", "length")
 	ErrCharset error = errcode.New("plate", "charset")
 	ErrFormat  error = errcode.New("plate", "format")
+	ErrRegion  error = errcode.New("plate", "region")
 )
 
 type Plate struct {
@@ -59,8 +65,19 @@ func Parse(s string) (Plate, error) {
 	if len(p.Region) > maxRegion || len(p.Number) > maxNumber || p.Number[0] == '0' {
 		return Plate{}, ErrFormat
 	}
+	if !regionCodes()[p.Region] {
+		return Plate{}, ErrRegion
+	}
 	return p, nil
 }
+
+var regionCodes = sync.OnceValue(func() map[string]bool {
+	codes := map[string]bool{registrationCode: true}
+	csvx.Each(data.PlateCodes(), func(f []string) {
+		codes[f[0]] = true
+	})
+	return codes
+})
 
 func Format(s string) (string, error) {
 	p, err := Parse(s)

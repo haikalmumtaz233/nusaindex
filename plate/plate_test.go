@@ -20,6 +20,9 @@ func TestSentinelErrors(t *testing.T) {
 	if _, err := plate.Parse("B 01234"); !errors.Is(err, plate.ErrFormat) {
 		t.Fatalf("want ErrFormat, got %v", err)
 	}
+	if _, err := plate.Parse("XX 1"); !errors.Is(err, plate.ErrRegion) {
+		t.Fatalf("want ErrRegion, got %v", err)
+	}
 }
 
 func FuzzParse(f *testing.F) {
