@@ -42,6 +42,10 @@
       "types": "./dist/npwp.d.ts",
       "default": "./dist/npwp.js"
     },
+    "./phone": {
+      "types": "./dist/phone.d.ts",
+      "default": "./dist/phone.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -71,6 +75,12 @@
     {
       "name": "npwp",
       "path": "dist/npwp.js",
+      "limit": "2 kB",
+      "gzip": true
+    },
+    {
+      "name": "phone",
+      "path": "dist/phone.js",
       "limit": "2 kB",
       "gzip": true
     }

@@ -1,0 +1,163 @@
+{
+  "module": "phone",
+  "cases": [
+    {
+      "fn": "parse",
+      "args": ["0812-0000-0001"],
+      "output": {
+        "e164": "+6281200000001",
+        "national": "081200000001",
+        "type": "mobile",
+        "prefix": "0812",
+        "brand": "Telkomsel",
+        "operator": "Telkomsel"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["+62 857 0000 0002"],
+      "output": {
+        "e164": "+6285700000002",
+        "national": "085700000002",
+        "type": "mobile",
+        "prefix": "0857",
+        "brand": "IM3",
+        "operator": "Indosat Ooredoo Hutchison"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["62 896 0000 0003"],
+      "output": {
+        "e164": "+6289600000003",
+        "national": "089600000003",
+        "type": "mobile",
+        "prefix": "0896",
+        "brand": "Tri",
+        "operator": "Indosat Ooredoo Hutchison"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["878.0000.0004"],
+      "output": {
+        "e164": "+6287800000004",
+        "national": "087800000004",
+        "type": "mobile",
+        "prefix": "0878",
+        "brand": "XL",
+        "operator": "XLSmart"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["+62 (0) 838 0000 0005"],
+      "output": {
+        "e164": "+6283800000005",
+        "national": "083800000005",
+        "type": "mobile",
+        "prefix": "0838",
+        "brand": "AXIS",
+        "operator": "XLSmart"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["0881 0000 0006"],
+      "output": {
+        "e164": "+6288100000006",
+        "national": "088100000006",
+        "type": "mobile",
+        "prefix": "0881",
+        "brand": "Smartfren",
+        "operator": "XLSmart"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["0851 000 000"],
+      "output": {
+        "e164": "+62851000000",
+        "national": "0851000000",
+        "type": "mobile",
+        "prefix": "0851",
+        "brand": "Telkomsel",
+        "operator": "Telkomsel"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["(021) 5000 0007"],
+      "output": {
+        "e164": "+622150000007",
+        "national": "02150000007",
+        "type": "fixed",
+        "areaCode": "021"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["0274 500007"],
+      "output": {
+        "e164": "+62274500007",
+        "national": "0274500007",
+        "type": "fixed",
+        "areaCode": "0274"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["+62 61 4500 0008"],
+      "output": {
+        "e164": "+626145000008",
+        "national": "06145000008",
+        "type": "fixed",
+        "areaCode": "061"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["0901-500009"],
+      "output": {
+        "e164": "+62901500009",
+        "national": "0901500009",
+        "type": "fixed",
+        "areaCode": "0901"
+      }
+    },
+    { "fn": "parse", "args": [""], "error": "length" },
+    { "fn": "parse", "args": ["+"], "error": "length" },
+    { "fn": "parse", "args": ["0812"], "error": "length" },
+    { "fn": "parse", "args": ["081"], "error": "length" },
+    { "fn": "parse", "args": ["08120000000100"], "error": "length" },
+    { "fn": "parse", "args": ["0812 0000 0000 0000"], "error": "length" },
+    { "fn": "parse", "args": ["021 5000"], "error": "length" },
+    { "fn": "parse", "args": ["021 5000 0000 00"], "error": "length" },
+    { "fn": "parse", "args": ["+1 212 555 0100"], "error": "country" },
+    { "fn": "parse", "args": ["+65 8123 4567"], "error": "country" },
+    { "fn": "parse", "args": ["0800 100 1000"], "error": "prefix" },
+    { "fn": "parse", "args": ["0828 0000 0009"], "error": "prefix" },
+    { "fn": "parse", "args": ["1500 000"], "error": "prefix" },
+    { "fn": "parse", "args": ["0012 3456 789"], "error": "prefix" },
+    { "fn": "parse", "args": ["0112 3456 789"], "error": "prefix" },
+    { "fn": "parse", "args": ["0812-0000-0001 ext 5"], "error": "charset" },
+    { "fn": "parse", "args": ["0812+00000001"], "error": "charset" },
+    { "fn": "parse", "args": ["++6281200000001"], "error": "charset" },
+    { "fn": "parse", "args": ["0812０000001"], "error": "charset" },
+    { "fn": "isValid", "args": ["0812-0000-0001"], "output": true },
+    { "fn": "isValid", "args": ["0800 100 1000"], "output": false },
+    { "fn": "format", "args": ["0812-0000-0001"], "output": "+6281200000001" },
+    { "fn": "format", "args": ["(021) 5000 0007"], "output": "+622150000007" },
+    { "fn": "format", "args": ["0812"], "error": "length" },
+    {
+      "fn": "whatsappLink",
+      "args": ["0812-0000-0001"],
+      "output": "https://wa.me/6281200000001"
+    },
+    { "fn": "whatsappLink", "args": ["+1 212 555 0100"], "error": "country" },
+    { "fn": "mask", "args": ["0812-0000-0001"], "output": "+62********001" },
+    { "fn": "mask", "args": ["(021) 5000 0007"], "output": "+62*******007" },
+    { "fn": "mask", "args": ["12345"], "output": "**345" },
+    { "fn": "mask", "args": [""], "output": "" }
+  ]
+}
