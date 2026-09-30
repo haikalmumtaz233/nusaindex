@@ -23,6 +23,28 @@
         "serial": "998"
       }
     },
+    {
+      "fn": "parse",
+      "args": ["19900105 202121 1 997"],
+      "output": {
+        "nip": "199001052021211997",
+        "birthDate": "1990-01-05",
+        "appointmentDate": "2021",
+        "sex": "male",
+        "serial": "997"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["199202292023992996"],
+      "output": {
+        "nip": "199202292023992996",
+        "birthDate": "1992-02-29",
+        "appointmentDate": "2023",
+        "sex": "female",
+        "serial": "996"
+      }
+    },
     { "fn": "parse", "args": [""], "error": "length" },
     { "fn": "parse", "args": ["19900105201503199"], "error": "length" },
     { "fn": "parse", "args": ["1990010520150319990"], "error": "length" },
@@ -32,14 +54,19 @@
     { "fn": "parse", "args": ["199013012015031999"], "error": "date" },
     { "fn": "parse", "args": ["199001052015131999"], "error": "date" },
     { "fn": "parse", "args": ["199001052015001999"], "error": "date" },
+    { "fn": "parse", "args": ["199001052021201997"], "error": "date" },
+    { "fn": "parse", "args": ["199001051990211997"], "error": "date" },
     { "fn": "parse", "args": ["199001051990031999"], "error": "date" },
     { "fn": "parse", "args": ["199001052015033999"], "error": "sex" },
     { "fn": "parse", "args": ["199001052015030999"], "error": "sex" },
     { "fn": "parse", "args": ["199001052015031000"], "error": "serial" },
     { "fn": "isValid", "args": ["19900105.201503.1.999"], "output": true },
     { "fn": "isValid", "args": ["199001052015031000"], "output": false },
+    { "fn": "isValid", "args": ["199001052021211997"], "output": true },
+    { "fn": "isValid", "args": ["199001052021131997"], "output": false },
     { "fn": "format", "args": ["199001052015031999"], "output": "19900105 201503 1 999" },
     { "fn": "format", "args": ["1990-0105-2015-0319-99"], "output": "19900105 201503 1 999" },
+    { "fn": "format", "args": ["199001052021211997"], "output": "19900105 202121 1 997" },
     { "fn": "format", "args": ["199001052015033999"], "error": "sex" },
     { "fn": "mask", "args": ["199001052015031999"], "output": "**************1999" },
     { "fn": "mask", "args": ["19900105 201503 1 999"], "output": "**************1999" }

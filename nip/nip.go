@@ -7,10 +7,11 @@ import (
 )
 
 const (
-	Size       = 18
-	separators = " .-"
-	maskKeep   = 4
-	minYear    = 1900
+	Size           = 18
+	separators     = " .-"
+	maskKeep       = 4
+	minYear        = 1900
+	firstAgreement = 21
 )
 
 var (
@@ -44,10 +45,14 @@ func Parse(s string) (NIP, error) {
 	if d[14] == '2' {
 		sex = "female"
 	}
+	appointment := string(d[8:12])
+	if code := digits.Int(d[12:14]); code < firstAgreement {
+		appointment = dates.ISOMonth(digits.Int(d[8:12]), code)
+	}
 	return NIP{
 		Number:          string(d),
 		BirthDate:       dates.ISODate(digits.Int(d[0:4]), digits.Int(d[4:6]), digits.Int(d[6:8])),
-		AppointmentDate: dates.ISOMonth(digits.Int(d[8:12]), digits.Int(d[12:14])),
+		AppointmentDate: appointment,
 		Sex:             sex,
 		Serial:          string(d[15:18]),
 	}, nil
@@ -79,7 +84,8 @@ func scan(d []byte, s string) error {
 		return ErrDate
 	}
 	appointmentYear := digits.Int(d[8:12])
-	if appointmentYear <= birthYear || !dates.Valid(appointmentYear, digits.Int(d[12:14]), 1) {
+	code := digits.Int(d[12:14])
+	if appointmentYear <= birthYear || (code < firstAgreement && !dates.Valid(appointmentYear, code, 1)) {
 		return ErrDate
 	}
 	if d[14] != '1' && d[14] != '2' {
