@@ -1,0 +1,29 @@
+version: "2"
+
+run:
+  timeout: 5m
+
+linters:
+  default: standard
+  enable:
+    - copyloopvar
+    - errname
+    - errorlint
+    - forbidigo
+    - gocritic
+    - gosec
+    - misspell
+    - nilerr
+    - unconvert
+    - unparam
+  settings:
+    forbidigo:
+      forbid:
+        - pattern: ^fmt\.Print.*$
+        - pattern: ^panic$
+        - pattern: ^print(ln)?$
+
+formatters:
+  enable:
+    - gofmt
+    - goimports
