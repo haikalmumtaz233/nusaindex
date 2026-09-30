@@ -1,0 +1,18 @@
+{
+  "module": "nisn",
+  "cases": [
+    { "fn": "parse", "args": ["0109999991"], "output": { "nisn": "0109999991" } },
+    { "fn": "parse", "args": ["010 999 9992"], "output": { "nisn": "0109999992" } },
+    { "fn": "parse", "args": [""], "error": "length" },
+    { "fn": "parse", "args": ["010999999"], "error": "length" },
+    { "fn": "parse", "args": ["01099999910"], "error": "length" },
+    { "fn": "parse", "args": ["010999999O"], "error": "charset" },
+    { "fn": "parse", "args": ["0000000000"], "error": "serial" },
+    { "fn": "isValid", "args": ["0109999991"], "output": true },
+    { "fn": "isValid", "args": ["0000000000"], "output": false },
+    { "fn": "format", "args": ["010-999-9991"], "output": "0109999991" },
+    { "fn": "format", "args": ["12"], "error": "length" },
+    { "fn": "mask", "args": ["0109999991"], "output": "******9991" },
+    { "fn": "mask", "args": ["abc"], "output": "" }
+  ]
+}
