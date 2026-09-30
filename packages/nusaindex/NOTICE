@@ -17,3 +17,10 @@ Historical region codes (data/region_aliases.csv)
   Undang-Undang Nomor 14, 15, 16, and 29 Tahun 2022 (Papua provinces),
   Undang-Undang Nomor 20 Tahun 2012 (Kalimantan Utara), and Peraturan Menteri
   Dalam Negeri Nomor 66 Tahun 2011 for the codes used before 2012.
+
+Vehicle plate codes (data/plate_codes.csv)
+  Lampiran Peraturan Kepolisian Negara Republik Indonesia Nomor 7 Tahun 2021,
+  with the 2024 codes for Papua Barat Daya, Papua Selatan, Papua Tengah, and
+  Papua Pegunungan as announced by Korlantas Polri and the provincial
+  governments. Regencies the regulation does not list are assigned the code of
+  their parent regency or the only code of their province, marked "(induk)".
