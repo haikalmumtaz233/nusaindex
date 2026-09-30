@@ -6,3 +6,4 @@ export * as normalize from "./normalize/index.js";
 export * as npwp from "./npwp/index.js";
 export * as phone from "./phone/index.js";
 export * as plate from "./plate/index.js";
+export * as region from "./region/index.js";
