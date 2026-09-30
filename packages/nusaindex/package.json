@@ -68,6 +68,10 @@
       "types": "./dist/region.d.ts",
       "default": "./dist/region.js"
     },
+    "./workday": {
+      "types": "./dist/workday.d.ts",
+      "default": "./dist/workday.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -140,6 +144,12 @@
       "name": "holiday",
       "path": "dist/holiday.js",
       "limit": "6 kB",
+      "gzip": true
+    },
+    {
+      "name": "workday",
+      "path": "dist/workday.js",
+      "limit": "7 kB",
       "gzip": true
     }
   ]
