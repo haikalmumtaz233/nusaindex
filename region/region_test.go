@@ -24,11 +24,12 @@ func searchOptions(args []any) region.SearchOptions {
 
 func TestVectors(t *testing.T) {
 	vectortest.Run(t, "region", map[string]vectortest.Func{
-		"get":      func(a []any) (any, error) { return region.Get(a[0].(string)) },
-		"children": func(a []any) (any, error) { return region.Children(a[0].(string)) },
-		"search":   func(a []any) (any, error) { return region.Search(a[0].(string), searchOptions(a)) },
-		"resolve":  func(a []any) (any, error) { return region.Resolve(a[0].(string)) },
-		"byPlate":  func(a []any) (any, error) { return region.ByPlate(a[0].(string)) },
+		"get":        func(a []any) (any, error) { return region.Get(a[0].(string)) },
+		"children":   func(a []any) (any, error) { return region.Children(a[0].(string)) },
+		"search":     func(a []any) (any, error) { return region.Search(a[0].(string), searchOptions(a)) },
+		"resolve":    func(a []any) (any, error) { return region.Resolve(a[0].(string)) },
+		"byPlate":    func(a []any) (any, error) { return region.ByPlate(a[0].(string)) },
+		"byAreaCode": func(a []any) (any, error) { return region.ByAreaCode(a[0].(string)) },
 	})
 }
 
