@@ -4,6 +4,7 @@ export default defineConfig({
   entry: {
     index: "src/index.ts",
     nik: "src/nik/index.ts",
+    nip: "src/nip/index.ts",
     normalize: "src/normalize/index.ts",
     npwp: "src/npwp/index.ts",
     phone: "src/phone/index.ts",

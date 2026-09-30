@@ -1,0 +1,47 @@
+{
+  "module": "nip",
+  "cases": [
+    {
+      "fn": "parse",
+      "args": ["199001052015031999"],
+      "output": {
+        "nip": "199001052015031999",
+        "birthDate": "1990-01-05",
+        "appointmentDate": "2015-03",
+        "sex": "male",
+        "serial": "999"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["19920229 201812 2 998"],
+      "output": {
+        "nip": "199202292018122998",
+        "birthDate": "1992-02-29",
+        "appointmentDate": "2018-12",
+        "sex": "female",
+        "serial": "998"
+      }
+    },
+    { "fn": "parse", "args": [""], "error": "length" },
+    { "fn": "parse", "args": ["19900105201503199"], "error": "length" },
+    { "fn": "parse", "args": ["1990010520150319990"], "error": "length" },
+    { "fn": "parse", "args": ["19900105 201503 1 99x"], "error": "charset" },
+    { "fn": "parse", "args": ["199002302015031999"], "error": "date" },
+    { "fn": "parse", "args": ["189901012015031999"], "error": "date" },
+    { "fn": "parse", "args": ["199013012015031999"], "error": "date" },
+    { "fn": "parse", "args": ["199001052015131999"], "error": "date" },
+    { "fn": "parse", "args": ["199001052015001999"], "error": "date" },
+    { "fn": "parse", "args": ["199001051990031999"], "error": "date" },
+    { "fn": "parse", "args": ["199001052015033999"], "error": "sex" },
+    { "fn": "parse", "args": ["199001052015030999"], "error": "sex" },
+    { "fn": "parse", "args": ["199001052015031000"], "error": "serial" },
+    { "fn": "isValid", "args": ["19900105.201503.1.999"], "output": true },
+    { "fn": "isValid", "args": ["199001052015031000"], "output": false },
+    { "fn": "format", "args": ["199001052015031999"], "output": "19900105 201503 1 999" },
+    { "fn": "format", "args": ["1990-0105-2015-0319-99"], "output": "19900105 201503 1 999" },
+    { "fn": "format", "args": ["199001052015033999"], "error": "sex" },
+    { "fn": "mask", "args": ["199001052015031999"], "output": "**************1999" },
+    { "fn": "mask", "args": ["19900105 201503 1 999"], "output": "**************1999" }
+  ]
+}
