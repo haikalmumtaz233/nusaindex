@@ -1,5 +1,5 @@
 {
-  "dataVersion": "2026.10.1",
+  "dataVersion": "2026.10.2",
   "datasets": {
     "regions.csv": {
       "source": [
@@ -26,6 +26,16 @@
       "retrievedAt": "2026-10-01",
       "sha256": "dab7c76fed2fcca69f7c419782cc09c1ce586a60f1fa105446e216f65086b20c",
       "rows": 663
+    },
+    "plate_codes.csv": {
+      "source": [
+        "https://peraturan.bpk.go.id/Download/219644/Perpol%20No.%207%20th%202021%20ttg%20regident_lampiran.pdf",
+        "https://korlantas.polri.go.id/kode-pelat-nomor-kendaraan-3-provinsi-di-papua-berubah/"
+      ],
+      "regulation": "Perpol 7 Tahun 2021 (05-05-2021); Korlantas 2024 (Papua Barat Daya, Papua Selatan, Papua Tengah, Papua Pegunungan)",
+      "retrievedAt": "2026-10-01",
+      "sha256": "53a3590acd4c5499c84aef3212821594ae5a39ff27180c49601c5b9d58e37cd7",
+      "rows": 514
     }
   }
 }
