@@ -64,10 +64,10 @@ describe("vectors", () => {
       });
 
       file.cases.forEach((c, i) => {
-        it(`${String(i)} ${c.fn}(${JSON.stringify(c.args)})`, () => {
+        it(`${String(i)} ${c.fn}(${JSON.stringify(c.args)})`, async () => {
           const fn = fns.get(c.fn);
           expect(fn).toBeDefined();
-          const result = fn?.(...c.args);
+          const result: unknown = await fn?.(...c.args);
           if (isResult(result)) {
             if (c.error !== undefined) {
               expect(result).toEqual({ ok: false, error: { code: c.error } });

@@ -10,6 +10,7 @@ export default defineConfig({
     npwp: "src/npwp/index.ts",
     phone: "src/phone/index.ts",
     plate: "src/plate/index.ts",
+    region: "src/region/index.ts",
   },
   format: "esm",
   platform: "neutral",
