@@ -1,5 +1,10 @@
-import { aliases as aliasText, index as indexText, shards } from "../generated/regions/index.js";
-import { collect } from "../internal/digits.js";
+import {
+  aliases as aliasText,
+  index as indexText,
+  plates as plateText,
+  shards,
+} from "../generated/regions/index.js";
+import { collect, MAX_INPUT } from "../internal/digits.js";
 import { failure, success, type Result } from "../internal/result.js";
 
 export type RegionLevel = "province" | "regency" | "district" | "village";
@@ -32,6 +37,7 @@ const SEPARATORS = ". ";
 const MAX_QUERY = 256;
 const DEFAULT_LIMIT = 10;
 const MAX_LIMIT = 100;
+const MAX_PLATE_CODE = 2;
 const NAME_PREFIXES = ["kabupaten administrasi ", "kota administrasi ", "kabupaten ", "kota "];
 const LEVEL_SIZES: Readonly<Record<RegionLevel, number>> = {
   province: PROVINCE,
@@ -271,10 +277,10 @@ function score(name: string, q: string): number {
 }
 
 function searchQuery(query: string): Result<string, RegionErrorCode> {
-  if (query.length > MAX_QUERY) {
-    return failure("length");
-  }
   for (let i = 0; i < query.length; i++) {
+    if (i === MAX_QUERY) {
+      return failure("length");
+    }
     const c = query.charCodeAt(i);
     if (c < 32 || c > 126) {
       return failure("charset");
@@ -336,4 +342,56 @@ export async function search(
       compare(a.entry.code, b.entry.code),
   );
   return success(matches.slice(0, limit).map((m) => toRegion(m.entry)));
+}
+
+function groups(text: string): Map<string, string[]> {
+  const out = new Map<string, string[]>();
+  for (const [key = "", code = ""] of lines(text)) {
+    const list = out.get(key) ?? [];
+    list.push(code);
+    out.set(key, list);
+  }
+  return out;
+}
+
+const plateMap = once(() => groups(plateText));
+
+function regionsOf(codes: readonly string[] | undefined): Result<Region[], RegionErrorCode> {
+  if (codes === undefined) {
+    return failure("unknown");
+  }
+  const entries = upper();
+  return success(
+    codes.flatMap((code) => {
+      const e = find(entries, code);
+      return e ? [toRegion(e)] : [];
+    }),
+  );
+}
+
+function plateCode(s: string): Result<string, RegionErrorCode> {
+  let code = "";
+  for (let i = 0; i < s.length; i++) {
+    if (i === MAX_INPUT) {
+      return failure("length");
+    }
+    const c = s.charCodeAt(i);
+    if (c === 32) {
+      continue;
+    }
+    const upperCase = c >= 97 && c <= 122 ? c - 32 : c;
+    if (upperCase < 65 || upperCase > 90) {
+      return failure("charset");
+    }
+    if (code.length === MAX_PLATE_CODE) {
+      return failure("length");
+    }
+    code += String.fromCharCode(upperCase);
+  }
+  return code === "" ? failure("length") : success(code);
+}
+
+export async function byPlate(code: string): Promise<Result<Region[], RegionErrorCode>> {
+  const c = plateCode(code);
+  return Promise.resolve(c.ok ? regionsOf(plateMap().get(c.value)) : c);
 }
