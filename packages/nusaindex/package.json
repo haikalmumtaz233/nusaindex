@@ -32,6 +32,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./bank": {
+      "types": "./dist/bank.d.ts",
+      "default": "./dist/bank.js"
+    },
     "./holiday": {
       "types": "./dist/holiday.d.ts",
       "default": "./dist/holiday.js"
@@ -150,6 +154,12 @@
       "name": "workday",
       "path": "dist/workday.js",
       "limit": "7 kB",
+      "gzip": true
+    },
+    {
+      "name": "bank",
+      "path": "dist/bank.js",
+      "limit": "5 kB",
       "gzip": true
     }
   ]
