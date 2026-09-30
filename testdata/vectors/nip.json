@@ -9,7 +9,8 @@
         "birthDate": "1990-01-05",
         "appointmentDate": "2015-03",
         "sex": "male",
-        "serial": "999"
+        "serial": "999",
+        "kind": "pns"
       }
     },
     {
@@ -20,7 +21,8 @@
         "birthDate": "1992-02-29",
         "appointmentDate": "2018-12",
         "sex": "female",
-        "serial": "998"
+        "serial": "998",
+        "kind": "pns"
       }
     },
     {
@@ -31,7 +33,9 @@
         "birthDate": "1990-01-05",
         "appointmentDate": "2021",
         "sex": "male",
-        "serial": "997"
+        "serial": "997",
+        "kind": "pppk",
+        "agreement": 1
       }
     },
     {
@@ -42,7 +46,9 @@
         "birthDate": "1992-02-29",
         "appointmentDate": "2023",
         "sex": "female",
-        "serial": "996"
+        "serial": "996",
+        "kind": "pppk",
+        "agreement": 79
       }
     },
     { "fn": "parse", "args": [""], "error": "length" },

@@ -7,6 +7,11 @@ import (
 )
 
 const (
+	KindPNS  = "pns"
+	KindPPPK = "pppk"
+)
+
+const (
 	Size           = 18
 	separators     = " .-"
 	maskKeep       = 4
@@ -28,6 +33,8 @@ type NIP struct {
 	AppointmentDate string `json:"appointmentDate"`
 	Sex             string `json:"sex"`
 	Serial          string `json:"serial"`
+	Kind            string `json:"kind"`
+	Agreement       int    `json:"agreement,omitempty"`
 }
 
 func Valid(s string) bool {
@@ -45,17 +52,22 @@ func Parse(s string) (NIP, error) {
 	if d[14] == '2' {
 		sex = "female"
 	}
-	appointment := string(d[8:12])
-	if code := digits.Int(d[12:14]); code < firstAgreement {
-		appointment = dates.ISOMonth(digits.Int(d[8:12]), code)
+	p := NIP{
+		Number:    string(d),
+		BirthDate: dates.ISODate(digits.Int(d[0:4]), digits.Int(d[4:6]), digits.Int(d[6:8])),
+		Sex:       sex,
+		Serial:    string(d[15:18]),
 	}
-	return NIP{
-		Number:          string(d),
-		BirthDate:       dates.ISODate(digits.Int(d[0:4]), digits.Int(d[4:6]), digits.Int(d[6:8])),
-		AppointmentDate: appointment,
-		Sex:             sex,
-		Serial:          string(d[15:18]),
-	}, nil
+	code := digits.Int(d[12:14])
+	if code < firstAgreement {
+		p.AppointmentDate = dates.ISOMonth(digits.Int(d[8:12]), code)
+		p.Kind = KindPNS
+		return p, nil
+	}
+	p.AppointmentDate = string(d[8:12])
+	p.Kind = KindPPPK
+	p.Agreement = code - firstAgreement + 1
+	return p, nil
 }
 
 func Format(s string) (string, error) {
