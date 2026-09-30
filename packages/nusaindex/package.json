@@ -30,6 +30,10 @@
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
+    "./nik": {
+      "types": "./dist/nik.d.ts",
+      "default": "./dist/nik.js"
+    },
     "./normalize": {
       "types": "./dist/normalize.d.ts",
       "default": "./dist/normalize.js"
@@ -45,12 +49,20 @@
     {
       "name": "nusaindex (all)",
       "path": "dist/index.js",
-      "limit": "20 kB"
+      "limit": "20 kB",
+      "gzip": true
+    },
+    {
+      "name": "nik",
+      "path": "dist/nik.js",
+      "limit": "2 kB",
+      "gzip": true
     },
     {
       "name": "normalize",
       "path": "dist/normalize.js",
-      "limit": "2 kB"
+      "limit": "2 kB",
+      "gzip": true
     }
   ]
 }

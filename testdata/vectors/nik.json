@@ -1,0 +1,135 @@
+{
+  "module": "nik",
+  "cases": [
+    {
+      "fn": "parse",
+      "args": ["3171014501909999"],
+      "output": {
+        "nik": "3171014501909999",
+        "provinceCode": "31",
+        "regencyCode": "31.71",
+        "districtCode": "31.71.01",
+        "birthDate": "1990-01-05",
+        "sex": "female",
+        "serial": "9999"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["3273 0101 0190 9998"],
+      "output": {
+        "nik": "3273010101909998",
+        "provinceCode": "32",
+        "regencyCode": "32.73",
+        "districtCode": "32.73.01",
+        "birthDate": "1990-01-01",
+        "sex": "male",
+        "serial": "9998"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["31.71.01.450190.9999"],
+      "output": {
+        "nik": "3171014501909999",
+        "provinceCode": "31",
+        "regencyCode": "31.71",
+        "districtCode": "31.71.01",
+        "birthDate": "1990-01-05",
+        "sex": "female",
+        "serial": "9999"
+      }
+    },
+    {
+      "fn": "parseAt",
+      "args": ["9301011212209997", 2026],
+      "output": {
+        "nik": "9301011212209997",
+        "provinceCode": "93",
+        "regencyCode": "93.01",
+        "districtCode": "93.01.01",
+        "birthDate": "2020-12-12",
+        "sex": "male",
+        "serial": "9997"
+      }
+    },
+    {
+      "fn": "parseAt",
+      "args": ["3171014501269999", 2026],
+      "output": {
+        "nik": "3171014501269999",
+        "provinceCode": "31",
+        "regencyCode": "31.71",
+        "districtCode": "31.71.01",
+        "birthDate": "2026-01-05",
+        "sex": "female",
+        "serial": "9999"
+      }
+    },
+    {
+      "fn": "parseAt",
+      "args": ["3171014501269999", 2025],
+      "output": {
+        "nik": "3171014501269999",
+        "provinceCode": "31",
+        "regencyCode": "31.71",
+        "districtCode": "31.71.01",
+        "birthDate": "1926-01-05",
+        "sex": "female",
+        "serial": "9999"
+      }
+    },
+    {
+      "fn": "parseAt",
+      "args": ["3171016902009995", 2026],
+      "output": {
+        "nik": "3171016902009995",
+        "provinceCode": "31",
+        "regencyCode": "31.71",
+        "districtCode": "31.71.01",
+        "birthDate": "2000-02-29",
+        "sex": "female",
+        "serial": "9995"
+      }
+    },
+    { "fn": "parseAt", "args": ["3171012902009996", 1999], "error": "date" },
+    { "fn": "parse", "args": [""], "error": "length" },
+    { "fn": "parse", "args": ["317101450190999"], "error": "length" },
+    { "fn": "parse", "args": ["31710145019099991"], "error": "length" },
+    {
+      "fn": "parse",
+      "args": ["1111111111111111111111111111111111111111111111111111111111111111x"],
+      "error": "length"
+    },
+    { "fn": "parse", "args": ["3171O14501909999"], "error": "charset" },
+    { "fn": "parse", "args": ["３１７１014501909999"], "error": "charset" },
+    { "fn": "parse", "args": ["3171014501909999​"], "error": "charset" },
+    { "fn": "parse", "args": ["3171_014501909999"], "error": "charset" },
+    { "fn": "parse", "args": ["0071014501909999"], "error": "region" },
+    { "fn": "parse", "args": ["2071014501909999"], "error": "region" },
+    { "fn": "parse", "args": ["9771014501909999"], "error": "region" },
+    { "fn": "parse", "args": ["3100014501909999"], "error": "region" },
+    { "fn": "parse", "args": ["3171004501909999"], "error": "region" },
+    { "fn": "parse", "args": ["0000000000000000"], "error": "region" },
+    { "fn": "parse", "args": ["3171010001909999"], "error": "date" },
+    { "fn": "parse", "args": ["3171013201909999"], "error": "date" },
+    { "fn": "parse", "args": ["3171014001909999"], "error": "date" },
+    { "fn": "parse", "args": ["3171017201909999"], "error": "date" },
+    { "fn": "parse", "args": ["3171010113909999"], "error": "date" },
+    { "fn": "parse", "args": ["3171010100909999"], "error": "date" },
+    { "fn": "parse", "args": ["3171013002909999"], "error": "date" },
+    { "fn": "parse", "args": ["3171014501900000"], "error": "serial" },
+    { "fn": "isValid", "args": ["3171014501909999"], "output": true },
+    { "fn": "isValid", "args": ["3171-0145-0190-9999"], "output": true },
+    { "fn": "isValid", "args": ["9612017112859990"], "output": true },
+    { "fn": "isValid", "args": ["6571014501909999"], "output": true },
+    { "fn": "isValid", "args": ["3171013201909999"], "output": false },
+    { "fn": "isValid", "args": ["abc"], "output": false },
+    { "fn": "format", "args": ["3171 0145 0190 9999"], "output": "3171014501909999" },
+    { "fn": "format", "args": ["3171014501900000"], "error": "serial" },
+    { "fn": "mask", "args": ["3171014501909999"], "output": "************9999" },
+    { "fn": "mask", "args": ["3171 0145 0190 9999"], "output": "************9999" },
+    { "fn": "mask", "args": ["123"], "output": "***" },
+    { "fn": "mask", "args": [""], "output": "" }
+  ]
+}
