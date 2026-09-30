@@ -16,6 +16,7 @@ const SIZE = 18;
 const SEPARATORS = " .-";
 const MASK_KEEP = 4;
 const MIN_YEAR = 1900;
+const FIRST_AGREEMENT = 21;
 
 export function isValid(s: string): boolean {
   return scan(s).ok;
@@ -27,10 +28,12 @@ export function parse(s: string): Result<Nip, NipErrorCode> {
     return scanned;
   }
   const d = scanned.value;
+  const code = toInt(d.slice(12, 14));
   return success({
     nip: d,
     birthDate: isoDate(toInt(d.slice(0, 4)), toInt(d.slice(4, 6)), toInt(d.slice(6, 8))),
-    appointmentDate: isoMonth(toInt(d.slice(8, 12)), toInt(d.slice(12, 14))),
+    appointmentDate:
+      code < FIRST_AGREEMENT ? isoMonth(toInt(d.slice(8, 12)), code) : d.slice(8, 12),
     sex: d.charAt(14) === "2" ? "female" : "male",
     serial: d.slice(15, 18),
   });
@@ -63,7 +66,11 @@ function scan(s: string): Result<string, NipErrorCode> {
     return failure("date");
   }
   const appointmentYear = toInt(d.slice(8, 12));
-  if (appointmentYear <= birthYear || !isValidDate(appointmentYear, toInt(d.slice(12, 14)), 1)) {
+  const code = toInt(d.slice(12, 14));
+  if (
+    appointmentYear <= birthYear ||
+    (code < FIRST_AGREEMENT && !isValidDate(appointmentYear, code, 1))
+  ) {
     return failure("date");
   }
   const sex = d.charAt(14);

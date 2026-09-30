@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- `nip`: accept PPPK numbers, whose 13th and 14th digits hold the work agreement count starting at `21` instead of the appointment month; `appointmentDate` is the appointment year for these numbers.
+
 ## [0.1.0] - 2026-09-30
 
 ### Added
