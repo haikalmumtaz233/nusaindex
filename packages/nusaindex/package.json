@@ -46,6 +46,10 @@
       "types": "./dist/phone.d.ts",
       "default": "./dist/phone.js"
     },
+    "./plate": {
+      "types": "./dist/plate.d.ts",
+      "default": "./dist/plate.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -81,6 +85,12 @@
     {
       "name": "phone",
       "path": "dist/phone.js",
+      "limit": "2 kB",
+      "gzip": true
+    },
+    {
+      "name": "plate",
+      "path": "dist/plate.js",
       "limit": "2 kB",
       "gzip": true
     }
