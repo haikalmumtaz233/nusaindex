@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-09-30
+
 ### Added
 
 - `nik`: validate, parse (region codes, birth date, sex, serial), format and mask 16-digit NIK, with `parseAt` for a fixed reference year.
