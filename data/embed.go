@@ -17,6 +17,9 @@ var areaCodes string
 //go:embed holidays.csv
 var holidays string
 
+//go:embed banks.csv
+var banks string
+
 func Regions() string {
 	return regions
 }
@@ -35,4 +38,8 @@ func AreaCodes() string {
 
 func Holidays() string {
 	return holidays
+}
+
+func Banks() string {
+	return banks
 }

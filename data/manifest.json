@@ -1,5 +1,5 @@
 {
-  "dataVersion": "2026.10.4",
+  "dataVersion": "2026.10.5",
   "datasets": {
     "regions.csv": {
       "source": [
@@ -65,6 +65,15 @@
       "retrievedAt": "2026-10-01",
       "sha256": "fa1403348c0cf51bb97458c6702d1c48ddf26f269b4261e8732adeb070b86ac3",
       "rows": 194
+    },
+    "banks.csv": {
+      "source": [
+        "https://www.bca.co.id/-/media/Files/2023/sandi-bank-bi"
+      ],
+      "regulation": "Tabel Sandi Bank (terbitan PT Bank Central Asia Tbk, pembaruan 01-11-2024); bukan terbitan Bank Indonesia",
+      "retrievedAt": "2026-10-01",
+      "sha256": "67494bfbeeccd7a9d1e1da939168003e992b8f16def439012f2a3263e18a1947",
+      "rows": 125
     }
   }
 }
