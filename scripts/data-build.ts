@@ -33,7 +33,10 @@ function buildRegions(): void {
   const upper = rows.filter(([code = ""]) => code.length <= 5);
   const provinces = upper.filter(([code = ""]) => code.length === 2).map(([code = ""]) => code);
   let index = constant("index", table(upper));
-  index += constant("aliases", table(readRows("region_aliases.csv")));
+  index += constant(
+    "aliases",
+    table(readRows("region_aliases.csv").map(([oldCode = "", newCode = ""]) => [oldCode, newCode])),
+  );
   if (has("plate_codes.csv")) {
     index += constant(
       "plates",
