@@ -12,6 +12,7 @@ func TestDatasetsHaveHeaders(t *testing.T) {
 		"code,name\n":                     data.Regions(),
 		"old_code,new_code,since,basis\n": data.RegionAliases(),
 		"code,region_code,basis\n":        data.PlateCodes(),
+		"code,region_code,place\n":        data.AreaCodes(),
 	}
 	for header, text := range cases {
 		if !strings.HasPrefix(text, header) {

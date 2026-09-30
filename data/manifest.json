@@ -1,5 +1,5 @@
 {
-  "dataVersion": "2026.10.2",
+  "dataVersion": "2026.10.3",
   "datasets": {
     "regions.csv": {
       "source": [
@@ -36,6 +36,15 @@
       "retrievedAt": "2026-10-01",
       "sha256": "53a3590acd4c5499c84aef3212821594ae5a39ff27180c49601c5b9d58e37cd7",
       "rows": 514
+    },
+    "area_codes.csv": {
+      "source": [
+        "https://peraturan.bpk.go.id/Download/141810/Permen%20Kominfo%20Nomor%2014%20Tahun%202018.pdf"
+      ],
+      "regulation": "Permenkominfo 14 Tahun 2018 (21-09-2018), Lampiran Tabel II.2-II.8",
+      "retrievedAt": "2026-10-01",
+      "sha256": "19b9120cd97c53fa7b575519ac3b07df00c17cb890ad27a4b52e056a0d13b2da",
+      "rows": 387
     }
   }
 }

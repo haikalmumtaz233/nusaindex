@@ -24,3 +24,9 @@ Vehicle plate codes (data/plate_codes.csv)
   Papua Pegunungan as announced by Korlantas Polri and the provincial
   governments. Regencies the regulation does not list are assigned the code of
   their parent regency or the only code of their province, marked "(induk)".
+
+Fixed-line area codes (data/area_codes.csv)
+  Lampiran Peraturan Menteri Komunikasi dan Informatika Nomor 14 Tahun 2018,
+  Tabel II.2 to II.8. Each place named in the tables is mapped to the regency
+  or city that contains it; four places that could not be located with
+  confidence are left out.
