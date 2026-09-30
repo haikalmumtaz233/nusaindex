@@ -34,3 +34,23 @@ func TestISO(t *testing.T) {
 		t.Errorf("ISOMonth = %q", got)
 	}
 }
+
+func TestParseISO(t *testing.T) {
+	tests := []struct {
+		s  string
+		ok bool
+	}{
+		{"2024-02-29", true},
+		{"2023-02-29", false},
+		{"2024-2-29", false},
+		{"2024/02/29", false},
+		{"2024-0a-29", false},
+		{"", false},
+	}
+	for _, tt := range tests {
+		y, m, d, ok := ParseISO(tt.s)
+		if ok != tt.ok || (ok && ISODate(y, m, d) != tt.s) {
+			t.Errorf("ParseISO(%q) = %d-%d-%d, %v", tt.s, y, m, d, ok)
+		}
+	}
+}

@@ -7,6 +7,7 @@ import {
 } from "../generated/regions/index.js";
 import { collect, MAX_INPUT } from "../internal/digits.js";
 import { parse as parseNik, type NikErrorCode } from "../nik/index.js";
+import { once } from "../internal/once.js";
 import { failure, success, type Result } from "../internal/result.js";
 
 export type RegionLevel = "province" | "regency" | "district" | "village";
@@ -49,14 +50,6 @@ const LEVEL_SIZES: Readonly<Record<RegionLevel, number>> = {
   district: DISTRICT,
   village: VILLAGE,
 };
-
-function once<T>(build: () => T): () => T {
-  let value: { readonly v: T } | undefined;
-  return () => {
-    value ??= { v: build() };
-    return value.v;
-  };
-}
 
 function lines(text: string): string[][] {
   return text === "" ? [] : text.split("\n").map((line) => line.split("|"));

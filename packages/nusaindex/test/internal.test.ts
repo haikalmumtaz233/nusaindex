@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { daysInMonth, isValidDate, isoDate, isoMonth } from "../src/internal/dates.js";
+import {
+  daysInMonth,
+  isValidDate,
+  isoDate,
+  isoMonth,
+  parseIsoDate,
+} from "../src/internal/dates.js";
 import { MAX_INPUT, collect, isAllZero, maskDigits, toInt } from "../src/internal/digits.js";
 import { failure, success } from "../src/internal/result.js";
 
@@ -55,6 +61,13 @@ describe("dates", () => {
   it("formats ISO dates", () => {
     expect(isoDate(987, 3, 7)).toBe("0987-03-07");
     expect(isoMonth(2024, 11)).toBe("2024-11");
+  });
+
+  it("parses strict ISO dates", () => {
+    expect(parseIsoDate("2024-02-29")).toEqual({ year: 2024, month: 2, day: 29 });
+    for (const bad of ["2023-02-29", "2024-2-29", "2024/02/29", "2024-0a-29", ""]) {
+      expect(parseIsoDate(bad)).toBeUndefined();
+    }
   });
 });
 
