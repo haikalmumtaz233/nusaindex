@@ -1,0 +1,84 @@
+{
+  "module": "npwp",
+  "cases": [
+    {
+      "fn": "parse",
+      "args": ["01.234.567.8-901.000"],
+      "output": {
+        "npwp16": "0012345678901000",
+        "npwp15": "012345678901000",
+        "isNik": false,
+        "taxOffice": "901",
+        "status": "000"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["0012 3456 7890 1002"],
+      "output": {
+        "npwp16": "0012345678901002",
+        "npwp15": "012345678901002",
+        "isNik": false,
+        "taxOffice": "901",
+        "status": "002"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["3171014501909999"],
+      "output": { "npwp16": "3171014501909999", "isNik": true }
+    },
+    {
+      "fn": "parse",
+      "args": ["0012345678901000000001"],
+      "output": {
+        "npwp16": "0012345678901000",
+        "npwp15": "012345678901000",
+        "nitku": "0012345678901000000001",
+        "businessPlace": "000001",
+        "isNik": false,
+        "taxOffice": "901",
+        "status": "000"
+      }
+    },
+    {
+      "fn": "parse",
+      "args": ["3171014501909999000000"],
+      "output": {
+        "npwp16": "3171014501909999",
+        "nitku": "3171014501909999000000",
+        "businessPlace": "000000",
+        "isNik": true
+      }
+    },
+    { "fn": "parse", "args": [""], "error": "length" },
+    { "fn": "parse", "args": ["01234567890100"], "error": "length" },
+    { "fn": "parse", "args": ["00123456789010001"], "error": "length" },
+    { "fn": "parse", "args": ["001234567890100000000"], "error": "length" },
+    { "fn": "parse", "args": ["00123456789010000000011"], "error": "length" },
+    { "fn": "parse", "args": ["01.234.567.8-901.00O"], "error": "charset" },
+    { "fn": "parse", "args": ["01/234/567/8/901/000"], "error": "charset" },
+    { "fn": "parse", "args": ["3171013201909999"], "error": "nik" },
+    { "fn": "parse", "args": ["9971014501909999"], "error": "nik" },
+    { "fn": "parse", "args": ["3171013201909999000001"], "error": "nik" },
+    { "fn": "parse", "args": ["00.000.000.0-000.000"], "error": "serial" },
+    { "fn": "parse", "args": ["000000000901000"], "error": "serial" },
+    { "fn": "parse", "args": ["0000000000000000"], "error": "serial" },
+    { "fn": "isValid", "args": ["01.234.567.8-901.000"], "output": true },
+    { "fn": "isValid", "args": ["0012345678901000"], "output": true },
+    { "fn": "isValid", "args": ["0012345678901000000001"], "output": true },
+    { "fn": "isValid", "args": ["00.000.000.0-000.000"], "output": false },
+    { "fn": "format", "args": ["012345678901000"], "output": "01.234.567.8-901.000" },
+    { "fn": "format", "args": ["01 234 567 8 901 000"], "output": "01.234.567.8-901.000" },
+    { "fn": "format", "args": ["0012.3456.7890.1000"], "output": "0012345678901000" },
+    { "fn": "format", "args": ["0012345678901000-000001"], "output": "0012345678901000000001" },
+    { "fn": "format", "args": ["0012"], "error": "length" },
+    { "fn": "to16", "args": ["01.234.567.8-901.000"], "output": "0012345678901000" },
+    { "fn": "to16", "args": ["0012345678901000"], "output": "0012345678901000" },
+    { "fn": "to16", "args": ["3171014501909999000003"], "output": "3171014501909999" },
+    { "fn": "to16", "args": ["3171013201909999"], "error": "nik" },
+    { "fn": "mask", "args": ["01.234.567.8-901.000"], "output": "***********1000" },
+    { "fn": "mask", "args": ["0012345678901000000001"], "output": "******************0001" },
+    { "fn": "mask", "args": ["12"], "output": "**" }
+  ]
+}

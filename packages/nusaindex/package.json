@@ -38,6 +38,10 @@
       "types": "./dist/normalize.d.ts",
       "default": "./dist/normalize.js"
     },
+    "./npwp": {
+      "types": "./dist/npwp.d.ts",
+      "default": "./dist/npwp.js"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
@@ -61,6 +65,12 @@
     {
       "name": "normalize",
       "path": "dist/normalize.js",
+      "limit": "2 kB",
+      "gzip": true
+    },
+    {
+      "name": "npwp",
+      "path": "dist/npwp.js",
       "limit": "2 kB",
       "gzip": true
     }
