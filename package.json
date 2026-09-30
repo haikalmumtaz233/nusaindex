@@ -1,0 +1,46 @@
+{
+  "name": "nusaindex-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.34.6",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "scripts": {
+    "build": "pnpm --filter nusaindex build",
+    "format": "node scripts/format.ts --write",
+    "format:check": "node scripts/format.ts",
+    "lint": "eslint .",
+    "check": "tsc -p tsconfig.json && tsc -p packages/nusaindex/tsconfig.json && tsc -p packages/nusaindex/test/tsconfig.json",
+    "test": "vitest run --coverage",
+    "go:vet": "go vet ./...",
+    "go:lint": "golangci-lint run",
+    "go:test": "node scripts/go-cover.ts",
+    "go:fuzz": "node scripts/go-fuzz.ts",
+    "go:vuln": "govulncheck ./...",
+    "comments:check": "node scripts/check-comments.ts",
+    "version:sync": "node scripts/version.ts sync",
+    "version:check": "node scripts/version.ts check",
+    "pkg:check": "pnpm --filter nusaindex run pkg:check",
+    "size": "pnpm --filter nusaindex run size",
+    "audit:deps": "pnpm audit --audit-level high",
+    "verify": "pnpm format:check && pnpm comments:check && pnpm version:check && pnpm lint && pnpm check && pnpm test && pnpm go:vet && pnpm go:lint && pnpm go:test && pnpm build && pnpm size && pnpm pkg:check && pnpm audit:deps && pnpm go:vuln"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "0.18.5",
+    "@eslint/js": "10.0.1",
+    "@size-limit/preset-small-lib": "14.1.0",
+    "@types/node": "22.20.4",
+    "@vitest/coverage-v8": "5.0.2",
+    "eslint": "10.11.0",
+    "fast-check": "4.10.2",
+    "prettier": "3.9.9",
+    "publint": "0.3.24",
+    "size-limit": "14.1.0",
+    "tsdown": "0.23.0",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.0",
+    "vitest": "5.0.2"
+  }
+}
