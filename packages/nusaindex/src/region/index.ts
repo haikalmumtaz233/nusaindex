@@ -6,6 +6,7 @@ import {
   shards,
 } from "../generated/regions/index.js";
 import { collect, MAX_INPUT } from "../internal/digits.js";
+import { parse as parseNik, type NikErrorCode } from "../nik/index.js";
 import { failure, success, type Result } from "../internal/result.js";
 
 export type RegionLevel = "province" | "regency" | "district" | "village";
@@ -416,4 +417,50 @@ function areaCode(s: string): Result<string, RegionErrorCode> {
 export async function byAreaCode(code: string): Promise<Result<Region[], RegionErrorCode>> {
   const c = areaCode(code);
   return Promise.resolve(c.ok ? regionsOf(areaMap().get(c.value)) : c);
+}
+
+export interface Place {
+  readonly province: Region;
+  readonly regency?: Region;
+  readonly district?: Region;
+  readonly historical: boolean;
+}
+
+async function current(code: string): Promise<{ code: string; moved: boolean }> {
+  if (find(await entriesFor(code), code)) {
+    return { code, moved: false };
+  }
+  const moved = aliasMap().get(code);
+  return moved === undefined ? { code: "", moved: false } : { code: moved, moved: true };
+}
+
+async function regionAt(code: string): Promise<Region | undefined> {
+  const entry = find(await entriesFor(code), code);
+  return entry ? toRegion(entry) : undefined;
+}
+
+export async function fromNik(s: string): Promise<Result<Place, RegionErrorCode | NikErrorCode>> {
+  const parsed = parseNik(s);
+  if (!parsed.ok) {
+    return parsed;
+  }
+  const n = parsed.value;
+  const district = await current(n.districtCode);
+  const regency =
+    district.code === ""
+      ? await current(n.regencyCode)
+      : { code: district.code.slice(0, REGENCY), moved: false };
+  const provinceCode = regency.code === "" ? n.provinceCode : regency.code.slice(0, PROVINCE);
+  const province = await regionAt(provinceCode);
+  if (!province) {
+    return failure("unknown");
+  }
+  const regencyRegion = regency.code === "" ? undefined : await regionAt(regency.code);
+  const districtRegion = district.code === "" ? undefined : await regionAt(district.code);
+  return success({
+    province,
+    ...(regencyRegion ? { regency: regencyRegion } : {}),
+    ...(districtRegion ? { district: districtRegion } : {}),
+    historical: district.moved || regency.moved,
+  });
 }

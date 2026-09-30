@@ -30,6 +30,7 @@ func TestVectors(t *testing.T) {
 		"resolve":    func(a []any) (any, error) { return region.Resolve(a[0].(string)) },
 		"byPlate":    func(a []any) (any, error) { return region.ByPlate(a[0].(string)) },
 		"byAreaCode": func(a []any) (any, error) { return region.ByAreaCode(a[0].(string)) },
+		"fromNik":    func(a []any) (any, error) { return region.FromNIK(a[0].(string)) },
 	})
 }
 
