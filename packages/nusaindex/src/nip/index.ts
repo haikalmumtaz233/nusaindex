@@ -10,6 +10,8 @@ export interface Nip {
   readonly appointmentDate: string;
   readonly sex: "male" | "female";
   readonly serial: string;
+  readonly kind: "pns" | "pppk";
+  readonly agreement?: number;
 }
 
 const SIZE = 18;
@@ -28,14 +30,26 @@ export function parse(s: string): Result<Nip, NipErrorCode> {
     return scanned;
   }
   const d = scanned.value;
-  const code = toInt(d.slice(12, 14));
-  return success({
+  const sex: Nip["sex"] = d.charAt(14) === "2" ? "female" : "male";
+  const base = {
     nip: d,
     birthDate: isoDate(toInt(d.slice(0, 4)), toInt(d.slice(4, 6)), toInt(d.slice(6, 8))),
-    appointmentDate:
-      code < FIRST_AGREEMENT ? isoMonth(toInt(d.slice(8, 12)), code) : d.slice(8, 12),
-    sex: d.charAt(14) === "2" ? "female" : "male",
+    sex,
     serial: d.slice(15, 18),
+  };
+  const code = toInt(d.slice(12, 14));
+  if (code < FIRST_AGREEMENT) {
+    return success({
+      ...base,
+      appointmentDate: isoMonth(toInt(d.slice(8, 12)), code),
+      kind: "pns",
+    });
+  }
+  return success({
+    ...base,
+    appointmentDate: d.slice(8, 12),
+    kind: "pppk",
+    agreement: code - FIRST_AGREEMENT + 1,
   });
 }
 

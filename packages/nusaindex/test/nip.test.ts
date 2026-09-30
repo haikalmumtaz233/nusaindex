@@ -47,6 +47,7 @@ describe("nip", () => {
           `${String(r.appointmentYear)}-${pad(r.appointmentMonth, 2)}`,
         );
         expect(parsed.value.sex).toBe(r.female ? "female" : "male");
+        expect(parsed.value.kind).toBe("pns");
       }),
     );
   });
