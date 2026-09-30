@@ -1,9 +1,10 @@
 import fc from "fast-check";
 import { describe, expect, it } from "vitest";
+import { plateCodes } from "../src/generated/plate-codes.js";
 import { format, isValid, parse } from "../src/plate/index.js";
 
 const plate = fc.record({
-  region: fc.stringMatching(/^[A-Z]{1,2}$/),
+  region: fc.constantFrom("RI", ...plateCodes.split(" ")),
   number: fc.stringMatching(/^[1-9]\d{0,3}$/),
   suffix: fc.stringMatching(/^[A-Z]{0,3}$/),
 });
@@ -25,6 +26,15 @@ describe("plate", () => {
       fc.property(plate, (p) => {
         const formatted = format(`${p.region}${p.number}${p.suffix}`);
         expect(formatted.ok && parse(formatted.value)).toEqual({ ok: true, value: p });
+      }),
+    );
+  });
+
+  it("rejects region codes outside the plate code list", () => {
+    fc.assert(
+      fc.property(fc.stringMatching(/^[A-Z]{1,2}$/), (region) => {
+        const known = region === "RI" || plateCodes.split(" ").includes(region);
+        expect(parse(`${region} 1`).ok).toBe(known);
       }),
     );
   });

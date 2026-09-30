@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 - `region`: get, list children, search and resolve provinces, regencies, districts and villages from Kepmendagri 300.2.2-2138/2025 (as amended by 2430/2025), including historical codes from the 2012 Kalimantan Utara and 2022 Papua splits. The TypeScript API is asynchronous and loads district and village data per province on demand.
 - `nip`: `parse` reports `kind` (`pns` or `pppk`) and, for PPPK numbers, the work `agreement` count.
 
+### Changed
+
+- `plate`: `parse`, `isValid` and `format` reject region codes that are not in Perpol 7/2021 or the 2024 Papua codes, with the new error code `region`. `RI` stays valid.
+
 ### Fixed
 
 - `nip`: accept PPPK numbers, whose 13th and 14th digits hold the work agreement count starting at `21` instead of the appointment month; `appointmentDate` is the appointment year for these numbers.

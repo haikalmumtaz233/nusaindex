@@ -26,10 +26,17 @@
     { "fn": "parse", "args": ["B_1234"], "error": "charset" },
     { "fn": "parse", "args": ["B 1234 ÁBC"], "error": "charset" },
     { "fn": "parse", "args": ["B.1234.ABC"], "error": "charset" },
+    { "fn": "parse", "args": ["PY 1 A"], "output": { "region": "PY", "number": "1", "suffix": "A" } },
+    { "fn": "parse", "args": ["pg 2024"], "output": { "region": "PG", "number": "2024", "suffix": "" } },
+    { "fn": "parse", "args": ["XX 1234"], "error": "region" },
+    { "fn": "parse", "args": ["CD 12"], "error": "region" },
+    { "fn": "parse", "args": ["Q 1 A"], "error": "region" },
     { "fn": "isValid", "args": ["B 1234 ABC"], "output": true },
     { "fn": "isValid", "args": ["B 12345"], "output": false },
+    { "fn": "isValid", "args": ["ZZ 1"], "output": false },
     { "fn": "format", "args": ["b-1234-abc"], "output": "B 1234 ABC" },
     { "fn": "format", "args": ["RI1"], "output": "RI 1" },
-    { "fn": "format", "args": ["B 12 34"], "error": "format" }
+    { "fn": "format", "args": ["B 12 34"], "error": "format" },
+    { "fn": "format", "args": ["q 1"], "error": "region" }
   ]
 }

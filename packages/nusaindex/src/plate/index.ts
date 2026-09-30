@@ -1,7 +1,8 @@
+import { plateCodes } from "../generated/plate-codes.js";
 import { MAX_INPUT } from "../internal/digits.js";
 import { failure, success, type Result } from "../internal/result.js";
 
-export type PlateErrorCode = "length" | "charset" | "format";
+export type PlateErrorCode = "length" | "charset" | "format" | "region";
 
 export interface Plate {
   readonly region: string;
@@ -21,6 +22,7 @@ const MAX_GROUPS = 3;
 const MAX_REGION = 2;
 const MAX_NUMBER = 4;
 const MAX_SUFFIX = 3;
+const REGISTRATION_CODE = "RI";
 
 export function isValid(s: string): boolean {
   return parse(s).ok;
@@ -45,7 +47,14 @@ export function parse(s: string): Result<Plate, PlateErrorCode> {
   ) {
     return failure("format");
   }
+  if (!isKnownRegion(region.text)) {
+    return failure("region");
+  }
   return success({ region: region.text, number: number.text, suffix: suffix?.text ?? "" });
+}
+
+function isKnownRegion(code: string): boolean {
+  return code === REGISTRATION_CODE || ` ${plateCodes} `.includes(` ${code} `);
 }
 
 export function format(s: string): Result<string, PlateErrorCode> {
