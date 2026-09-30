@@ -8,12 +8,12 @@
     "node": ">=22.18.0"
   },
   "scripts": {
-    "build": "pnpm --filter nusaindex build",
+    "build": "pnpm data:build && pnpm --filter nusaindex build",
     "format": "node scripts/format.ts --write",
     "format:check": "node scripts/format.ts",
-    "lint": "eslint .",
-    "check": "tsc -p tsconfig.json && tsc -p packages/nusaindex/tsconfig.json && tsc -p packages/nusaindex/test/tsconfig.json",
-    "test": "vitest run --coverage",
+    "lint": "pnpm data:build && eslint .",
+    "check": "pnpm data:build && tsc -p tsconfig.json && tsc -p packages/nusaindex/tsconfig.json && tsc -p packages/nusaindex/test/tsconfig.json",
+    "test": "pnpm data:build && vitest run --coverage",
     "go:vet": "go vet ./...",
     "go:lint": "golangci-lint run",
     "go:test": "node scripts/go-cover.ts",
@@ -22,10 +22,12 @@
     "comments:check": "node scripts/check-comments.ts",
     "version:sync": "node scripts/version.ts sync",
     "version:check": "node scripts/version.ts check",
+    "data:check": "node scripts/data-check.ts",
+    "data:build": "node scripts/data-build.ts",
     "pkg:check": "pnpm --filter nusaindex run pkg:check",
     "size": "pnpm --filter nusaindex run size",
     "audit:deps": "pnpm audit --audit-level high",
-    "verify": "pnpm format:check && pnpm comments:check && pnpm version:check && pnpm lint && pnpm check && pnpm test && pnpm go:vet && pnpm go:lint && pnpm go:test && pnpm build && pnpm size && pnpm pkg:check && pnpm audit:deps && pnpm go:vuln"
+    "verify": "pnpm format:check && pnpm comments:check && pnpm version:check && pnpm data:check && pnpm lint && pnpm check && pnpm test && pnpm go:vet && pnpm go:lint && pnpm go:test && pnpm build && pnpm size && pnpm pkg:check && pnpm audit:deps && pnpm go:vuln"
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "0.18.5",
