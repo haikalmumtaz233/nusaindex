@@ -1,0 +1,21 @@
+{
+  "module": "normalize",
+  "cases": [
+    { "fn": "text", "args": ["３１７１　０１２３"], "output": "3171 0123" },
+    { "fn": "text", "args": ["​3171‍0123﻿"], "output": "31710123" },
+    { "fn": "text", "args": ["31­71⁠"], "output": "3171" },
+    { "fn": "text", "args": ["٣١٧١"], "output": "3171" },
+    { "fn": "text", "args": ["۳۱۰۹"], "output": "3109" },
+    { "fn": "text", "args": ["0812–3456−7890"], "output": "0812-3456-7890" },
+    { "fn": "text", "args": ["0812‐3456―7890﹣"], "output": "0812-3456-7890-" },
+    { "fn": "text", "args": ["  0812 3456 7890 \t\r\n"], "output": "0812 3456 7890" },
+    { "fn": "text", "args": ["＋６２ ８１２"], "output": "+62 812" },
+    { "fn": "text", "args": ["ｂ １２３４ ａｂｃ"], "output": "b 1234 abc" },
+    { "fn": "text", "args": ["B 1234 XYZ"], "output": "B 1234 XYZ" },
+    { "fn": "text", "args": [""], "output": "" },
+    { "fn": "text", "args": [" ​ "], "output": "" },
+    { "fn": "text", "args": ["१२"], "output": "१२" },
+    { "fn": "text", "args": ["NIK: 3171　0123"], "output": "NIK: 3171 0123" },
+    { "fn": "text", "args": ["😀 12"], "output": "😀 12" }
+  ]
+}
