@@ -11,6 +11,7 @@ export interface DatasetEntry {
   retrievedAt: string;
   sha256: string;
   rows: number;
+  sourceSha256?: Record<string, string>;
 }
 
 export interface Manifest {
@@ -91,7 +92,7 @@ function parseEntry(name: string, value: unknown): DatasetEntry {
   if (!isRecord(value)) {
     throw new Error(`manifest: ${name} is not an object`);
   }
-  const { source, regulation, retrievedAt, sha256: hash, rows } = value;
+  const { source, regulation, retrievedAt, sha256: hash, rows, sourceSha256 } = value;
   if (
     !Array.isArray(source) ||
     !source.every((s) => typeof s === "string") ||
@@ -102,7 +103,25 @@ function parseEntry(name: string, value: unknown): DatasetEntry {
   ) {
     throw new Error(`manifest: ${name} has missing or invalid fields`);
   }
-  return { source: source.map(String), regulation, retrievedAt, sha256: hash, rows };
+  const entry: DatasetEntry = {
+    source: source.map(String),
+    regulation,
+    retrievedAt,
+    sha256: hash,
+    rows,
+  };
+  if (sourceSha256 !== undefined) {
+    if (
+      !isRecord(sourceSha256) ||
+      !Object.values(sourceSha256).every((v) => typeof v === "string")
+    ) {
+      throw new Error(`manifest: ${name} has an invalid sourceSha256`);
+    }
+    entry.sourceSha256 = Object.fromEntries(
+      Object.entries(sourceSha256).map(([k, v]) => [k, String(v)]),
+    );
+  }
+  return entry;
 }
 
 export function readManifest(): Manifest {

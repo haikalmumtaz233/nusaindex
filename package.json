@@ -24,6 +24,7 @@
     "version:check": "node scripts/version.ts check",
     "data:check": "node scripts/data-check.ts",
     "data:build": "node scripts/data-build.ts",
+    "data:watch": "node scripts/data-watch.ts",
     "pkg:check": "pnpm --filter nusaindex run pkg:check",
     "size": "pnpm --filter nusaindex run size",
     "audit:deps": "pnpm audit --audit-level high",
