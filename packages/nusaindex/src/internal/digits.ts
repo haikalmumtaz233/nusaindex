@@ -1,7 +1,9 @@
 export const MAX_INPUT = 64;
 
 export type CollectResult =
-  { readonly status: "ok"; readonly digits: string } | { readonly status: "charset" | "length" };
+  | { readonly status: "ok"; readonly digits: string }
+  | { readonly status: "charset" }
+  | { readonly status: "length" };
 
 export function collect(s: string, separators: string): CollectResult {
   let digits = "";
