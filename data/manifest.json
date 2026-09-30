@@ -10,7 +10,10 @@
       "regulation": "Kepmendagri 300.2.2-2138 Tahun 2025 (25-04-2025) jo. 300.2.2-2430 Tahun 2025 (23-06-2025)",
       "retrievedAt": "2026-10-01",
       "sha256": "3b73e36a6c38cf8d5f64dfde6a04fd7c50f154a87578da34ba1c98524fbaeb60",
-      "rows": 91599
+      "rows": 91599,
+      "sourceSha256": {
+        "https://peraturan.bpk.go.id/Download/384753/Lampiran-Kepmen%20300.2.2-2138%20Tahun%202025.pdf": "ac13b5a57358fcec0503429bb06b2d6b4e5572f65fd0162979b87a79863b1de6"
+      }
     },
     "region_aliases.csv": {
       "source": [
@@ -25,7 +28,10 @@
       "regulation": "UU 14, 15, 16, 29 Tahun 2022; UU 20 Tahun 2012; Permendagri 66 Tahun 2011",
       "retrievedAt": "2026-10-01",
       "sha256": "dab7c76fed2fcca69f7c419782cc09c1ce586a60f1fa105446e216f65086b20c",
-      "rows": 663
+      "rows": 663,
+      "sourceSha256": {
+        "https://raw.githubusercontent.com/cahyadsn/wilayah/master/db/archive/wilayah_2022.sql": "c8849883ccaeda1e82b78adf8786123ad9789b61039d141895ef8633ab1b3227"
+      }
     },
     "plate_codes.csv": {
       "source": [
@@ -35,7 +41,10 @@
       "regulation": "Perpol 7 Tahun 2021 (05-05-2021); Korlantas 2024 (Papua Barat Daya, Papua Selatan, Papua Tengah, Papua Pegunungan)",
       "retrievedAt": "2026-10-01",
       "sha256": "53a3590acd4c5499c84aef3212821594ae5a39ff27180c49601c5b9d58e37cd7",
-      "rows": 514
+      "rows": 514,
+      "sourceSha256": {
+        "https://peraturan.bpk.go.id/Download/219644/Perpol%20No.%207%20th%202021%20ttg%20regident_lampiran.pdf": "2f62c200998d0e92f35fb5f9fc83155cb3a3ebc0496e323df6229835776b3d42"
+      }
     },
     "area_codes.csv": {
       "source": [
@@ -44,7 +53,10 @@
       "regulation": "Permenkominfo 14 Tahun 2018 (21-09-2018), Lampiran Tabel II.2-II.8",
       "retrievedAt": "2026-10-01",
       "sha256": "19b9120cd97c53fa7b575519ac3b07df00c17cb890ad27a4b52e056a0d13b2da",
-      "rows": 387
+      "rows": 387,
+      "sourceSha256": {
+        "https://peraturan.bpk.go.id/Download/141810/Permen%20Kominfo%20Nomor%2014%20Tahun%202018.pdf": "f6d11a90388de4c9a683d2aae3230a7255d997f359ce2d3ea55475ae748949f2"
+      }
     },
     "holidays.csv": {
       "source": [
@@ -64,7 +76,16 @@
       "regulation": "SKB 3 Menteri 2020-2027 beserta perubahannya; Keppres 22 Tahun 2020, 10 Tahun 2024, 33 Tahun 2024",
       "retrievedAt": "2026-10-01",
       "sha256": "fa1403348c0cf51bb97458c6702d1c48ddf26f269b4261e8732adeb070b86ac3",
-      "rows": 194
+      "rows": 194,
+      "sourceSha256": {
+        "https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2021-06/SKB%203%20Menteri%20tentang%20Perubahan%20kedua%20Libur%20Nasional%20dan%20Cuti%20Bersama%202021.pdf": "757191d82f3ee9f5250071bddf5c9f8eee9c413f02e17a6ff231d0e3013b1277",
+        "https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2021-09/SKB%20Libnas%20%26%20Cuti%20Bersama%20Tahun%202022.pdf": "df91277bf89398bebadada994ca697b336b94cc8ae40bd6112a5c2c808ab9ffb",
+        "https://kemenkopmk.go.id/sites/default/files/pengumuman/2022-10/SKB%20LibNas%20dan%20CuBer%202023_0.pdf": "cdafb41a8e95fe0874d3fb3cbe8cc02c73c374f5c5a92ded31d735148e5bf882",
+        "https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2024-02/SKB%20Perubahan%20Libur%20Nasional%20dan%20Cuti%20Bersama%202024%20_0.pdf": "c5fa6634b590e033cd3bb9a93fab76e81910ce9bd640ffe1fce9396ed3c68919",
+        "https://jdih.kemenkoinfra.go.id/cfind/source/files/2025skbmenpanrb003.pdf": "332dabf45954b4046d3db840a1ee557b68a5258a5df7ce939a48e29e5c11ff6d",
+        "https://www.kemenkopmk.go.id/sites/default/files/pengumuman/2025-09/SKB%20Libur%20Nasional%20dan%20Cuti%20Bersama%20Tahun%202026.pdf": "fead795bdcd98c384db2761a46d19ba643a80d8779fbb0040a938ba57896bd24",
+        "https://kemenkopmk.go.id/sites/default/files/pengumuman/2026-09/SKB%20Libur%20Nasional%20dan%20Cuti%20Bersama%20Tahun%202027.pdf": "dc43367115b4a5485bae697143bd0c93abbba3b8dd951195f734c9777cede66e"
+      }
     },
     "banks.csv": {
       "source": [
@@ -73,7 +94,10 @@
       "regulation": "Tabel Sandi Bank (terbitan PT Bank Central Asia Tbk, pembaruan 01-11-2024); bukan terbitan Bank Indonesia",
       "retrievedAt": "2026-10-01",
       "sha256": "67494bfbeeccd7a9d1e1da939168003e992b8f16def439012f2a3263e18a1947",
-      "rows": 125
+      "rows": 125,
+      "sourceSha256": {
+        "https://www.bca.co.id/-/media/Files/2023/sandi-bank-bi": "09af2a95b0d42377aaad06247b420924ccfdca45839d0b940adc2fad7fc1992c"
+      }
     }
   }
 }

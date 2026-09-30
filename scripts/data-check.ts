@@ -246,6 +246,11 @@ for (const name of ordered) {
   if (!isDate(entry.retrievedAt) || entry.source.length === 0 || entry.regulation === "") {
     fail(`manifest: ${name} needs source, regulation and retrievedAt`);
   }
+  for (const [url, hash] of Object.entries(entry.sourceSha256 ?? {})) {
+    if (!entry.source.includes(url) || !/^[0-9a-f]{64}$/.test(hash)) {
+      fail(`manifest: ${name} has a sourceSha256 for an unlisted source or a bad hash`);
+    }
+  }
   checks[name]?.(rows);
 }
 
