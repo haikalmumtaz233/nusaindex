@@ -13,6 +13,7 @@ Rupiah
 
 Reference data
   nusaindex region get <code>
+  nusaindex region resolve <code>    Follow codes renumbered by region splits
   nusaindex region children [code]
   nusaindex region search <query> [--level <level>] [--limit <n>]
   nusaindex region nik <nik>

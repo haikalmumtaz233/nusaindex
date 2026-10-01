@@ -39,7 +39,8 @@ const MAX_FAKE = 1000;
 const MAX_SEED = 0xffff_ffff;
 const MAX_LIMIT = 100;
 const LEVELS: readonly region.RegionLevel[] = ["province", "regency", "district", "village"];
-const REGION_USAGE = "region needs get <code>, children [code], search <query> or nik <nik>";
+const REGION_USAGE =
+  "region needs get <code>, resolve <code>, children [code], search <query> or nik <nik>";
 const WORKDAY_USAGE = "workday needs is <date>, add <date> <days> or count <from> <to>";
 
 const identifiers = new Map<string, Handler>([
@@ -169,6 +170,15 @@ async function searchRegions(io: Io, flags: Flags, query: string): Promise<numbe
   return print(io, flags, await region.search(query, options));
 }
 
+async function resolveRegion(code: string): Promise<Result<unknown>> {
+  const r = await region.resolve(code);
+  if (!r.ok) {
+    return r;
+  }
+  const moved = code.replace(/\D/g, "") !== r.value.code.replace(/\D/g, "");
+  return success(moved ? { ...r.value, resolvedFrom: code } : r.value);
+}
+
 export async function regions(io: Io, flags: Flags, rest: readonly string[]): Promise<number> {
   const [op = "", ...args] = rest;
   const [first = ""] = args;
@@ -180,6 +190,9 @@ export async function regions(io: Io, flags: Flags, rest: readonly string[]): Pr
   }
   if (op === "get" && args.length === 1) {
     return print(io, flags, await region.get(first));
+  }
+  if (op === "resolve" && args.length === 1) {
+    return print(io, flags, await resolveRegion(first));
   }
   if (op === "nik" && args.length === 1) {
     return print(io, flags, await region.fromNik(first));
