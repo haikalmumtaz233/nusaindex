@@ -3,37 +3,57 @@ title: NusaIndex
 description: Validasi, parse, dan format data Indonesia di Go, TypeScript, command line, dan agent AI. Offline, tanpa dependensi runtime.
 template: splash
 hero:
-  tagline: Validasi, parse, dan format data Indonesia, dengan data referensi yang selalu terbaru. Untuk Go, TypeScript, command line, dan agent AI.
+  title: Setiap digit ada artinya.
+  tagline: NusaIndex memeriksa, membaca isi, dan memformat nomor identitas serta data referensi Indonesia di Go, TypeScript, terminal, dan agent AI. Berjalan offline, tanpa dependensi.
   actions:
     - text: Mulai
       link: /id/getting-started/
-      icon: right-arrow
-    - text: Coba playground
+    - text: Buka playground
       link: /id/playground/
       variant: minimal
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+import Example from "../../../components/Example.astro";
+import ModuleGrid from "../../../components/ModuleGrid.astro";
 
-<CardGrid>
-  <Card title="Nomor identitas" icon="seti:lock">
-    NIK, NPWP (15 dan 16 digit, NITKU), nomor HP, plat nomor, NIP, dan NISN: cek, parse, format, dan
-    mask.
-  </Card>
-  <Card title="Data referensi" icon="seti:json">
-    Wilayah sampai desa dari Kepmendagri terbaru, libur nasional dan cuti bersama, hari kerja, serta
-    kode bank, masing-masing dengan sumbernya.
-  </Card>
-  <Card title="Dua library native" icon="seti:go">
-    Go dan TypeScript dengan API yang sama dan hasil identik, dikunci oleh test vector bersama.
-    Tanpa dependensi runtime.
-  </Card>
-  <Card title="Privasi sejak desain" icon="approve-check">
-    Semua berjalan di proses Anda. Tanpa panggilan jaringan, tanpa log, tanpa telemetri. Masking dan
-    redaksi untuk log sudah tersedia.
-  </Card>
-</CardGrid>
+## Pakai di mana saja
 
-:::caution[Tidak resmi]
-NusaIndex tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah Indonesia mana pun. Hasil valid berarti nomor **strukturnya benar**, bukan berarti nomor itu asli atau siapa pemiliknya.
-:::
+<Tabs syncKey="surface">
+  <TabItem label="Go dan TypeScript">
+    <Example name="quickstart" />
+  </TabItem>
+  <TabItem label="Terminal">
+
+```sh
+npm install --global nusaindex
+```
+
+    <img
+      src="/demos/cli.svg"
+      width="760"
+      height="534"
+      alt="Sesi terminal: nusa nik membaca isi NIK, nusa phone menemukan merek XL, nusa rupiah terbilang mengeja 1.500.000,50, dan nusa mask text menyembunyikan NIK dan nomor HP di dalam kalimat."
+    />
+
+  </TabItem>
+  <TabItem label="Agent AI">
+    Hubungkan [`nusaindex-mcp`](/id/tools/mcp/) ke klien MCP mana pun. Semua tool hanya membaca.
+    <img
+      src="/demos/mcp.svg"
+      width="760"
+      height="366"
+      alt="Klien MCP: diminta tiga NIK uji di Kota Bandung, tool fake mengembalikan tiga NIK; ditanya soal 0859-5257-171, tool parse mengembalikan +628595257171, nomor seluler XL (XLSmart)."
+    />
+  </TabItem>
+</Tabs>
+
+## Isinya
+
+<ModuleGrid />
+
+## Aman sejak awal
+
+- **Offline.** Tanpa panggilan jaringan, log, atau telemetri. Input tidak pernah keluar dari proses Anda.
+- **Bisa ditelusuri.** Setiap dataset menyebut regulasi dan dokumen sumbernya di [`data/manifest.json`](/id/project/data-sources/).
+- **Tidak resmi.** Tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah mana pun. Valid berarti **strukturnya benar**, bukan berarti nomornya asli atau dimiliki seseorang.

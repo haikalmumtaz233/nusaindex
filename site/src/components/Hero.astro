@@ -1,0 +1,61 @@
+---
+import { LinkButton } from "@astrojs/starlight/components";
+import Anatomy from "./Anatomy.astro";
+
+const { data } = Astro.locals.starlightRoute.entry;
+const { title = data.title, tagline, actions = [] } = data.hero ?? {};
+---
+
+<div class="intro">
+  <div class="copy">
+    <h1 id="_top" data-page-title set:html={title} />
+    {tagline !== undefined && <p class="tagline" set:html={tagline} />}
+    {
+      actions.length > 0 && (
+        <div class="actions">
+          {actions.map(({ link, text, variant }) => (
+            <LinkButton href={link} variant={variant}>
+              {text}
+            </LinkButton>
+          ))}
+        </div>
+      )
+    }
+  </div>
+  <Anatomy hero />
+</div>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 2rem;
+    padding-block: 1.5rem 0.5rem;
+  }
+  .copy {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+  }
+  h1 {
+    margin: 0;
+    max-width: 16ch;
+    font-size: clamp(2.5rem, 6.5vw, 4.25rem);
+    font-weight: 800;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    color: var(--sl-color-white);
+  }
+  .tagline {
+    margin: 0;
+    max-width: 58ch;
+    font-size: var(--sl-text-lg);
+    line-height: 1.55;
+    color: var(--sl-color-gray-2);
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+</style>

@@ -1,0 +1,164 @@
+---
+import * as bank from "nusaindex/bank";
+import * as holiday from "nusaindex/holiday";
+import regionsCsv from "../../../data/regions.csv?raw";
+import { localeOf } from "../lib/anatomy-text";
+import { icons, type IconName } from "../lib/icons";
+
+const locale = localeOf(Astro.currentLocale);
+const id = locale === "id";
+const number = new Intl.NumberFormat(id ? "id-ID" : "en-US");
+const levels = { 2: 0, 5: 0, 8: 0, 13: 0 };
+for (const line of regionsCsv.split("\n").slice(1)) {
+  const length = line.indexOf(",");
+  if (length === 2 || length === 5 || length === 8 || length === 13) {
+    levels[length] += 1;
+  }
+}
+const years = holiday.years();
+const banks = bank.list().length;
+
+interface Module {
+  readonly icon: IconName;
+  readonly name: string;
+  readonly line: string;
+}
+
+const groups: readonly { title: string; modules: readonly Module[] }[] = [
+  {
+    title: id ? "Nomor identitas" : "Identifiers",
+    modules: [
+      { icon: "nik", name: "NIK", line: id ? "Wilayah, tanggal lahir, jenis kelamin" : "Region, birth date, sex" },
+      { icon: "npwp", name: "NPWP", line: id ? "15 dan 16 digit, NITKU" : "15 and 16 digits, NITKU" },
+      { icon: "phone", name: id ? "Nomor HP" : "Phone", line: id ? "Operator, kode area, E.164" : "Operator, area code, E.164" },
+      { icon: "plate", name: id ? "Plat nomor" : "Plate", line: id ? "Kode wilayah Perpol 7/2021" : "Region codes from Perpol 7/2021" },
+      { icon: "nip", name: "NIP", line: id ? "PNS dan PPPK" : "Civil servants, PNS and PPPK" },
+      { icon: "nisn", name: "NISN", line: id ? "Nomor induk siswa" : "Student number" },
+    ],
+  },
+  {
+    title: id ? "Data referensi" : "Reference data",
+    modules: [
+      {
+        icon: "region",
+        name: id ? "Wilayah" : "Region",
+        line: id
+          ? `${number.format(levels[2])} provinsi sampai ${number.format(levels[13])} desa`
+          : `${number.format(levels[2])} provinces to ${number.format(levels[13])} villages`,
+      },
+      {
+        icon: "holiday",
+        name: id ? "Libur" : "Holiday",
+        line: id
+          ? `Libur dan cuti bersama ${String(years.from)}–${String(years.to)}`
+          : `Holidays and cuti bersama, ${String(years.from)}–${String(years.to)}`,
+      },
+      { icon: "workday", name: id ? "Hari kerja" : "Workday", line: id ? "Tambah dan hitung hari kerja" : "Add and count working days" },
+      {
+        icon: "bank",
+        name: "Bank",
+        line: id ? `${String(banks)} kode bank dan BIC` : `${String(banks)} bank codes and BICs`,
+      },
+    ],
+  },
+  {
+    title: id ? "Utilitas" : "Utilities",
+    modules: [
+      { icon: "rupiah", name: "Rupiah", line: id ? "Format, parse, terbilang" : "Format, parse, spell out" },
+      { icon: "mask", name: "Mask", line: id ? "Sembunyikan data pribadi di log" : "Hide personal data in logs" },
+      { icon: "fake", name: "Fake", line: id ? "Data uji valid dari seed" : "Valid test data from a seed" },
+      { icon: "schemas", name: id ? "Skema" : "Schemas", line: "Zod, Valibot" },
+    ],
+  },
+];
+
+const prefix = id ? "/id" : "";
+const href = (icon: IconName): string => `${prefix}/reference/${icon}/`;
+---
+
+<div class="modules not-content">
+  {
+    groups.map((group) => (
+      <section>
+        <h3>{group.title}</h3>
+        <ul>
+          {group.modules.map((m) => (
+            <li>
+              <a href={href(m.icon)}>
+                <svg
+                  viewBox="0 0 24 24"
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                  set:html={icons[m.icon]}
+                />
+                <span class="name">{m.name}</span>
+                <span class="line">{m.line}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+    ))
+  }
+</div>
+
+<style>
+  .modules {
+    display: grid;
+    gap: 2rem;
+    margin-block: 1.5rem;
+  }
+  h3 {
+    margin: 0 0 0.75rem;
+    font-size: var(--sl-text-base);
+    font-weight: 700;
+    color: var(--sl-color-gray-2);
+  }
+  ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: 0.25rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  a {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    column-gap: 0.75rem;
+    align-items: center;
+    padding: 0.7rem 0.5rem;
+    margin-inline: -0.5rem;
+    border-radius: 0.5rem;
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover {
+    background: var(--surface);
+  }
+  a:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  svg {
+    grid-row: span 2;
+    color: var(--sl-color-accent-high);
+  }
+  :root[data-theme="light"] svg {
+    color: var(--sl-color-accent);
+  }
+  .name {
+    font-weight: 700;
+    color: var(--sl-color-white);
+  }
+  .line {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+</style>
