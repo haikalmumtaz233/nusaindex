@@ -40,6 +40,10 @@
       "types": "./dist/holiday.d.ts",
       "default": "./dist/holiday.js"
     },
+    "./mask": {
+      "types": "./dist/mask.d.ts",
+      "default": "./dist/mask.js"
+    },
     "./nik": {
       "types": "./dist/nik.d.ts",
       "default": "./dist/nik.js"
@@ -169,6 +173,12 @@
     {
       "name": "rupiah",
       "path": "dist/rupiah.js",
+      "limit": "2 kB",
+      "gzip": true
+    },
+    {
+      "name": "mask",
+      "path": "dist/mask.js",
       "limit": "2 kB",
       "gzip": true
     }

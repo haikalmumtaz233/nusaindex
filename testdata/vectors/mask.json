@@ -1,0 +1,86 @@
+{
+  "module": "mask",
+  "cases": [
+    { "fn": "nik", "args": ["3171014501909999"], "output": "************9999" },
+    { "fn": "nik", "args": ["3171 0145 0190 9999"], "output": "************9999" },
+    { "fn": "nik", "args": [""], "output": "" },
+    { "fn": "npwp", "args": ["01.234.567.8-901.000"], "output": "***********1000" },
+    { "fn": "npwp", "args": ["0012345678901000000001"], "output": "******************0001" },
+    { "fn": "phone", "args": ["0812-0000-0001"], "output": "+62********001" },
+    { "fn": "phone", "args": ["+62 812 0000 0001"], "output": "+62********001" },
+    { "fn": "phone", "args": ["12345"], "output": "**345" },
+    { "fn": "nip", "args": ["19900105 201503 1 999"], "output": "**************1999" },
+    { "fn": "nisn", "args": ["0109999991"], "output": "******9991" },
+    { "fn": "account", "args": ["1234567890"], "output": "******7890" },
+    { "fn": "account", "args": ["123-456-7890"], "output": "******7890" },
+    { "fn": "account", "args": ["12"], "output": "**" },
+
+    { "fn": "text", "args": [""], "output": "" },
+    { "fn": "text", "args": ["NIK 3171014501909999 milik Budi"], "output": "NIK ************9999 milik Budi" },
+    { "fn": "text", "args": ["nik=3171 0145 0190 9999;"], "output": "nik=************9999;" },
+    {
+      "fn": "text",
+      "args": ["hubungi 0812-0000-0001 atau +62 812 0000 0001"],
+      "output": "hubungi +62********001 atau +62********001"
+    },
+    { "fn": "text", "args": ["wa 6281200000001."], "output": "wa +62********001." },
+    { "fn": "text", "args": ["NPWP 01.234.567.8-901.000."], "output": "NPWP ***********1000." },
+    { "fn": "text", "args": ["NIP 19900105 201503 1 999"], "output": "NIP **************1999" },
+    { "fn": "text", "args": ["NIP 19900105-201503-1-999"], "output": "NIP **************1999" },
+    { "fn": "text", "args": ["nisn 0109999991"], "output": "nisn ******9991" },
+    { "fn": "text", "args": ["+1 415 555 0100"], "output": "*******0100" },
+    { "fn": "text", "args": ["user_3171014501909999"], "output": "user_************9999" },
+    { "fn": "text", "args": ["NIK：3171014501909999"], "output": "NIK：************9999" },
+    {
+      "fn": "text",
+      "args": ["tanggal 2025-01-01 10:00, total Rp1.500.000, kode 123456789"],
+      "output": "tanggal 2025-01-01 10:00, total Rp1.500.000, kode 123456789"
+    },
+    {
+      "fn": "text",
+      "args": ["request f47ac10b-58cc-4372-a567-0e02b2c3d479"],
+      "output": "request f47ac10b-58cc-4372-a567-0e02b2c3d479"
+    },
+    { "fn": "text", "args": ["ID3171014501909999"], "output": "ID3171014501909999" },
+    { "fn": "text", "args": ["3171014501909999X"], "output": "3171014501909999X" },
+    { "fn": "text", "args": ["ab1 3171014501909999"], "output": "ab1 ************9999" },
+    { "fn": "text", "args": ["3171014501909999 1a"], "output": "************9999 1a" },
+    { "fn": "text", "args": ["+a+6281200000001b"], "output": "+a+6281200000001b" },
+    { "fn": "text", "args": ["3171  0145  0190  9999"], "output": "3171  0145  0190  9999" },
+    { "fn": "text", "args": ["++62 812-0000-0001 -"], "output": "++62********001 -" },
+    { "fn": "text", "args": ["１２３４５６７８９０１２"], "output": "１２３４５６７８９０１２" },
+
+    { "fn": "redact", "args": ["3171014501909999"], "output": "************9999" },
+    { "fn": "redact", "args": [3171014501909999], "output": "************9999" },
+    { "fn": "redact", "args": [-81200000001], "output": "-*******0001" },
+    { "fn": "redact", "args": [123], "output": 123 },
+    { "fn": "redact", "args": [1.5], "output": 1.5 },
+    { "fn": "redact", "args": [true], "output": true },
+    { "fn": "redact", "args": [null], "output": null },
+    { "fn": "redact", "args": [[]], "output": [] },
+    { "fn": "redact", "args": [{}], "output": {} },
+    {
+      "fn": "redact",
+      "args": [
+        {
+          "nama": "Budi",
+          "nik": "3171014501909999",
+          "hp": ["0812-0000-0001", 7, null],
+          "meta": {
+            "__proto__": { "polluted": true },
+            "constructor": "c",
+            "prototype": "p",
+            "nisn": "0109999991",
+            "3171014501909999": "key"
+          }
+        }
+      ],
+      "output": {
+        "nama": "Budi",
+        "nik": "************9999",
+        "hp": ["+62********001", 7, null],
+        "meta": { "nisn": "******9991", "************9999": "key" }
+      }
+    }
+  ]
+}
