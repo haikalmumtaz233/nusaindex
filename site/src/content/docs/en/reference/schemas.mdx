@@ -19,7 +19,7 @@ import { Tabs, TabItem } from "@astrojs/starlight/components";
 | `plate()`  | A vehicle plate                    | The input string, unchanged |
 | `rupiah()` | Rupiah text such as `Rp 25.000,-`  | A `number` in rupiah        |
 
-Identifier schemas validate without transforming, so you decide whether to store the original or a normalized value (`nik.format`, `phone.format`). Every factory takes `{ message }`. The error message never contains the input; Zod issues carry the NusaIndex error code in `params.nusaindex`.
+Identifier schemas validate without transforming, so you decide whether to store the original or a normalized value (`nik.format`, `phone.format`). Every factory takes `{ message }`. The error message never contains the input. Zod issues carry the NusaIndex error code in `params.nusaindex`.
 
 <Tabs syncKey="schema">
   <TabItem label="Zod">
