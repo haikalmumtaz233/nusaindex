@@ -254,12 +254,8 @@ for (const name of ordered) {
   checks[name]?.(rows);
 }
 
-const notices = ["NOTICE", "packages/nusaindex/NOTICE"];
-if (ordered.length > 0) {
-  const texts = notices.map((p) => (existsSync(p) ? readFileSync(p, "utf8") : ""));
-  if (texts.some((t) => t === "") || texts[0] !== texts[1]) {
-    fail("NOTICE: root and packages/nusaindex copies must exist and match");
-  }
+if (ordered.length > 0 && (!existsSync("NOTICE") || readFileSync("NOTICE", "utf8").trim() === "")) {
+  fail("NOTICE: the root NOTICE must list the dataset sources");
 }
 
 if (errors.length > 0) {

@@ -107,8 +107,9 @@
   },
   "scripts": {
     "build": "tsdown",
+    "prepack": "node ../../scripts/package-files.ts",
     "size": "size-limit",
-    "pkg:check": "publint --strict && attw --pack . --profile esm-only"
+    "pkg:check": "node ../../scripts/package-files.ts && publint --strict && attw --pack . --profile esm-only"
   },
   "size-limit": [
     {

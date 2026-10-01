@@ -25,3 +25,6 @@ Thumbs.db
 .vscode/*
 !.vscode/extensions.json
 packages/mcp/THIRD_PARTY_NOTICES.md
+packages/*/LICENSE
+packages/nusaindex/NOTICE
+packages/nusaindex/README.md
