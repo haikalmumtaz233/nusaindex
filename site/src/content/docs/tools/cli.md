@@ -14,15 +14,16 @@ npx nusaindex --help
 
 ## Commands
 
-| Command                                                  | Does                                            |
-| -------------------------------------------------------- | ----------------------------------------------- |
-| `nusaindex <nik\|npwp\|phone\|plate\|nip\|nisn> <value>` | Validate and parse one value                    |
-| `nusaindex mask <kind\|text> <value>`                    | Mask an identifier (`account` too) or free text |
-| `nusaindex rupiah format\|parse\|terbilang <value>`      | Format, parse or spell a Rupiah amount          |
-| `nusaindex region get\|children\|search\|nik <value>`    | Look up regions                                 |
-| `nusaindex holiday <year>`                               | Holidays and collective leave in a year         |
-| `nusaindex workday is\|add\|count …`                     | Working-day arithmetic                          |
-| `nusaindex fake <kind> [--seed n] [--count n]`           | Test data (for tests only)                      |
+| Command                                                        | Does                                                |
+| -------------------------------------------------------------- | --------------------------------------------------- |
+| `nusaindex <nik\|npwp\|phone\|plate\|nip\|nisn> <value>`       | Validate and parse one value                        |
+| `nusaindex mask <kind\|text> <value>`                          | Mask an identifier (`account` too) or free text     |
+| `nusaindex rupiah format\|parse\|terbilang <value>`            | Format, parse or spell a Rupiah amount              |
+| `nusaindex region get\|resolve\|children\|search\|nik <value>` | Look up regions; `resolve` follows renumbered codes |
+| `nusaindex holiday <year>`                                     | Holidays and collective leave in a year             |
+| `nusaindex bank <code\|bic\|list>`                             | Look up banks by transfer code or BIC               |
+| `nusaindex workday is\|add\|count …`                           | Working-day arithmetic                              |
+| `nusaindex fake <kind> [--seed n] [--count n]`                 | Test data (for tests only)                          |
 
 ```sh
 nusaindex nik 7502010706599583
