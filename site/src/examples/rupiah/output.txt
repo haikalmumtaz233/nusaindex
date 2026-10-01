@@ -1,0 +1,5 @@
+Rp1.500.000,50
+2.000.000,00
+true
+25000
+satu juta lima ratus ribu rupiah lima puluh sen

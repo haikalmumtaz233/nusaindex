@@ -1,0 +1,13 @@
+{
+  "name": "nusaindex-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node ../scripts/site.ts dev",
+    "build": "node ../scripts/site.ts build",
+    "preview": "node ../scripts/site.ts preview"
+  },
+  "dependencies": {
+    "nusaindex": "workspace:*"
+  }
+}

@@ -22,6 +22,11 @@ linters:
         - pattern: ^fmt\.Print.*$
         - pattern: ^panic$
         - pattern: ^print(ln)?$
+  exclusions:
+    rules:
+      - path: ^site/src/examples/
+        linters:
+          - forbidigo
 
 formatters:
   enable:
