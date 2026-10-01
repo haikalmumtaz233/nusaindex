@@ -35,6 +35,7 @@ export default defineConfig({
       sidebar: [
         section("Mulai", "Start here", [
           "getting-started",
+          "use-cases",
           "guides/results-and-errors",
           "guides/input-and-privacy",
         ]),

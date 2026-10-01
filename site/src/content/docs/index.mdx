@@ -1,10 +1,10 @@
 ---
 title: NusaIndex
-description: Validasi, parse, dan format data Indonesia di Go, TypeScript, command line, dan agent AI. Offline, tanpa dependensi runtime.
+description: Cek, baca, dan format NIK, NPWP, nomor HP, plat, dan data wilayah Indonesia di Go, TypeScript, terminal, dan agent AI. Jalan offline.
 template: splash
 hero:
   title: Setiap digit ada artinya.
-  tagline: NusaIndex memeriksa, membaca isi, dan memformat nomor identitas serta data referensi Indonesia di Go, TypeScript, terminal, dan agent AI. Berjalan offline, tanpa dependensi.
+  tagline: Cek dan baca isi NIK, NPWP, nomor HP, plat, sampai kode wilayah. Untuk Go, TypeScript, terminal, dan agent AI. Jalan offline.
   actions:
     - text: Mulai
       link: /getting-started/
@@ -16,6 +16,11 @@ hero:
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 import Example from "../../components/Example.astro";
 import ModuleGrid from "../../components/ModuleGrid.astro";
+import UseCases from "../../components/UseCases.astro";
+
+## Dipakai untuk apa
+
+<UseCases compact />
 
 ## Pakai di mana saja
 
@@ -38,12 +43,12 @@ npm install --global nusaindex
 
   </TabItem>
   <TabItem label="Agent AI">
-    Hubungkan [`nusaindex-mcp`](/tools/mcp/) ke klien MCP mana pun. Semua tool hanya membaca.
+    Hubungkan [`nusaindex-mcp`](/tools/mcp/) ke klien MCP mana pun. Semua tool-nya cuma membaca.
     <img
       src="/demos/mcp.svg"
       width="760"
       height="386"
-      alt="Klien MCP: diminta tiga NIK uji di Kota Bandung, tool fake mengembalikan tiga NIK; ditanya soal 0859-5257-171, tool parse mengembalikan +628595257171, nomor seluler XL (XLSmart)."
+      alt="Klien MCP: diminta tiga NIK uji di Kota Bandung, tool fake mengembalikan tiga NIK. Ditanya soal 0859-5257-171, tool parse menjawab +628595257171, nomor seluler XL (XLSmart)."
     />
   </TabItem>
 </Tabs>
@@ -52,8 +57,8 @@ npm install --global nusaindex
 
 <ModuleGrid />
 
-## Aman sejak awal
+## Aman dari awal
 
-- **Offline.** Tanpa panggilan jaringan, log, atau telemetri. Input tidak pernah keluar dari proses Anda.
-- **Bisa ditelusuri.** Setiap dataset menyebut regulasi dan dokumen sumbernya di [`data/manifest.json`](/project/data-sources/).
-- **Tidak resmi.** Tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah mana pun. Valid berarti **strukturnya benar**, bukan berarti nomornya asli atau dimiliki seseorang.
+- **Offline.** Tanpa request jaringan, log, atau telemetri. Input tidak pernah keluar dari aplikasimu.
+- **Bisa ditelusuri.** Setiap dataset mencatat regulasi dan dokumen sumbernya di [`data/manifest.json`](/project/data-sources/).
+- **Tidak resmi.** Tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah mana pun. Valid artinya **strukturnya benar**, bukan berarti nomornya asli atau milik seseorang.
