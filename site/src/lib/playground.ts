@@ -107,3 +107,21 @@ export async function sample(kind: Kind, seed: number): Promise<string> {
 function valueOf(result: { ok: true; value: string } | { ok: false }): string {
   return result.ok ? result.value : "";
 }
+
+const exampleSeeds: Readonly<Record<Kind, number>> = {
+  nik: 42,
+  npwp: 42,
+  phone: 7,
+  plate: 42,
+  nip: 42,
+  nisn: 42,
+  rupiah: 42,
+};
+
+export async function example(kind: Kind): Promise<string> {
+  if (kind === "nik") {
+    const r = await fake.nik(42, { region: "32.73", birthDate: "1990-05-17", sex: "female" });
+    return r.ok ? r.value : "";
+  }
+  return sample(kind, exampleSeeds[kind]);
+}

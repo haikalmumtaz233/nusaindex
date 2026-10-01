@@ -1,0 +1,388 @@
+---
+import { anatomy, anatomyKinds, type AnatomyKind } from "../lib/anatomy";
+import { detailText, localeOf, roleLabel, ui } from "../lib/anatomy-text";
+import { example } from "../lib/playground";
+
+interface Props {
+  kind?: AnatomyKind;
+  hero?: boolean;
+}
+
+const { kind, hero = false } = Astro.props;
+const locale = localeOf(Astro.currentLocale);
+const text = ui(locale);
+const active = kind ?? "nik";
+const value = await example(active);
+const result = await anatomy(active, value);
+const segments = result.ok ? result.value : [];
+const inputId = `anatomy-${active}`;
+---
+
+<section
+  class:list={["anatomy", "not-content", { hero }]}
+  data-kind={active}
+  data-locale={locale}
+  data-state="valid"
+>
+  {
+    kind === undefined && (
+      <div class="kinds" role="group" aria-label={text.choose}>
+        {anatomyKinds.map((k) => (
+          <button type="button" data-kind={k} aria-pressed={k === active ? "true" : "false"}>
+            {text.kinds[k]}
+          </button>
+        ))}
+      </div>
+    )
+  }
+  <div class="field">
+    <label for={inputId}>{text.input[active]}</label>
+    <div class="controls">
+      <input
+        id={inputId}
+        type="text"
+        value={value}
+        maxlength="64"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <button type="button" class="shuffle">{text.generate}</button>
+    </div>
+  </div>
+  <p class="digits" aria-hidden="true">
+    {
+      segments.map((s, i) => (
+        <span class={`seg tone-${String(s.tone)}`} data-i={i} style={`--i: ${String(i)}`}>
+          {s.digits}
+        </span>
+      ))
+    }
+  </p>
+  <dl class="legend">
+    {
+      segments.map((s, i) => {
+        const detail = detailText(s.detail, locale);
+        return (
+          <div class={`item tone-${String(s.tone)}`} data-i={i} style={`--i: ${String(i)}`}>
+            <dt>
+              <span class="chip">{s.digits}</span>
+              {roleLabel(s.role, locale)}
+            </dt>
+            {detail !== "" && <dd>{detail}</dd>}
+          </div>
+        );
+      })
+    }
+  </dl>
+  <p class="status" role="status" aria-live="polite">{text.valid}</p>
+  <p class="note">{text.note}</p>
+</section>
+
+<style is:global>
+  .anatomy {
+    --tone-0: var(--ink-muted);
+    --tone-1: var(--tarum);
+    --tone-2: var(--laut);
+    --tone-3: var(--pandan);
+    --tone-4: var(--kunyit);
+    --tone-5: var(--soga);
+    display: grid;
+    gap: 1.25rem;
+    margin-block: 1.5rem 2.5rem;
+  }
+  .anatomy .tone-0 {
+    --tone: var(--tone-0);
+  }
+  .anatomy .tone-1 {
+    --tone: var(--tone-1);
+  }
+  .anatomy .tone-2 {
+    --tone: var(--tone-2);
+  }
+  .anatomy .tone-3 {
+    --tone: var(--tone-3);
+  }
+  .anatomy .tone-4 {
+    --tone: var(--tone-4);
+  }
+  .anatomy .tone-5 {
+    --tone: var(--tone-5);
+  }
+  .anatomy .kinds {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .anatomy .kinds button,
+  .anatomy .shuffle {
+    font: inherit;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    min-height: 2.75rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid var(--surface-line);
+    background: transparent;
+    color: var(--sl-color-gray-1);
+    cursor: pointer;
+  }
+  .anatomy .kinds button[aria-pressed="true"] {
+    background: var(--sl-color-accent);
+    border-color: var(--sl-color-accent);
+    color: var(--sl-color-black);
+  }
+  .anatomy .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  .anatomy label {
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-gray-2);
+  }
+  .anatomy .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .anatomy input {
+    flex: 1 1 16rem;
+    min-height: 2.75rem;
+    padding: 0.5rem 0.875rem;
+    font: inherit;
+    font-size: var(--sl-text-lg);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.03em;
+    color: var(--sl-color-white);
+    background: var(--surface);
+    border: 1px solid var(--surface-line);
+    border-radius: 0.5rem;
+  }
+  .anatomy :is(input, button):focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  .anatomy .digits {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2em 0.4em;
+    min-height: 1.4em;
+    margin: 0;
+    font-size: clamp(1.75rem, 5.5vw, 3.25rem);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: 0.04em;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+  .anatomy.hero .digits {
+    font-size: clamp(2rem, 8vw, 4.75rem);
+  }
+  .anatomy .seg {
+    color: var(--tone);
+    border-bottom: 0.1em solid var(--tone);
+    transition: opacity 0.15s ease;
+  }
+  .anatomy[data-state="invalid"] .digits {
+    color: var(--sl-color-gray-3);
+    text-decoration: line-through;
+    text-decoration-thickness: 0.06em;
+  }
+  .anatomy .legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 10rem), 1fr));
+    gap: 1rem 1.5rem;
+    margin: 0;
+  }
+  .anatomy .item {
+    padding-inline-start: 0.75rem;
+    border-inline-start: 3px solid var(--tone);
+    transition: opacity 0.15s ease;
+  }
+  .anatomy dt {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.5rem;
+    align-items: baseline;
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
+    color: var(--sl-color-gray-2);
+  }
+  .anatomy .chip {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--tone);
+  }
+  .anatomy dd {
+    margin: 0.2rem 0 0;
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .anatomy .status {
+    margin: 0;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--pandan);
+  }
+  .anatomy[data-state="invalid"] .status {
+    color: var(--soga);
+  }
+  .anatomy .note {
+    margin: 0;
+    font-size: var(--sl-text-xs);
+    color: var(--sl-color-gray-3);
+  }
+  .anatomy:has(.item:hover) :is(.seg, .item) {
+    opacity: 0.35;
+  }
+  .anatomy:has(.item[data-i="0"]:hover) [data-i="0"],
+  .anatomy:has(.item[data-i="1"]:hover) [data-i="1"],
+  .anatomy:has(.item[data-i="2"]:hover) [data-i="2"],
+  .anatomy:has(.item[data-i="3"]:hover) [data-i="3"],
+  .anatomy:has(.item[data-i="4"]:hover) [data-i="4"],
+  .anatomy:has(.item[data-i="5"]:hover) [data-i="5"],
+  .anatomy:has(.item[data-i="6"]:hover) [data-i="6"],
+  .anatomy:has(.item[data-i="7"]:hover) [data-i="7"] {
+    opacity: 1;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .anatomy.hero:not(.live) .seg {
+      animation: anatomy-settle 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+      animation-delay: calc(var(--i) * 110ms);
+    }
+    .anatomy.hero:not(.live) .item {
+      animation: anatomy-fade 0.5s ease both;
+      animation-delay: calc(400ms + var(--i) * 110ms);
+    }
+  }
+  @keyframes anatomy-settle {
+    from {
+      opacity: 0;
+      transform: translateY(0.3em);
+    }
+  }
+  @keyframes anatomy-fade {
+    from {
+      opacity: 0;
+    }
+  }
+</style>
+
+<script>
+  import { anatomy, isAnatomyKind, type AnatomyKind, type Segment } from "../lib/anatomy";
+  import { detailText, errorText, localeOf, roleLabel, ui, type Locale } from "../lib/anatomy-text";
+  import { sample } from "../lib/playground";
+
+  function element<K extends keyof HTMLElementTagNameMap>(
+    tag: K,
+    className: string,
+    text?: string,
+  ): HTMLElementTagNameMap[K] {
+    const node = document.createElement(tag);
+    if (className !== "") {
+      node.className = className;
+    }
+    if (text !== undefined) {
+      node.textContent = text;
+    }
+    return node;
+  }
+
+  function render(root: HTMLElement, segments: readonly Segment[], locale: Locale): void {
+    root.querySelector(".digits")?.replaceChildren(
+      ...segments.map((s, i) => {
+        const span = element("span", `seg tone-${String(s.tone)}`, s.digits);
+        span.dataset.i = String(i);
+        return span;
+      }),
+    );
+    root.querySelector(".legend")?.replaceChildren(
+      ...segments.map((s, i) => {
+        const item = element("div", `item tone-${String(s.tone)}`);
+        item.dataset.i = String(i);
+        const term = element("dt", "");
+        term.append(element("span", "chip", s.digits), roleLabel(s.role, locale));
+        item.append(term);
+        const detail = detailText(s.detail, locale);
+        if (detail !== "") {
+          item.append(element("dd", "", detail));
+        }
+        return item;
+      }),
+    );
+  }
+
+  function showRaw(root: HTMLElement, value: string): void {
+    root.querySelector(".digits")?.replaceChildren(value);
+    root.querySelector(".legend")?.replaceChildren();
+  }
+
+  function randomSeed(): number {
+    return crypto.getRandomValues(new Uint32Array(1))[0] ?? 0;
+  }
+
+  function setup(root: HTMLElement): void {
+    const locale = localeOf(root.dataset.locale);
+    const text = ui(locale);
+    const input = root.querySelector("input");
+    const label = root.querySelector("label");
+    const shuffle = root.querySelector<HTMLButtonElement>(".shuffle");
+    const status = root.querySelector(".status");
+    const initial = root.dataset.kind ?? "";
+    if (!input || !label || !shuffle || !status || !isAnatomyKind(initial)) {
+      return;
+    }
+    let kind: AnatomyKind = initial;
+    let run = 0;
+
+    const update = async (): Promise<void> => {
+      const current = ++run;
+      root.classList.add("live");
+      const value = input.value;
+      const result = value.trim() === "" ? undefined : await anatomy(kind, value);
+      if (current !== run) {
+        return;
+      }
+      if (result === undefined) {
+        showRaw(root, "");
+        root.dataset.state = "empty";
+        status.textContent = text.empty;
+      } else if (result.ok) {
+        render(root, result.value, locale);
+        root.dataset.state = "valid";
+        status.textContent = text.valid;
+      } else {
+        showRaw(root, value);
+        root.dataset.state = "invalid";
+        status.textContent = errorText(kind, result.error, locale);
+      }
+    };
+
+    const generate = async (): Promise<void> => {
+      input.value = await sample(kind, randomSeed());
+      await update();
+    };
+
+    input.addEventListener("input", () => void update());
+    shuffle.addEventListener("click", () => void generate());
+    for (const button of root.querySelectorAll<HTMLButtonElement>(".kinds button")) {
+      button.addEventListener("click", () => {
+        const next = button.dataset.kind ?? "";
+        if (!isAnatomyKind(next) || next === kind) {
+          return;
+        }
+        kind = next;
+        root.dataset.kind = next;
+        label.textContent = text.input[next];
+        for (const other of root.querySelectorAll(".kinds button")) {
+          other.setAttribute("aria-pressed", other === button ? "true" : "false");
+        }
+        void generate();
+      });
+    }
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>(".anatomy")) {
+    setup(root);
+  }
+</script>
