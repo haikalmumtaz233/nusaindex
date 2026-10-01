@@ -12,11 +12,14 @@
   "keywords": [
     "indonesia",
     "nik",
-    "npwp",
     "nitku",
+    "npwp",
     "phone",
     "region",
-    "validation"
+    "rupiah",
+    "valibot",
+    "validation",
+    "zod"
   ],
   "type": "module",
   "sideEffects": false,
@@ -84,9 +87,17 @@
       "types": "./dist/rupiah.d.ts",
       "default": "./dist/rupiah.js"
     },
+    "./valibot": {
+      "types": "./dist/valibot.d.ts",
+      "default": "./dist/valibot.js"
+    },
     "./workday": {
       "types": "./dist/workday.d.ts",
       "default": "./dist/workday.js"
+    },
+    "./zod": {
+      "types": "./dist/zod.d.ts",
+      "default": "./dist/zod.js"
     },
     "./package.json": "./package.json"
   },
@@ -194,6 +205,40 @@
       ],
       "limit": "9 kB",
       "gzip": true
+    },
+    {
+      "name": "zod adapter (without zod)",
+      "path": "dist/zod.js",
+      "ignore": [
+        "zod"
+      ],
+      "limit": "4 kB",
+      "gzip": true
+    },
+    {
+      "name": "valibot adapter (without valibot)",
+      "path": "dist/valibot.js",
+      "ignore": [
+        "valibot"
+      ],
+      "limit": "4 kB",
+      "gzip": true
     }
-  ]
+  ],
+  "peerDependencies": {
+    "valibot": "^1.0.0",
+    "zod": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+    "valibot": {
+      "optional": true
+    },
+    "zod": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "valibot": "1.5.0",
+    "zod": "4.6.5"
+  }
 }
