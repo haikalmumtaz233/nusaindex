@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="366" viewBox="0 0 760 366" role="img" aria-label="nusaindex-mcp in an MCP client">
+<style>text{font-family:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,monospace;font-size:14px;white-space:pre}.f0r0{animation:k0r0 9.9s infinite}@keyframes k0r0{0%,4.03%{opacity:0}4.04%,93.94%{opacity:1}100%{opacity:0}}.f1r0{animation:k1r0 9.9s infinite}@keyframes k1r0{0%,16.15%{opacity:0}16.16%,93.94%{opacity:1}100%{opacity:0}}.f2r0{animation:k2r0 9.9s infinite}@keyframes k2r0{0%,24.23%{opacity:0}24.24%,93.94%{opacity:1}100%{opacity:0}}.f2r1{animation:k2r1 9.9s infinite}@keyframes k2r1{0%,24.23%{opacity:0}24.24%,93.94%{opacity:1}100%{opacity:0}}.f2r2{animation:k2r2 9.9s infinite}@keyframes k2r2{0%,24.23%{opacity:0}24.24%,93.94%{opacity:1}100%{opacity:0}}.f3r0{animation:k3r0 9.9s infinite}@keyframes k3r0{0%,44.43%{opacity:0}44.44%,93.94%{opacity:1}100%{opacity:0}}.f4r0{animation:k4r0 9.9s infinite}@keyframes k4r0{0%,56.56%{opacity:0}56.57%,93.94%{opacity:1}100%{opacity:0}}.f5r0{animation:k5r0 9.9s infinite}@keyframes k5r0{0%,64.64%{opacity:0}64.65%,93.94%{opacity:1}100%{opacity:0}}.f5r1{animation:k5r1 9.9s infinite}@keyframes k5r1{0%,64.64%{opacity:0}64.65%,93.94%{opacity:1}100%{opacity:0}}@media (prefers-reduced-motion:reduce){.a{animation:none}.cover{display:none}}</style>
+<rect width="760" height="366" rx="12" fill="#12163a"/>
+<rect x="0.5" y="0.5" width="759" height="365" rx="12" fill="none" stroke="#2c3366"/>
+<text x="24" y="28" fill="#8890bc">nusaindex-mcp in an MCP client</text>
+<line x1="0" y1="40" x2="760" y2="40" stroke="#2c3366"/>
+<g class="a f0r0"><rect x="250" y="40" width="486" height="26" rx="13" fill="#f2b53a"/><text x="262" y="57"><tspan fill="#12163a">Make 3 test NIKs: Kota Bandung, born 1990-05-17, female</tspan></text></g>
+<g class="a f1r0"><rect x="24" y="82" width="473.6" height="26" rx="6" fill="none" stroke="#2c3366"/><text x="34" y="99"><tspan fill="#5fd3cf">fake  kind=nik count=3 region=32.73 sex=female seed=42</tspan></text></g>
+<text class="a f2r0" x="40.8" y="140"><tspan fill="#e6e8f5">3273275705901349</tspan></text>
+<text class="a f2r1" x="40.8" y="162"><tspan fill="#e6e8f5">3273295705904267</tspan></text>
+<text class="a f2r2" x="40.8" y="184"><tspan fill="#e6e8f5">3273245705909267</tspan></text>
+<g class="a f3r0"><rect x="392.8" y="200" width="343.2" height="26" rx="13" fill="#f2b53a"/><text x="404.8" y="217"><tspan fill="#12163a">Is 0859-5257-171 a valid phone number?</tspan></text></g>
+<g class="a f4r0"><rect x="24" y="242" width="162.8" height="26" rx="6" fill="none" stroke="#2c3366"/><text x="34" y="259"><tspan fill="#5fd3cf">parse  kind=phone</tspan></text></g>
+<text class="a f5r0" x="40.8" y="300"><tspan fill="#e6e8f5">+628595257171  mobile</tspan></text>
+<text class="a f5r1" x="40.8" y="322"><tspan fill="#e6e8f5">XL (XLSmart)</tspan></text>
+</svg>

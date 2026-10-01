@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="534" viewBox="0 0 760 534" role="img" aria-label="nusa: the NusaIndex command line">
+<style>text{font-family:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,monospace;font-size:14px;white-space:pre}.f0r0{animation:k0r0 14.4s infinite}@keyframes k0r0{0%,2.77%{opacity:0}2.78%,95.83%{opacity:1}100%{opacity:0}}.t0{animation:t0 14.4s infinite}@keyframes t0{0%,2.78%{transform:translateX(0);animation-timing-function:steps(25,end)}9.72%,100%{transform:translateX(218.4px)}}.f1r0{animation:k1r0 14.4s infinite}@keyframes k1r0{0%,11.8%{opacity:0}11.81%,95.83%{opacity:1}100%{opacity:0}}.f1r1{animation:k1r1 14.4s infinite}@keyframes k1r1{0%,11.8%{opacity:0}11.81%,95.83%{opacity:1}100%{opacity:0}}.f1r2{animation:k1r2 14.4s infinite}@keyframes k1r2{0%,11.8%{opacity:0}11.81%,95.83%{opacity:1}100%{opacity:0}}.f1r3{animation:k1r3 14.4s infinite}@keyframes k1r3{0%,11.8%{opacity:0}11.81%,95.83%{opacity:1}100%{opacity:0}}.f1r4{animation:k1r4 14.4s infinite}@keyframes k1r4{0%,11.8%{opacity:0}11.81%,95.83%{opacity:1}100%{opacity:0}}.f1r5{animation:k1r5 14.4s infinite}@keyframes k1r5{0%,11.8%{opacity:0}11.81%,95.83%{opacity:1}100%{opacity:0}}.f1r6{animation:k1r6 14.4s infinite}@keyframes k1r6{0%,11.8%{opacity:0}11.81%,95.83%{opacity:1}100%{opacity:0}}.f2r0{animation:k2r0 14.4s infinite}@keyframes k2r0{0%,22.21%{opacity:0}22.22%,95.83%{opacity:1}100%{opacity:0}}.t2{animation:t2 14.4s infinite}@keyframes t2{0%,22.22%{transform:translateX(0);animation-timing-function:steps(24,end)}28.89%,100%{transform:translateX(210px)}}.f3r0{animation:k3r0 14.4s infinite}@keyframes k3r0{0%,30.96%{opacity:0}30.97%,95.83%{opacity:1}100%{opacity:0}}.f3r1{animation:k3r1 14.4s infinite}@keyframes k3r1{0%,30.96%{opacity:0}30.97%,95.83%{opacity:1}100%{opacity:0}}.f3r2{animation:k3r2 14.4s infinite}@keyframes k3r2{0%,30.96%{opacity:0}30.97%,95.83%{opacity:1}100%{opacity:0}}.f3r3{animation:k3r3 14.4s infinite}@keyframes k3r3{0%,30.96%{opacity:0}30.97%,95.83%{opacity:1}100%{opacity:0}}.f3r4{animation:k3r4 14.4s infinite}@keyframes k3r4{0%,30.96%{opacity:0}30.97%,95.83%{opacity:1}100%{opacity:0}}.f3r5{animation:k3r5 14.4s infinite}@keyframes k3r5{0%,30.96%{opacity:0}30.97%,95.83%{opacity:1}100%{opacity:0}}.f4r0{animation:k4r0 14.4s infinite}@keyframes k4r0{0%,41.38%{opacity:0}41.39%,95.83%{opacity:1}100%{opacity:0}}.t4{animation:t4 14.4s infinite}@keyframes t4{0%,41.39%{transform:translateX(0);animation-timing-function:steps(31,end)}50%,100%{transform:translateX(268.8px)}}.f5r0{animation:k5r0 14.4s infinite}@keyframes k5r0{0%,52.07%{opacity:0}52.08%,95.83%{opacity:1}100%{opacity:0}}.f6r0{animation:k6r0 14.4s infinite}@keyframes k6r0{0%,62.49%{opacity:0}62.5%,95.83%{opacity:1}100%{opacity:0}}.t6{animation:t6 14.4s infinite}@keyframes t6{0%,62.5%{transform:translateX(0);animation-timing-function:steps(55,end)}73.61%,100%{transform:translateX(470.4px)}}.f7r0{animation:k7r0 14.4s infinite}@keyframes k7r0{0%,75.68%{opacity:0}75.69%,95.83%{opacity:1}100%{opacity:0}}@media (prefers-reduced-motion:reduce){.a{animation:none}.cover{display:none}}</style>
+<rect width="760" height="534" rx="12" fill="#12163a"/>
+<rect x="0.5" y="0.5" width="759" height="533" rx="12" fill="none" stroke="#2c3366"/>
+<text x="24" y="28" fill="#8890bc">nusa: the NusaIndex command line</text>
+<line x1="0" y1="40" x2="760" y2="40" stroke="#2c3366"/>
+<text class="a f0r0" x="24" y="56"><tspan fill="#f2b53a">$ </tspan><tspan fill="#ffffff">nusa nik 3273275705901349</tspan></text>
+<rect class="cover t0" x="40.8" y="40" width="218.4" height="22" fill="#12163a"/>
+<text class="a f1r0" x="24" y="84"><tspan fill="#8890bc">nik           </tspan><tspan fill="#e6e8f5">3273275705901349</tspan></text>
+<text class="a f1r1" x="24" y="106"><tspan fill="#8890bc">provinceCode  </tspan><tspan fill="#e6e8f5">32</tspan></text>
+<text class="a f1r2" x="24" y="128"><tspan fill="#8890bc">regencyCode   </tspan><tspan fill="#e6e8f5">32.73</tspan></text>
+<text class="a f1r3" x="24" y="150"><tspan fill="#8890bc">districtCode  </tspan><tspan fill="#e6e8f5">32.73.27</tspan></text>
+<text class="a f1r4" x="24" y="172"><tspan fill="#8890bc">birthDate     </tspan><tspan fill="#e6e8f5">1990-05-17</tspan></text>
+<text class="a f1r5" x="24" y="194"><tspan fill="#8890bc">sex           </tspan><tspan fill="#e6e8f5">female</tspan></text>
+<text class="a f1r6" x="24" y="216"><tspan fill="#8890bc">serial        </tspan><tspan fill="#e6e8f5">1349</tspan></text>
+<text class="a f2r0" x="24" y="244"><tspan fill="#f2b53a">$ </tspan><tspan fill="#ffffff">nusa phone 0859-5257-171</tspan></text>
+<rect class="cover t2" x="40.8" y="228" width="210" height="22" fill="#12163a"/>
+<text class="a f3r0" x="24" y="272"><tspan fill="#8890bc">e164      </tspan><tspan fill="#e6e8f5">+628595257171</tspan></text>
+<text class="a f3r1" x="24" y="294"><tspan fill="#8890bc">national  </tspan><tspan fill="#e6e8f5">08595257171</tspan></text>
+<text class="a f3r2" x="24" y="316"><tspan fill="#8890bc">type      </tspan><tspan fill="#e6e8f5">mobile</tspan></text>
+<text class="a f3r3" x="24" y="338"><tspan fill="#8890bc">prefix    </tspan><tspan fill="#e6e8f5">0859</tspan></text>
+<text class="a f3r4" x="24" y="360"><tspan fill="#8890bc">brand     </tspan><tspan fill="#e6e8f5">XL</tspan></text>
+<text class="a f3r5" x="24" y="382"><tspan fill="#8890bc">operator  </tspan><tspan fill="#e6e8f5">XLSmart</tspan></text>
+<text class="a f4r0" x="24" y="410"><tspan fill="#f2b53a">$ </tspan><tspan fill="#ffffff">nusa rupiah terbilang 1500000.5</tspan></text>
+<rect class="cover t4" x="40.8" y="394" width="268.8" height="22" fill="#12163a"/>
+<text class="a f5r0" x="24" y="438"><tspan fill="#e6e8f5">satu juta lima ratus ribu rupiah lima puluh sen</tspan></text>
+<text class="a f6r0" x="24" y="466"><tspan fill="#f2b53a">$ </tspan><tspan fill="#ffffff">nusa mask text &quot;NIK 3273275705901349, HP 0859-5257-171&quot;</tspan></text>
+<rect class="cover t6" x="40.8" y="450" width="470.4" height="22" fill="#12163a"/>
+<text class="a f7r0" x="24" y="494"><tspan fill="#e6e8f5">NIK ************1349, HP +62*******171</tspan></text>
+</svg>
