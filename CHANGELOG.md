@@ -6,8 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-01
+
 ### Added
 
+- Reference data `2026.10.5` in `data/` (regions, historical region codes, plate codes, fixed-line area codes, holidays and bank codes), with the source document, regulation and checksum of every dataset in `data/manifest.json` and attributions in `NOTICE`.
 - `bank`: list banks and look them up by 3-digit bank code (including their sharia units) or by BIC.
 - `workday`: check a date, add or subtract working days, and count working days in a range, skipping weekends, national holidays and (optionally) collective leave. The weekend days are configurable.
 - `holiday`: national holidays and collective leave for 2020-2027 by year, date range or single date, each with its Indonesian and English name and the SKB or Keppres it comes from.
