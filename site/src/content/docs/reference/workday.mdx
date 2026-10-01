@@ -1,0 +1,35 @@
+---
+title: Working days
+description: Check, add, and count Indonesian working days, skipping weekends, national holidays, and collective leave.
+---
+
+import Example from "../../../components/Example.astro";
+
+Working days skip weekends, national holidays, and (by default) collective leave from [`holiday`](/reference/holiday/). Use them for payroll cut-offs, SLAs and due dates.
+
+## Functions
+
+| Go                              | TypeScript                       | Returns                                                 |
+| ------------------------------- | -------------------------------- | ------------------------------------------------------- |
+| `workday.IsWorkday(date, opts)` | `workday.isWorkday(date, opts?)` | Whether `date` is a working day                         |
+| `workday.Add(date, days, opts)` | `workday.add(date, days, opts?)` | The date `days` working days later (negative goes back) |
+| `workday.Count(from, to, opts)` | `workday.count(from, to, opts?)` | Working days from `from` to `to`, inclusive             |
+
+## Options
+
+| Go `Options`               | TypeScript                 | Default             |
+| -------------------------- | -------------------------- | ------------------- |
+| `Weekend []time.Weekday`   | `weekend: number[]`        | Saturday and Sunday |
+| `CollectiveLeaveIsWorkday` | `collectiveLeaveIsWorkday` | `false`             |
+
+TypeScript weekend days use `0` for Sunday to `6` for Saturday, like `Date.getUTCDay()`. A six-day work week is `[0]`.
+
+Calculations only work inside the years covered by holiday data, so a result is never silently wrong. A date outside that range fails with `range`.
+
+## Errors
+
+`date`, `range` (outside the covered years, or `from` after `to`), `options` (an invalid weekend day, or every day of the week as weekend).
+
+## Example
+
+<Example name="workday" />

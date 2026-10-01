@@ -1,0 +1,39 @@
+---
+title: NusaIndex
+description: Validate, parse, and format Indonesian data in Go, TypeScript, the command line, and AI agents. Offline, with zero runtime dependencies.
+template: splash
+hero:
+  tagline: Validate, parse, and format Indonesian data, with reference data that stays current. For Go, TypeScript, the command line, and AI agents.
+  actions:
+    - text: Get started
+      link: /getting-started/
+      icon: right-arrow
+    - text: Try the playground
+      link: /playground/
+      variant: minimal
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <Card title="Identifiers" icon="seti:lock">
+    NIK, NPWP (15 and 16 digits, NITKU), phone numbers, vehicle plates, NIP and NISN: check, parse,
+    format, and mask.
+  </Card>
+  <Card title="Reference data" icon="seti:json">
+    Regions down to village level from the latest Kepmendagri, national holidays and collective
+    leave, working days, and bank codes, each traced to its source.
+  </Card>
+  <Card title="Two native libraries" icon="seti:go">
+    Go and TypeScript with the same API and identical results, locked by shared test vectors. Zero
+    runtime dependencies.
+  </Card>
+  <Card title="Private by design" icon="approve-check">
+    Everything runs in your process. No network calls, no logging, no telemetry. Masking and
+    redaction for logs are built in.
+  </Card>
+</CardGrid>
+
+:::caution[Unofficial]
+NusaIndex is not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any Indonesian government agency. A valid result means the number is **well-formed**, not that it is real or who owns it.
+:::

@@ -5,3 +5,6 @@ packages:
 minimumReleaseAge: 1440
 
 onlyBuiltDependencies: []
+
+ignoredOptionalDependencies:
+  - sharp

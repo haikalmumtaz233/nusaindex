@@ -1,0 +1,42 @@
+---
+title: Phone numbers
+description: Normalize Indonesian mobile and fixed-line numbers to E.164 and identify brand, operator, and area code.
+---
+
+import Example from "../../../components/Example.astro";
+
+Accepts `08…`, `628…`, `+62 8…`, and fixed-line numbers with an area code such as `(021) 3456 789`. Mobile prefixes and fixed-line area codes follow Permenkominfo 14/2018.
+
+## Functions
+
+| Go                      | TypeScript              | Returns                                        |
+| ----------------------- | ----------------------- | ---------------------------------------------- |
+| `phone.Valid(s)`        | `phone.isValid(s)`      | Whether `s` is a well-formed Indonesian number |
+| `phone.Parse(s)`        | `phone.parse(s)`        | The fields below                               |
+| `phone.Format(s)`       | `phone.format(s)`       | E.164, such as `+628595257171`                 |
+| `phone.WhatsAppLink(s)` | `phone.whatsappLink(s)` | `https://wa.me/628595257171`                   |
+| `phone.Mask(s)`         | `phone.mask(s)`         | `+62` and the last 3 digits visible            |
+
+Accepted separators: space, `-`, `.`, `(` and `)`.
+
+## Parsed fields
+
+| Field (JSON) | Example         | Notes                                                                          |
+| ------------ | --------------- | ------------------------------------------------------------------------------ |
+| `e164`       | `+628595257171` |                                                                                |
+| `national`   | `08595257171`   |                                                                                |
+| `type`       | `mobile`        | `mobile` or `fixed`                                                            |
+| `prefix`     | `0859`          | Mobile only                                                                    |
+| `brand`      | `XL`            | Mobile only: Telkomsel, IM3, Tri, XL, AXIS, or Smartfren                       |
+| `operator`   | `XLSmart`       | Mobile only: Telkomsel, Indosat Ooredoo Hutchison, or XLSmart                  |
+| `areaCode`   | `021`           | Fixed line only; see [`region.ByAreaCode`](/reference/region/) for the regions |
+
+Mobile numbers have 9 to 12 digits after the leading `0`; fixed-line numbers have 8 to 11 including the area code. Prefixes that were revoked or never allocated, such as `0827`, `0828` and `0879`, fail with `prefix`.
+
+## Errors
+
+`length`, `charset`, `country` (country code other than +62), `prefix`.
+
+## Example
+
+<Example name="phone" />

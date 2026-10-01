@@ -1,0 +1,37 @@
+---
+title: Test data (fake)
+description: Generate structurally valid NIK, NPWP, phone numbers, NIP, NISN, and plates from a seed, identically in Go and TypeScript.
+---
+
+import Example from "../../../components/Example.astro";
+
+:::danger[For tests only]
+Generated numbers are well-formed and may belong to real people. Never use them outside tests, demos and fixtures, and never present them as real.
+:::
+
+Every generator takes a 32-bit seed (`uint32` in Go, an integer from 0 to 4,294,967,295 in TypeScript). The same seed and options return the same value in Go and TypeScript, so fixtures can be shared between a Go backend and a TypeScript frontend.
+
+## Functions
+
+| Go                       | TypeScript                    | Options                           |
+| ------------------------ | ----------------------------- | --------------------------------- |
+| `fake.NIK(seed, opts)`   | `await fake.nik(seed, opts?)` | `region`, `birthDate`, `sex`      |
+| `fake.NPWP(seed)`        | `fake.npwp(seed)`             |                                   |
+| `fake.Phone(seed)`       | `fake.phone(seed)`            |                                   |
+| `fake.NIP(seed, opts)`   | `fake.nip(seed, opts?)`       | `birthDate`, `sex`                |
+| `fake.NISN(seed)`        | `fake.nisn(seed)`             |                                   |
+| `fake.Plate(seed, opts)` | `fake.plate(seed, opts?)`     | `region` (plate code such as `B`) |
+
+- A NIK uses a real district code. `region` can pin it to a province (`31`), regency (`31.71`) or district (`31.71.01`); `birthDate` (`YYYY-MM-DD`) and `sex` (`male` or `female`) set the encoded date and the +40 day offset.
+- In TypeScript `fake` is only exported from `nusaindex/fake`, never from the root, so it cannot end up in a production bundle by accident. `fake.nik` is async because district data loads per province.
+- Go returns `string` for generators without options; TypeScript returns a `Result` for all of them, which fails with `options` for an invalid seed.
+
+Changes to region data can change the NIK generated for a seed. Pin the NusaIndex version in tests that compare exact values.
+
+## Errors
+
+`options`, `date`, `region`.
+
+## Example
+
+<Example name="fake" />

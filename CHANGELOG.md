@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- Documentation site in English and Indonesian (Astro Starlight): a reference page for every module with Go and TypeScript examples that run as tests, guides on results, errors, input and privacy, the CLI and MCP server, a browser-only playground, and static JSON files for holidays, provinces and regencies. Pages ship a hash-based Content Security Policy with no third-party scripts, fonts or analytics.
+
 ### Fixed
 
 - Go `mask.Redact` passed structs, typed maps and slices (`map[string]string`, `[]string`), pointers and integer types other than `int` and `int64` through unchanged, so identifiers inside them were not redacted. It now walks any value: structs become maps keyed by their JSON names, `[]byte` is treated as text, `time.Time` is kept, and values it cannot inspect (functions, channels) become `[redacted]`.

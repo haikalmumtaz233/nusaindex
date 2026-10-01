@@ -1,0 +1,39 @@
+---
+title: NusaIndex
+description: Validasi, parse, dan format data Indonesia di Go, TypeScript, command line, dan agent AI. Offline, tanpa dependensi runtime.
+template: splash
+hero:
+  tagline: Validasi, parse, dan format data Indonesia, dengan data referensi yang selalu terbaru. Untuk Go, TypeScript, command line, dan agent AI.
+  actions:
+    - text: Mulai
+      link: /id/getting-started/
+      icon: right-arrow
+    - text: Coba playground
+      link: /id/playground/
+      variant: minimal
+---
+
+import { Card, CardGrid } from "@astrojs/starlight/components";
+
+<CardGrid>
+  <Card title="Nomor identitas" icon="seti:lock">
+    NIK, NPWP (15 dan 16 digit, NITKU), nomor HP, plat nomor, NIP, dan NISN: cek, parse, format, dan
+    mask.
+  </Card>
+  <Card title="Data referensi" icon="seti:json">
+    Wilayah sampai desa dari Kepmendagri terbaru, libur nasional dan cuti bersama, hari kerja, serta
+    kode bank, masing-masing dengan sumbernya.
+  </Card>
+  <Card title="Dua library native" icon="seti:go">
+    Go dan TypeScript dengan API yang sama dan hasil identik, dikunci oleh test vector bersama.
+    Tanpa dependensi runtime.
+  </Card>
+  <Card title="Privasi sejak desain" icon="approve-check">
+    Semua berjalan di proses Anda. Tanpa panggilan jaringan, tanpa log, tanpa telemetri. Masking dan
+    redaksi untuk log sudah tersedia.
+  </Card>
+</CardGrid>
+
+:::caution[Tidak resmi]
+NusaIndex tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah Indonesia mana pun. Hasil valid berarti nomor **strukturnya benar**, bukan berarti nomor itu asli atau siapa pemiliknya.
+:::

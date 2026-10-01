@@ -1,0 +1,37 @@
+---
+title: Input and privacy
+description: Which characters NusaIndex accepts, how to clean pasted text, and how personal data is protected.
+---
+
+import Example from "../../../components/Example.astro";
+
+## Accepted input
+
+Identifier functions accept ASCII digits plus the separators listed on each module page (usually space, dot and hyphen). Input longer than 64 characters fails with `length` before any other check, so cost stays bounded no matter what a user submits.
+
+Anything else, including full-width digits (`７５０２…`), Arabic-Indic digits, and zero-width characters, fails with `charset`. These characters look identical on screen but would be stored differently, so they are rejected instead of being accepted silently.
+
+## Cleaning pasted text with `normalize`
+
+When input comes from copy and paste, call `normalize` explicitly before validating. It converts full-width ASCII, Arabic-Indic digits, Unicode spaces and dashes to ASCII, removes zero-width characters and soft hyphens, and trims the result. Go and TypeScript apply exactly the same table.
+
+<Example name="normalize" />
+
+## Masking
+
+Masks show only what support staff usually need:
+
+| Kind                                  | Visible part            | Example            |
+| ------------------------------------- | ----------------------- | ------------------ |
+| NIK, NPWP, NIP, NISN, account numbers | Last 4 digits           | `************9583` |
+| Phone numbers                         | `+62` and last 3 digits | `+62*******171`    |
+
+The first digits of a NIK encode the region and birth date, so they are never shown. See [`mask`](/reference/mask/) for free-text redaction, object redaction, and a Go `slog` handler.
+
+## What NusaIndex never does
+
+- No network requests from the libraries, the CLI, or the MCP server. Region, holiday and bank data are embedded.
+- No logging, storing, or sending of input. Error messages contain a code, never the value.
+- No lookups of who owns a NIK, NPWP, plate, or phone number, and no verification against Dukcapil or DJP. See [non-goals](/project/non-goals/).
+
+Valid means well-formed. A NIK can pass every check and still not belong to anyone.

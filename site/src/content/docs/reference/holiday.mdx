@@ -1,0 +1,37 @@
+---
+title: Holidays
+description: Indonesian national holidays and collective leave (cuti bersama) for 2020 to 2027, each with its legal basis.
+---
+
+import Example from "../../../components/Example.astro";
+
+National holidays and collective leave come from the joint ministerial decrees (SKB 3 Menteri) for each year, including every amendment, plus presidential decrees that added election days. Coverage is 2020 to 2027 and grows as new decrees are published.
+
+## Functions
+
+| Go                          | TypeScript                  | Returns                                   |
+| --------------------------- | --------------------------- | ----------------------------------------- |
+| `holiday.Years()`           | `holiday.years()`           | `{ from, to }`: the covered years         |
+| `holiday.InYear(year)`      | `holiday.inYear(year)`      | All entries in a year, by date            |
+| `holiday.Between(from, to)` | `holiday.between(from, to)` | Entries in an inclusive date range        |
+| `holiday.On(date)`          | `holiday.on(date)`          | Entries on one date (usually zero or one) |
+
+Dates are strings in `YYYY-MM-DD` format, never `Date` objects, so time zones cannot shift them.
+
+## Holiday fields
+
+| Field (JSON) | Example                   | Notes                            |
+| ------------ | ------------------------- | -------------------------------- |
+| `date`       | `2026-08-17`              |                                  |
+| `kind`       | `national`                | `national` or `collective_leave` |
+| `name`       | `Proklamasi Kemerdekaan`  | Indonesian name from the decree  |
+| `nameEn`     | `Independence Day`        | English name                     |
+| `basis`      | `SKB 1497/2/5 Tahun 2025` | The decree the entry comes from  |
+
+## Errors
+
+`date` (not a `YYYY-MM-DD` date), `range` (a year without data, or `from` after `to`).
+
+## Example
+
+<Example name="holiday" />
