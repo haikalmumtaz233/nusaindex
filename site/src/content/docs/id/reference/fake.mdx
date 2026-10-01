@@ -3,11 +3,14 @@ title: Data uji (fake)
 description: Buat NIK, NPWP, nomor HP, NIP, NISN, dan plat yang strukturnya valid dari sebuah seed, identik di Go dan TypeScript.
 ---
 
+import Live from "../../../../components/Live.astro";
 import Example from "../../../../components/Example.astro";
 
 :::danger[Hanya untuk pengujian]
 Nomor yang dihasilkan strukturnya benar dan bisa saja milik orang sungguhan. Jangan pernah memakainya di luar test, demo, dan fixture, dan jangan pernah menyajikannya sebagai data asli.
 :::
+
+<Live tool="fake" />
 
 Setiap generator menerima seed 32-bit (`uint32` di Go, bilangan bulat 0 sampai 4.294.967.295 di TypeScript). Seed dan opsi yang sama menghasilkan nilai yang sama di Go dan TypeScript, sehingga fixture bisa dipakai bersama oleh backend Go dan frontend TypeScript.
 
