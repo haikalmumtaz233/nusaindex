@@ -3,16 +3,15 @@ title: Regions
 description: Look up Indonesian provinces, regencies, districts, and villages, follow renumbered codes, and map plates, area codes, and NIKs to regions.
 ---
 
+import RegionLevels from "../../../components/RegionLevels.astro";
+import Live from "../../../components/Live.astro";
 import Example from "../../../components/Example.astro";
 
-Regions come from Kepmendagri 300.2.2-2138/2025 as amended by 300.2.2-2430/2025: 38 provinces, 514 regencies and cities, 7,285 districts, and 83,762 villages.
+Regions follow Kepmendagri 300.2.2-2138/2025 as amended by 300.2.2-2430/2025. Each level adds one segment to the code:
 
-| Level      | Code            |
-| ---------- | --------------- |
-| `province` | `31`            |
-| `regency`  | `31.71`         |
-| `district` | `31.71.01`      |
-| `village`  | `31.71.01.1001` |
+<RegionLevels />
+
+<Live tool="region" />
 
 Codes may be written with or without dots, spaces or hyphens (`3171`, `31.71`, `31 71`).
 

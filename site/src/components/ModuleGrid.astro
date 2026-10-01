@@ -4,17 +4,12 @@ import * as holiday from "nusaindex/holiday";
 import regionsCsv from "../../../data/regions.csv?raw";
 import { localeOf } from "../lib/anatomy-text";
 import { icons, type IconName } from "../lib/icons";
+import { levelCounts } from "../lib/stats";
 
 const locale = localeOf(Astro.currentLocale);
 const id = locale === "id";
 const number = new Intl.NumberFormat(id ? "id-ID" : "en-US");
-const levels = { 2: 0, 5: 0, 8: 0, 13: 0 };
-for (const line of regionsCsv.split("\n").slice(1)) {
-  const length = line.indexOf(",");
-  if (length === 2 || length === 5 || length === 8 || length === 13) {
-    levels[length] += 1;
-  }
-}
+const levels = levelCounts(regionsCsv);
 const years = holiday.years();
 const banks = bank.list().length;
 
@@ -28,10 +23,26 @@ const groups: readonly { title: string; modules: readonly Module[] }[] = [
   {
     title: id ? "Nomor identitas" : "Identifiers",
     modules: [
-      { icon: "nik", name: "NIK", line: id ? "Wilayah, tanggal lahir, jenis kelamin" : "Region, birth date, sex" },
-      { icon: "npwp", name: "NPWP", line: id ? "15 dan 16 digit, NITKU" : "15 and 16 digits, NITKU" },
-      { icon: "phone", name: id ? "Nomor HP" : "Phone", line: id ? "Operator, kode area, E.164" : "Operator, area code, E.164" },
-      { icon: "plate", name: id ? "Plat nomor" : "Plate", line: id ? "Kode wilayah Perpol 7/2021" : "Region codes from Perpol 7/2021" },
+      {
+        icon: "nik",
+        name: "NIK",
+        line: id ? "Wilayah, tanggal lahir, jenis kelamin" : "Region, birth date, sex",
+      },
+      {
+        icon: "npwp",
+        name: "NPWP",
+        line: id ? "15 dan 16 digit, NITKU" : "15 and 16 digits, NITKU",
+      },
+      {
+        icon: "phone",
+        name: id ? "Nomor HP" : "Phone",
+        line: id ? "Operator, kode area, E.164" : "Operator, area code, E.164",
+      },
+      {
+        icon: "plate",
+        name: id ? "Plat nomor" : "Plate",
+        line: id ? "Kode wilayah Perpol 7/2021" : "Region codes from Perpol 7/2021",
+      },
       { icon: "nip", name: "NIP", line: id ? "PNS dan PPPK" : "Civil servants, PNS and PPPK" },
       { icon: "nisn", name: "NISN", line: id ? "Nomor induk siswa" : "Student number" },
     ],
@@ -43,8 +54,8 @@ const groups: readonly { title: string; modules: readonly Module[] }[] = [
         icon: "region",
         name: id ? "Wilayah" : "Region",
         line: id
-          ? `${number.format(levels[2])} provinsi sampai ${number.format(levels[13])} desa`
-          : `${number.format(levels[2])} provinces to ${number.format(levels[13])} villages`,
+          ? `${number.format(levels.province)} provinsi sampai ${number.format(levels.village)} desa`
+          : `${number.format(levels.province)} provinces to ${number.format(levels.village)} villages`,
       },
       {
         icon: "holiday",
@@ -53,7 +64,11 @@ const groups: readonly { title: string; modules: readonly Module[] }[] = [
           ? `Libur dan cuti bersama ${String(years.from)}–${String(years.to)}`
           : `Holidays and cuti bersama, ${String(years.from)}–${String(years.to)}`,
       },
-      { icon: "workday", name: id ? "Hari kerja" : "Workday", line: id ? "Tambah dan hitung hari kerja" : "Add and count working days" },
+      {
+        icon: "workday",
+        name: id ? "Hari kerja" : "Workday",
+        line: id ? "Tambah dan hitung hari kerja" : "Add and count working days",
+      },
       {
         icon: "bank",
         name: "Bank",
@@ -64,9 +79,21 @@ const groups: readonly { title: string; modules: readonly Module[] }[] = [
   {
     title: id ? "Utilitas" : "Utilities",
     modules: [
-      { icon: "rupiah", name: "Rupiah", line: id ? "Format, parse, terbilang" : "Format, parse, spell out" },
-      { icon: "mask", name: "Mask", line: id ? "Sembunyikan data pribadi di log" : "Hide personal data in logs" },
-      { icon: "fake", name: "Fake", line: id ? "Data uji valid dari seed" : "Valid test data from a seed" },
+      {
+        icon: "rupiah",
+        name: "Rupiah",
+        line: id ? "Format, parse, terbilang" : "Format, parse, spell out",
+      },
+      {
+        icon: "mask",
+        name: "Mask",
+        line: id ? "Sembunyikan data pribadi di log" : "Hide personal data in logs",
+      },
+      {
+        icon: "fake",
+        name: "Fake",
+        line: id ? "Data uji valid dari seed" : "Valid test data from a seed",
+      },
       { icon: "schemas", name: id ? "Skema" : "Schemas", line: "Zod, Valibot" },
     ],
   },

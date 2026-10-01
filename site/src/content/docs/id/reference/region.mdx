@@ -3,16 +3,15 @@ title: Wilayah
 description: Cari provinsi, kabupaten/kota, kecamatan, dan desa di Indonesia, ikuti kode yang berubah, serta petakan plat, kode area, dan NIK ke wilayah.
 ---
 
+import RegionLevels from "../../../../components/RegionLevels.astro";
+import Live from "../../../../components/Live.astro";
 import Example from "../../../../components/Example.astro";
 
-Data wilayah berasal dari Kepmendagri 300.2.2-2138/2025 sebagaimana diubah 300.2.2-2430/2025: 38 provinsi, 514 kabupaten/kota, 7.285 kecamatan, dan 83.762 desa/kelurahan.
+Data wilayah mengikuti Kepmendagri 300.2.2-2138/2025 sebagaimana diubah 300.2.2-2430/2025. Setiap level menambah satu segmen kode:
 
-| Level      | Kode            |
-| ---------- | --------------- |
-| `province` | `31`            |
-| `regency`  | `31.71`         |
-| `district` | `31.71.01`      |
-| `village`  | `31.71.01.1001` |
+<RegionLevels />
+
+<Live tool="region" />
 
 Kode boleh ditulis dengan atau tanpa titik, spasi, atau strip (`3171`, `31.71`, `31 71`).
 
