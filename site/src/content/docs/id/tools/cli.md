@@ -14,15 +14,16 @@ npx nusaindex --help
 
 ## Perintah
 
-| Perintah                                                 | Fungsi                                                    |
-| -------------------------------------------------------- | --------------------------------------------------------- |
-| `nusaindex <nik\|npwp\|phone\|plate\|nip\|nisn> <nilai>` | Validasi dan parse satu nilai                             |
-| `nusaindex mask <jenis\|text> <nilai>`                   | Mask nomor identitas (termasuk `account`) atau teks bebas |
-| `nusaindex rupiah format\|parse\|terbilang <nilai>`      | Format, parse, atau terbilang nominal Rupiah              |
-| `nusaindex region get\|children\|search\|nik <nilai>`    | Cari wilayah                                              |
-| `nusaindex holiday <tahun>`                              | Libur dan cuti bersama dalam setahun                      |
-| `nusaindex workday is\|add\|count …`                     | Perhitungan hari kerja                                    |
-| `nusaindex fake <jenis> [--seed n] [--count n]`          | Data uji (hanya untuk pengujian)                          |
+| Perintah                                                       | Fungsi                                                    |
+| -------------------------------------------------------------- | --------------------------------------------------------- |
+| `nusaindex <nik\|npwp\|phone\|plate\|nip\|nisn> <nilai>`       | Validasi dan parse satu nilai                             |
+| `nusaindex mask <jenis\|text> <nilai>`                         | Mask nomor identitas (termasuk `account`) atau teks bebas |
+| `nusaindex rupiah format\|parse\|terbilang <nilai>`            | Format, parse, atau terbilang nominal Rupiah              |
+| `nusaindex region get\|resolve\|children\|search\|nik <nilai>` | Cari wilayah; `resolve` mengikuti kode yang berubah       |
+| `nusaindex holiday <tahun>`                                    | Libur dan cuti bersama dalam setahun                      |
+| `nusaindex bank <kode\|bic\|list>`                             | Cari bank dari kode transfer atau BIC                     |
+| `nusaindex workday is\|add\|count …`                           | Perhitungan hari kerja                                    |
+| `nusaindex fake <jenis> [--seed n] [--count n]`                | Data uji (hanya untuk pengujian)                          |
 
 ```sh
 nusaindex nik 7502010706599583
