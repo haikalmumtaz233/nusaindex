@@ -6,6 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- Go `mask.Redact` passed structs, typed maps and slices (`map[string]string`, `[]string`), pointers and integer types other than `int` and `int64` through unchanged, so identifiers inside them were not redacted. It now walks any value: structs become maps keyed by their JSON names, `[]byte` is treated as text, `time.Time` is kept, and values it cannot inspect (functions, channels) become `[redacted]`.
+- Go `mask.NewHandler` now also redacts integer, float and `slog.Any` attribute values; before, only strings and groups were redacted.
+
 ## [0.4.0] - 2026-10-01
 
 ### Added
