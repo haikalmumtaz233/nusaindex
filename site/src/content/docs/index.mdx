@@ -3,37 +3,57 @@ title: NusaIndex
 description: Validate, parse, and format Indonesian data in Go, TypeScript, the command line, and AI agents. Offline, with zero runtime dependencies.
 template: splash
 hero:
-  tagline: Validate, parse, and format Indonesian data, with reference data that stays current. For Go, TypeScript, the command line, and AI agents.
+  title: Every digit means something.
+  tagline: NusaIndex checks, decodes, and formats Indonesian identifiers and reference data in Go, TypeScript, the terminal, and AI agents. It runs offline, with zero dependencies.
   actions:
     - text: Get started
       link: /getting-started/
-      icon: right-arrow
-    - text: Try the playground
+    - text: Open the playground
       link: /playground/
       variant: minimal
 ---
 
-import { Card, CardGrid } from "@astrojs/starlight/components";
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+import Example from "../../components/Example.astro";
+import ModuleGrid from "../../components/ModuleGrid.astro";
 
-<CardGrid>
-  <Card title="Identifiers" icon="seti:lock">
-    NIK, NPWP (15 and 16 digits, NITKU), phone numbers, vehicle plates, NIP and NISN: check, parse,
-    format, and mask.
-  </Card>
-  <Card title="Reference data" icon="seti:json">
-    Regions down to village level from the latest Kepmendagri, national holidays and collective
-    leave, working days, and bank codes, each traced to its source.
-  </Card>
-  <Card title="Two native libraries" icon="seti:go">
-    Go and TypeScript with the same API and identical results, locked by shared test vectors. Zero
-    runtime dependencies.
-  </Card>
-  <Card title="Private by design" icon="approve-check">
-    Everything runs in your process. No network calls, no logging, no telemetry. Masking and
-    redaction for logs are built in.
-  </Card>
-</CardGrid>
+## Use it where you work
 
-:::caution[Unofficial]
-NusaIndex is not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any Indonesian government agency. A valid result means the number is **well-formed**, not that it is real or who owns it.
-:::
+<Tabs syncKey="surface">
+  <TabItem label="Go and TypeScript">
+    <Example name="quickstart" />
+  </TabItem>
+  <TabItem label="Terminal">
+
+```sh
+npm install --global nusaindex
+```
+
+    <img
+      src="/demos/cli.svg"
+      width="760"
+      height="534"
+      alt="Terminal session: nusa nik decodes a NIK into its fields, nusa phone finds the XL brand, nusa rupiah terbilang spells 1,500,000.50 in words, and nusa mask text hides a NIK and a phone number in a sentence."
+    />
+
+  </TabItem>
+  <TabItem label="AI agents">
+    Connect [`nusaindex-mcp`](/tools/mcp/) to any MCP client. Every tool is read-only.
+    <img
+      src="/demos/mcp.svg"
+      width="760"
+      height="366"
+      alt="MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs; asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart)."
+    />
+  </TabItem>
+</Tabs>
+
+## What's inside
+
+<ModuleGrid />
+
+## Safe by default
+
+- **Offline.** No network calls, logging, or telemetry. Input never leaves your process.
+- **Traceable.** Every dataset names its regulation and source document in [`data/manifest.json`](/project/data-sources/).
+- **Unofficial.** Not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any government agency. Valid means **well-formed**, not real or owned by anyone.
