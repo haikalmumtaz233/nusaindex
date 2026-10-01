@@ -4,7 +4,7 @@ description: Validate, parse, and format Indonesian data in Go, TypeScript, the 
 template: splash
 hero:
   title: Every digit means something.
-  tagline: NusaIndex checks, decodes, and formats Indonesian identifiers and reference data in Go, TypeScript, the terminal, and AI agents. It runs offline, with zero dependencies.
+  tagline: Check and decode NIK, NPWP, phone numbers, plates and region codes. For Go, TypeScript, the terminal and AI agents. Runs offline.
   actions:
     - text: Get started
       link: /en/getting-started/
@@ -16,6 +16,11 @@ hero:
 import { TabItem, Tabs } from "@astrojs/starlight/components";
 import Example from "../../../components/Example.astro";
 import ModuleGrid from "../../../components/ModuleGrid.astro";
+import UseCases from "../../../components/UseCases.astro";
+
+## What it is for
+
+<UseCases compact />
 
 ## Use it where you work
 
@@ -43,7 +48,7 @@ npm install --global nusaindex
       src="/demos/mcp.svg"
       width="760"
       height="386"
-      alt="MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs; asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart)."
+      alt="MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs. Asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart)."
     />
   </TabItem>
 </Tabs>
@@ -54,6 +59,6 @@ npm install --global nusaindex
 
 ## Safe by default
 
-- **Offline.** No network calls, logging, or telemetry. Input never leaves your process.
+- **Offline.** No network calls, logging, or telemetry. Input never leaves your app.
 - **Traceable.** Every dataset names its regulation and source document in [`data/manifest.json`](/en/project/data-sources/).
 - **Unofficial.** Not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any government agency. Valid means **well-formed**, not real or owned by anyone.

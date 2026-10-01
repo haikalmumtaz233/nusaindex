@@ -1,0 +1,194 @@
+---
+import { localeOf } from "../lib/anatomy-text";
+import { icons } from "../lib/icons";
+import { useCases } from "../lib/use-cases";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+const locale = localeOf(Astro.currentLocale);
+const prefix = locale === "en" ? "/en" : "";
+const names: Readonly<Record<string, string>> = {
+  nik: "NIK",
+  npwp: "NPWP",
+  nip: "NIP",
+  nisn: "NISN",
+  phone: locale === "en" ? "Phone" : "Nomor HP",
+  plate: locale === "en" ? "Plate" : "Plat",
+  region: locale === "en" ? "Region" : "Wilayah",
+  holiday: locale === "en" ? "Holiday" : "Libur",
+  workday: locale === "en" ? "Workday" : "Hari kerja",
+  bank: "Bank",
+  rupiah: "Rupiah",
+  mask: "Mask",
+  fake: "Fake",
+  schemas: locale === "en" ? "Schemas" : "Skema",
+};
+const toolNames = { cli: "CLI", mcp: "MCP" };
+const icon = (name: keyof typeof icons): string => icons[name];
+---
+
+{
+  compact ? (
+    <ul class="cases compact not-content">
+      {useCases.map((c) => (
+        <li>
+          <a href={`${prefix}/use-cases/#${c.slug}`}>
+            <svg
+              viewBox="0 0 24 24"
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+              set:html={icon(c.icon)}
+            />
+            <span class="title">{c.title[locale]}</span>
+            <span class="short">{c.short[locale]}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <div class="cases full not-content">
+      {useCases.map((c) => (
+        <section id={c.slug}>
+          <svg
+            viewBox="0 0 24 24"
+            width="28"
+            height="28"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+            set:html={icon(c.icon)}
+          />
+          <div class="body">
+            <h2>{c.title[locale]}</h2>
+            <p class="short">{c.short[locale]}</p>
+            <ul class="points">
+              {c.points[locale].map((p) => (
+                <li>{p}</li>
+              ))}
+            </ul>
+            <p class="chips">
+              {c.modules.map((m) => (
+                <a href={`${prefix}/reference/${m}/`}>{names[m] ?? m}</a>
+              ))}
+              {(c.tools ?? []).map((t) => (
+                <a href={`${prefix}/tools/${t}/`}>{toolNames[t]}</a>
+              ))}
+            </p>
+          </div>
+        </section>
+      ))}
+    </div>
+  )
+}
+
+<style>
+  .cases {
+    margin-block: 1.5rem 2rem;
+  }
+  .compact {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15.5rem), 1fr));
+    gap: 0.75rem;
+    padding: 0;
+    list-style: none;
+  }
+  .compact a {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0.2rem 0.75rem;
+    height: 100%;
+    padding: 0.9rem 1rem;
+    color: inherit;
+    text-decoration: none;
+    border: 1px solid var(--surface-line);
+    border-radius: 0.75rem;
+  }
+  .compact a:hover {
+    background: var(--surface);
+  }
+  .compact a:focus-visible,
+  .chips a:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  .compact svg {
+    grid-row: span 2;
+    color: var(--sl-color-accent-high);
+  }
+  :root[data-theme="light"] .cases svg {
+    color: var(--sl-color-accent);
+  }
+  .title {
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--sl-color-white);
+  }
+  .compact .short {
+    font-size: var(--sl-text-sm);
+    line-height: 1.45;
+    color: var(--sl-color-gray-3);
+  }
+  .full {
+    display: grid;
+    gap: 2.25rem;
+  }
+  .full section {
+    display: grid;
+    grid-template-columns: 2.25rem 1fr;
+    gap: 1rem;
+    scroll-margin-top: 5rem;
+  }
+  .full svg {
+    margin-top: 0.2rem;
+    color: var(--sl-color-accent-high);
+  }
+  .full h2 {
+    margin: 0;
+    font-size: var(--sl-text-h3);
+    line-height: 1.25;
+    color: var(--sl-color-white);
+  }
+  .full .short {
+    margin: 0.35rem 0 0;
+    font-size: var(--sl-text-lg);
+    color: var(--sl-color-gray-2);
+  }
+  .points {
+    display: grid;
+    gap: 0.4rem;
+    margin: 0.75rem 0 0;
+    padding-inline-start: 1.1rem;
+    color: var(--sl-color-gray-1);
+  }
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin: 0.85rem 0 0;
+  }
+  .chips a {
+    padding: 0.2rem 0.65rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-gray-1);
+    text-decoration: none;
+    border: 1px solid var(--surface-line);
+    border-radius: 999px;
+  }
+  .chips a:hover {
+    color: var(--sl-color-white);
+    border-color: var(--sl-color-accent);
+  }
+</style>
