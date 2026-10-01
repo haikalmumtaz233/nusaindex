@@ -5,6 +5,8 @@ description: Validate, mask, and look up Indonesian data from the terminal, one 
 
 The `nusaindex` package installs a `nusaindex` command with the shorter alias `nusa`. It needs Node.js 22.18 or later and has no dependencies.
 
+<img src="/demos/cli.svg" width="760" height="534" alt="Terminal session: nusa nik decodes a NIK into its fields, nusa phone finds the XL brand, nusa rupiah terbilang spells 1,500,000.50 in words, and nusa mask text hides a NIK and a phone number in a sentence." />
+
 ```sh
 npm install --global nusaindex
 npx nusaindex --help

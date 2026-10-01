@@ -5,6 +5,8 @@ description: Beri agent AI tool read-only dan offline untuk nomor identitas, wil
 
 `nusaindex-mcp` adalah server [Model Context Protocol](https://modelcontextprotocol.io) yang berjalan lokal lewat stdio. Semua tool-nya read-only: tanpa akses file system, shell, maupun jaringan.
 
+<img src="/demos/mcp.svg" width="760" height="366" alt="Klien MCP: diminta tiga NIK uji di Kota Bandung, tool fake mengembalikan tiga NIK; ditanya soal 0859-5257-171, tool parse mengembalikan +628595257171, nomor seluler XL (XLSmart)." />
+
 ## Setup
 
 Sebagian besar klien MCP (Claude Desktop, Claude Code, Cursor, VS Code) menerima konfigurasi ini:

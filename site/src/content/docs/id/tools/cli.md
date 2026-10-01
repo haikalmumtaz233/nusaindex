@@ -5,6 +5,8 @@ description: Validasi, mask, dan cari data Indonesia dari terminal, satu nilai a
 
 Paket `nusaindex` memasang perintah `nusaindex` dengan alias pendek `nusa`. Butuh Node.js 22.18 atau lebih baru dan tanpa dependensi.
 
+<img src="/demos/cli.svg" width="760" height="534" alt="Sesi terminal: nusa nik membaca isi NIK, nusa phone menemukan merek XL, nusa rupiah terbilang mengeja 1.500.000,50, dan nusa mask text menyembunyikan NIK dan nomor HP di dalam kalimat." />
+
 ```sh
 npm install --global nusaindex
 npx nusaindex --help
