@@ -131,15 +131,20 @@ const regionGet = define({
   idempotent: true,
   title: "Get an Indonesian region",
   description:
-    "Get a region by code (11, 11.01, 11.01.01 or 11.01.01.2001), following codes renamed by the 2012 and 2022 splits, optionally with its direct children.",
+    "Get a region by code (11, 11.01, 11.01.01 or 11.01.01.2001), following codes renamed by the 2012 and 2022 splits, optionally with its direct children. When an old code was followed, resolved gives the code asked for and the current one.",
   inputSchema: z.object({ code: z.string().max(16), children: z.boolean().optional() }),
   run: async ({ code, children }) => {
     const r = await region.resolve(code);
-    if (!r.ok || children !== true) {
+    if (!r.ok) {
       return r;
     }
+    const moved = code.replace(/\D/g, "") !== r.value.code.replace(/\D/g, "");
+    const resolved = moved ? { resolved: { from: code, to: r.value.code } } : {};
+    if (children !== true) {
+      return { ...r, ...resolved };
+    }
     const list = await region.children(r.value.code);
-    return { ok: true, value: r.value, children: list.ok ? list.value : [] };
+    return { ok: true, value: r.value, ...resolved, children: list.ok ? list.value : [] };
   },
 });
 
