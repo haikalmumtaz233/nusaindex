@@ -18,6 +18,7 @@ Reference data
   nusaindex region search <query> [--level <level>] [--limit <n>]
   nusaindex region nik <nik>
   nusaindex holiday <year>
+  nusaindex bank <code|bic|list>
   nusaindex workday is <date>
   nusaindex workday add <date> <days>
   nusaindex workday count <from> <to>

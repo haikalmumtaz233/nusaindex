@@ -1,3 +1,4 @@
+import * as bank from "../bank/index.js";
 import * as fake from "../fake/index.js";
 import * as holiday from "../holiday/index.js";
 import { failure, success, type Result } from "../internal/result.js";
@@ -41,6 +42,7 @@ const MAX_LIMIT = 100;
 const LEVELS: readonly region.RegionLevel[] = ["province", "regency", "district", "village"];
 const REGION_USAGE =
   "region needs get <code>, resolve <code>, children [code], search <query> or nik <nik>";
+const BANK_USAGE = "bank needs a 3-digit code, a BIC or list";
 const WORKDAY_USAGE = "workday needs is <date>, add <date> <days> or count <from> <to>";
 
 const identifiers = new Map<string, Handler>([
@@ -177,6 +179,17 @@ async function resolveRegion(code: string): Promise<Result<unknown>> {
   }
   const moved = code.replace(/\D/g, "") !== r.value.code.replace(/\D/g, "");
   return success(moved ? { ...r.value, resolvedFrom: code } : r.value);
+}
+
+export function banks(io: Io, flags: Flags, rest: readonly string[]): number {
+  const [query] = rest;
+  if (query === undefined || rest.length !== 1) {
+    return usage(io, BANK_USAGE);
+  }
+  if (query === "list") {
+    return print(io, flags, success(bank.list()));
+  }
+  return print(io, flags, /^[0-9]/.test(query) ? bank.byCode(query) : bank.byBic(query));
 }
 
 export async function regions(io: Io, flags: Flags, rest: readonly string[]): Promise<number> {
