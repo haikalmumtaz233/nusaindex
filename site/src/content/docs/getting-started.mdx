@@ -3,82 +3,33 @@ title: Getting started
 description: Install NusaIndex for Go or TypeScript and run your first check.
 ---
 
-import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
+import Example from "../../components/Example.astro";
+import ModuleGrid from "../../components/ModuleGrid.astro";
 
-## Install
+<Steps>
 
-<Tabs syncKey="language">
-  <TabItem label="Go">
-    Go 1.25 or later. The module has no dependencies outside the standard library.
+1. Install the package. Go 1.25 or later uses only the standard library; TypeScript runs on Node.js 22.18 or later, Bun, Deno, edge runtimes and modern browsers (ESM only).
 
-    ```sh
-    go get github.com/haikalmumtaz233/nusaindex
-    ```
+   ```sh title="Go"
+   go get github.com/haikalmumtaz233/nusaindex
+   ```
 
-  </TabItem>
-  <TabItem label="TypeScript">
-    Node.js 22.18 or later, Bun, Deno, edge runtimes, or any modern browser. ESM only, zero runtime
-    dependencies.
+   ```sh title="TypeScript"
+   npm install nusaindex
+   ```
 
-    ```sh
-    npm install nusaindex
-    ```
+2. Run a first check. This example runs on every build, in both languages, and must print the same output.
 
-  </TabItem>
-</Tabs>
+   <Example name="quickstart" />
 
-## First check
+3. Import only what you need. Each module is its own Go package (`github.com/haikalmumtaz233/nusaindex/<name>`) and TypeScript subpath (`nusaindex/<name>`). `nusaindex/nik` adds less than 2 KB gzip to a browser bundle, and region data loads one province at a time.
 
-<Tabs syncKey="language">
-  <TabItem label="Go">
+</Steps>
 
-```go
-package main
+## Modules
 
-import (
-	"fmt"
-
-	"github.com/haikalmumtaz233/nusaindex/nik"
-)
-
-func main() {
-	parsed, err := nik.Parse("7502010706599583")
-	if err != nil {
-		fmt.Println("invalid:", err)
-		return
-	}
-	fmt.Println(parsed.BirthDate, parsed.Sex)
-}
-```
-
-  </TabItem>
-  <TabItem label="TypeScript">
-
-```ts
-import * as nik from "nusaindex/nik";
-
-const parsed = nik.parse("7502010706599583");
-if (parsed.ok) {
-  console.log(parsed.value.birthDate, parsed.value.sex);
-} else {
-  console.log("invalid:", parsed.error.code);
-}
-```
-
-  </TabItem>
-</Tabs>
-
-The sample numbers on this site come from the [`fake`](/reference/fake/) generator. Never paste real personal data into examples, issues, or AI chats.
-
-## Imports
-
-| Go package                                    | TypeScript                                          |
-| --------------------------------------------- | --------------------------------------------------- |
-| `github.com/haikalmumtaz233/nusaindex/<name>` | `nusaindex/<name>`, or a namespace from `nusaindex` |
-
-Each module is a separate Go package and a separate TypeScript subpath, so you only ship what you import. Importing `nusaindex/nik` adds less than 2 KB gzip to a browser bundle; region data loads per province only when you call `region`.
-
-`fake`, `zod` and `valibot` are subpath-only in TypeScript and are not part of the root `nusaindex` export.
+<ModuleGrid />
 
 ## Same API, two languages
 
@@ -89,10 +40,14 @@ Each module is a separate Go package and a separate TypeScript subpath, so you o
 | Normalize   | `Format(s) (string, error)` | `format(s): Result<string>` |
 | Mask        | `Mask(s) string`            | `mask(s): string`           |
 
-Names follow each language's conventions (`WhatsAppLink` and `whatsappLink`, `FromNIK` and `fromNik`). Results are identical: every function is covered by shared test vectors that run against both implementations.
+Names follow each language (`WhatsAppLink`, `whatsappLink`). Shared test vectors run against both implementations, so results are identical. In TypeScript, `fake`, `zod` and `valibot` are subpath-only.
+
+:::note[Sample data]
+Numbers on this site come from the [`fake`](/reference/fake/) generator. Never paste real personal data into examples, issues, or AI chats.
+:::
 
 ## Next steps
 
 - [Results and errors](/guides/results-and-errors/): how failures are reported.
 - [Input and privacy](/guides/input-and-privacy/): accepted characters, Unicode, and masking.
-- [CLI](/tools/cli/) and [MCP server](/tools/mcp/) if you are not writing code.
+- [Command line](/tools/cli/) and [MCP server](/tools/mcp/) if you are not writing code.
