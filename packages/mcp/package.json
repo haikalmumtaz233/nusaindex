@@ -29,7 +29,8 @@
   ],
   "scripts": {
     "build": "tsdown && node ../../scripts/notices.ts",
-    "pkg:check": "publint --strict"
+    "prepack": "node ../../scripts/package-files.ts",
+    "pkg:check": "node ../../scripts/package-files.ts && publint --strict"
   },
   "dependencies": {
     "nusaindex": "workspace:^"
