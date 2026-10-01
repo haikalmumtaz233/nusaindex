@@ -1,0 +1,14 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "lib": ["ES2023", "DOM"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "paths": {
+      "nusaindex/*": ["../../../packages/nusaindex/src/*/index.ts"]
+    }
+  },
+  "include": ["**/*.ts"]
+}
