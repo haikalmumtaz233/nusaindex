@@ -1,0 +1,41 @@
+{
+  "name": "nusaindex-mcp",
+  "version": "0.3.0",
+  "description": "MCP server for NusaIndex: validate Indonesian identifiers, look up regions and holidays, and work with Rupiah offline.",
+  "license": "MIT",
+  "author": "Haikal Mumtaz",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haikalmumtaz233/nusaindex.git",
+    "directory": "packages/mcp"
+  },
+  "keywords": [
+    "indonesia",
+    "mcp",
+    "model-context-protocol",
+    "nik",
+    "npwp"
+  ],
+  "type": "module",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "bin": {
+    "nusaindex-mcp": "./dist/main.js"
+  },
+  "files": [
+    "dist",
+    "THIRD_PARTY_NOTICES.md"
+  ],
+  "scripts": {
+    "build": "tsdown && node ../../scripts/notices.ts",
+    "pkg:check": "publint --strict"
+  },
+  "dependencies": {
+    "nusaindex": "workspace:^"
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/server": "2.2.0",
+    "zod": "4.6.5"
+  }
+}

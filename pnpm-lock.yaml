@@ -51,6 +51,19 @@ importers:
         specifier: 5.0.2
         version: 5.0.2(@types/node@22.20.4)(@vitest/coverage-v8@5.0.2)(vite@8.3.1(@types/node@22.20.4))
 
+  packages/mcp:
+    dependencies:
+      nusaindex:
+        specifier: workspace:^
+        version: link:../nusaindex
+    devDependencies:
+      '@modelcontextprotocol/server':
+        specifier: 2.2.0
+        version: 2.2.0
+      zod:
+        specifier: 4.6.5
+        version: 4.6.5
+
   packages/nusaindex:
     devDependencies:
       valibot:
@@ -188,6 +201,14 @@ packages:
 
   '@loaderkit/resolve@1.0.6':
     resolution: {integrity: sha512-G8FdIoF5CypfwmD9rl8BXod5HDn8JqB0CCNBXDTaRZ+yRYhARrrSToX1zg1zy9jX3zLqigsELwhT4gNtkdQAUg==}
+
+  '@modelcontextprotocol/core@2.2.0':
+    resolution: {integrity: sha512-iLhmprRmWI8EcosOA3wVvww22z02NkgqhV4fBH6f/odQBsi7xnJc0HGmi21yWO+/iKw2yzqVE127Zhna5/+JXw==}
+    engines: {node: '>=20'}
+
+  '@modelcontextprotocol/server@2.2.0':
+    resolution: {integrity: sha512-qFnltjus6Gk8Lx6J1w2RXmr3YPN22MNT6qD6zjAkaiWIlFIFxWClz0rXHNuJF/KSUyn5YGhkSvXkWDbQHVLFEQ==}
+    engines: {node: '>=20'}
 
   '@oxc-project/types@0.151.0':
     resolution: {integrity: sha512-J1yXrIlNDZVzE3ada310xeAw7nH8yCAyLPuUIsjKatFPmfn5bS1oW+cM+QsGOtVWd5nhSpbwZWx/rue+r5Z+PA==}
@@ -1558,6 +1579,15 @@ snapshots:
   '@loaderkit/resolve@1.0.6':
     dependencies:
       '@braidai/lang': 1.1.2
+
+  '@modelcontextprotocol/core@2.2.0':
+    dependencies:
+      zod: 4.6.5
+
+  '@modelcontextprotocol/server@2.2.0':
+    dependencies:
+      '@modelcontextprotocol/core': 2.2.0
+      zod: 4.6.5
 
   '@oxc-project/types@0.151.0': {}
 
