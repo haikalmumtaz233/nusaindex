@@ -1,5 +1,7 @@
+import * as bank from "nusaindex/bank";
 import * as fake from "nusaindex/fake";
 import * as holiday from "nusaindex/holiday";
+import * as mask from "nusaindex/mask";
 import * as nik from "nusaindex/nik";
 import * as nip from "nusaindex/nip";
 import * as nisn from "nusaindex/nisn";
@@ -43,6 +45,8 @@ const PRIVACY =
 
 const KINDS = ["nik", "npwp", "phone", "plate", "nip", "nisn"] as const;
 const FAKE_KINDS = ["nik", "npwp", "phone", "nip", "nisn", "plate"] as const;
+const MASK_KINDS = ["nik", "npwp", "phone", "nip", "nisn", "account"] as const;
+const MAX_TEXT = 100_000;
 const LEVELS = ["province", "regency", "district", "village"] as const;
 const MAX_SEED = 0xffff_ffff;
 
@@ -227,6 +231,58 @@ const money = define({
   },
 });
 
+const banks = define({
+  name: "bank",
+  idempotent: true,
+  title: "Indonesian bank codes",
+  description:
+    "Look up an Indonesian bank by its 3-digit transfer code (014) or its BIC/SWIFT code (CENAIDJA), or list all banks when neither is given. A code can return more than one entry when the bank has a sharia unit.",
+  inputSchema: z.object({ code: z.string().max(8).optional(), bic: z.string().max(11).optional() }),
+  run: async ({ code, bic }) => {
+    await Promise.resolve();
+    if (code !== undefined && bic !== undefined) {
+      return { ok: false, error: { code: "options" } };
+    }
+    if (code !== undefined) {
+      return bank.byCode(code);
+    }
+    return bic === undefined ? { ok: true, value: bank.list() } : bank.byBic(bic);
+  },
+});
+
+const maskers: Readonly<Record<(typeof MASK_KINDS)[number], (s: string) => string>> = {
+  nik: mask.nik,
+  npwp: mask.npwp,
+  phone: mask.phone,
+  nip: mask.nip,
+  nisn: mask.nisn,
+  account: mask.account,
+};
+
+const masks = define({
+  name: "mask",
+  idempotent: true,
+  title: "Mask Indonesian identifiers",
+  description:
+    "Hide identifiers before they reach logs, tickets or screens: give kind (nik, npwp, phone, nip, nisn, account) with up to 100 values to keep only the last digits, or text to mask every identifier-like number of 10 or more digits in it. " +
+    PRIVACY,
+  inputSchema: z.object({
+    kind: z.enum(MASK_KINDS).optional(),
+    values: z.array(identifierValue).min(1).max(100).optional(),
+    text: z.string().max(MAX_TEXT).optional(),
+  }),
+  run: async ({ kind: k, values, text }) => {
+    await Promise.resolve();
+    if (text !== undefined && k === undefined && values === undefined) {
+      return mask.text(text);
+    }
+    if (text === undefined && k !== undefined && values !== undefined) {
+      return { ok: true, value: values.map(maskers[k]) };
+    }
+    return { ok: false, error: { code: "options" } };
+  },
+});
+
 async function generate(
   k: (typeof FAKE_KINDS)[number],
   seed: number,
@@ -291,5 +347,7 @@ export const tools = {
   holidays,
   workdays,
   money,
+  banks,
+  masks,
   fakes,
 };

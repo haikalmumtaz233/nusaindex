@@ -29,7 +29,7 @@ async function connect(): Promise<(message: object) => Promise<unknown>> {
 }
 
 describe("mcp server", () => {
-  it("lists eight read-only tools and answers calls", async () => {
+  it("lists ten read-only tools and answers calls", async () => {
     const request = await connect();
     const init = await request({
       method: "initialize",
@@ -42,7 +42,7 @@ describe("mcp server", () => {
     expect(init).toMatchObject({ result: { serverInfo: { name: "nusaindex" } } });
     const list = await request({ method: "tools/list" });
     const listed: unknown = Reflect.get(Reflect.get(Object(list), "result"), "tools");
-    expect(Array.isArray(listed) && listed.length).toBe(8);
+    expect(Array.isArray(listed) && listed.length).toBe(10);
     expect(JSON.stringify(listed)).toContain('"readOnlyHint":true');
     const call = await request({
       method: "tools/call",
@@ -54,7 +54,7 @@ describe("mcp server", () => {
   });
 
   it("warns about privacy where personal data goes in", () => {
-    for (const tool of [tools.validate, tools.parse]) {
+    for (const tool of [tools.validate, tools.parse, tools.masks]) {
       expect(tool.description).toContain("already been sent to the AI provider");
     }
     expect(tools.fakes.description).toContain("For tests only");
@@ -178,5 +178,42 @@ describe("mcp tools", () => {
       ok: false,
       error: { code: "region" },
     });
+  });
+});
+
+describe("mcp bank and mask tools", () => {
+  it("looks up banks by code or bic, or lists them all", async () => {
+    expect(await tools.banks.call({ code: "014" }, ctx)).toMatchObject({
+      ok: true,
+      value: [{ bic: "CENAIDJA", shortName: "BCA" }],
+    });
+    expect(await tools.banks.call({ bic: "cenaidja" }, ctx)).toMatchObject({
+      ok: true,
+      value: { code: "014" },
+    });
+    const all = await tools.banks.call({}, ctx);
+    expect(Reflect.get(all, "value")).toHaveLength(125);
+    expect(await tools.banks.call({ code: "014", bic: "CENAIDJA" }, ctx)).toEqual({
+      ok: false,
+      error: { code: "options" },
+    });
+    expect(await tools.banks.call({ code: "999" }, ctx)).toEqual({
+      ok: false,
+      error: { code: "unknown" },
+    });
+  });
+
+  it("masks values of one kind or identifiers in free text", async () => {
+    expect(await tools.masks.call({ kind: "nik", values: [FAKE_NIK, "12"] }, ctx)).toEqual({
+      ok: true,
+      value: ["************9999", "**"],
+    });
+    expect(await tools.masks.call({ text: `NIK ${FAKE_NIK} masuk` }, ctx)).toEqual({
+      ok: true,
+      value: "NIK ************9999 masuk",
+    });
+    for (const args of [{}, { kind: "nik" }, { kind: "nik", values: ["1"], text: "x" }]) {
+      expect(await tools.masks.call(args, ctx)).toEqual({ ok: false, error: { code: "options" } });
+    }
   });
 });
