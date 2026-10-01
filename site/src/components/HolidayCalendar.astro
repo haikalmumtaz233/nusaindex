@@ -1,0 +1,272 @@
+---
+import * as holiday from "nusaindex/holiday";
+import { localeOf } from "../lib/anatomy-text";
+import { yearCalendar } from "../lib/calendar";
+
+const locale = localeOf(Astro.currentLocale);
+const id = locale === "id";
+const { to } = holiday.years();
+const calendars = [to - 1, to].map(yearCalendar);
+const monthName = new Intl.DateTimeFormat(id ? "id-ID" : "en-GB", { month: "long", timeZone: "UTC" });
+const dayName = new Intl.DateTimeFormat(id ? "id-ID" : "en-GB", {
+  day: "numeric",
+  month: "long",
+  timeZone: "UTC",
+});
+const weekdays = id ? ["S", "S", "R", "K", "J", "S", "M"] : ["M", "T", "W", "T", "F", "S", "S"];
+const text = id
+  ? {
+      years: "Tahun",
+      national: "Libur nasional",
+      leave: "Cuti bersama",
+      weekend: "Akhir pekan",
+      list: "Daftar lengkap",
+    }
+  : {
+      years: "Year",
+      national: "National holiday",
+      leave: "Collective leave",
+      weekend: "Weekend",
+      list: "Full list",
+    };
+const label = (date: string): string => dayName.format(new Date(`${date}T00:00:00Z`));
+---
+
+<section class="calendar not-content">
+  <div class="bar">
+    <div class="years" role="group" aria-label={text.years}>
+      {
+        calendars.map((c, i) => (
+          <button type="button" data-year={c.year} aria-pressed={i === 0 ? "true" : "false"}>
+            {c.year}
+          </button>
+        ))
+      }
+    </div>
+    <ul class="key">
+      <li><span class="swatch national"></span>{text.national}</li>
+      <li><span class="swatch leave"></span>{text.leave}</li>
+      <li><span class="swatch weekend"></span>{text.weekend}</li>
+    </ul>
+  </div>
+  {
+    calendars.map((c, i) => (
+      <div class="year" data-year={c.year} hidden={i !== 0}>
+        <div class="months" aria-hidden="true">
+          {c.months.map((m) => (
+            <div class="month">
+              <p class="name">{monthName.format(new Date(Date.UTC(c.year, m.month - 1, 1)))}</p>
+              <div class="grid">
+                {weekdays.map((w) => (
+                  <span class="head">{w}</span>
+                ))}
+                {m.weeks.flat().map((cell) =>
+                  cell === null ? (
+                    <span />
+                  ) : (
+                    <span
+                      class:list={[
+                        "day",
+                        { weekend: cell.weekend },
+                        cell.holiday === undefined
+                          ? ""
+                          : cell.holiday.kind === "national"
+                            ? "national"
+                            : "leave",
+                      ]}
+                      title={
+                        cell.holiday === undefined
+                          ? undefined
+                          : id
+                            ? cell.holiday.name
+                            : cell.holiday.nameEn
+                      }
+                    >
+                      {cell.day}
+                    </span>
+                  ),
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+        <details>
+          <summary>
+            {text.list} {c.year}: {c.national} {text.national.toLowerCase()}, {c.leave}{" "}
+            {text.leave.toLowerCase()}
+          </summary>
+          <ul class="list">
+            {c.months
+              .flatMap((m) => m.weeks.flat())
+              .filter((cell) => cell?.holiday !== undefined)
+              .map((cell) => (
+                <li class:list={[cell?.holiday?.kind === "national" ? "national" : "leave"]}>
+                  <span class="date">{label(cell?.date ?? "")}</span>
+                  {id ? cell?.holiday?.name : cell?.holiday?.nameEn}
+                </li>
+              ))}
+          </ul>
+        </details>
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  .calendar {
+    display: grid;
+    gap: 1.25rem;
+    margin-block: 1.5rem 2rem;
+  }
+  .bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem 2rem;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .years {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .years button {
+    min-height: 2.75rem;
+    padding: 0.4rem 1rem;
+    font: inherit;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-gray-1);
+    background: transparent;
+    border: 1px solid var(--surface-line);
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  .years button[aria-pressed="true"] {
+    color: var(--sl-color-black);
+    background: var(--sl-color-accent);
+    border-color: var(--sl-color-accent);
+  }
+  .years button:focus-visible,
+  summary:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  .key {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+  }
+  .key li {
+    display: flex;
+    gap: 0.4rem;
+    align-items: center;
+  }
+  .swatch {
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 0.25rem;
+  }
+  .swatch.national {
+    background: var(--kunyit);
+  }
+  .swatch.leave {
+    border: 2px solid var(--laut);
+  }
+  .swatch.weekend {
+    background: var(--surface-line);
+  }
+  .months {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 13rem), 1fr));
+    gap: 1.25rem 1.75rem;
+  }
+  .name {
+    margin: 0 0 0.4rem;
+    font-weight: 700;
+    color: var(--sl-color-white);
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    font-size: var(--sl-text-xs);
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+  .head {
+    color: var(--sl-color-gray-3);
+    font-weight: 600;
+  }
+  .day {
+    padding-block: 0.3rem;
+    border-radius: 0.3rem;
+    color: var(--sl-color-gray-2);
+  }
+  .day.weekend {
+    background: var(--surface);
+    color: var(--sl-color-gray-3);
+  }
+  .day.national {
+    font-weight: 700;
+    color: var(--sl-color-black);
+    background: var(--kunyit);
+  }
+  .day.leave {
+    font-weight: 700;
+    color: var(--laut);
+    box-shadow: inset 0 0 0 2px var(--laut);
+  }
+  details {
+    margin-top: 1rem;
+  }
+  summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--sl-color-gray-1);
+  }
+  .list {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0.75rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .list li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    padding-inline-start: 0.6rem;
+    border-inline-start: 3px solid var(--kunyit);
+  }
+  .list li.leave {
+    border-color: var(--laut);
+  }
+  .list .date {
+    min-width: 7.5rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+</style>
+
+<script>
+  for (const root of document.querySelectorAll<HTMLElement>(".calendar")) {
+    const buttons = root.querySelectorAll<HTMLButtonElement>(".years button");
+    const years = root.querySelectorAll<HTMLElement>(".year");
+    for (const button of buttons) {
+      button.addEventListener("click", () => {
+        for (const other of buttons) {
+          other.setAttribute("aria-pressed", other === button ? "true" : "false");
+        }
+        for (const year of years) {
+          year.hidden = year.dataset.year !== button.dataset.year;
+        }
+      });
+    }
+  }
+</script>
