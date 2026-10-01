@@ -9,4 +9,5 @@ export * as npwp from "./npwp/index.js";
 export * as phone from "./phone/index.js";
 export * as plate from "./plate/index.js";
 export * as region from "./region/index.js";
+export * as rupiah from "./rupiah/index.js";
 export * as workday from "./workday/index.js";

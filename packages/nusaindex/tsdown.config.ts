@@ -13,6 +13,7 @@ export default defineConfig({
     phone: "src/phone/index.ts",
     plate: "src/plate/index.ts",
     region: "src/region/index.ts",
+    rupiah: "src/rupiah/index.ts",
     workday: "src/workday/index.ts",
   },
   format: "esm",
