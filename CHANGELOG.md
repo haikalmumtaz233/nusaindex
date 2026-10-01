@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-01
+
 ### Added
 
 - `nusaindex/zod` and `nusaindex/valibot`: schemas for NIK, NPWP, phone numbers, NIP, NISN and plates, plus `rupiah()` that parses a Rupiah string into a number. Zod and Valibot are optional peer dependencies (`zod@^4`, `valibot@^1`); failed checks carry the error code but never the input in the message. The README shows how to register the Go `Valid` functions with go-playground/validator without adding a dependency.
