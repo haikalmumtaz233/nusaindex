@@ -72,6 +72,10 @@
       "types": "./dist/region.d.ts",
       "default": "./dist/region.js"
     },
+    "./rupiah": {
+      "types": "./dist/rupiah.d.ts",
+      "default": "./dist/rupiah.js"
+    },
     "./workday": {
       "types": "./dist/workday.d.ts",
       "default": "./dist/workday.js"
@@ -160,6 +164,12 @@
       "name": "bank",
       "path": "dist/bank.js",
       "limit": "5 kB",
+      "gzip": true
+    },
+    {
+      "name": "rupiah",
+      "path": "dist/rupiah.js",
+      "limit": "2 kB",
       "gzip": true
     }
   ]

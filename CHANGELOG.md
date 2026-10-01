@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- `rupiah`: format amounts (`Rp1.500.000,50`, optional fixed sen and no symbol), parse Indonesian-style input (`Rp`, `Rp.` or `IDR`, dot thousands, comma sen, `,-`), and spell amounts in words (`satu juta lima ratus ribu rupiah lima puluh sen`) up to 999 trillion. Amounts with sen are limited to below 10 trillion so TypeScript numbers stay exact. Go uses the `Amount` type in sen (`150_000 * rupiah.Rupiah`), TypeScript a number in rupiah.
+
 ## [0.2.0] - 2026-10-01
 
 ### Added
