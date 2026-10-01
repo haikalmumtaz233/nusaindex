@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --sl-font:
+    "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --sl-font-mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, Consolas, monospace;
+
+  --tarum: #9aa6ff;
+  --laut: #5fd3cf;
+  --pandan: #9ad67f;
+  --kunyit: #f2b53a;
+  --soga: #f09a6e;
+  --ink-muted: #aab0d4;
+  --surface: #181d47;
+  --surface-line: #2c3366;
+
+  --sl-color-accent-low: #3a2c08;
+  --sl-color-accent: #e3a21a;
+  --sl-color-accent-high: #f6d58a;
+  --sl-color-white: #ffffff;
+  --sl-color-gray-1: #e6e8f5;
+  --sl-color-gray-2: #bcc1dd;
+  --sl-color-gray-3: #8890bc;
+  --sl-color-gray-4: #565e8c;
+  --sl-color-gray-5: #363d68;
+  --sl-color-gray-6: #1e2450;
+  --sl-color-black: #12163a;
+}
+
+:root[data-theme="light"] {
+  --tarum: #2e3a9e;
+  --laut: #0b6e6d;
+  --pandan: #3a7329;
+  --kunyit: #8f5a00;
+  --soga: #9a4520;
+  --ink-muted: #4d5482;
+  --surface: #f1f2fa;
+  --surface-line: #d6d9ec;
+
+  --sl-color-accent-low: #dde1f7;
+  --sl-color-accent: #2e3a9e;
+  --sl-color-accent-high: #1b2266;
+  --sl-color-white: #12163a;
+  --sl-color-gray-1: #232a57;
+  --sl-color-gray-2: #3a4170;
+  --sl-color-gray-3: #5d6491;
+  --sl-color-gray-4: #8b91b5;
+  --sl-color-gray-5: #c3c7de;
+  --sl-color-gray-6: #e8eaf5;
+  --sl-color-gray-7: #f3f4fa;
+  --sl-color-black: #fbfbfe;
+}
+
+body {
+  font-feature-settings: "calt", "kern";
+}
+
+.sl-markdown-content :is(h2, h3) {
+  letter-spacing: -0.01em;
+}

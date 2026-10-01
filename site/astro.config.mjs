@@ -25,6 +25,7 @@ export default defineConfig({
       social: [
         { icon: "github", label: "GitHub", href: "https://github.com/haikalmumtaz233/nusaindex" },
       ],
+      customCss: ["./src/styles/theme.css"],
       lastUpdated: false,
       pagination: true,
       sidebar: [
