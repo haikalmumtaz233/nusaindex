@@ -1,0 +1,160 @@
+---
+import regionsCsv from "../../../data/regions.csv?raw";
+import { localeOf } from "../lib/anatomy-text";
+import { levelCounts } from "../lib/stats";
+
+const locale = localeOf(Astro.currentLocale);
+const id = locale === "id";
+const counts = levelCounts(regionsCsv);
+const number = new Intl.NumberFormat(id ? "id-ID" : "en-US");
+
+interface Row {
+  readonly tone: number;
+  readonly name: string;
+  readonly level: string;
+  readonly known: string;
+  readonly added: string;
+  readonly count: number;
+  readonly example: string;
+}
+
+const rows: readonly Row[] = [
+  {
+    tone: 1,
+    name: id ? "Provinsi" : "Province",
+    level: "province",
+    known: "",
+    added: "31",
+    count: counts.province,
+    example: "DKI Jakarta",
+  },
+  {
+    tone: 2,
+    name: id ? "Kabupaten/kota" : "Regency or city",
+    level: "regency",
+    known: "31.",
+    added: "71",
+    count: counts.regency,
+    example: "Jakarta Pusat",
+  },
+  {
+    tone: 3,
+    name: id ? "Kecamatan" : "District",
+    level: "district",
+    known: "31.71.",
+    added: "01",
+    count: counts.district,
+    example: "Gambir",
+  },
+  {
+    tone: 4,
+    name: id ? "Desa/kelurahan" : "Village",
+    level: "village",
+    known: "31.71.01.",
+    added: "1001",
+    count: counts.village,
+    example: "Gambir",
+  },
+];
+const largest = Math.log10(counts.village);
+const width = (count: number): string =>
+  `${String(Math.max(6, Math.round((Math.log10(count) / largest) * 100)))}%`;
+---
+
+<ol class="levels not-content">
+  {
+    rows.map((row) => (
+      <li class={`tone-${String(row.tone)}`}>
+        <span class="name">
+          {row.name} <code>{row.level}</code>
+        </span>
+        <span class="code">
+          {row.known !== "" && <span class="known">{row.known}</span>}
+          <span class="added">{row.added}</span>
+          <span class="example">{row.example}</span>
+        </span>
+        <span class="bar" style={`--w: ${width(row.count)}`}>
+          <span class="count">{number.format(row.count)}</span>
+        </span>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .levels {
+    --tone-1: var(--tarum);
+    --tone-2: var(--laut);
+    --tone-3: var(--pandan);
+    --tone-4: var(--kunyit);
+    display: grid;
+    gap: 0.9rem;
+    margin: 1.5rem 0 2rem;
+    padding: 0;
+    list-style: none;
+  }
+  .tone-1 {
+    --tone: var(--tone-1);
+  }
+  .tone-2 {
+    --tone: var(--tone-2);
+  }
+  .tone-3 {
+    --tone: var(--tone-3);
+  }
+  .tone-4 {
+    --tone: var(--tone-4);
+  }
+  li {
+    display: grid;
+    grid-template-columns: minmax(9rem, 13rem) minmax(10rem, 15rem) 1fr;
+    gap: 0.35rem 1rem;
+    align-items: center;
+  }
+  .name {
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .name code {
+    font-size: var(--sl-text-xs);
+    font-weight: 500;
+    color: var(--sl-color-gray-3);
+  }
+  .code {
+    font-size: var(--sl-text-lg);
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+  }
+  .known {
+    color: var(--sl-color-gray-3);
+  }
+  .added {
+    color: var(--tone);
+  }
+  .example {
+    margin-inline-start: 0.5rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
+    color: var(--sl-color-gray-2);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    width: var(--w);
+    min-height: 1.9rem;
+    padding-inline: 0.6rem;
+    border-radius: 0.4rem;
+    background: color-mix(in srgb, var(--tone) 22%, transparent);
+    border-inline-start: 4px solid var(--tone);
+  }
+  .count {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+  @media (max-width: 40rem) {
+    li {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
