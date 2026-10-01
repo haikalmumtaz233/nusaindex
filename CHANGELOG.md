@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-10-01
+
 ### Added
 
 - Documentation site in English and Indonesian (Astro Starlight): a reference page for every module with Go and TypeScript examples that run as tests, guides on results, errors, input and privacy, the CLI and MCP server, a browser-only playground, and static JSON files for holidays, provinces and regencies. Pages ship a hash-based Content Security Policy with no third-party scripts, fonts or analytics.
