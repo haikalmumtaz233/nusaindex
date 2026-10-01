@@ -28,3 +28,33 @@ In active development. Not ready for general use yet.
 
 - Go 1.25 or later, or
 - Node.js 22.18 or later, a modern browser, Bun, or Deno
+
+## Validation libraries
+
+TypeScript schemas live in their own subpaths, so `zod` and `valibot` stay optional peer dependencies:
+
+```ts
+import { z } from "zod";
+import * as id from "nusaindex/zod";
+
+const Customer = z.object({ nik: id.nik(), phone: id.phone(), deposit: id.rupiah() });
+```
+
+`nusaindex/valibot` exports the same functions. Failed checks never include the input in the message.
+
+In Go, register the `Valid` functions with [go-playground/validator](https://github.com/go-playground/validator). NusaIndex itself does not depend on it:
+
+```go
+validate := validator.New()
+_ = validate.RegisterValidation("nik", func(fl validator.FieldLevel) bool {
+	return nik.Valid(fl.Field().String())
+})
+
+type Customer struct {
+	NIK string `validate:"required,nik"`
+}
+```
+
+## Test data
+
+`fake` (Go package, TypeScript `nusaindex/fake`) generates valid-looking NIK, NPWP, phone numbers, NIP, NISN and plates from a seed, with the same output in Go and TypeScript. It is for tests only: generated numbers can belong to real people.
