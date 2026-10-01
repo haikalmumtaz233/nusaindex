@@ -1,0 +1,43 @@
+---
+import Default from "@astrojs/starlight/components/TableOfContents.astro";
+---
+
+<Default />
+
+<script>
+  import { atPageEnd, lastVisible } from "../lib/toc";
+
+  const SETTLE_MS = 150;
+
+  function headingOf(link: HTMLAnchorElement): HTMLElement | null {
+    return document.getElementById(decodeURIComponent(link.hash.slice(1)));
+  }
+
+  function markLastSection(): void {
+    const viewport = window.innerHeight;
+    if (!atPageEnd(window.scrollY, viewport, document.documentElement.scrollHeight)) {
+      return;
+    }
+    for (const toc of document.querySelectorAll("starlight-toc, mobile-starlight-toc")) {
+      const links = [...toc.querySelectorAll("a")];
+      const tops = links.map(
+        (link) => headingOf(link)?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY,
+      );
+      const link = links[lastVisible(tops, viewport)];
+      if (link !== undefined) {
+        Reflect.set(toc, "current", link);
+      }
+    }
+  }
+
+  let settle = 0;
+  window.addEventListener(
+    "scroll",
+    () => {
+      markLastSection();
+      window.clearTimeout(settle);
+      settle = window.setTimeout(markLastSection, SETTLE_MS);
+    },
+    { passive: true },
+  );
+</script>
