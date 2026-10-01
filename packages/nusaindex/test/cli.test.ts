@@ -180,10 +180,22 @@ describe("cli reference data", () => {
     expect((await cli(["region", "resolve", "99"])).code).toBe(1);
   });
 
+  it("looks up banks by code or bic and lists them", async () => {
+    const byCode = await cli(["bank", "014"]);
+    expect(byCode.code).toBe(0);
+    expect(byCode.out[0]).toContain("CENAIDJA");
+    expect((await cli(["bank", "cenaidja"])).out).toContain("shortName   BCA");
+    expect((await cli(["bank", "list"])).out).toHaveLength(125);
+    expect((await cli(["bank", "999"])).code).toBe(1);
+    expect((await cli(["bank", "014", "--json"])).out[0]).toContain('"shortName":"BCA"');
+  });
+
   it.each([
     [["region"]],
     [["region", "get", "31", "32"]],
     [["region", "resolve"]],
+    [["bank"]],
+    [["bank", "014", "015"]],
     [["region", "search", "x", "--level", "city"]],
     [["region", "search", "x", "--limit", "0"]],
     [["holiday", "abc"]],

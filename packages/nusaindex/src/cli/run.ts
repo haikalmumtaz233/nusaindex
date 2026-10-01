@@ -2,6 +2,7 @@ import { parseArgs } from "node:util";
 import pkg from "../../package.json" with { type: "json" };
 import {
   type Flags,
+  banks,
   fakes,
   holidays,
   identifier,
@@ -42,6 +43,7 @@ const ALLOWED: Readonly<Record<string, readonly Option[]>> = {
   rupiah: [...BATCH, "decimals", "no-symbol"],
   region: ["json", "level", "limit"],
   holiday: ["json"],
+  bank: ["json"],
   workday: ["json", "weekend", "leave-workday"],
   fake: ["json", "seed", "count", "region", "birth-date", "sex"],
 };
@@ -53,6 +55,7 @@ const COMMANDS: Readonly<Record<string, Command>> = {
   rupiah: money,
   region: regions,
   holiday: holidays,
+  bank: banks,
   workday: workdays,
   fake: fakes,
 };
