@@ -1,0 +1,46 @@
+---
+title: NPWP
+description: Validate, parse, and convert Indonesian taxpayer numbers in the 15-digit, 16-digit, and NITKU formats.
+---
+
+import Example from "../../../components/Example.astro";
+
+Three formats are accepted (PMK 112/2022 as amended by PMK 136/2023):
+
+- **15 digits**, the legacy format (`02.973.675.8-100.600`).
+- **16 digits**, either `0` followed by the legacy 15 digits, or a NIK for individual residents.
+- **NITKU**, 22 digits: the 16-digit NPWP plus a 6-digit business place number.
+
+## Functions
+
+| Go               | TypeScript        | Returns                                               |
+| ---------------- | ----------------- | ----------------------------------------------------- |
+| `npwp.Valid(s)`  | `npwp.isValid(s)` | Whether `s` is a well-formed NPWP or NITKU            |
+| `npwp.Parse(s)`  | `npwp.parse(s)`   | The fields below                                      |
+| `npwp.To16(s)`   | `npwp.to16(s)`    | The 16-digit form of any accepted format              |
+| `npwp.Format(s)` | `npwp.format(s)`  | 15 digits in the dotted layout, otherwise digits only |
+| `npwp.Mask(s)`   | `npwp.mask(s)`    | Last 4 digits visible                                 |
+
+Accepted separators: space, `.` and `-`.
+
+## Parsed fields
+
+| Field (JSON)    | Present when     | Notes                                |
+| --------------- | ---------------- | ------------------------------------ |
+| `npwp16`        | Always           |                                      |
+| `npwp15`        | Not a NIK        | Legacy 15 digits                     |
+| `nitku`         | Input is a NITKU | 22 digits                            |
+| `businessPlace` | Input is a NITKU | Last 6 digits                        |
+| `isNik`         | Always           | The 16 digits are a NIK              |
+| `taxOffice`     | Not a NIK        | 3-digit tax office code (KPP)        |
+| `status`        | Not a NIK        | 3-digit status (`000` = head office) |
+
+There is no official check digit for NPWP published by DJP, so NusaIndex checks structure only. New taxpayers since 2024 receive a 16-digit NPWP without a public structure.
+
+## Errors
+
+`length`, `charset`, `nik` (16 digits that look like a NIK but are not a valid one), `serial`.
+
+## Example
+
+<Example name="npwp" />

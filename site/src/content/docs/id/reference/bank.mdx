@@ -1,0 +1,37 @@
+---
+title: Bank
+description: Cari bank di Indonesia berdasarkan sandi bank 3 digit atau BIC.
+---
+
+import Example from "../../../../components/Example.astro";
+
+125 bank dengan sandi bank 3 digit, BIC (SWIFT), kode kantor, dan namanya. Bank Indonesia tidak menerbitkan daftar yang bisa dibaca mesin, jadi datanya berasal dari tabel sandi bank terbitan PT Bank Central Asia Tbk (pembaruan 1 November 2024).
+
+## Fungsi
+
+| Go                  | TypeScript          | Hasil                                                                 |
+| ------------------- | ------------------- | --------------------------------------------------------------------- |
+| `bank.List()`       | `bank.list()`       | Semua bank, urut sandi                                                |
+| `bank.ByCode(code)` | `bank.byCode(code)` | Semua entri dengan sandi itu (bank dan unit syariahnya berbagi sandi) |
+| `bank.ByBIC(bic)`   | `bank.byBic(bic)`   | Satu bank                                                             |
+
+## Field bank
+
+| Field (JSON) | Contoh                       |
+| ------------ | ---------------------------- |
+| `code`       | `014`                        |
+| `bic`        | `CENAIDJA`                   |
+| `officeCode` | `0397`                       |
+| `name`       | `PT. BANK CENTRAL ASIA Tbk.` |
+| `shortName`  | `BCA`                        |
+| `shariaUnit` | `false`                      |
+
+Panjang nomor rekening tidak disertakan karena tidak ada sumber resminya.
+
+## Error
+
+`length`, `charset`, `unknown`.
+
+## Contoh
+
+<Example name="bank" />

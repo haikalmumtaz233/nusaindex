@@ -1,0 +1,98 @@
+---
+title: Mulai
+description: Pasang NusaIndex untuk Go atau TypeScript dan jalankan pengecekan pertama.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+## Instalasi
+
+<Tabs syncKey="language">
+  <TabItem label="Go">
+    Go 1.25 atau lebih baru. Modul ini tidak memakai dependensi di luar standard library.
+
+    ```sh
+    go get github.com/haikalmumtaz233/nusaindex
+    ```
+
+  </TabItem>
+  <TabItem label="TypeScript">
+    Node.js 22.18 atau lebih baru, Bun, Deno, edge runtime, atau browser modern. Hanya ESM, tanpa
+    dependensi runtime.
+
+    ```sh
+    npm install nusaindex
+    ```
+
+  </TabItem>
+</Tabs>
+
+## Pengecekan pertama
+
+<Tabs syncKey="language">
+  <TabItem label="Go">
+
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/haikalmumtaz233/nusaindex/nik"
+)
+
+func main() {
+	parsed, err := nik.Parse("7502010706599583")
+	if err != nil {
+		fmt.Println("invalid:", err)
+		return
+	}
+	fmt.Println(parsed.BirthDate, parsed.Sex)
+}
+```
+
+  </TabItem>
+  <TabItem label="TypeScript">
+
+```ts
+import * as nik from "nusaindex/nik";
+
+const parsed = nik.parse("7502010706599583");
+if (parsed.ok) {
+  console.log(parsed.value.birthDate, parsed.value.sex);
+} else {
+  console.log("invalid:", parsed.error.code);
+}
+```
+
+  </TabItem>
+</Tabs>
+
+Nomor contoh di situs ini dibuat dengan generator [`fake`](/id/reference/fake/). Jangan pernah menempelkan data pribadi asli ke contoh, issue, atau chat AI.
+
+## Import
+
+| Paket Go                                      | TypeScript                                          |
+| --------------------------------------------- | --------------------------------------------------- |
+| `github.com/haikalmumtaz233/nusaindex/<nama>` | `nusaindex/<nama>`, atau namespace dari `nusaindex` |
+
+Setiap modul adalah paket Go dan subpath TypeScript tersendiri, jadi yang ikut ter-bundle hanya yang Anda import. Import `nusaindex/nik` menambah kurang dari 2 KB gzip ke bundle browser; data wilayah dimuat per provinsi hanya saat Anda memanggil `region`.
+
+Di TypeScript, `fake`, `zod`, dan `valibot` hanya tersedia lewat subpath dan tidak ada di export root `nusaindex`.
+
+## API sama, dua bahasa
+
+| Operasi     | Go                          | TypeScript                  |
+| ----------- | --------------------------- | --------------------------- |
+| Cek cepat   | `Valid(s) bool`             | `isValid(s): boolean`       |
+| Parse       | `Parse(s) (T, error)`       | `parse(s): Result<T>`       |
+| Normalisasi | `Format(s) (string, error)` | `format(s): Result<string>` |
+| Mask        | `Mask(s) string`            | `mask(s): string`           |
+
+Nama mengikuti konvensi tiap bahasa (`WhatsAppLink` dan `whatsappLink`, `FromNIK` dan `fromNik`). Hasilnya identik: setiap fungsi diuji dengan test vector bersama yang dijalankan di kedua implementasi.
+
+## Langkah berikutnya
+
+- [Hasil dan error](/id/guides/results-and-errors/): cara kegagalan dilaporkan.
+- [Input dan privasi](/id/guides/input-and-privacy/): karakter yang diterima, Unicode, dan masking.
+- [CLI](/id/tools/cli/) dan [server MCP](/id/tools/mcp/) jika Anda tidak menulis kode.

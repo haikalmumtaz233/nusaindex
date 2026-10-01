@@ -9,5 +9,9 @@
   },
   "dependencies": {
     "nusaindex": "workspace:*"
+  },
+  "devDependencies": {
+    "@astrojs/starlight": "0.42.4",
+    "astro": "7.3.5"
   }
 }

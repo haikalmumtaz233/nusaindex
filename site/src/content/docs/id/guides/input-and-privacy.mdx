@@ -1,0 +1,37 @@
+---
+title: Input dan privasi
+description: Karakter yang diterima NusaIndex, cara membersihkan teks tempelan, dan cara data pribadi dilindungi.
+---
+
+import Example from "../../../../components/Example.astro";
+
+## Input yang diterima
+
+Fungsi nomor identitas menerima digit ASCII ditambah pemisah yang tercantum di halaman tiap modul (biasanya spasi, titik, dan strip). Input lebih dari 64 karakter langsung gagal dengan `length` sebelum pengecekan lain, sehingga biaya pemrosesan tetap terbatas apa pun input pengguna.
+
+Karakter lain, termasuk digit full-width (`７５０２…`), digit Arab-Indic, dan karakter zero-width, gagal dengan `charset`. Karakter ini terlihat sama di layar tetapi tersimpan berbeda, jadi ditolak alih-alih diterima diam-diam.
+
+## Membersihkan teks tempelan dengan `normalize`
+
+Jika input berasal dari copy-paste, panggil `normalize` secara eksplisit sebelum validasi. Fungsi ini mengubah ASCII full-width, digit Arab-Indic, spasi dan strip Unicode menjadi ASCII, membuang karakter zero-width dan soft hyphen, lalu memangkas spasi di ujung. Go dan TypeScript memakai tabel yang persis sama.
+
+<Example name="normalize" />
+
+## Masking
+
+Mask hanya menampilkan bagian yang biasanya dibutuhkan tim layanan:
+
+| Jenis                                | Bagian yang terlihat       | Contoh             |
+| ------------------------------------ | -------------------------- | ------------------ |
+| NIK, NPWP, NIP, NISN, nomor rekening | 4 digit terakhir           | `************9583` |
+| Nomor HP                             | `+62` dan 3 digit terakhir | `+62*******171`    |
+
+Digit awal NIK memuat wilayah dan tanggal lahir, jadi tidak pernah ditampilkan. Lihat [`mask`](/id/reference/mask/) untuk redaksi teks bebas, redaksi objek, dan handler `slog` di Go.
+
+## Yang tidak pernah dilakukan NusaIndex
+
+- Tidak ada request jaringan dari library, CLI, maupun server MCP. Data wilayah, libur, dan bank sudah tertanam.
+- Tidak me-log, menyimpan, atau mengirim input. Pesan error hanya berisi kode, tidak pernah nilainya.
+- Tidak mencari siapa pemilik NIK, NPWP, plat, atau nomor HP, dan tidak memverifikasi ke Dukcapil atau DJP. Lihat [non-goal](/id/project/non-goals/).
+
+Valid berarti strukturnya benar. Sebuah NIK bisa lolos semua pengecekan tetapi tetap bukan milik siapa pun.

@@ -1,0 +1,27 @@
+---
+title: NISN
+description: Validate the 10-digit national student number (NISN).
+---
+
+import Example from "../../../components/Example.astro";
+
+A NISN has 10 digits. No official document describes an internal structure or check digit, so NusaIndex checks length, characters, and that the number is not all zeros.
+
+## Functions
+
+| Go               | TypeScript        | Returns                            |
+| ---------------- | ----------------- | ---------------------------------- |
+| `nisn.Valid(s)`  | `nisn.isValid(s)` | Whether `s` is a well-formed NISN  |
+| `nisn.Parse(s)`  | `nisn.parse(s)`   | `{ nisn }` with separators removed |
+| `nisn.Format(s)` | `nisn.format(s)`  | 10 digits                          |
+| `nisn.Mask(s)`   | `nisn.mask(s)`    | Last 4 digits visible              |
+
+Accepted separators: space, `.` and `-`.
+
+## Errors
+
+`length`, `charset`, `serial`.
+
+## Example
+
+<Example name="nisn" />

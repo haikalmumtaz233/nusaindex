@@ -1,0 +1,42 @@
+---
+title: NIK
+description: Validasi dan parse Nomor Induk Kependudukan 16 digit.
+---
+
+import Example from "../../../../components/Example.astro";
+
+NIK terdiri dari 16 digit: kode kecamatan 6 digit (provinsi, kabupaten/kota, kecamatan), tanggal lahir `DDMMYY` dengan tanggal ditambah 40 untuk perempuan, dan nomor urut 4 digit.
+
+## Fungsi
+
+| Go                     | TypeScript             | Hasil                                              |
+| ---------------------- | ---------------------- | -------------------------------------------------- |
+| `nik.Valid(s)`         | `nik.isValid(s)`       | Apakah `s` NIK yang strukturnya benar              |
+| `nik.Parse(s)`         | `nik.parse(s)`         | Field di bawah                                     |
+| `nik.ParseAt(s, year)` | `nik.parseAt(s, year)` | Sama, dengan abad lahir dihitung relatif ke `year` |
+| `nik.Format(s)`        | `nik.format(s)`        | 16 digit tanpa pemisah                             |
+| `nik.Mask(s)`          | `nik.mask(s)`          | Hanya 4 digit terakhir terlihat                    |
+
+Pemisah yang diterima: spasi, `.`, dan `-`.
+
+## Field hasil parse
+
+| Field (JSON)   | Contoh       | Catatan                                                                                                            |
+| -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `nik`          | 16 digit     | Tanpa pemisah                                                                                                      |
+| `provinceCode` | `75`         |                                                                                                                    |
+| `regencyCode`  | `75.02`      |                                                                                                                    |
+| `districtCode` | `75.02.01`   | Dicek ke data wilayah, termasuk kode historis                                                                      |
+| `birthDate`    | `1959-06-07` | `YYYY-MM-DD`; tahun dua digit menjadi tahun terakhir yang tidak melewati tahun berjalan (atau `year` di `ParseAt`) |
+| `sex`          | `male`       | `male` atau `female`                                                                                               |
+| `serial`       | `9583`       | Tidak pernah `0000`                                                                                                |
+
+`Parse` tidak memuat nama wilayah. Pakai [`region.FromNIK` / `region.fromNik`](/id/reference/region/) untuk mengubah kode kecamatan menjadi nama.
+
+## Error
+
+`length`, `charset`, `region` (kode kecamatan tidak ada), `date` (bukan tanggal yang ada), `serial`.
+
+## Contoh
+
+<Example name="nik" />

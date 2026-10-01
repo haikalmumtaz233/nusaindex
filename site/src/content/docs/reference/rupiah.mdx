@@ -1,0 +1,41 @@
+---
+title: Rupiah
+description: Format, parse, and spell Rupiah amounts in Indonesian style.
+---
+
+import Example from "../../../components/Example.astro";
+
+## Functions
+
+| Go                       | TypeScript                | Returns                                                        |
+| ------------------------ | ------------------------- | -------------------------------------------------------------- |
+| `rupiah.Format(a, opts)` | `rupiah.format(n, opts?)` | `Rp1.500.000,50`                                               |
+| `rupiah.Parse(s)`        | `rupiah.parse(s)`         | The amount (Go: `Amount` in sen, TypeScript: number in rupiah) |
+| `rupiah.Valid(s)`        | `rupiah.isValid(s)`       | Whether `s` parses                                             |
+| `rupiah.Terbilang(a)`    | `rupiah.terbilang(n)`     | `satu juta lima ratus ribu rupiah lima puluh sen`              |
+
+## Amounts
+
+- **Go** uses `rupiah.Amount`, an `int64` in sen, so arithmetic is exact: `150_000 * rupiah.Rupiah + 50 * rupiah.Sen`.
+- **TypeScript** uses a `number` in rupiah. Amounts with sen are limited to below 10 trillion (`MAX_SEN_AMOUNT`) so they stay exact; whole amounts go up to 999 trillion (`MAX_AMOUNT`).
+
+## Format options
+
+| Go `Options` | TypeScript      | Effect                             |
+| ------------ | --------------- | ---------------------------------- |
+| `Decimals`   | `decimals`      | Always print sen: `Rp2.000.000,00` |
+| `OmitSymbol` | `symbol: false` | No `Rp` prefix                     |
+
+Without `Decimals`, sen is printed only when it is not zero. Negative amounts are formatted as `-Rp1.000`.
+
+## Parsing
+
+`Parse` accepts what people write in Indonesia: an optional `Rp`, `Rp.` or `IDR` prefix, dots as thousands separators, a comma before sen, and a trailing `,-`. `Rp 25.000,-`, `IDR 1.500.000,50` and `25000` all parse. Input is limited to 64 characters.
+
+## Errors
+
+`length`, `charset`, `format` (misplaced separators, more than two sen digits), `range` (larger than the supported amount).
+
+## Example
+
+<Example name="rupiah" />

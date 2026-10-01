@@ -1,0 +1,76 @@
+---
+title: Zod, Valibot, dan validator
+description: Pakai pengecekan NusaIndex di skema Zod dan Valibot, atau dengan go-playground/validator di Go.
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+## Skema TypeScript
+
+`nusaindex/zod` dan `nusaindex/valibot` mengekspor fungsi pembuat yang sama. Zod (`^4`) dan Valibot (`^1`) adalah peer dependency opsional: pasang yang Anda pakai saja.
+
+| Fungsi     | Menerima                          | Hasil                      |
+| ---------- | --------------------------------- | -------------------------- |
+| `nik()`    | NIK                               | String input, tidak diubah |
+| `npwp()`   | NPWP 15 atau 16 digit, atau NITKU | String input, tidak diubah |
+| `phone()`  | Nomor telepon                     | String input, tidak diubah |
+| `nip()`    | NIP                               | String input, tidak diubah |
+| `nisn()`   | NISN                              | String input, tidak diubah |
+| `plate()`  | Plat nomor                        | String input, tidak diubah |
+| `rupiah()` | Teks Rupiah seperti `Rp 25.000,-` | `number` dalam rupiah      |
+
+Skema nomor identitas memvalidasi tanpa mengubah nilai, jadi Anda yang menentukan apakah menyimpan nilai asli atau yang sudah dinormalisasi (`nik.format`, `phone.format`). Setiap fungsi menerima `{ message }`. Pesan error tidak pernah memuat input; issue Zod membawa kode error NusaIndex di `params.nusaindex`.
+
+<Tabs syncKey="schema">
+  <TabItem label="Zod">
+
+```ts
+import { z } from "zod";
+import * as id from "nusaindex/zod";
+
+const Customer = z.object({
+  nik: id.nik({ message: "NIK tidak valid" }),
+  phone: id.phone(),
+  deposit: id.rupiah(),
+});
+
+const result = Customer.safeParse(form);
+```
+
+  </TabItem>
+  <TabItem label="Valibot">
+
+```ts
+import * as v from "valibot";
+import * as id from "nusaindex/valibot";
+
+const Customer = v.object({
+  nik: id.nik({ message: "NIK tidak valid" }),
+  phone: id.phone(),
+  deposit: id.rupiah(),
+});
+
+const result = v.safeParse(Customer, form);
+```
+
+  </TabItem>
+</Tabs>
+
+## Go: go-playground/validator
+
+NusaIndex tidak bergantung pada library validasi mana pun. Daftarkan fungsi `Valid` yang Anda butuhkan:
+
+```go
+validate := validator.New()
+_ = validate.RegisterValidation("nik", func(fl validator.FieldLevel) bool {
+	return nik.Valid(fl.Field().String())
+})
+_ = validate.RegisterValidation("phone_id", func(fl validator.FieldLevel) bool {
+	return phone.Valid(fl.Field().String())
+})
+
+type Customer struct {
+	NIK   string `validate:"required,nik"`
+	Phone string `validate:"required,phone_id"`
+}
+```

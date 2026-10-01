@@ -1,0 +1,39 @@
+---
+import { existsSync, readFileSync } from "node:fs";
+import { join } from "node:path";
+import { Code, TabItem, Tabs } from "@astrojs/starlight/components";
+
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+const dir = join(process.cwd(), "src", "examples", name);
+const read = (file: string): string | undefined => {
+  const path = join(dir, file);
+  return existsSync(path) ? readFileSync(path, "utf8").replace(/\r\n/g, "\n") : undefined;
+};
+const go = read("main.go");
+const ts = read("main.ts");
+const output = read("output.txt");
+if (output === undefined || (go === undefined && ts === undefined)) {
+  throw new Error(`example "${name}" is missing`);
+}
+const outputTitle = Astro.currentLocale === "id" ? "Keluaran" : "Output";
+---
+
+{
+  go !== undefined && ts !== undefined ? (
+    <Tabs syncKey="language">
+      <TabItem label="Go">
+        <Code code={go} lang="go" />
+      </TabItem>
+      <TabItem label="TypeScript">
+        <Code code={ts} lang="ts" />
+      </TabItem>
+    </Tabs>
+  ) : (
+    <Code code={go ?? ts ?? ""} lang={go !== undefined ? "go" : "ts"} />
+  )
+}
+<Code code={output} lang="txt" title={outputTitle} />
