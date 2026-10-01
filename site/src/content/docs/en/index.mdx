@@ -1,0 +1,59 @@
+---
+title: NusaIndex
+description: Validate, parse, and format Indonesian data in Go, TypeScript, the command line, and AI agents. Offline, with zero runtime dependencies.
+template: splash
+hero:
+  title: Every digit means something.
+  tagline: NusaIndex checks, decodes, and formats Indonesian identifiers and reference data in Go, TypeScript, the terminal, and AI agents. It runs offline, with zero dependencies.
+  actions:
+    - text: Get started
+      link: /en/getting-started/
+    - text: Open the playground
+      link: /en/playground/
+      variant: minimal
+---
+
+import { TabItem, Tabs } from "@astrojs/starlight/components";
+import Example from "../../../components/Example.astro";
+import ModuleGrid from "../../../components/ModuleGrid.astro";
+
+## Use it where you work
+
+<Tabs syncKey="surface">
+  <TabItem label="Go and TypeScript">
+    <Example name="quickstart" />
+  </TabItem>
+  <TabItem label="Terminal">
+
+```sh
+npm install --global nusaindex
+```
+
+    <img
+      src="/demos/cli.svg"
+      width="760"
+      height="554"
+      alt="Terminal session: nusa nik decodes a NIK into its fields, nusa phone finds the XL brand, nusa rupiah terbilang spells 1,500,000.50 in words, and nusa mask text hides a NIK and a phone number in a sentence."
+    />
+
+  </TabItem>
+  <TabItem label="AI agents">
+    Connect [`nusaindex-mcp`](/en/tools/mcp/) to any MCP client. Every tool is read-only.
+    <img
+      src="/demos/mcp.svg"
+      width="760"
+      height="386"
+      alt="MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs; asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart)."
+    />
+  </TabItem>
+</Tabs>
+
+## What's inside
+
+<ModuleGrid />
+
+## Safe by default
+
+- **Offline.** No network calls, logging, or telemetry. Input never leaves your process.
+- **Traceable.** Every dataset names its regulation and source document in [`data/manifest.json`](/en/project/data-sources/).
+- **Unofficial.** Not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any government agency. Valid means **well-formed**, not real or owned by anyone.

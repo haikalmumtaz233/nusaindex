@@ -1,31 +1,31 @@
 ---
-title: Results and errors
-description: How NusaIndex reports invalid input in Go and TypeScript.
+title: Hasil dan error
+description: Cara NusaIndex melaporkan input tidak valid di Go dan TypeScript.
 ---
 
-Invalid input is an expected outcome, not an exception. Neither library throws or panics for bad input.
+Input tidak valid adalah hasil yang wajar, bukan exception. Kedua library tidak pernah melempar exception atau panic untuk input yang salah.
 
-## Go: error values
+## Go: error sebagai nilai
 
-Functions return `(value, error)`. Each package exports sentinel errors named after the error code, such as `nik.ErrLength` or `phone.ErrPrefix`. Compare with `errors.Is`, which keeps working when you wrap the error:
+Fungsi mengembalikan `(nilai, error)`. Setiap paket mengekspor sentinel error yang dinamai sesuai kode error, misalnya `nik.ErrLength` atau `phone.ErrPrefix`. Bandingkan dengan `errors.Is`, yang tetap berfungsi walaupun error dibungkus:
 
 ```go
 _, err := nik.Parse(input)
 switch {
 case errors.Is(err, nik.ErrLength):
-	return "NIK must have 16 digits"
+	return "NIK harus 16 digit"
 case errors.Is(err, nik.ErrDate):
-	return "birth date in NIK is not a real date"
+	return "tanggal lahir di NIK bukan tanggal yang ada"
 case err != nil:
-	return "invalid NIK"
+	return "NIK tidak valid"
 }
 ```
 
-`err.Error()` reads like `nik: invalid date`. It never contains the input.
+`err.Error()` berbentuk `nik: invalid date` dan tidak pernah memuat input.
 
 ## TypeScript: `Result`
 
-Functions that can fail return a `Result`:
+Fungsi yang bisa gagal mengembalikan `Result`:
 
 ```ts
 type Result<T, E extends string> =
@@ -33,40 +33,40 @@ type Result<T, E extends string> =
   | { readonly ok: false; readonly error: { readonly code: E } };
 ```
 
-Each module exports its error code union (`NikErrorCode`, `PhoneErrorCode`, …), so a `switch` on `error.code` is checked by the compiler:
+Setiap modul mengekspor union kode error-nya (`NikErrorCode`, `PhoneErrorCode`, …), sehingga `switch` pada `error.code` dicek oleh compiler:
 
 ```ts
 const result = nik.parse(input);
 if (!result.ok) {
   switch (result.error.code) {
     case "length":
-      return "NIK must have 16 digits";
+      return "NIK harus 16 digit";
     case "date":
-      return "birth date in NIK is not a real date";
+      return "tanggal lahir di NIK bukan tanggal yang ada";
     default:
-      return "invalid NIK";
+      return "NIK tidak valid";
   }
 }
 ```
 
-Functions in `region` and `fake.nik` return `Promise<Result<…>>` because region data loads per province on demand.
+Fungsi di `region` dan `fake.nik` mengembalikan `Promise<Result<…>>` karena data wilayah dimuat per provinsi saat dibutuhkan.
 
-## Error codes
+## Kode error
 
-| Code      | Meaning                                                                      |
-| --------- | ---------------------------------------------------------------------------- |
-| `length`  | Wrong number of digits, or input longer than the limit (64 characters)       |
-| `charset` | A character outside the digits and separators that module accepts            |
-| `region`  | Region code that does not exist (NIK district, plate area)                   |
-| `date`    | Not a real date, or a date in the wrong place                                |
-| `serial`  | Serial part is zero or otherwise impossible                                  |
-| `sex`     | NIP sex digit is not 1 or 2                                                  |
-| `nik`     | 16-digit NPWP that is a NIK, but not a valid one                             |
-| `country` | Phone number with a country code other than +62                              |
-| `prefix`  | Phone prefix that is not allocated                                           |
-| `format`  | Text that does not follow the expected layout (plates, Rupiah)               |
-| `unknown` | Well-formed code that is not in the reference data                           |
-| `options` | Invalid option, such as an unknown region level or weekend day               |
-| `range`   | Value outside the supported range (years without holiday data, huge amounts) |
+| Kode      | Arti                                                                                |
+| --------- | ----------------------------------------------------------------------------------- |
+| `length`  | Jumlah digit salah, atau input melebihi batas (64 karakter)                         |
+| `charset` | Ada karakter di luar digit dan pemisah yang diterima modul itu                      |
+| `region`  | Kode wilayah tidak ada (kecamatan di NIK, kode plat)                                |
+| `date`    | Bukan tanggal yang ada, atau tanggal di posisi yang salah                           |
+| `serial`  | Nomor urut nol atau tidak mungkin                                                   |
+| `sex`     | Digit jenis kelamin NIP bukan 1 atau 2                                              |
+| `nik`     | NPWP 16 digit berupa NIK, tetapi NIK-nya tidak valid                                |
+| `country` | Nomor telepon dengan kode negara selain +62                                         |
+| `prefix`  | Prefix nomor HP yang tidak dialokasikan                                             |
+| `format`  | Teks tidak mengikuti susunan yang diharapkan (plat, Rupiah)                         |
+| `unknown` | Kode yang strukturnya benar tetapi tidak ada di data referensi                      |
+| `options` | Opsi tidak valid, misalnya level wilayah atau hari akhir pekan yang tidak dikenal   |
+| `range`   | Nilai di luar rentang yang didukung (tahun tanpa data libur, nominal terlalu besar) |
 
-The reference page of each module lists the codes it can return.
+Halaman referensi tiap modul mencantumkan kode yang bisa dikembalikannya.

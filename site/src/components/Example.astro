@@ -19,7 +19,7 @@ const output = read("output.txt");
 if (output === undefined || (go === undefined && ts === undefined)) {
   throw new Error(`example "${name}" is missing`);
 }
-const outputTitle = Astro.currentLocale === "id" ? "Keluaran" : "Output";
+const outputTitle = Astro.currentLocale === "en" ? "Output" : "Keluaran";
 ---
 
 {

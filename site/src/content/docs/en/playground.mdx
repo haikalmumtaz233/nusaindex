@@ -1,0 +1,14 @@
+---
+title: Playground
+description: Try NusaIndex validation and parsing in your browser. Nothing you type leaves your device.
+---
+
+import Playground from "../../../components/Playground.astro";
+
+:::note[Runs in your browser]
+This page uses the `nusaindex` package compiled into the page. What you type is checked on your device and is never sent anywhere: the site has no server, analytics, or third-party scripts. Still, prefer the **Fill fake data** button to typing real personal data.
+:::
+
+<Playground />
+
+For a NIK, the result includes the region names from [`region.fromNik`](/en/reference/region/). Invalid values show the [error code](/en/guides/results-and-errors/) and, when the text contains full-width or zero-width characters, a hint to call [`normalize`](/en/guides/input-and-privacy/).

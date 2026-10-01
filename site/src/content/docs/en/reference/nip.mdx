@@ -1,0 +1,47 @@
+---
+title: NIP
+description: Validate and parse the 18-digit civil servant number (NIP) for PNS and PPPK.
+---
+
+import Anatomy from "../../../../components/Anatomy.astro";
+import Example from "../../../../components/Example.astro";
+
+<Anatomy kind="nip" />
+
+The 18-digit NIP has two layouts:
+
+| Kind   | Layout                                                                                       | Basis                |
+| ------ | -------------------------------------------------------------------------------------------- | -------------------- |
+| `pns`  | Birth date `YYYYMMDD`, appointment `YYYYMM`, sex digit, 3-digit serial                       | Perka BKN 22/2007    |
+| `pppk` | Birth date `YYYYMMDD`, appointment year `YYYY`, agreement count from `21`, sex digit, serial | Peraturan BKN 1/2019 |
+
+## Functions
+
+| Go              | TypeScript       | Returns                          |
+| --------------- | ---------------- | -------------------------------- |
+| `nip.Valid(s)`  | `nip.isValid(s)` | Whether `s` is a well-formed NIP |
+| `nip.Parse(s)`  | `nip.parse(s)`   | The fields below                 |
+| `nip.Format(s)` | `nip.format(s)`  | `19881227 200809 2 553`          |
+| `nip.Mask(s)`   | `nip.mask(s)`    | Last 4 digits visible            |
+
+Accepted separators: space, `.` and `-`.
+
+## Parsed fields
+
+| Field (JSON)      | Example      | Notes                                               |
+| ----------------- | ------------ | --------------------------------------------------- |
+| `nip`             | 18 digits    |                                                     |
+| `kind`            | `pns`        | `pns` or `pppk`                                     |
+| `birthDate`       | `1988-12-27` |                                                     |
+| `appointmentDate` | `2008-09`    | `YYYY-MM` for PNS, `YYYY` for PPPK                  |
+| `sex`             | `female`     | Digit `1` is male, `2` is female                    |
+| `serial`          | `553`        |                                                     |
+| `agreement`       | `1`          | PPPK only: which work agreement (`21` is the first) |
+
+## Errors
+
+`length`, `charset`, `date`, `sex`, `serial`.
+
+## Example
+
+<Example name="nip" />

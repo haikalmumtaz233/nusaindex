@@ -1,14 +1,14 @@
 ---
 title: NusaIndex
-description: Validate, parse, and format Indonesian data in Go, TypeScript, the command line, and AI agents. Offline, with zero runtime dependencies.
+description: Validasi, parse, dan format data Indonesia di Go, TypeScript, command line, dan agent AI. Offline, tanpa dependensi runtime.
 template: splash
 hero:
-  title: Every digit means something.
-  tagline: NusaIndex checks, decodes, and formats Indonesian identifiers and reference data in Go, TypeScript, the terminal, and AI agents. It runs offline, with zero dependencies.
+  title: Setiap digit ada artinya.
+  tagline: NusaIndex memeriksa, membaca isi, dan memformat nomor identitas serta data referensi Indonesia di Go, TypeScript, terminal, dan agent AI. Berjalan offline, tanpa dependensi.
   actions:
-    - text: Get started
+    - text: Mulai
       link: /getting-started/
-    - text: Open the playground
+    - text: Buka playground
       link: /playground/
       variant: minimal
 ---
@@ -17,10 +17,10 @@ import { TabItem, Tabs } from "@astrojs/starlight/components";
 import Example from "../../components/Example.astro";
 import ModuleGrid from "../../components/ModuleGrid.astro";
 
-## Use it where you work
+## Pakai di mana saja
 
 <Tabs syncKey="surface">
-  <TabItem label="Go and TypeScript">
+  <TabItem label="Go dan TypeScript">
     <Example name="quickstart" />
   </TabItem>
   <TabItem label="Terminal">
@@ -33,27 +33,27 @@ npm install --global nusaindex
       src="/demos/cli.svg"
       width="760"
       height="554"
-      alt="Terminal session: nusa nik decodes a NIK into its fields, nusa phone finds the XL brand, nusa rupiah terbilang spells 1,500,000.50 in words, and nusa mask text hides a NIK and a phone number in a sentence."
+      alt="Sesi terminal: nusa nik membaca isi NIK, nusa phone menemukan merek XL, nusa rupiah terbilang mengeja 1.500.000,50, dan nusa mask text menyembunyikan NIK dan nomor HP di dalam kalimat."
     />
 
   </TabItem>
-  <TabItem label="AI agents">
-    Connect [`nusaindex-mcp`](/tools/mcp/) to any MCP client. Every tool is read-only.
+  <TabItem label="Agent AI">
+    Hubungkan [`nusaindex-mcp`](/tools/mcp/) ke klien MCP mana pun. Semua tool hanya membaca.
     <img
       src="/demos/mcp.svg"
       width="760"
       height="386"
-      alt="MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs; asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart)."
+      alt="Klien MCP: diminta tiga NIK uji di Kota Bandung, tool fake mengembalikan tiga NIK; ditanya soal 0859-5257-171, tool parse mengembalikan +628595257171, nomor seluler XL (XLSmart)."
     />
   </TabItem>
 </Tabs>
 
-## What's inside
+## Isinya
 
 <ModuleGrid />
 
-## Safe by default
+## Aman sejak awal
 
-- **Offline.** No network calls, logging, or telemetry. Input never leaves your process.
-- **Traceable.** Every dataset names its regulation and source document in [`data/manifest.json`](/project/data-sources/).
-- **Unofficial.** Not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any government agency. Valid means **well-formed**, not real or owned by anyone.
+- **Offline.** Tanpa panggilan jaringan, log, atau telemetri. Input tidak pernah keluar dari proses Anda.
+- **Bisa ditelusuri.** Setiap dataset menyebut regulasi dan dokumen sumbernya di [`data/manifest.json`](/project/data-sources/).
+- **Tidak resmi.** Tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah mana pun. Valid berarti **strukturnya benar**, bukan berarti nomornya asli atau dimiliki seseorang.

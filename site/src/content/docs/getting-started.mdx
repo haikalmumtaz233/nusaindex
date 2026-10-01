@@ -1,6 +1,6 @@
 ---
-title: Getting started
-description: Install NusaIndex for Go or TypeScript and run your first check.
+title: Mulai
+description: Pasang NusaIndex untuk Go atau TypeScript dan jalankan pengecekan pertama.
 ---
 
 import { Steps } from "@astrojs/starlight/components";
@@ -9,7 +9,7 @@ import ModuleGrid from "../../components/ModuleGrid.astro";
 
 <Steps>
 
-1. Install the package. Go 1.25 or later uses only the standard library; TypeScript runs on Node.js 22.18 or later, Bun, Deno, edge runtimes and modern browsers (ESM only).
+1. Pasang paketnya. Go 1.25 atau lebih baru hanya memakai standard library; TypeScript berjalan di Node.js 22.18 atau lebih baru, Bun, Deno, edge runtime, dan browser modern (hanya ESM).
 
    ```sh title="Go"
    go get github.com/haikalmumtaz233/nusaindex
@@ -19,35 +19,35 @@ import ModuleGrid from "../../components/ModuleGrid.astro";
    npm install nusaindex
    ```
 
-2. Run a first check. This example runs on every build, in both languages, and must print the same output.
+2. Jalankan pengecekan pertama. Contoh ini dijalankan setiap build, di kedua bahasa, dan keluarannya harus sama.
 
    <Example name="quickstart" />
 
-3. Import only what you need. Each module is its own Go package (`github.com/haikalmumtaz233/nusaindex/<name>`) and TypeScript subpath (`nusaindex/<name>`). `nusaindex/nik` adds less than 2 KB gzip to a browser bundle, and region data loads one province at a time.
+3. Import seperlunya. Setiap modul adalah paket Go (`github.com/haikalmumtaz233/nusaindex/<nama>`) dan subpath TypeScript (`nusaindex/<nama>`) tersendiri. `nusaindex/nik` menambah kurang dari 2 KB gzip ke bundle browser, dan data wilayah dimuat per provinsi.
 
 </Steps>
 
-## Modules
+## Modul
 
 <ModuleGrid />
 
-## Same API, two languages
+## API sama, dua bahasa
 
-| Operation   | Go                          | TypeScript                  |
+| Operasi     | Go                          | TypeScript                  |
 | ----------- | --------------------------- | --------------------------- |
-| Quick check | `Valid(s) bool`             | `isValid(s): boolean`       |
+| Cek cepat   | `Valid(s) bool`             | `isValid(s): boolean`       |
 | Parse       | `Parse(s) (T, error)`       | `parse(s): Result<T>`       |
-| Normalize   | `Format(s) (string, error)` | `format(s): Result<string>` |
+| Normalisasi | `Format(s) (string, error)` | `format(s): Result<string>` |
 | Mask        | `Mask(s) string`            | `mask(s): string`           |
 
-Names follow each language (`WhatsAppLink`, `whatsappLink`). Shared test vectors run against both implementations, so results are identical. In TypeScript, `fake`, `zod` and `valibot` are subpath-only.
+Nama mengikuti konvensi tiap bahasa (`WhatsAppLink`, `whatsappLink`). Test vector bersama dijalankan di kedua implementasi, jadi hasilnya identik. Di TypeScript, `fake`, `zod`, dan `valibot` hanya tersedia lewat subpath.
 
-:::note[Sample data]
-Numbers on this site come from the [`fake`](/reference/fake/) generator. Never paste real personal data into examples, issues, or AI chats.
+:::note[Data contoh]
+Nomor di situs ini dibuat dengan generator [`fake`](/reference/fake/). Jangan pernah menempelkan data pribadi asli ke contoh, issue, atau chat AI.
 :::
 
-## Next steps
+## Langkah berikutnya
 
-- [Results and errors](/guides/results-and-errors/): how failures are reported.
-- [Input and privacy](/guides/input-and-privacy/): accepted characters, Unicode, and masking.
-- [Command line](/tools/cli/) and [MCP server](/tools/mcp/) if you are not writing code.
+- [Hasil dan error](/guides/results-and-errors/): cara kegagalan dilaporkan.
+- [Input dan privasi](/guides/input-and-privacy/): karakter yang diterima, Unicode, dan masking.
+- [Command line](/tools/cli/) dan [server MCP](/tools/mcp/) jika Anda tidak menulis kode.

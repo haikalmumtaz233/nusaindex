@@ -64,7 +64,7 @@ describe("anatomy text", () => {
   it("maps page languages to a locale and has ui strings for both", () => {
     expect(localeOf("id")).toBe("id");
     expect(localeOf("en")).toBe("en");
-    expect(localeOf(undefined)).toBe("en");
+    expect(localeOf(undefined)).toBe("id");
     expect(ui("id").generate).toBe("Buat contoh lain");
     expect(ui("en").input.phone).toBe("Paste a phone number");
   });

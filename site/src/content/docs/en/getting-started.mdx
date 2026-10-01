@@ -1,0 +1,53 @@
+---
+title: Getting started
+description: Install NusaIndex for Go or TypeScript and run your first check.
+---
+
+import { Steps } from "@astrojs/starlight/components";
+import Example from "../../../components/Example.astro";
+import ModuleGrid from "../../../components/ModuleGrid.astro";
+
+<Steps>
+
+1. Install the package. Go 1.25 or later uses only the standard library; TypeScript runs on Node.js 22.18 or later, Bun, Deno, edge runtimes and modern browsers (ESM only).
+
+   ```sh title="Go"
+   go get github.com/haikalmumtaz233/nusaindex
+   ```
+
+   ```sh title="TypeScript"
+   npm install nusaindex
+   ```
+
+2. Run a first check. This example runs on every build, in both languages, and must print the same output.
+
+   <Example name="quickstart" />
+
+3. Import only what you need. Each module is its own Go package (`github.com/haikalmumtaz233/nusaindex/<name>`) and TypeScript subpath (`nusaindex/<name>`). `nusaindex/nik` adds less than 2 KB gzip to a browser bundle, and region data loads one province at a time.
+
+</Steps>
+
+## Modules
+
+<ModuleGrid />
+
+## Same API, two languages
+
+| Operation   | Go                          | TypeScript                  |
+| ----------- | --------------------------- | --------------------------- |
+| Quick check | `Valid(s) bool`             | `isValid(s): boolean`       |
+| Parse       | `Parse(s) (T, error)`       | `parse(s): Result<T>`       |
+| Normalize   | `Format(s) (string, error)` | `format(s): Result<string>` |
+| Mask        | `Mask(s) string`            | `mask(s): string`           |
+
+Names follow each language (`WhatsAppLink`, `whatsappLink`). Shared test vectors run against both implementations, so results are identical. In TypeScript, `fake`, `zod` and `valibot` are subpath-only.
+
+:::note[Sample data]
+Numbers on this site come from the [`fake`](/en/reference/fake/) generator. Never paste real personal data into examples, issues, or AI chats.
+:::
+
+## Next steps
+
+- [Results and errors](/en/guides/results-and-errors/): how failures are reported.
+- [Input and privacy](/en/guides/input-and-privacy/): accepted characters, Unicode, and masking.
+- [Command line](/en/tools/cli/) and [MCP server](/en/tools/mcp/) if you are not writing code.

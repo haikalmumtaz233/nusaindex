@@ -1,6 +1,6 @@
 ---
 title: NIP
-description: Validate and parse the 18-digit civil servant number (NIP) for PNS and PPPK.
+description: Validasi dan parse NIP ASN 18 digit untuk PNS dan PPPK.
 ---
 
 import Anatomy from "../../../components/Anatomy.astro";
@@ -8,40 +8,40 @@ import Example from "../../../components/Example.astro";
 
 <Anatomy kind="nip" />
 
-The 18-digit NIP has two layouts:
+NIP 18 digit punya dua susunan:
 
-| Kind   | Layout                                                                                       | Basis                |
-| ------ | -------------------------------------------------------------------------------------------- | -------------------- |
-| `pns`  | Birth date `YYYYMMDD`, appointment `YYYYMM`, sex digit, 3-digit serial                       | Perka BKN 22/2007    |
-| `pppk` | Birth date `YYYYMMDD`, appointment year `YYYY`, agreement count from `21`, sex digit, serial | Peraturan BKN 1/2019 |
+| Jenis  | Susunan                                                                                                               | Dasar                |
+| ------ | --------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `pns`  | Tanggal lahir `YYYYMMDD`, TMT `YYYYMM`, digit jenis kelamin, nomor urut 3 digit                                       | Perka BKN 22/2007    |
+| `pppk` | Tanggal lahir `YYYYMMDD`, tahun pengangkatan `YYYY`, perjanjian kerja ke- mulai `21`, digit jenis kelamin, nomor urut | Peraturan BKN 1/2019 |
 
-## Functions
+## Fungsi
 
-| Go              | TypeScript       | Returns                          |
-| --------------- | ---------------- | -------------------------------- |
-| `nip.Valid(s)`  | `nip.isValid(s)` | Whether `s` is a well-formed NIP |
-| `nip.Parse(s)`  | `nip.parse(s)`   | The fields below                 |
-| `nip.Format(s)` | `nip.format(s)`  | `19881227 200809 2 553`          |
-| `nip.Mask(s)`   | `nip.mask(s)`    | Last 4 digits visible            |
+| Go              | TypeScript       | Hasil                                 |
+| --------------- | ---------------- | ------------------------------------- |
+| `nip.Valid(s)`  | `nip.isValid(s)` | Apakah `s` NIP yang strukturnya benar |
+| `nip.Parse(s)`  | `nip.parse(s)`   | Field di bawah                        |
+| `nip.Format(s)` | `nip.format(s)`  | `19881227 200809 2 553`               |
+| `nip.Mask(s)`   | `nip.mask(s)`    | Hanya 4 digit terakhir terlihat       |
 
-Accepted separators: space, `.` and `-`.
+Pemisah yang diterima: spasi, `.`, dan `-`.
 
-## Parsed fields
+## Field hasil parse
 
-| Field (JSON)      | Example      | Notes                                               |
-| ----------------- | ------------ | --------------------------------------------------- |
-| `nip`             | 18 digits    |                                                     |
-| `kind`            | `pns`        | `pns` or `pppk`                                     |
-| `birthDate`       | `1988-12-27` |                                                     |
-| `appointmentDate` | `2008-09`    | `YYYY-MM` for PNS, `YYYY` for PPPK                  |
-| `sex`             | `female`     | Digit `1` is male, `2` is female                    |
-| `serial`          | `553`        |                                                     |
-| `agreement`       | `1`          | PPPK only: which work agreement (`21` is the first) |
+| Field (JSON)      | Contoh       | Catatan                                                 |
+| ----------------- | ------------ | ------------------------------------------------------- |
+| `nip`             | 18 digit     |                                                         |
+| `kind`            | `pns`        | `pns` atau `pppk`                                       |
+| `birthDate`       | `1988-12-27` |                                                         |
+| `appointmentDate` | `2008-09`    | `YYYY-MM` untuk PNS, `YYYY` untuk PPPK                  |
+| `sex`             | `female`     | Digit `1` laki-laki, `2` perempuan                      |
+| `serial`          | `553`        |                                                         |
+| `agreement`       | `1`          | Hanya PPPK: perjanjian kerja ke berapa (`21` = pertama) |
 
-## Errors
+## Error
 
 `length`, `charset`, `date`, `sex`, `serial`.
 
-## Example
+## Contoh
 
 <Example name="nip" />
