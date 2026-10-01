@@ -89,11 +89,13 @@ const regions = tool === "region" ? await regionMatches(defaults.region, 6) : un
             {t.newSeed}
           </button>
         </div>
-        <ol class="out values" role="status" aria-live="polite">
-          {fakes.map((v) => (
-            <li>{v}</li>
-          ))}
-        </ol>
+        <div class="out" role="status" aria-live="polite">
+          <ol class="values">
+            {fakes.map((v) => (
+              <li>{v}</li>
+            ))}
+          </ol>
+        </div>
         <p class="hint">{t.fakeHint}</p>
       </>
     )
@@ -129,17 +131,19 @@ const regions = tool === "region" ? await regionMatches(defaults.region, 6) : un
           <span>{t.regionInput}</span>
           <input name="query" type="search" value={defaults.region} maxlength="64" autocomplete="off" />
         </label>
-        <ul class="out results" role="status" aria-live="polite">
-          {regions?.ok === true &&
-            regions.value.map((r) => (
-              <li>
-                <span class="name">{r.name}</span>
-                <span class="level">{t.levels[r.level]}</span>
-                <code>{r.code}</code>
-                {r.parents.length > 0 && <span class="path">{r.parents.join(" › ")}</span>}
-              </li>
-            ))}
-        </ul>
+        <div class="out" role="status" aria-live="polite">
+          <ul class="results">
+            {regions?.ok === true &&
+              regions.value.map((r) => (
+                <li>
+                  <span class="name">{r.name}</span>
+                  <span class="level">{t.levels[r.level]}</span>
+                  <code>{r.code}</code>
+                  {r.parents.length > 0 && <span class="path">{r.parents.join(" › ")}</span>}
+                </li>
+              ))}
+          </ul>
+        </div>
       </>
     )
   }
@@ -376,7 +380,7 @@ const regions = tool === "region" ? await regionMatches(defaults.region, 6) : un
     const kind = field<HTMLSelectElement>(root, "select");
     const seed = field<HTMLInputElement>(root, "input[name=seed]");
     const reseed = field<HTMLButtonElement>(root, "button[name=reseed]");
-    const out = field<HTMLElement>(root, ".out");
+    const out = field<HTMLElement>(root, ".values");
     if (!kind || !seed || !reseed || !out) {
       return;
     }
@@ -430,7 +434,7 @@ const regions = tool === "region" ? await regionMatches(defaults.region, 6) : un
   function setupRegion(root: HTMLElement, locale: Locale): void {
     const t = texts(locale);
     const input = field<HTMLInputElement>(root, "input");
-    const out = field<HTMLElement>(root, ".out");
+    const out = field<HTMLElement>(root, ".results");
     if (!input || !out) {
       return;
     }
@@ -442,7 +446,7 @@ const regions = tool === "region" ? await regionMatches(defaults.region, 6) : un
           return;
         }
         if (!found.ok) {
-          out.replaceChildren(errorNode(locale, found.error));
+          out.replaceChildren(node("li", "error", t.error(found.error)));
           return;
         }
         out.replaceChildren(
