@@ -5,6 +5,7 @@ export default defineConfig({
     bank: "src/bank/index.ts",
     holiday: "src/holiday/index.ts",
     index: "src/index.ts",
+    mask: "src/mask/index.ts",
     nik: "src/nik/index.ts",
     nip: "src/nip/index.ts",
     nisn: "src/nisn/index.ts",

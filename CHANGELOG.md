@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ### Added
 
+- `mask`: mask NIK, NPWP, NIP, NISN and bank account numbers (last 4 digits) and phone numbers (`+62` and the last 3 digits) from one place; `text` redacts every identifier-like number with 10 or more digits in free text up to 1 MiB, using a linear scanner; `redact` (TypeScript and Go) returns a redacted deep copy of objects, arrays, strings and integers without mutating the input, calling getters, or copying `__proto__`, `constructor` and `prototype` keys, and marks cycles and nesting beyond 32 levels.
 - `rupiah`: format amounts (`Rp1.500.000,50`, optional fixed sen and no symbol), parse Indonesian-style input (`Rp`, `Rp.` or `IDR`, dot thousands, comma sen, `,-`), and spell amounts in words (`satu juta lima ratus ribu rupiah lima puluh sen`) up to 999 trillion. Amounts with sen are limited to below 10 trillion so TypeScript numbers stay exact. Go uses the `Amount` type in sen (`150_000 * rupiah.Rupiah`), TypeScript a number in rupiah.
 
 ## [0.2.0] - 2026-10-01

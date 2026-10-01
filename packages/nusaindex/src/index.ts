@@ -1,6 +1,7 @@
 export type { Failure, Result, Success } from "./internal/result.js";
 export * as bank from "./bank/index.js";
 export * as holiday from "./holiday/index.js";
+export * as mask from "./mask/index.js";
 export * as nik from "./nik/index.js";
 export * as nip from "./nip/index.js";
 export * as nisn from "./nisn/index.js";
