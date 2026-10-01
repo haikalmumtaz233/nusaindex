@@ -12,7 +12,7 @@
     "format": "node scripts/format.ts --write",
     "format:check": "node scripts/format.ts",
     "lint": "pnpm data:build && eslint .",
-    "check": "pnpm data:build && tsc -p tsconfig.json && tsc -p packages/nusaindex/tsconfig.json && tsc -p packages/nusaindex/src/cli/tsconfig.json && tsc -p packages/nusaindex/test/tsconfig.json && tsc -p packages/mcp/tsconfig.json && tsc -p packages/mcp/test/tsconfig.json && tsc -p site/src/examples/tsconfig.json && tsc -p site/src/lib/tsconfig.json",
+    "check": "pnpm data:build && tsc -p tsconfig.json && tsc -p packages/nusaindex/tsconfig.json && tsc -p packages/nusaindex/src/cli/tsconfig.json && tsc -p packages/nusaindex/test/tsconfig.json && tsc -p packages/mcp/tsconfig.json && tsc -p packages/mcp/test/tsconfig.json && tsc -p site/src/examples/tsconfig.json && tsc -p site/src/lib/tsconfig.json && tsc -p site/src/pages/tsconfig.json",
     "test": "pnpm data:build && vitest run --coverage",
     "go:vet": "go vet ./...",
     "go:lint": "golangci-lint run",
