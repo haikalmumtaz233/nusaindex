@@ -48,7 +48,7 @@ Arguments can end up in your shell history, so pass real data with `--stdin` or 
 
 ## MCP server
 
-`nusaindex-mcp` exposes the same features to AI agents over stdio with eight read-only tools:
+`nusaindex-mcp` exposes the same features to AI agents over stdio with ten read-only tools:
 
 ```json
 {
