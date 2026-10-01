@@ -23,6 +23,10 @@
   ],
   "type": "module",
   "sideEffects": false,
+  "bin": {
+    "nusa": "./dist/cli.js",
+    "nusaindex": "./dist/cli.js"
+  },
   "engines": {
     "node": ">=22.18.0"
   },
