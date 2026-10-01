@@ -110,9 +110,45 @@ function hashComments(text: string): number[] {
   return text.split("\n").flatMap((l, idx) => (l.trimStart().startsWith("#") ? [idx + 1] : []));
 }
 
+function markerComments(text: string, markers: readonly string[]): number[] {
+  return text
+    .split("\n")
+    .flatMap((l, idx) => (markers.some((m) => l.includes(m)) ? [idx + 1] : []));
+}
+
+function offsetLines(lines: number[], offset: number): number[] {
+  return lines.map((l) => l + offset);
+}
+
+function astroComments(file: string, text: string): number[] {
+  const lines: number[] = [];
+  const frontmatter = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+  if (frontmatter) {
+    lines.push(...offsetLines(scriptComments(`${file}.ts`, frontmatter[1] ?? ""), 1));
+  }
+  for (const block of text.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)) {
+    const offset = lineOf(text, block.index + block[0].indexOf(">") + 1) - 1;
+    lines.push(...offsetLines(scriptComments(`${file}.ts`, block[1] ?? ""), offset));
+  }
+  const template = text.replace(/<script[^>]*>[\s\S]*?<\/script>/g, (s) =>
+    s.replace(/[^\n]/g, " "),
+  );
+  lines.push(...markerComments(template, ["<!--", "{/*", "/*"]));
+  return [...new Set(lines)].sort((a, b) => a - b);
+}
+
 function commentLines(file: string, text: string): number[] {
   if (/\.(?:[cm]?[jt]s)$/.test(file)) {
     return scriptComments(file, text);
+  }
+  if (file.endsWith(".astro")) {
+    return astroComments(file, text);
+  }
+  if (/\.mdx?$/.test(file)) {
+    return markerComments(text, ["<!--", "{/*"]);
+  }
+  if (file.endsWith(".css")) {
+    return markerComments(text, ["/*"]);
   }
   if (file.endsWith(".go")) {
     return goComments(text);
