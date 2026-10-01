@@ -3,7 +3,10 @@ title: Plat nomor
 description: Validasi dan parse plat nomor kendaraan (TNKB) terhadap kode wilayah Perpol 7/2021.
 ---
 
+import Anatomy from "../../../../components/Anatomy.astro";
 import Example from "../../../../components/Example.astro";
+
+<Anatomy kind="plate" />
 
 Plat nomor terdiri dari kode wilayah satu atau dua huruf, nomor sampai empat digit, dan akhiran sampai tiga huruf: `B 1234 XYZ`. Kode wilayah dicek ke Perpol 7/2021 ditambah kode 2024 untuk provinsi baru di Papua (`PY`, `PS`, `PT`, `PG`). `RI` juga diterima.
 
