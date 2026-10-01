@@ -1,39 +1,45 @@
 # NusaIndex
 
-Validate, parse, and format Indonesian data, with reference data that stays current. For Go, TypeScript, and AI agents.
+**Bahasa Indonesia** | [English](https://github.com/haikalmumtaz233/nusaindex/blob/main/README.en.md)
 
-NIK, NPWP (including the 16-digit format and NITKU), phone numbers, vehicle plates, NIP, NISN, bank codes, regions down to village level, national holidays and collective leave, working days, and Rupiah.
+Cek, baca, dan format data Indonesia, lengkap dengan data referensi yang selalu terbaru. Untuk Go, TypeScript, terminal, dan agent AI.
 
-> Unofficial. Not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any Indonesian government agency.
+NIK, NPWP (termasuk format 16 digit dan NITKU), nomor HP, plat nomor, NIP, NISN, kode bank, wilayah sampai desa, libur nasional dan cuti bersama, hari kerja, dan Rupiah.
 
-![Terminal session: nusa nik decodes a NIK into its fields, nusa phone finds the XL brand, nusa rupiah terbilang spells 1,500,000.50 in words, and nusa mask text hides a NIK and a phone number in a sentence.](site/public/demos/cli.svg)
+> Tidak resmi. Tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah mana pun.
 
-## Features
+![Sesi terminal: nusa nik membaca isi NIK, nusa phone menemukan merek XL, nusa rupiah terbilang mengeja 1.500.000,50, dan nusa mask text menyembunyikan NIK dan nomor HP di dalam kalimat.](site/public/demos/cli.svg)
 
-- Native Go and TypeScript libraries with the same API and identical behavior, checked by shared test vectors
-- Zero runtime dependencies and fully offline: your users' data never leaves your process
-- Parse what a number encodes: region, birth date and sex from a NIK, brand and operator from a phone number
-- Region data from the latest Ministry of Home Affairs decree, with old codes mapped to their current regions, and every dataset traced to its source document in `data/manifest.json`
-- Holidays, collective leave, and working-day arithmetic for payroll, SLAs, and due dates
-- Rupiah formatting and spelling in words, PII masking for logs, and realistic test data
-- Zod and Valibot schemas, a CLI, and an MCP server for AI agents
+## Fitur
 
-## What it does not do
+- Library Go dan TypeScript asli dengan API yang sama dan hasil yang identik, dikunci oleh test vector bersama
+- Tanpa dependensi runtime dan jalan offline, jadi data penggunamu tidak pernah keluar dari aplikasi
+- Baca isi nomor: wilayah, tanggal lahir, dan jenis kelamin dari NIK, atau merek dan operator dari nomor HP
+- Data wilayah dari Kepmendagri terbaru, kode lama hasil pemekaran otomatis diarahkan ke kode baru, dan setiap dataset tercatat sumbernya di `data/manifest.json`
+- Libur, cuti bersama, dan hitungan hari kerja untuk gajian, SLA, dan jatuh tempo
+- Format dan terbilang Rupiah, masking data pribadi untuk log, dan data uji yang realistis
+- Skema Zod dan Valibot, CLI, dan server MCP untuk agent AI
 
-It checks that a number is well-formed. It cannot tell you whether a NIK, NPWP, plate, or phone number is real, or who it belongs to. Use the official verification services for that.
+## Dipakai untuk apa
+
+Formulir layanan publik dan website pemda, pendaftaran sekolah, fintech dan e-commerce, HR dan penggajian, logistik, kepatuhan UU PDP, pengujian, sampai chatbot. Contoh lengkapnya ada di halaman Kegunaan di situs dokumentasi.
+
+## Yang tidak dilakukan
+
+NusaIndex cuma mengecek apakah sebuah nomor strukturnya benar. Ia tidak bisa memastikan NIK, NPWP, plat, atau nomor HP itu asli, apalagi siapa pemiliknya. Untuk itu pakai layanan verifikasi resmi.
 
 ## Status
 
-In active development. Not ready for general use yet.
+Masih dalam pengembangan aktif dan belum siap dipakai umum.
 
-## Requirements
+## Kebutuhan
 
-- Go 1.25 or later, or
-- Node.js 22.18 or later, a modern browser, Bun, or Deno
+- Go 1.25 ke atas, atau
+- Node.js 22.18 ke atas, browser modern, Bun, atau Deno
 
 ## Command line
 
-The `nusaindex` package ships a `nusaindex` command (alias `nusa`):
+Paket `nusaindex` sudah termasuk perintah `nusaindex` (alias `nusa`):
 
 ```sh
 nusaindex nik 3171014501909999
@@ -44,11 +50,11 @@ nusaindex mask text --stdin < app.log > app.redacted.log
 nusaindex nik --csv --column nik < customers.csv
 ```
 
-Arguments can end up in your shell history, so pass real data with `--stdin` or `--csv`. Add `--json` for machine-readable output. The exit code is `0` when every value is valid, `1` when one is not, and `2` for a usage error.
+Argumen bisa tersimpan di riwayat shell, jadi kirim data asli lewat `--stdin` atau `--csv`. Tambahkan `--json` kalau hasilnya mau dibaca program lain. Exit code-nya `0` kalau semua nilai valid, `1` kalau ada yang tidak valid, dan `2` kalau perintahnya salah.
 
-## MCP server
+## Server MCP
 
-`nusaindex-mcp` exposes the same features to AI agents over stdio with ten read-only tools:
+`nusaindex-mcp` membuka fitur yang sama untuk agent AI lewat stdio, dengan sepuluh tool yang cuma membaca:
 
 ```json
 {
@@ -58,13 +64,13 @@ Arguments can end up in your shell history, so pass real data with `--stdin` or 
 }
 ```
 
-Anything typed into an AI chat has already been sent to the AI provider before it reaches the local server, so use the `fake` tool for demos.
+Apa pun yang kamu ketik di chat AI sudah terkirim ke penyedia AI sebelum sampai ke server lokal ini, jadi pakai tool `fake` untuk demo.
 
-![MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs; asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart).](site/public/demos/mcp.svg)
+![Klien MCP: diminta tiga NIK uji di Kota Bandung, tool fake mengembalikan tiga NIK. Ditanya soal 0859-5257-171, tool parse menjawab +628595257171, nomor seluler XL (XLSmart).](site/public/demos/mcp.svg)
 
-## Validation libraries
+## Library validasi
 
-TypeScript schemas live in their own subpaths, so `zod` and `valibot` stay optional peer dependencies:
+Skema TypeScript ada di subpath tersendiri, jadi `zod` dan `valibot` tetap jadi peer dependency opsional:
 
 ```ts
 import { z } from "zod";
@@ -73,9 +79,9 @@ import * as id from "nusaindex/zod";
 const Customer = z.object({ nik: id.nik(), phone: id.phone(), deposit: id.rupiah() });
 ```
 
-`nusaindex/valibot` exports the same functions. Failed checks never include the input in the message.
+`nusaindex/valibot` punya fungsi yang sama. Pesan error tidak pernah memuat input.
 
-In Go, register the `Valid` functions with [go-playground/validator](https://github.com/go-playground/validator). NusaIndex itself does not depend on it:
+Di Go, daftarkan fungsi `Valid` ke [go-playground/validator](https://github.com/go-playground/validator). NusaIndex sendiri tidak bergantung padanya:
 
 ```go
 validate := validator.New()
@@ -88,6 +94,6 @@ type Customer struct {
 }
 ```
 
-## Test data
+## Data uji
 
-`fake` (Go package, TypeScript `nusaindex/fake`) generates valid-looking NIK, NPWP, phone numbers, NIP, NISN and plates from a seed, with the same output in Go and TypeScript. It is for tests only: generated numbers can belong to real people.
+`fake` (paket Go, atau `nusaindex/fake` di TypeScript) membuat NIK, NPWP, nomor HP, NIP, NISN, dan plat yang strukturnya valid dari sebuah seed, dengan hasil yang sama di Go dan TypeScript. Cuma untuk pengujian, karena nomornya bisa saja milik orang sungguhan.

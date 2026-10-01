@@ -1,6 +1,6 @@
 # nusaindex-mcp
 
-MCP server for [NusaIndex](https://github.com/haikalmumtaz233/nusaindex): validate and parse Indonesian identifiers (NIK, NPWP, phone numbers, plates, NIP, NISN), look up regions, holidays and working days, format and spell Rupiah, and generate fake test data. It runs locally over stdio, offline, with read-only tools.
+Server MCP untuk [NusaIndex](https://github.com/haikalmumtaz233/nusaindex). Cek dan baca isi nomor identitas Indonesia (NIK, NPWP, nomor HP, plat, NIP, NISN), cari wilayah, libur, hari kerja, dan kode bank, format dan terbilang Rupiah, mask data pribadi, serta buat data uji. Jalan lokal lewat stdio, offline, dan semua tool-nya cuma membaca.
 
 ```json
 {
@@ -10,8 +10,10 @@ MCP server for [NusaIndex](https://github.com/haikalmumtaz233/nusaindex): valida
 }
 ```
 
-Tools: `validate`, `parse`, `region_search`, `region_get`, `holidays`, `workdays`, `rupiah`, `bank`, `mask`, `fake`.
+Tool: `validate`, `parse`, `region_search`, `region_get`, `holidays`, `workdays`, `rupiah`, `bank`, `mask`, `fake`.
 
-Privacy: anything you type into an AI chat has already been sent to the AI provider before it reaches this server. Use the `fake` tool for demos. The server never logs or stores input.
+Privasi: apa pun yang kamu ketik di chat AI sudah terkirim ke penyedia AI sebelum sampai ke server ini. Pakai tool `fake` untuk demo. Server tidak pernah me-log atau menyimpan input.
 
-Valid means well-formed: NusaIndex cannot tell whether a number is real or who owns it. Unofficial; not affiliated with any Indonesian government agency.
+Valid artinya strukturnya benar. NusaIndex tidak bisa memastikan nomor itu asli atau siapa pemiliknya. Tidak resmi dan tidak berafiliasi dengan instansi pemerintah mana pun.
+
+English: an offline, read-only MCP server for Indonesian identifiers, regions, holidays, working days, bank codes and Rupiah. See the [English README](https://github.com/haikalmumtaz233/nusaindex/blob/main/README.en.md).
