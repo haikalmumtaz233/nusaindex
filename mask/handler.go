@@ -53,6 +53,14 @@ func redactAttr(a slog.Attr, depth int) slog.Attr {
 			return slog.String(key, markerDepth)
 		}
 		return slog.Attr{Key: key, Value: slog.GroupValue(redactAttrs(v.Group(), depth+1)...)}
+	case slog.KindInt64:
+		return slog.Attr{Key: key, Value: slog.AnyValue(redactInt(v.Int64(), v.Int64()))}
+	case slog.KindUint64:
+		return slog.Attr{Key: key, Value: slog.AnyValue(redactUint(v.Uint64(), v.Uint64()))}
+	case slog.KindFloat64:
+		return slog.Attr{Key: key, Value: slog.AnyValue(redactFloat(v.Float64()))}
+	case slog.KindAny:
+		return slog.Attr{Key: key, Value: slog.AnyValue(Redact(v.Any()))}
 	default:
 		return slog.Attr{Key: key, Value: v}
 	}

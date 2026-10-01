@@ -34,7 +34,7 @@ func TestHandler(t *testing.T) {
 			t.Fatalf("log leaks %q: %s", leak, out)
 		}
 	}
-	for _, want := range []string{`"msg":"login ************9999"`, `"hp":"+62********001"`, `"lazy":"nik ************9999"`, `"npwp":"***********1000"`, `"count":12345678901234`} {
+	for _, want := range []string{`"msg":"login ************9999"`, `"hp":"+62********001"`, `"lazy":"nik ************9999"`, `"npwp":"***********1000"`, `"count":"**********1234"`} {
 		if !strings.Contains(out, want) {
 			t.Fatalf("log missing %s: %s", want, out)
 		}
