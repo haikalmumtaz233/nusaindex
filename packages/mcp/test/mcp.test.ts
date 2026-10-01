@@ -95,6 +95,12 @@ describe("mcp tools", () => {
     expect(await tools.regionGet.call({ code: "99", children: true }, ctx)).toMatchObject({
       ok: false,
     });
+    expect(await tools.regionGet.call({ code: "91.04" }, ctx)).toEqual({
+      ok: true,
+      value: { code: "94.01", name: "Kabupaten Nabire", level: "regency", parentCode: "94" },
+      resolved: { from: "91.04", to: "94.01" },
+    });
+    expect(await tools.regionGet.call({ code: "3171" }, ctx)).not.toHaveProperty("resolved");
   });
 
   it("answers holidays and workdays", async () => {
