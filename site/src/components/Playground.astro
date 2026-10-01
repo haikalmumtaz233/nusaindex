@@ -1,0 +1,195 @@
+---
+import { kinds } from "../lib/playground";
+
+const id = Astro.currentLocale === "id";
+const text = id
+  ? {
+      kind: "Jenis",
+      value: "Nilai",
+      sample: "Isi data palsu",
+      empty: "Ketik atau tempel nilai untuk diperiksa.",
+      valid: "Valid (strukturnya benar)",
+      invalid: "Tidak valid",
+      hint: "Teks berisi karakter Unicode. Panggil normalize lebih dulu, lalu nilai ini valid.",
+    }
+  : {
+      kind: "Type",
+      value: "Value",
+      sample: "Fill fake data",
+      empty: "Type or paste a value to check it.",
+      valid: "Valid (well-formed)",
+      invalid: "Invalid",
+      hint: "The text contains Unicode characters. After normalize, this value is valid.",
+    };
+const labels: Record<(typeof kinds)[number], string> = {
+  nik: "NIK",
+  npwp: "NPWP / NITKU",
+  phone: id ? "Nomor HP / telepon" : "Phone number",
+  plate: id ? "Plat nomor" : "Vehicle plate",
+  nip: "NIP",
+  nisn: "NISN",
+  rupiah: "Rupiah",
+};
+---
+
+<div class="playground not-content" data-text={JSON.stringify(text)}>
+  <div class="fields">
+    <label>
+      <span>{text.kind}</span>
+      <select name="kind">
+        {kinds.map((kind) => <option value={kind}>{labels[kind]}</option>)}
+      </select>
+    </label>
+    <label class="grow">
+      <span>{text.value}</span>
+      <input name="value" type="text" maxlength="64" autocomplete="off" spellcheck="false" />
+    </label>
+    <button type="button" name="sample">{text.sample}</button>
+  </div>
+  <p class="status" role="status" aria-live="polite">{text.empty}</p>
+  <pre class="result" hidden></pre>
+</div>
+
+<style>
+  .playground {
+    display: grid;
+    gap: 1rem;
+    margin-block: 1.5rem;
+  }
+  .fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: end;
+  }
+  label {
+    display: grid;
+    gap: 0.25rem;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+  }
+  .grow {
+    flex: 1 1 16rem;
+  }
+  select,
+  input,
+  button {
+    font: inherit;
+    font-size: var(--sl-text-base);
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+    background: var(--sl-color-black);
+    color: var(--sl-color-white);
+    min-height: 2.75rem;
+  }
+  input {
+    width: 100%;
+    font-family: var(--sl-font-mono);
+  }
+  button {
+    cursor: pointer;
+    background: var(--sl-color-accent-low);
+    border-color: var(--sl-color-accent);
+  }
+  select:focus-visible,
+  input:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--sl-color-accent-high);
+    outline-offset: 2px;
+  }
+  .status {
+    margin: 0;
+    font-weight: 600;
+  }
+  .status[data-state="valid"] {
+    color: var(--sl-color-green-high);
+  }
+  .status[data-state="invalid"] {
+    color: var(--sl-color-red-high);
+  }
+  .result {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: auto;
+    border: 1px solid var(--sl-color-gray-5);
+    border-radius: 0.375rem;
+    background: var(--sl-color-gray-6);
+    font-size: var(--sl-text-sm);
+  }
+</style>
+
+<script>
+  import { inspect, isKind, sample } from "../lib/playground";
+
+  interface Text {
+    empty: string;
+    valid: string;
+    invalid: string;
+    hint: string;
+  }
+
+  function isText(value: unknown): value is Text {
+    return (
+      typeof value === "object" &&
+      value !== null &&
+      ["empty", "valid", "invalid", "hint"].every(
+        (key) => typeof (value as Record<string, unknown>)[key] === "string",
+      )
+    );
+  }
+
+  function setup(root: HTMLElement): void {
+    const parsedText: unknown = JSON.parse(root.dataset.text ?? "{}");
+    const kindInput = root.querySelector("select");
+    const valueInput = root.querySelector("input");
+    const sampleButton = root.querySelector("button");
+    const status = root.querySelector<HTMLElement>(".status");
+    const result = root.querySelector<HTMLElement>(".result");
+    if (!isText(parsedText) || !kindInput || !valueInput || !sampleButton || !status || !result) {
+      return;
+    }
+    const text = parsedText;
+    let run = 0;
+
+    const update = async (): Promise<void> => {
+      const current = ++run;
+      const kind = kindInput.value;
+      const value = valueInput.value;
+      if (!isKind(kind) || value.trim() === "") {
+        status.textContent = text.empty;
+        delete status.dataset.state;
+        result.hidden = true;
+        return;
+      }
+      const report = await inspect(kind, value);
+      if (current !== run) {
+        return;
+      }
+      status.dataset.state = report.valid ? "valid" : "invalid";
+      status.textContent = report.valid
+        ? text.valid
+        : `${text.invalid}: ${report.error ?? ""}${report.normalizedHint === true ? `. ${text.hint}` : ""}`;
+      result.textContent = JSON.stringify(report, null, 2);
+      result.hidden = false;
+    };
+
+    kindInput.addEventListener("change", () => void update());
+    valueInput.addEventListener("input", () => void update());
+    sampleButton.addEventListener("click", () => {
+      const kind = kindInput.value;
+      if (!isKind(kind)) {
+        return;
+      }
+      const seed = crypto.getRandomValues(new Uint32Array(1))[0] ?? 0;
+      void sample(kind, seed).then((value) => {
+        valueInput.value = value;
+        return update();
+      });
+    });
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>(".playground")) {
+    setup(root);
+  }
+</script>

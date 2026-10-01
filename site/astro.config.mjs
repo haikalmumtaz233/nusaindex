@@ -53,7 +53,7 @@ export default defineConfig({
           "reference/fake",
           "reference/schemas",
         ]),
-        section("Tools", "Alat", ["tools/cli", "tools/mcp", "tools/json-api"]),
+        section("Tools", "Alat", ["tools/cli", "tools/mcp", "tools/json-api", "playground"]),
         section("Project", "Proyek", [
           "project/data-sources",
           "project/security",
