@@ -1,25 +1,25 @@
 ---
-title: Zod, Valibot and validator
-description: Use NusaIndex checks in Zod and Valibot schemas, or with go-playground/validator in Go.
+title: Zod, Valibot, dan validator
+description: Pakai pengecekan NusaIndex di skema Zod dan Valibot, atau dengan go-playground/validator di Go.
 ---
 
 import { Tabs, TabItem } from "@astrojs/starlight/components";
 
-## TypeScript schemas
+## Skema TypeScript
 
-`nusaindex/zod` and `nusaindex/valibot` export the same factories. Zod (`^4`) and Valibot (`^1`) are optional peer dependencies: install the one you use.
+`nusaindex/zod` dan `nusaindex/valibot` mengekspor fungsi pembuat yang sama. Zod (`^4`) dan Valibot (`^1`) adalah peer dependency opsional: pasang yang Anda pakai saja.
 
-| Factory    | Accepts                            | Output                      |
-| ---------- | ---------------------------------- | --------------------------- |
-| `nik()`    | A NIK                              | The input string, unchanged |
-| `npwp()`   | A 15-digit, 16-digit NPWP or NITKU | The input string, unchanged |
-| `phone()`  | A phone number                     | The input string, unchanged |
-| `nip()`    | A NIP                              | The input string, unchanged |
-| `nisn()`   | A NISN                             | The input string, unchanged |
-| `plate()`  | A vehicle plate                    | The input string, unchanged |
-| `rupiah()` | Rupiah text such as `Rp 25.000,-`  | A `number` in rupiah        |
+| Fungsi     | Menerima                          | Hasil                      |
+| ---------- | --------------------------------- | -------------------------- |
+| `nik()`    | NIK                               | String input, tidak diubah |
+| `npwp()`   | NPWP 15 atau 16 digit, atau NITKU | String input, tidak diubah |
+| `phone()`  | Nomor telepon                     | String input, tidak diubah |
+| `nip()`    | NIP                               | String input, tidak diubah |
+| `nisn()`   | NISN                              | String input, tidak diubah |
+| `plate()`  | Plat nomor                        | String input, tidak diubah |
+| `rupiah()` | Teks Rupiah seperti `Rp 25.000,-` | `number` dalam rupiah      |
 
-Identifier schemas validate without transforming, so you decide whether to store the original or a normalized value (`nik.format`, `phone.format`). Every factory takes `{ message }`. The error message never contains the input; Zod issues carry the NusaIndex error code in `params.nusaindex`.
+Skema nomor identitas memvalidasi tanpa mengubah nilai, jadi Anda yang menentukan apakah menyimpan nilai asli atau yang sudah dinormalisasi (`nik.format`, `phone.format`). Setiap fungsi menerima `{ message }`. Pesan error tidak pernah memuat input; issue Zod membawa kode error NusaIndex di `params.nusaindex`.
 
 <Tabs syncKey="schema">
   <TabItem label="Zod">
@@ -58,7 +58,7 @@ const result = v.safeParse(Customer, form);
 
 ## Go: go-playground/validator
 
-NusaIndex does not depend on any validation library. Register the `Valid` functions you need:
+NusaIndex tidak bergantung pada library validasi mana pun. Daftarkan fungsi `Valid` yang Anda butuhkan:
 
 ```go
 validate := validator.New()

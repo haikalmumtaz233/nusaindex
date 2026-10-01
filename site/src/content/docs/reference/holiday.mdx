@@ -1,6 +1,6 @@
 ---
-title: Holidays
-description: Indonesian national holidays and collective leave (cuti bersama) for 2020 to 2027, each with its legal basis.
+title: Hari libur
+description: Libur nasional dan cuti bersama Indonesia 2020 sampai 2027, masing-masing dengan dasar hukumnya.
 ---
 
 import HolidayCalendar from "../../../components/HolidayCalendar.astro";
@@ -8,33 +8,33 @@ import Example from "../../../components/Example.astro";
 
 <HolidayCalendar />
 
-National holidays and collective leave come from the joint ministerial decrees (SKB 3 Menteri) for each year, including every amendment, plus presidential decrees that added election days. Coverage is 2020 to 2027 and grows as new decrees are published.
+Libur nasional dan cuti bersama berasal dari SKB 3 Menteri setiap tahun, termasuk semua perubahannya, ditambah Keppres yang menetapkan hari pemungutan suara. Cakupannya 2020 sampai 2027 dan bertambah setiap SKB baru terbit.
 
-## Functions
+## Fungsi
 
-| Go                          | TypeScript                  | Returns                                   |
-| --------------------------- | --------------------------- | ----------------------------------------- |
-| `holiday.Years()`           | `holiday.years()`           | `{ from, to }`: the covered years         |
-| `holiday.InYear(year)`      | `holiday.inYear(year)`      | All entries in a year, by date            |
-| `holiday.Between(from, to)` | `holiday.between(from, to)` | Entries in an inclusive date range        |
-| `holiday.On(date)`          | `holiday.on(date)`          | Entries on one date (usually zero or one) |
+| Go                          | TypeScript                  | Hasil                                            |
+| --------------------------- | --------------------------- | ------------------------------------------------ |
+| `holiday.Years()`           | `holiday.years()`           | `{ from, to }`: tahun yang tercakup              |
+| `holiday.InYear(year)`      | `holiday.inYear(year)`      | Semua entri dalam setahun, urut tanggal          |
+| `holiday.Between(from, to)` | `holiday.between(from, to)` | Entri dalam rentang tanggal (inklusif)           |
+| `holiday.On(date)`          | `holiday.on(date)`          | Entri pada satu tanggal (biasanya nol atau satu) |
 
-Dates are strings in `YYYY-MM-DD` format, never `Date` objects, so time zones cannot shift them.
+Tanggal berupa string `YYYY-MM-DD`, bukan objek `Date`, sehingga tidak bergeser karena zona waktu.
 
-## Holiday fields
+## Field libur
 
-| Field (JSON) | Example                   | Notes                            |
-| ------------ | ------------------------- | -------------------------------- |
-| `date`       | `2026-08-17`              |                                  |
-| `kind`       | `national`                | `national` or `collective_leave` |
-| `name`       | `Proklamasi Kemerdekaan`  | Indonesian name from the decree  |
-| `nameEn`     | `Independence Day`        | English name                     |
-| `basis`      | `SKB 1497/2/5 Tahun 2025` | The decree the entry comes from  |
+| Field (JSON) | Contoh                    | Catatan                            |
+| ------------ | ------------------------- | ---------------------------------- |
+| `date`       | `2026-08-17`              |                                    |
+| `kind`       | `national`                | `national` atau `collective_leave` |
+| `name`       | `Proklamasi Kemerdekaan`  | Nama sesuai SKB                    |
+| `nameEn`     | `Independence Day`        | Nama dalam bahasa Inggris          |
+| `basis`      | `SKB 1497/2/5 Tahun 2025` | Dasar hukum entri tersebut         |
 
-## Errors
+## Error
 
-`date` (not a `YYYY-MM-DD` date), `range` (a year without data, or `from` after `to`).
+`date` (bukan tanggal `YYYY-MM-DD`), `range` (tahun tanpa data, atau `from` setelah `to`).
 
-## Example
+## Contoh
 
 <Example name="holiday" />

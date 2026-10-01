@@ -1,9 +1,9 @@
 import starlight from "@astrojs/starlight";
 import { defineConfig, passthroughImageService } from "astro/config";
 
-const section = (label, translation, slugs) => ({
+const section = (label, english, slugs) => ({
   label,
-  translations: { id: translation },
+  translations: { en: english },
   items: slugs,
 });
 
@@ -16,11 +16,11 @@ export default defineConfig({
     starlight({
       title: "NusaIndex",
       description:
-        "Validate, parse, and format Indonesian data in Go, TypeScript, the command line, and AI agents.",
+        "Cek, baca, dan format data Indonesia di Go, TypeScript, terminal, dan agent AI.",
       defaultLocale: "root",
       locales: {
-        root: { label: "English", lang: "en" },
-        id: { label: "Bahasa Indonesia", lang: "id" },
+        root: { label: "Bahasa Indonesia", lang: "id" },
+        en: { label: "English", lang: "en" },
       },
       social: [
         { icon: "github", label: "GitHub", href: "https://github.com/haikalmumtaz233/nusaindex" },
@@ -33,12 +33,12 @@ export default defineConfig({
       lastUpdated: false,
       pagination: true,
       sidebar: [
-        section("Start here", "Mulai", [
+        section("Mulai", "Start here", [
           "getting-started",
           "guides/results-and-errors",
           "guides/input-and-privacy",
         ]),
-        section("Identifiers", "Nomor identitas", [
+        section("Nomor identitas", "Identifiers", [
           "reference/nik",
           "reference/npwp",
           "reference/phone",
@@ -46,20 +46,20 @@ export default defineConfig({
           "reference/nip",
           "reference/nisn",
         ]),
-        section("Reference data", "Data referensi", [
+        section("Data referensi", "Reference data", [
           "reference/region",
           "reference/holiday",
           "reference/workday",
           "reference/bank",
         ]),
-        section("Utilities", "Utilitas", [
+        section("Utilitas", "Utilities", [
           "reference/rupiah",
           "reference/mask",
           "reference/fake",
           "reference/schemas",
         ]),
-        section("Tools", "Alat", ["tools/cli", "tools/mcp", "tools/json-api", "playground"]),
-        section("Project", "Proyek", [
+        section("Alat", "Tools", ["tools/cli", "tools/mcp", "tools/json-api", "playground"]),
+        section("Proyek", "Project", [
           "project/data-sources",
           "project/security",
           "project/non-goals",

@@ -1,0 +1,37 @@
+---
+title: Banks
+description: Look up Indonesian banks by 3-digit bank code or BIC.
+---
+
+import Example from "../../../../components/Example.astro";
+
+125 banks with their 3-digit bank code (sandi bank), BIC (SWIFT), office code and names. Bank Indonesia does not publish a machine-readable list, so the data comes from the bank code table published by PT Bank Central Asia Tbk (updated 1 November 2024).
+
+## Functions
+
+| Go                  | TypeScript          | Returns                                                              |
+| ------------------- | ------------------- | -------------------------------------------------------------------- |
+| `bank.List()`       | `bank.list()`       | All banks, ordered by code                                           |
+| `bank.ByCode(code)` | `bank.byCode(code)` | Every entry with that code (a bank and its sharia unit share a code) |
+| `bank.ByBIC(bic)`   | `bank.byBic(bic)`   | One bank                                                             |
+
+## Bank fields
+
+| Field (JSON) | Example                      |
+| ------------ | ---------------------------- |
+| `code`       | `014`                        |
+| `bic`        | `CENAIDJA`                   |
+| `officeCode` | `0397`                       |
+| `name`       | `PT. BANK CENTRAL ASIA Tbk.` |
+| `shortName`  | `BCA`                        |
+| `shariaUnit` | `false`                      |
+
+Account number lengths are not included: there is no official source for them.
+
+## Errors
+
+`length`, `charset`, `unknown`.
+
+## Example
+
+<Example name="bank" />

@@ -1,23 +1,23 @@
 ---
-title: Banks
-description: Look up Indonesian banks by 3-digit bank code or BIC.
+title: Bank
+description: Cari bank di Indonesia berdasarkan sandi bank 3 digit atau BIC.
 ---
 
 import Example from "../../../components/Example.astro";
 
-125 banks with their 3-digit bank code (sandi bank), BIC (SWIFT), office code and names. Bank Indonesia does not publish a machine-readable list, so the data comes from the bank code table published by PT Bank Central Asia Tbk (updated 1 November 2024).
+125 bank dengan sandi bank 3 digit, BIC (SWIFT), kode kantor, dan namanya. Bank Indonesia tidak menerbitkan daftar yang bisa dibaca mesin, jadi datanya berasal dari tabel sandi bank terbitan PT Bank Central Asia Tbk (pembaruan 1 November 2024).
 
-## Functions
+## Fungsi
 
-| Go                  | TypeScript          | Returns                                                              |
-| ------------------- | ------------------- | -------------------------------------------------------------------- |
-| `bank.List()`       | `bank.list()`       | All banks, ordered by code                                           |
-| `bank.ByCode(code)` | `bank.byCode(code)` | Every entry with that code (a bank and its sharia unit share a code) |
-| `bank.ByBIC(bic)`   | `bank.byBic(bic)`   | One bank                                                             |
+| Go                  | TypeScript          | Hasil                                                                 |
+| ------------------- | ------------------- | --------------------------------------------------------------------- |
+| `bank.List()`       | `bank.list()`       | Semua bank, urut sandi                                                |
+| `bank.ByCode(code)` | `bank.byCode(code)` | Semua entri dengan sandi itu (bank dan unit syariahnya berbagi sandi) |
+| `bank.ByBIC(bic)`   | `bank.byBic(bic)`   | Satu bank                                                             |
 
-## Bank fields
+## Field bank
 
-| Field (JSON) | Example                      |
+| Field (JSON) | Contoh                       |
 | ------------ | ---------------------------- |
 | `code`       | `014`                        |
 | `bic`        | `CENAIDJA`                   |
@@ -26,12 +26,12 @@ import Example from "../../../components/Example.astro";
 | `shortName`  | `BCA`                        |
 | `shariaUnit` | `false`                      |
 
-Account number lengths are not included: there is no official source for them.
+Panjang nomor rekening tidak disertakan karena tidak ada sumber resminya.
 
-## Errors
+## Error
 
 `length`, `charset`, `unknown`.
 
-## Example
+## Contoh
 
 <Example name="bank" />

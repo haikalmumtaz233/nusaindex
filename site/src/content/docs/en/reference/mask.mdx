@@ -1,0 +1,45 @@
+---
+title: Masking and redaction
+description: Mask identifiers, redact free text and objects, and keep personal data out of logs.
+---
+
+import Live from "../../../../components/Live.astro";
+import Example from "../../../../components/Example.astro";
+
+<Live tool="mask" />
+
+`mask` keeps NIK, NPWP, phone numbers and other identifiers out of logs, screens and support tickets, for example to meet the data minimization principle of Indonesia's personal data protection law (UU PDP).
+
+## Functions
+
+| Go                      | TypeScript        | Returns                                              |
+| ----------------------- | ----------------- | ---------------------------------------------------- |
+| `mask.NIK(s)`           | `mask.nik(s)`     | Last 4 digits visible                                |
+| `mask.NPWP(s)`          | `mask.npwp(s)`    | Last 4 digits visible                                |
+| `mask.NIP(s)`           | `mask.nip(s)`     | Last 4 digits visible                                |
+| `mask.NISN(s)`          | `mask.nisn(s)`    | Last 4 digits visible                                |
+| `mask.Account(s)`       | `mask.account(s)` | Last 4 digits visible                                |
+| `mask.Phone(s)`         | `mask.phone(s)`   | `+62` and the last 3 digits visible                  |
+| `mask.Text(s)`          | `mask.text(s)`    | Free text with every run of 10 or more digits masked |
+| `mask.Redact(v)`        | `mask.redact(v)`  | A redacted deep copy of an object, array or value    |
+| `mask.NewHandler(next)` | —                 | A `log/slog` handler that redacts before `next`      |
+
+The per-kind functions are the same as `nik.Mask`, `phone.Mask` and so on, collected in one place.
+
+## Free text
+
+`Text` finds identifier-like numbers (10 or more digits, allowing the usual separators) and masks each one with the same rule as its kind: phone numbers keep `+62` and 3 digits, everything else keeps 4. It scans in linear time and accepts up to 1 MiB (`MaxText` / `MAX_TEXT`); longer input fails with `length`.
+
+## Objects
+
+`Redact` returns a copy in which every string and key goes through `Text` (strings over 1 MiB become `[redacted]`) and every integer with 10 or more digits is masked. It never mutates the input, never calls getters (TypeScript returns `[Getter]`), skips `__proto__`, `constructor` and `prototype` keys, replaces cycles with `[Circular]`, and stops at 32 levels (`[MaxDepth]`).
+
+In Go, `Redact` accepts any value. Structs become maps keyed by their JSON names (fields tagged `json:"-"` and unexported fields are dropped), maps, slices, arrays and pointers are walked, `[]byte` is treated as text, and `time.Time` is kept. Values that cannot be inspected, such as functions and channels, become `[redacted]` instead of passing through.
+
+<Example name="mask" />
+
+## Go `slog` handler
+
+`NewHandler` wraps any `slog.Handler` and redacts the message, every key and group, and every string, number and `slog.Any` value (through `Redact`) before passing the record on.
+
+<Example name="mask-slog" />

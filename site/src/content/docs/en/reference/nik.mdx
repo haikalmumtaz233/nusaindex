@@ -1,0 +1,43 @@
+---
+title: NIK
+description: Validate and parse the 16-digit Indonesian population identity number (Nomor Induk Kependudukan).
+---
+
+import Anatomy from "../../../../components/Anatomy.astro";
+import Example from "../../../../components/Example.astro";
+
+<Anatomy kind="nik" />
+
+## Functions
+
+| Go                     | TypeScript             | Returns                                         |
+| ---------------------- | ---------------------- | ----------------------------------------------- |
+| `nik.Valid(s)`         | `nik.isValid(s)`       | Whether `s` is a well-formed NIK                |
+| `nik.Parse(s)`         | `nik.parse(s)`         | The fields below                                |
+| `nik.ParseAt(s, year)` | `nik.parseAt(s, year)` | Same, with the birth century relative to `year` |
+| `nik.Format(s)`        | `nik.format(s)`        | 16 digits without separators                    |
+| `nik.Mask(s)`          | `nik.mask(s)`          | Last 4 digits visible                           |
+
+Accepted separators: space, `.` and `-`.
+
+## Parsed fields
+
+| Field (JSON)   | Example      | Notes                                                                                                            |
+| -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `nik`          | 16 digits    | Separators removed                                                                                               |
+| `provinceCode` | `75`         |                                                                                                                  |
+| `regencyCode`  | `75.02`      |                                                                                                                  |
+| `districtCode` | `75.02.01`   | Checked against the region data, including historical codes                                                      |
+| `birthDate`    | `1959-06-07` | `YYYY-MM-DD`; the two-digit year resolves to the latest year not after the current year (or `year` in `ParseAt`) |
+| `sex`          | `male`       | `male` or `female`                                                                                               |
+| `serial`       | `9583`       | Never `0000`                                                                                                     |
+
+`Parse` does not load region names. Use [`region.FromNIK` / `region.fromNik`](/en/reference/region/) to turn the district code into names.
+
+## Errors
+
+`length`, `charset`, `region` (district code does not exist), `date` (not a real date), `serial`.
+
+## Example
+
+<Example name="nik" />

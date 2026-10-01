@@ -1,27 +1,27 @@
 ---
 title: NISN
-description: Validate the 10-digit national student number (NISN).
+description: Validasi Nomor Induk Siswa Nasional 10 digit.
 ---
 
 import Example from "../../../components/Example.astro";
 
-A NISN has 10 digits. No official document describes an internal structure or check digit, so NusaIndex checks length, characters, and that the number is not all zeros.
+NISN terdiri dari 10 digit. Tidak ada dokumen resmi yang menjelaskan struktur internal atau check digit-nya, jadi NusaIndex mengecek panjang, karakter, dan bahwa nomornya tidak nol semua.
 
-## Functions
+## Fungsi
 
-| Go               | TypeScript        | Returns                            |
-| ---------------- | ----------------- | ---------------------------------- |
-| `nisn.Valid(s)`  | `nisn.isValid(s)` | Whether `s` is a well-formed NISN  |
-| `nisn.Parse(s)`  | `nisn.parse(s)`   | `{ nisn }` with separators removed |
-| `nisn.Format(s)` | `nisn.format(s)`  | 10 digits                          |
-| `nisn.Mask(s)`   | `nisn.mask(s)`    | Last 4 digits visible              |
+| Go               | TypeScript        | Hasil                                  |
+| ---------------- | ----------------- | -------------------------------------- |
+| `nisn.Valid(s)`  | `nisn.isValid(s)` | Apakah `s` NISN yang strukturnya benar |
+| `nisn.Parse(s)`  | `nisn.parse(s)`   | `{ nisn }` tanpa pemisah               |
+| `nisn.Format(s)` | `nisn.format(s)`  | 10 digit                               |
+| `nisn.Mask(s)`   | `nisn.mask(s)`    | Hanya 4 digit terakhir terlihat        |
 
-Accepted separators: space, `.` and `-`.
+Pemisah yang diterima: spasi, `.`, dan `-`.
 
-## Errors
+## Error
 
 `length`, `charset`, `serial`.
 
-## Example
+## Contoh
 
 <Example name="nisn" />

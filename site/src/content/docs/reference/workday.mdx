@@ -1,6 +1,6 @@
 ---
-title: Working days
-description: Check, add, and count Indonesian working days, skipping weekends, national holidays, and collective leave.
+title: Hari kerja
+description: Cek, tambah, dan hitung hari kerja di Indonesia dengan melewati akhir pekan, libur nasional, dan cuti bersama.
 ---
 
 import Live from "../../../components/Live.astro";
@@ -8,31 +8,31 @@ import Example from "../../../components/Example.astro";
 
 <Live tool="workday" />
 
-Working days skip weekends, national holidays, and (by default) collective leave from [`holiday`](/reference/holiday/). Use them for payroll cut-offs, SLAs and due dates.
+Hari kerja melewati akhir pekan, libur nasional, dan (secara default) cuti bersama dari [`holiday`](/reference/holiday/). Cocok untuk batas penggajian, SLA, dan jatuh tempo.
 
-## Functions
+## Fungsi
 
-| Go                              | TypeScript                       | Returns                                                 |
-| ------------------------------- | -------------------------------- | ------------------------------------------------------- |
-| `workday.IsWorkday(date, opts)` | `workday.isWorkday(date, opts?)` | Whether `date` is a working day                         |
-| `workday.Add(date, days, opts)` | `workday.add(date, days, opts?)` | The date `days` working days later (negative goes back) |
-| `workday.Count(from, to, opts)` | `workday.count(from, to, opts?)` | Working days from `from` to `to`, inclusive             |
+| Go                              | TypeScript                       | Hasil                                                 |
+| ------------------------------- | -------------------------------- | ----------------------------------------------------- |
+| `workday.IsWorkday(date, opts)` | `workday.isWorkday(date, opts?)` | Apakah `date` hari kerja                              |
+| `workday.Add(date, days, opts)` | `workday.add(date, days, opts?)` | Tanggal `days` hari kerja kemudian (negatif = mundur) |
+| `workday.Count(from, to, opts)` | `workday.count(from, to, opts?)` | Jumlah hari kerja dari `from` sampai `to`, inklusif   |
 
-## Options
+## Opsi
 
-| Go `Options`               | TypeScript                 | Default             |
-| -------------------------- | -------------------------- | ------------------- |
-| `Weekend []time.Weekday`   | `weekend: number[]`        | Saturday and Sunday |
-| `CollectiveLeaveIsWorkday` | `collectiveLeaveIsWorkday` | `false`             |
+| Go `Options`               | TypeScript                 | Default          |
+| -------------------------- | -------------------------- | ---------------- |
+| `Weekend []time.Weekday`   | `weekend: number[]`        | Sabtu dan Minggu |
+| `CollectiveLeaveIsWorkday` | `collectiveLeaveIsWorkday` | `false`          |
 
-TypeScript weekend days use `0` for Sunday to `6` for Saturday, like `Date.getUTCDay()`. A six-day work week is `[0]`.
+Hari akhir pekan di TypeScript memakai `0` untuk Minggu sampai `6` untuk Sabtu, seperti `Date.getUTCDay()`. Enam hari kerja seminggu ditulis `[0]`.
 
-Calculations only work inside the years covered by holiday data, so a result is never silently wrong. A date outside that range fails with `range`.
+Perhitungan hanya berjalan di dalam tahun yang punya data libur, jadi hasilnya tidak pernah diam-diam salah. Tanggal di luar rentang itu gagal dengan `range`.
 
-## Errors
+## Error
 
-`date`, `range` (outside the covered years, or `from` after `to`), `options` (an invalid weekend day, or every day of the week as weekend).
+`date`, `range` (di luar tahun yang tercakup, atau `from` setelah `to`), `options` (hari akhir pekan tidak valid, atau semua hari dijadikan akhir pekan).
 
-## Example
+## Contoh
 
 <Example name="workday" />

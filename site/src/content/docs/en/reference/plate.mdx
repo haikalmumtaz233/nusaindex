@@ -1,0 +1,33 @@
+---
+title: Vehicle plates
+description: Validate and parse Indonesian vehicle registration plates (TNKB) against the Perpol 7/2021 region codes.
+---
+
+import Anatomy from "../../../../components/Anatomy.astro";
+import Example from "../../../../components/Example.astro";
+
+<Anatomy kind="plate" />
+
+A plate has a region code of one or two letters, a number of up to four digits, and a suffix of up to three letters: `B 1234 XYZ`. Region codes are checked against Perpol 7/2021 plus the 2024 codes for the new Papua provinces (`PY`, `PS`, `PT`, `PG`). `RI` is also accepted.
+
+## Functions
+
+| Go                | TypeScript         | Returns                                 |
+| ----------------- | ------------------ | --------------------------------------- |
+| `plate.Valid(s)`  | `plate.isValid(s)` | Whether `s` is a well-formed plate      |
+| `plate.Parse(s)`  | `plate.parse(s)`   | `region`, `number`, `suffix`            |
+| `plate.Format(s)` | `plate.format(s)`  | Upper case, single spaces: `B 1234 XYZ` |
+
+Input is case-insensitive. Accepted separators: space and `-`; groups may also be written without separators (`b1234xyz`).
+
+Use [`region.ByPlate`](/en/reference/region/) to list the regencies registered under a region code.
+
+## Errors
+
+`length`, `charset`, `format` (groups in the wrong order or too long), `region` (unknown region code).
+
+Diplomatic plates (`CD 12 5`) are not supported yet.
+
+## Example
+
+<Example name="plate" />

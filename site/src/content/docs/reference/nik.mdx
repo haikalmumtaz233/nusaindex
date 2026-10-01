@@ -1,6 +1,6 @@
 ---
 title: NIK
-description: Validate and parse the 16-digit Indonesian population identity number (Nomor Induk Kependudukan).
+description: Validasi dan parse Nomor Induk Kependudukan 16 digit.
 ---
 
 import Anatomy from "../../../components/Anatomy.astro";
@@ -8,36 +8,36 @@ import Example from "../../../components/Example.astro";
 
 <Anatomy kind="nik" />
 
-## Functions
+## Fungsi
 
-| Go                     | TypeScript             | Returns                                         |
-| ---------------------- | ---------------------- | ----------------------------------------------- |
-| `nik.Valid(s)`         | `nik.isValid(s)`       | Whether `s` is a well-formed NIK                |
-| `nik.Parse(s)`         | `nik.parse(s)`         | The fields below                                |
-| `nik.ParseAt(s, year)` | `nik.parseAt(s, year)` | Same, with the birth century relative to `year` |
-| `nik.Format(s)`        | `nik.format(s)`        | 16 digits without separators                    |
-| `nik.Mask(s)`          | `nik.mask(s)`          | Last 4 digits visible                           |
+| Go                     | TypeScript             | Hasil                                              |
+| ---------------------- | ---------------------- | -------------------------------------------------- |
+| `nik.Valid(s)`         | `nik.isValid(s)`       | Apakah `s` NIK yang strukturnya benar              |
+| `nik.Parse(s)`         | `nik.parse(s)`         | Field di bawah                                     |
+| `nik.ParseAt(s, year)` | `nik.parseAt(s, year)` | Sama, dengan abad lahir dihitung relatif ke `year` |
+| `nik.Format(s)`        | `nik.format(s)`        | 16 digit tanpa pemisah                             |
+| `nik.Mask(s)`          | `nik.mask(s)`          | Hanya 4 digit terakhir terlihat                    |
 
-Accepted separators: space, `.` and `-`.
+Pemisah yang diterima: spasi, `.`, dan `-`.
 
-## Parsed fields
+## Field hasil parse
 
-| Field (JSON)   | Example      | Notes                                                                                                            |
-| -------------- | ------------ | ---------------------------------------------------------------------------------------------------------------- |
-| `nik`          | 16 digits    | Separators removed                                                                                               |
-| `provinceCode` | `75`         |                                                                                                                  |
-| `regencyCode`  | `75.02`      |                                                                                                                  |
-| `districtCode` | `75.02.01`   | Checked against the region data, including historical codes                                                      |
-| `birthDate`    | `1959-06-07` | `YYYY-MM-DD`; the two-digit year resolves to the latest year not after the current year (or `year` in `ParseAt`) |
-| `sex`          | `male`       | `male` or `female`                                                                                               |
-| `serial`       | `9583`       | Never `0000`                                                                                                     |
+| Field (JSON)   | Contoh       | Catatan                                                                                                            |
+| -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
+| `nik`          | 16 digit     | Tanpa pemisah                                                                                                      |
+| `provinceCode` | `75`         |                                                                                                                    |
+| `regencyCode`  | `75.02`      |                                                                                                                    |
+| `districtCode` | `75.02.01`   | Dicek ke data wilayah, termasuk kode historis                                                                      |
+| `birthDate`    | `1959-06-07` | `YYYY-MM-DD`; tahun dua digit menjadi tahun terakhir yang tidak melewati tahun berjalan (atau `year` di `ParseAt`) |
+| `sex`          | `male`       | `male` atau `female`                                                                                               |
+| `serial`       | `9583`       | Tidak pernah `0000`                                                                                                |
 
-`Parse` does not load region names. Use [`region.FromNIK` / `region.fromNik`](/reference/region/) to turn the district code into names.
+`Parse` tidak memuat nama wilayah. Pakai [`region.FromNIK` / `region.fromNik`](/reference/region/) untuk mengubah kode kecamatan menjadi nama.
 
-## Errors
+## Error
 
-`length`, `charset`, `region` (district code does not exist), `date` (not a real date), `serial`.
+`length`, `charset`, `region` (kode kecamatan tidak ada), `date` (bukan tanggal yang ada), `serial`.
 
-## Example
+## Contoh
 
 <Example name="nik" />

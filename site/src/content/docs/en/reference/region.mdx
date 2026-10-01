@@ -1,0 +1,61 @@
+---
+title: Regions
+description: Look up Indonesian provinces, regencies, districts, and villages, follow renumbered codes, and map plates, area codes, and NIKs to regions.
+---
+
+import RegionLevels from "../../../../components/RegionLevels.astro";
+import Live from "../../../../components/Live.astro";
+import Example from "../../../../components/Example.astro";
+
+Regions follow Kepmendagri 300.2.2-2138/2025 as amended by 300.2.2-2430/2025. Each level adds one segment to the code:
+
+<RegionLevels />
+
+<Live tool="region" />
+
+Codes may be written with or without dots, spaces or hyphens (`3171`, `31.71`, `31 71`).
+
+## Functions
+
+| Go                        | TypeScript                | Returns                                                                                     |
+| ------------------------- | ------------------------- | ------------------------------------------------------------------------------------------- |
+| `region.Get(code)`        | `region.get(code)`        | One region with the current code                                                            |
+| `region.Resolve(code)`    | `region.resolve(code)`    | Like `Get`, but follows codes renumbered by the 2012 Kalimantan Utara and 2022 Papua splits |
+| `region.Children(code)`   | `region.children(code)`   | Direct children; `""` lists the provinces                                                   |
+| `region.Search(q, opts)`  | `region.search(q, opts)`  | Regions whose name matches `q`, best match first                                            |
+| `region.ByPlate(code)`    | `region.byPlate(code)`    | Regencies registered under a plate code such as `DR`                                        |
+| `region.ByAreaCode(code)` | `region.byAreaCode(code)` | Province or regencies behind a fixed-line area code                                         |
+| `region.FromNIK(nik)`     | `region.fromNik(nik)`     | Province, regency and district names for a NIK                                              |
+
+In TypeScript every function is `async`: district and village data are split into one chunk per province and load only when needed. The index of provinces, regencies, aliases, plates and area codes is under 16 KB gzip. In Go, data loads once on first use (about 10 ms).
+
+The per-province chunks rely on dynamic `import()`. Vite, webpack, Rollup and esbuild with `splitting: true` emit them as separate files. A bundler that inlines dynamic imports puts every province into one file (about 500 KB gzip), so enable code splitting for browser builds.
+
+### Search options
+
+| Go `SearchOptions` | TypeScript | Meaning                                                      |
+| ------------------ | ---------- | ------------------------------------------------------------ |
+| `Level`            | `level`    | Only one level: `province`, `regency`, `district`, `village` |
+| `Within`           | `within`   | Only descendants of this code                                |
+| `Limit`            | `limit`    | 1 to 100, default 10                                         |
+
+Matching ignores case and the `Kabupaten`/`Kota` prefix. Exact names rank first, then prefixes, then word starts, then any substring. Queries are limited to 256 characters.
+
+Searching districts or villages without `within` reads every province. In a browser, pass `within` to load a single province.
+
+### `Place` (from a NIK)
+
+| Field        | Notes                                                                  |
+| ------------ | ---------------------------------------------------------------------- |
+| `province`   | Always present                                                         |
+| `regency`    | Present when the regency still exists                                  |
+| `district`   | Present when the district still exists                                 |
+| `historical` | `true` when the NIK uses a code from before a split; names are current |
+
+## Errors
+
+`length`, `charset`, `unknown` (well-formed code that does not exist), `options`.
+
+## Example
+
+<Example name="region" />

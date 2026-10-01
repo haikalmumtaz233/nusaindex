@@ -183,7 +183,7 @@ export function errorText(kind: AnatomyKind, code: string, locale: Locale): stri
 }
 
 export function localeOf(lang: string | undefined): Locale {
-  return lang === "id" ? "id" : "en";
+  return lang === "en" ? "en" : "id";
 }
 
 export function ui(locale: Locale): Ui {

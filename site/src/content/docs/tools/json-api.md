@@ -1,18 +1,18 @@
 ---
-title: Static JSON API
-description: Read-only JSON files for holidays, provinces, and regencies, generated when the site is built.
+title: API JSON statis
+description: File JSON read-only untuk libur, provinsi, dan kabupaten/kota, dibuat saat situs di-build.
 ---
 
-For projects that cannot use the Go or TypeScript library, this site publishes reference data as static JSON files. They are generated from the same data when the site is built: there is no server, no query parameters, and no rate limit beyond normal caching.
+Untuk proyek yang tidak bisa memakai library Go atau TypeScript, situs ini menerbitkan data referensi sebagai file JSON statis. File dibuat dari data yang sama saat situs di-build: tanpa server, tanpa query parameter, dan tanpa batasan selain caching biasa.
 
-| Path                                | Contents                                                                |
-| ----------------------------------- | ----------------------------------------------------------------------- |
-| `/api/v1/index.json`                | Data version and the list of endpoints                                  |
-| `/api/v1/holidays/{year}.json`      | National holidays and collective leave in a year (2020 to 2027)         |
-| `/api/v1/provinces.json`            | The 38 provinces                                                        |
-| `/api/v1/regencies/{province}.json` | Regencies and cities in a province, such as `/api/v1/regencies/31.json` |
+| Path                                | Isi                                                                      |
+| ----------------------------------- | ------------------------------------------------------------------------ |
+| `/api/v1/index.json`                | Versi data dan daftar endpoint                                           |
+| `/api/v1/holidays/{year}.json`      | Libur nasional dan cuti bersama dalam setahun (2020 sampai 2027)         |
+| `/api/v1/provinces.json`            | 38 provinsi                                                              |
+| `/api/v1/regencies/{province}.json` | Kabupaten/kota dalam satu provinsi, misalnya `/api/v1/regencies/31.json` |
 
-Every file has the same envelope:
+Setiap file memakai amplop yang sama:
 
 ```json
 {
@@ -28,6 +28,6 @@ Every file has the same envelope:
 }
 ```
 
-Items have the same fields as the library: [`Holiday`](/reference/holiday/) and [`Region`](/reference/region/). `dataVersion` changes whenever a dataset changes.
+Item memakai field yang sama dengan library: [`Holiday`](/reference/holiday/) dan [`Region`](/reference/region/). `dataVersion` berubah setiap ada dataset yang berubah.
 
-Responses allow cross-origin requests. For districts, villages, search, and anything involving personal data, use the library so data never leaves your process.
+Respons mengizinkan request lintas origin. Untuk kecamatan, desa, pencarian, dan apa pun yang melibatkan data pribadi, pakai library agar data tidak pernah keluar dari proses Anda.

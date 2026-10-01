@@ -1,6 +1,6 @@
 ---
 title: Rupiah
-description: Format, parse, and spell Rupiah amounts in Indonesian style.
+description: Format, parse, dan terbilang nominal Rupiah gaya Indonesia.
 ---
 
 import Live from "../../../components/Live.astro";
@@ -8,37 +8,37 @@ import Example from "../../../components/Example.astro";
 
 <Live tool="rupiah" />
 
-## Functions
+## Fungsi
 
-| Go                       | TypeScript                | Returns                                                        |
-| ------------------------ | ------------------------- | -------------------------------------------------------------- |
-| `rupiah.Format(a, opts)` | `rupiah.format(n, opts?)` | `Rp1.500.000,50`                                               |
-| `rupiah.Parse(s)`        | `rupiah.parse(s)`         | The amount (Go: `Amount` in sen, TypeScript: number in rupiah) |
-| `rupiah.Valid(s)`        | `rupiah.isValid(s)`       | Whether `s` parses                                             |
-| `rupiah.Terbilang(a)`    | `rupiah.terbilang(n)`     | `satu juta lima ratus ribu rupiah lima puluh sen`              |
+| Go                       | TypeScript                | Hasil                                                             |
+| ------------------------ | ------------------------- | ----------------------------------------------------------------- |
+| `rupiah.Format(a, opts)` | `rupiah.format(n, opts?)` | `Rp1.500.000,50`                                                  |
+| `rupiah.Parse(s)`        | `rupiah.parse(s)`         | Nominal (Go: `Amount` dalam sen, TypeScript: number dalam rupiah) |
+| `rupiah.Valid(s)`        | `rupiah.isValid(s)`       | Apakah `s` bisa di-parse                                          |
+| `rupiah.Terbilang(a)`    | `rupiah.terbilang(n)`     | `satu juta lima ratus ribu rupiah lima puluh sen`                 |
 
-## Amounts
+## Nominal
 
-- **Go** uses `rupiah.Amount`, an `int64` in sen, so arithmetic is exact: `150_000 * rupiah.Rupiah + 50 * rupiah.Sen`.
-- **TypeScript** uses a `number` in rupiah. Amounts with sen are limited to below 10 trillion (`MAX_SEN_AMOUNT`) so they stay exact; whole amounts go up to 999 trillion (`MAX_AMOUNT`).
+- **Go** memakai `rupiah.Amount`, `int64` dalam sen, sehingga aritmetika selalu tepat: `150_000 * rupiah.Rupiah + 50 * rupiah.Sen`.
+- **TypeScript** memakai `number` dalam rupiah. Nominal dengan sen dibatasi di bawah 10 triliun (`MAX_SEN_AMOUNT`) agar tetap tepat; nominal bulat sampai 999 triliun (`MAX_AMOUNT`).
 
-## Format options
+## Opsi format
 
-| Go `Options` | TypeScript      | Effect                             |
-| ------------ | --------------- | ---------------------------------- |
-| `Decimals`   | `decimals`      | Always print sen: `Rp2.000.000,00` |
-| `OmitSymbol` | `symbol: false` | No `Rp` prefix                     |
+| Go `Options` | TypeScript      | Efek                                   |
+| ------------ | --------------- | -------------------------------------- |
+| `Decimals`   | `decimals`      | Selalu tampilkan sen: `Rp2.000.000,00` |
+| `OmitSymbol` | `symbol: false` | Tanpa awalan `Rp`                      |
 
-Without `Decimals`, sen is printed only when it is not zero. Negative amounts are formatted as `-Rp1.000`.
+Tanpa `Decimals`, sen hanya ditampilkan jika tidak nol. Nominal negatif ditulis `-Rp1.000`.
 
 ## Parsing
 
-`Parse` accepts what people write in Indonesia: an optional `Rp`, `Rp.` or `IDR` prefix, dots as thousands separators, a comma before sen, and a trailing `,-`. `Rp 25.000,-`, `IDR 1.500.000,50` and `25000` all parse. Input is limited to 64 characters.
+`Parse` menerima cara orang Indonesia menulis nominal: awalan `Rp`, `Rp.`, atau `IDR` (opsional), titik sebagai pemisah ribuan, koma sebelum sen, dan akhiran `,-`. `Rp 25.000,-`, `IDR 1.500.000,50`, dan `25000` semuanya bisa di-parse. Input dibatasi 64 karakter.
 
-## Errors
+## Error
 
-`length`, `charset`, `format` (misplaced separators, more than two sen digits), `range` (larger than the supported amount).
+`length`, `charset`, `format` (pemisah salah tempat, lebih dari dua digit sen), `range` (melebihi nominal yang didukung).
 
-## Example
+## Contoh
 
 <Example name="rupiah" />
