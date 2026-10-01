@@ -1,14 +1,14 @@
 ---
 title: Non-goal
-description: Hal yang tidak akan dilakukan NusaIndex, dan alasannya.
+description: Hal yang sengaja tidak dilakukan NusaIndex, dan alasannya.
 ---
 
-NusaIndex mengecek bahwa data **strukturnya benar**. Beberapa hal sengaja tidak dilakukan:
+NusaIndex mengecek apakah data **strukturnya benar**. Ada beberapa hal yang sengaja tidak dilakukan:
 
-- **Tidak mencari pemilik.** NusaIndex tidak akan pernah memberi tahu siapa pemilik NIK, NPWP, plat, atau nomor HP, atau di mana seseorang tinggal. Itu akan mengubah library validasi menjadi alat untuk memprofilkan orang.
-- **Tidak memverifikasi ke sistem pemerintah.** Tidak ada panggilan ke Dukcapil, DJP, Samsat, atau operator. Hasil valid tidak berarti nomor itu pernah diterbitkan atau masih aktif. Gunakan layanan resmi yang berwenang untuk itu.
-- **Tidak mengakses jaringan.** Semuanya berjalan offline. Dataset diperbarui lewat rilis, bukan diambil saat runtime.
-- **Tidak menebak.** Aturan hanya berasal dari regulasi yang bisa dibaca dan dikutip. Jika tidak ada aturan resmi (check digit NPWP, struktur NISN, panjang nomor rekening), NusaIndex lebih memilih mengecek lebih sedikit daripada mengarang aturan.
-- **Bukan sumber resmi.** NusaIndex tidak resmi dan tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah Indonesia mana pun. Nama dataset merujuk ke regulasi; dataset ini bukan publikasi resmi.
+- **Tidak mencari pemilik.** NusaIndex tidak akan pernah memberi tahu siapa pemilik NIK, NPWP, plat, atau nomor HP, apalagi alamatnya. Fitur seperti itu mengubah library validasi jadi alat profiling orang.
+- **Tidak mengecek ke sistem pemerintah.** Tidak ada panggilan ke Dukcapil, DJP, Samsat, atau operator. Valid bukan berarti nomornya pernah terbit atau masih aktif. Pakai layanan resmi untuk itu.
+- **Tidak mengakses jaringan.** Semuanya jalan offline. Dataset diperbarui lewat rilis, bukan diunduh saat runtime.
+- **Tidak menebak.** Aturan cuma diambil dari regulasi yang bisa dibaca dan dikutip. Kalau aturan resminya tidak ada (check digit NPWP, struktur NISN, panjang nomor rekening), NusaIndex memilih mengecek lebih sedikit daripada mengarang aturan.
+- **Bukan sumber resmi.** NusaIndex tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah mana pun. Nama dataset merujuk ke regulasinya, tapi dataset ini bukan publikasi resmi.
 
-Data uji dari [`fake`](/reference/fake/) hanya untuk pengujian dan bisa bertabrakan dengan nomor sungguhan.
+Data dari [`fake`](/reference/fake/) cuma untuk pengujian dan bisa saja sama dengan nomor milik orang sungguhan.

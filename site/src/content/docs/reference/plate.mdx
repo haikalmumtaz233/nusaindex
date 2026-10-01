@@ -8,7 +8,7 @@ import Example from "../../../components/Example.astro";
 
 <Anatomy kind="plate" />
 
-Plat nomor terdiri dari kode wilayah satu atau dua huruf, nomor sampai empat digit, dan akhiran sampai tiga huruf: `B 1234 XYZ`. Kode wilayah dicek ke Perpol 7/2021 ditambah kode 2024 untuk provinsi baru di Papua (`PY`, `PS`, `PT`, `PG`). `RI` juga diterima.
+Kode wilayah dicek ke Perpol 7/2021, ditambah kode 2024 untuk provinsi baru di Papua (`PY`, `PS`, `PT`, `PG`). `RI` juga diterima.
 
 ## Fungsi
 
@@ -18,9 +18,9 @@ Plat nomor terdiri dari kode wilayah satu atau dua huruf, nomor sampai empat dig
 | `plate.Parse(s)`  | `plate.parse(s)`   | `region`, `number`, `suffix`           |
 | `plate.Format(s)` | `plate.format(s)`  | Huruf besar, satu spasi: `B 1234 XYZ`  |
 
-Input tidak membedakan huruf besar dan kecil. Pemisah yang diterima: spasi dan `-`; grup juga boleh ditulis tanpa pemisah (`b1234xyz`).
+Huruf besar dan kecil dianggap sama. Pemisah yang diterima spasi dan `-`, atau boleh juga tanpa pemisah (`b1234xyz`).
 
-Pakai [`region.ByPlate`](/reference/region/) untuk melihat kabupaten/kota yang memakai sebuah kode wilayah.
+Mau tahu kabupaten/kota mana saja yang memakai sebuah kode? Pakai [`region.ByPlate`](/reference/region/).
 
 ## Error
 

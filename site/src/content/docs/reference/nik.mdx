@@ -22,17 +22,17 @@ Pemisah yang diterima: spasi, `.`, dan `-`.
 
 ## Field hasil parse
 
-| Field (JSON)   | Contoh       | Catatan                                                                                                            |
-| -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------ |
-| `nik`          | 16 digit     | Tanpa pemisah                                                                                                      |
-| `provinceCode` | `75`         |                                                                                                                    |
-| `regencyCode`  | `75.02`      |                                                                                                                    |
-| `districtCode` | `75.02.01`   | Dicek ke data wilayah, termasuk kode historis                                                                      |
-| `birthDate`    | `1959-06-07` | `YYYY-MM-DD`; tahun dua digit menjadi tahun terakhir yang tidak melewati tahun berjalan (atau `year` di `ParseAt`) |
-| `sex`          | `male`       | `male` atau `female`                                                                                               |
-| `serial`       | `9583`       | Tidak pernah `0000`                                                                                                |
+| Field (JSON)   | Contoh       | Catatan                                                                                                        |
+| -------------- | ------------ | -------------------------------------------------------------------------------------------------------------- |
+| `nik`          | 16 digit     | Tanpa pemisah                                                                                                  |
+| `provinceCode` | `75`         |                                                                                                                |
+| `regencyCode`  | `75.02`      |                                                                                                                |
+| `districtCode` | `75.02.01`   | Dicek ke data wilayah, termasuk kode historis                                                                  |
+| `birthDate`    | `1959-06-07` | `YYYY-MM-DD`. Tahun dua digit dianggap tahun terakhir yang belum melewati tahun ini (atau `year` di `ParseAt`) |
+| `sex`          | `male`       | `male` atau `female`                                                                                           |
+| `serial`       | `9583`       | Tidak pernah `0000`                                                                                            |
 
-`Parse` tidak memuat nama wilayah. Pakai [`region.FromNIK` / `region.fromNik`](/reference/region/) untuk mengubah kode kecamatan menjadi nama.
+`Parse` tidak memuat nama wilayah. Untuk mengubah kode kecamatan jadi nama, pakai [`region.FromNIK` / `region.fromNik`](/reference/region/).
 
 ## Error
 

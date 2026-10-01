@@ -1,14 +1,12 @@
 ---
 title: Playground
-description: Coba validasi dan parsing NusaIndex di browser. Apa pun yang Anda ketik tidak keluar dari perangkat Anda.
+description: Coba validasi dan parse NusaIndex langsung di browser. Yang kamu ketik tidak keluar dari perangkatmu.
 ---
 
 import Playground from "../../components/Playground.astro";
 
-:::note[Berjalan di browser Anda]
-Halaman ini memakai paket `nusaindex` yang ikut dikompilasi ke halaman. Apa yang Anda ketik dicek di perangkat Anda dan tidak pernah dikirim ke mana pun: situs ini tidak punya server, analytics, maupun script pihak ketiga. Meski begitu, lebih baik pakai tombol **Isi data palsu** daripada mengetik data pribadi asli.
-:::
+Semua pengecekan jalan di browser kamu. Situs ini tidak punya server, analytics, atau script pihak ketiga. Biar aman, pakai tombol **Isi data palsu** daripada mengetik data asli.
 
 <Playground />
 
-Untuk NIK, hasilnya memuat nama wilayah dari [`region.fromNik`](/reference/region/). Nilai yang tidak valid menampilkan [kode error](/guides/results-and-errors/) dan, jika teksnya berisi karakter full-width atau zero-width, saran untuk memanggil [`normalize`](/guides/input-and-privacy/).
+Untuk NIK, hasilnya ikut menampilkan nama wilayah dari [`region.fromNik`](/reference/region/). Kalau tidak valid, kamu dapat [kode error](/guides/results-and-errors/). Kalau teksnya mengandung karakter full-width atau zero-width, ada saran untuk memanggil [`normalize`](/guides/input-and-privacy/) dulu.

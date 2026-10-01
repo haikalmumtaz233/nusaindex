@@ -8,7 +8,7 @@ import Example from "../../../components/Example.astro";
 
 <HolidayCalendar />
 
-Libur nasional dan cuti bersama berasal dari SKB 3 Menteri setiap tahun, termasuk semua perubahannya, ditambah Keppres yang menetapkan hari pemungutan suara. Cakupannya 2020 sampai 2027 dan bertambah setiap SKB baru terbit.
+Datanya dari SKB 3 Menteri tiap tahun beserta semua perubahannya, plus Keppres hari pemungutan suara. Cakupannya 2020 sampai 2027 dan bertambah setiap ada SKB baru.
 
 ## Fungsi
 
@@ -19,7 +19,7 @@ Libur nasional dan cuti bersama berasal dari SKB 3 Menteri setiap tahun, termasu
 | `holiday.Between(from, to)` | `holiday.between(from, to)` | Entri dalam rentang tanggal (inklusif)           |
 | `holiday.On(date)`          | `holiday.on(date)`          | Entri pada satu tanggal (biasanya nol atau satu) |
 
-Tanggal berupa string `YYYY-MM-DD`, bukan objek `Date`, sehingga tidak bergeser karena zona waktu.
+Tanggal berupa string `YYYY-MM-DD`, bukan objek `Date`, jadi tidak bergeser gara-gara zona waktu.
 
 ## Field libur
 

@@ -8,7 +8,7 @@ import Example from "../../../components/Example.astro";
 
 <Live tool="workday" />
 
-Hari kerja melewati akhir pekan, libur nasional, dan (secara default) cuti bersama dari [`holiday`](/reference/holiday/). Cocok untuk batas penggajian, SLA, dan jatuh tempo.
+Hari kerja melewati akhir pekan, libur nasional, dan cuti bersama dari [`holiday`](/reference/holiday/). Cocok untuk tanggal gajian, SLA, dan jatuh tempo.
 
 ## Fungsi
 
@@ -27,7 +27,7 @@ Hari kerja melewati akhir pekan, libur nasional, dan (secara default) cuti bersa
 
 Hari akhir pekan di TypeScript memakai `0` untuk Minggu sampai `6` untuk Sabtu, seperti `Date.getUTCDay()`. Enam hari kerja seminggu ditulis `[0]`.
 
-Perhitungan hanya berjalan di dalam tahun yang punya data libur, jadi hasilnya tidak pernah diam-diam salah. Tanggal di luar rentang itu gagal dengan `range`.
+Perhitungan cuma jalan di tahun yang punya data libur, supaya hasilnya tidak diam-diam salah. Tanggal di luar rentang itu gagal dengan `range`.
 
 ## Error
 
