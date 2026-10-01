@@ -3,7 +3,7 @@ import pkg from "../package.json" with { type: "json" };
 import { type ToolContext, type ToolDefinition, tools } from "./tools.js";
 
 const INSTRUCTIONS =
-  "NusaIndex validates and parses Indonesian identifiers (NIK, NPWP, phone, plate, NIP, NISN), looks up regions, holidays and working days, and formats Rupiah, fully offline. " +
+  "NusaIndex validates and parses Indonesian identifiers (NIK, NPWP, phone, plate, NIP, NISN), looks up regions, holidays, working days and bank codes, masks identifiers, and formats Rupiah, fully offline. " +
   "Results are structural checks, not proof that a number is real. Unofficial; not affiliated with any Indonesian government agency.";
 
 function register(server: McpServer, tool: ToolDefinition, ctx: ToolContext): void {

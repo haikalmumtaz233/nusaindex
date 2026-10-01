@@ -10,7 +10,7 @@ MCP server for [NusaIndex](https://github.com/haikalmumtaz233/nusaindex): valida
 }
 ```
 
-Tools: `validate`, `parse`, `region_search`, `region_get`, `holidays`, `workdays`, `rupiah`, `fake`.
+Tools: `validate`, `parse`, `region_search`, `region_get`, `holidays`, `workdays`, `rupiah`, `bank`, `mask`, `fake`.
 
 Privacy: anything you type into an AI chat has already been sent to the AI provider before it reaches this server. Use the `fake` tool for demos. The server never logs or stores input.
 
