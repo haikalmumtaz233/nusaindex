@@ -6,8 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- CLI: `nusaindex bank <code|bic|list>` looks up banks by transfer code or BIC, and `nusaindex region resolve <code>` follows codes renumbered by the 2012 and 2022 region splits and prints `resolvedFrom` with the code it was given.
+- MCP: a `bank` tool for bank codes and BICs, and a `mask` tool that masks values of one kind or every identifier-like number in free text.
+
 ### Changed
 
+- MCP `region_get` adds `resolved` with the code asked for and the current code when it follows a renumbered code, so agents can tell users the code has changed.
 - Documentation site: every identifier page opens with a live decoder that colours each digit by what it means (region, birth date, operator, tax office and more) and explains errors in plain words. Holidays show on a year calendar, regions on a level diagram with live search, and the Rupiah, masking, test data and working-day pages have small tools that run in the browser. The home page and the CLI and MCP pages show animated demos generated from real output, and the site uses a self-hosted Plus Jakarta Sans font.
 
 ## [0.9.0-rc.1] - 2026-10-01
