@@ -5,7 +5,7 @@ description: Give AI agents read-only, offline tools for Indonesian identifiers,
 
 `nusaindex-mcp` is a [Model Context Protocol](https://modelcontextprotocol.io) server that runs locally over stdio. Its tools are read-only: no file system, no shell, no network.
 
-<img src="/demos/mcp.svg" width="760" height="366" alt="MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs; asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart)." />
+<img src="/demos/mcp.svg" width="760" height="386" alt="MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs; asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart)." />
 
 ## Setup
 
