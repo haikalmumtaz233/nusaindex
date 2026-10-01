@@ -26,7 +26,10 @@ export default defineConfig({
         { icon: "github", label: "GitHub", href: "https://github.com/haikalmumtaz233/nusaindex" },
       ],
       customCss: ["./src/styles/theme.css"],
-      components: { Hero: "./src/components/Hero.astro" },
+      components: {
+        Hero: "./src/components/Hero.astro",
+        TableOfContents: "./src/components/TableOfContents.astro",
+      },
       lastUpdated: false,
       pagination: true,
       sidebar: [
