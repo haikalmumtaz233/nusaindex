@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-01
+
 ### Added
 
 - `nusaindex-mcp`: a stdio MCP server with eight read-only tools (`validate`, `parse`, `region_search`, `region_get`, `holidays`, `workdays`, `rupiah`, `fake`). Tool descriptions warn that chat input has already reached the AI provider and that valid only means well-formed; the server never logs input. It bundles the official MCP SDK (v2) and Zod, listed with their licenses in `THIRD_PARTY_NOTICES.md`, so its only dependency is `nusaindex`.
