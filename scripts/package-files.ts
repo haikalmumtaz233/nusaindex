@@ -1,7 +1,8 @@
-import { copyFileSync, readFileSync } from "node:fs";
+import { copyFileSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const root = join(import.meta.dirname, "..");
+const rawBase = "https://raw.githubusercontent.com/haikalmumtaz233/nusaindex/main/";
 
 const shared: Readonly<Record<string, readonly string[]>> = {
   nusaindex: ["LICENSE", "NOTICE", "README.md"],
@@ -16,6 +17,11 @@ if (files === undefined) {
   process.exit(1);
 }
 for (const file of files) {
-  copyFileSync(join(root, file), file);
+  if (file === "README.md") {
+    const readme = readFileSync(join(root, file), "utf8");
+    writeFileSync(file, readme.replaceAll("](site/public/", `](${rawBase}site/public/`));
+  } else {
+    copyFileSync(join(root, file), file);
+  }
 }
 process.stdout.write(`package-files: ${String(name)} <- ${files.join(", ")}\n`);
