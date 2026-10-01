@@ -29,18 +29,20 @@ Server butuh Node.js 22.18 atau lebih baru dan siap dalam waktu kurang dari 300 
 
 ## Tool
 
-| Tool            | Input                                                                    | Hasil                                          |
-| --------------- | ------------------------------------------------------------------------ | ---------------------------------------------- |
-| `validate`      | `kind`, `values` (1 sampai 100)                                          | Valid atau kode error untuk setiap nilai       |
-| `parse`         | `kind`, `value`                                                          | Field hasil parse; untuk NIK juga nama wilayah |
-| `region_search` | `query`, opsional `level`, `within`, `limit`                             | Wilayah yang cocok, terbaik dulu               |
-| `region_get`    | `code`, opsional `children`                                              | Satu wilayah, mengikuti kode yang berubah      |
-| `holidays`      | `year`, atau `from` dan `to`                                             | Libur beserta dasar hukumnya                   |
-| `workdays`      | `operation` (`is`, `add`, `count`), `date`, `days` atau `to`             | Hasil perhitungan hari kerja                   |
-| `rupiah`        | `operation` (`format`, `parse`, `terbilang`), `amount` atau `text`       | Teks format, angka, atau terbilang             |
-| `fake`          | `kind`, opsional `seed`, `count` (maks 20), `region`, `birthDate`, `sex` | Data uji (hanya untuk pengujian)               |
+| Tool            | Input                                                                    | Hasil                                           |
+| --------------- | ------------------------------------------------------------------------ | ----------------------------------------------- |
+| `validate`      | `kind`, `values` (1 sampai 100)                                          | Valid atau kode error untuk setiap nilai        |
+| `parse`         | `kind`, `value`                                                          | Field hasil parse; untuk NIK juga nama wilayah  |
+| `region_search` | `query`, opsional `level`, `within`, `limit`                             | Wilayah yang cocok, terbaik dulu                |
+| `region_get`    | `code`, opsional `children`                                              | Satu wilayah; `resolved` jika kode lama diikuti |
+| `holidays`      | `year`, atau `from` dan `to`                                             | Libur beserta dasar hukumnya                    |
+| `workdays`      | `operation` (`is`, `add`, `count`), `date`, `days` atau `to`             | Hasil perhitungan hari kerja                    |
+| `rupiah`        | `operation` (`format`, `parse`, `terbilang`), `amount` atau `text`       | Teks format, angka, atau terbilang              |
+| `bank`          | opsional `code` atau `bic`; tanpa keduanya menampilkan semua             | Bank yang cocok                                 |
+| `mask`          | `kind` dan `values` (1 sampai 100), atau `text`                          | Nilai atau teks yang sudah di-mask              |
+| `fake`          | `kind`, opsional `seed`, `count` (maks 20), `region`, `birthDate`, `sex` | Data uji (hanya untuk pengujian)                |
 
-`kind` salah satu dari `nik`, `npwp`, `phone`, `plate`, `nip`, `nisn`. Setiap tool mengembalikan structured content plus data yang sama dalam bentuk teks JSON.
+Untuk `validate` dan `parse`, `kind` salah satu dari `nik`, `npwp`, `phone`, `plate`, `nip`, `nisn`; `mask` menerima `account` sebagai ganti `plate`. Setiap tool mengembalikan structured content plus data yang sama dalam bentuk teks JSON.
 
 ## Privasi
 
