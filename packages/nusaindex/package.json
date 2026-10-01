@@ -36,6 +36,10 @@
       "types": "./dist/bank.d.ts",
       "default": "./dist/bank.js"
     },
+    "./fake": {
+      "types": "./dist/fake.d.ts",
+      "default": "./dist/fake.js"
+    },
     "./holiday": {
       "types": "./dist/holiday.d.ts",
       "default": "./dist/holiday.js"
@@ -180,6 +184,15 @@
       "name": "mask",
       "path": "dist/mask.js",
       "limit": "2 kB",
+      "gzip": true
+    },
+    {
+      "name": "fake (region shards load on demand)",
+      "path": "dist/fake.js",
+      "entry": [
+        "fake"
+      ],
+      "limit": "9 kB",
       "gzip": true
     }
   ]

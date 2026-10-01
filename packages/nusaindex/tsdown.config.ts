@@ -3,6 +3,7 @@ import { defineConfig } from "tsdown";
 export default defineConfig({
   entry: {
     bank: "src/bank/index.ts",
+    fake: "src/fake/index.ts",
     holiday: "src/holiday/index.ts",
     index: "src/index.ts",
     mask: "src/mask/index.ts",

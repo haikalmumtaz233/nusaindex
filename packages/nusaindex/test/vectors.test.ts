@@ -1,7 +1,8 @@
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
-import * as api from "../src/index.js";
+import * as fake from "../src/fake/index.js";
+import * as root from "../src/index.js";
 
 interface VectorCase {
   fn: string;
@@ -16,6 +17,8 @@ interface VectorFile {
 }
 
 type AnyFunction = (...args: unknown[]) => unknown;
+
+const api = { ...root, fake };
 
 const vectorDir = join(import.meta.dirname, "..", "..", "..", "testdata", "vectors");
 
