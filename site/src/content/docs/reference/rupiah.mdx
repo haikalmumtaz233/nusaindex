@@ -20,7 +20,7 @@ import Example from "../../../components/Example.astro";
 ## Nominal
 
 - **Go** memakai `rupiah.Amount`, `int64` dalam sen, sehingga aritmetika selalu tepat: `150_000 * rupiah.Rupiah + 50 * rupiah.Sen`.
-- **TypeScript** memakai `number` dalam rupiah. Nominal dengan sen dibatasi di bawah 10 triliun (`MAX_SEN_AMOUNT`) agar tetap tepat; nominal bulat sampai 999 triliun (`MAX_AMOUNT`).
+- **TypeScript** memakai `number` dalam rupiah. Nominal dengan sen dibatasi di bawah 10 triliun (`MAX_SEN_AMOUNT`) supaya tetap tepat. Nominal bulat bisa sampai 999 triliun (`MAX_AMOUNT`).
 
 ## Opsi format
 
@@ -33,7 +33,7 @@ Tanpa `Decimals`, sen hanya ditampilkan jika tidak nol. Nominal negatif ditulis 
 
 ## Parsing
 
-`Parse` menerima cara orang Indonesia menulis nominal: awalan `Rp`, `Rp.`, atau `IDR` (opsional), titik sebagai pemisah ribuan, koma sebelum sen, dan akhiran `,-`. `Rp 25.000,-`, `IDR 1.500.000,50`, dan `25000` semuanya bisa di-parse. Input dibatasi 64 karakter.
+`Parse` paham cara orang Indonesia menulis nominal: awalan `Rp`, `Rp.`, atau `IDR` (opsional), titik sebagai pemisah ribuan, koma sebelum sen, dan akhiran `,-`. `Rp 25.000,-`, `IDR 1.500.000,50`, dan `25000` semuanya bisa di-parse. Input dibatasi 64 karakter.
 
 ## Error
 

@@ -1,13 +1,13 @@
 ---
 title: Hasil dan error
-description: Cara NusaIndex melaporkan input tidak valid di Go dan TypeScript.
+description: Cara NusaIndex melaporkan input yang tidak valid di Go dan TypeScript.
 ---
 
-Input tidak valid adalah hasil yang wajar, bukan exception. Kedua library tidak pernah melempar exception atau panic untuk input yang salah.
+Input yang salah itu hal biasa, jadi diperlakukan sebagai hasil, bukan exception. Kedua library tidak pernah melempar exception atau panic gara-gara input.
 
 ## Go: error sebagai nilai
 
-Fungsi mengembalikan `(nilai, error)`. Setiap paket mengekspor sentinel error yang dinamai sesuai kode error, misalnya `nik.ErrLength` atau `phone.ErrPrefix`. Bandingkan dengan `errors.Is`, yang tetap berfungsi walaupun error dibungkus:
+Fungsi mengembalikan `(nilai, error)`. Tiap paket punya sentinel error sesuai kode error-nya, misalnya `nik.ErrLength` atau `phone.ErrPrefix`. Cek dengan `errors.Is`, yang tetap jalan walaupun error-nya dibungkus:
 
 ```go
 _, err := nik.Parse(input)
@@ -21,7 +21,7 @@ case err != nil:
 }
 ```
 
-`err.Error()` berbentuk `nik: invalid date` dan tidak pernah memuat input.
+`err.Error()` bentuknya seperti `nik: invalid date` dan tidak pernah memuat input.
 
 ## TypeScript: `Result`
 
@@ -33,7 +33,7 @@ type Result<T, E extends string> =
   | { readonly ok: false; readonly error: { readonly code: E } };
 ```
 
-Setiap modul mengekspor union kode error-nya (`NikErrorCode`, `PhoneErrorCode`, …), sehingga `switch` pada `error.code` dicek oleh compiler:
+Tiap modul mengekspor union kode error-nya (`NikErrorCode`, `PhoneErrorCode`, dan seterusnya), jadi `switch` pada `error.code` ikut dicek compiler:
 
 ```ts
 const result = nik.parse(input);
@@ -53,20 +53,20 @@ Fungsi di `region` dan `fake.nik` mengembalikan `Promise<Result<…>>` karena da
 
 ## Kode error
 
-| Kode      | Arti                                                                                |
-| --------- | ----------------------------------------------------------------------------------- |
-| `length`  | Jumlah digit salah, atau input melebihi batas (64 karakter)                         |
-| `charset` | Ada karakter di luar digit dan pemisah yang diterima modul itu                      |
-| `region`  | Kode wilayah tidak ada (kecamatan di NIK, kode plat)                                |
-| `date`    | Bukan tanggal yang ada, atau tanggal di posisi yang salah                           |
-| `serial`  | Nomor urut nol atau tidak mungkin                                                   |
-| `sex`     | Digit jenis kelamin NIP bukan 1 atau 2                                              |
-| `nik`     | NPWP 16 digit berupa NIK, tetapi NIK-nya tidak valid                                |
-| `country` | Nomor telepon dengan kode negara selain +62                                         |
-| `prefix`  | Prefix nomor HP yang tidak dialokasikan                                             |
-| `format`  | Teks tidak mengikuti susunan yang diharapkan (plat, Rupiah)                         |
-| `unknown` | Kode yang strukturnya benar tetapi tidak ada di data referensi                      |
-| `options` | Opsi tidak valid, misalnya level wilayah atau hari akhir pekan yang tidak dikenal   |
-| `range`   | Nilai di luar rentang yang didukung (tahun tanpa data libur, nominal terlalu besar) |
+| Kode      | Artinya                                                                        |
+| --------- | ------------------------------------------------------------------------------ |
+| `length`  | Jumlah digit salah, atau input lebih dari 64 karakter                          |
+| `charset` | Ada karakter selain digit dan pemisah yang diterima modul itu                  |
+| `region`  | Kode wilayah tidak ada (kecamatan di NIK, kode plat)                           |
+| `date`    | Bukan tanggal yang ada, atau tanggalnya di posisi yang salah                   |
+| `serial`  | Nomor urut nol atau tidak mungkin                                              |
+| `sex`     | Digit jenis kelamin NIP bukan 1 atau 2                                         |
+| `nik`     | NPWP 16 digit berupa NIK, tapi NIK-nya tidak valid                             |
+| `country` | Nomor telepon dengan kode negara selain +62                                    |
+| `prefix`  | Prefix nomor HP yang tidak pernah dialokasikan                                 |
+| `format`  | Susunan teksnya tidak sesuai (plat, Rupiah)                                    |
+| `unknown` | Strukturnya benar, tapi kodenya tidak ada di data referensi                    |
+| `options` | Opsinya salah, misalnya level wilayah atau hari akhir pekan yang tidak dikenal |
+| `range`   | Di luar rentang yang didukung (tahun tanpa data libur, nominal terlalu besar)  |
 
-Halaman referensi tiap modul mencantumkan kode yang bisa dikembalikannya.
+Halaman referensi tiap modul menyebut kode apa saja yang bisa muncul.

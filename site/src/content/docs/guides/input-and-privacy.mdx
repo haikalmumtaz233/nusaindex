@@ -1,37 +1,37 @@
 ---
 title: Input dan privasi
-description: Karakter yang diterima NusaIndex, cara membersihkan teks tempelan, dan cara data pribadi dilindungi.
+description: Karakter apa saja yang diterima, cara membersihkan teks tempelan, dan cara NusaIndex menjaga data pribadi.
 ---
 
 import Example from "../../../components/Example.astro";
 
 ## Input yang diterima
 
-Fungsi nomor identitas menerima digit ASCII ditambah pemisah yang tercantum di halaman tiap modul (biasanya spasi, titik, dan strip). Input lebih dari 64 karakter langsung gagal dengan `length` sebelum pengecekan lain, sehingga biaya pemrosesan tetap terbatas apa pun input pengguna.
+Fungsi nomor identitas cuma menerima digit ASCII dan pemisah yang disebut di halaman tiap modul (biasanya spasi, titik, dan strip). Input lebih dari 64 karakter langsung gagal dengan `length` sebelum dicek lebih jauh, jadi input sepanjang apa pun tetap murah diproses.
 
-Karakter lain, termasuk digit full-width (`７５０２…`), digit Arab-Indic, dan karakter zero-width, gagal dengan `charset`. Karakter ini terlihat sama di layar tetapi tersimpan berbeda, jadi ditolak alih-alih diterima diam-diam.
+Karakter lain langsung gagal dengan `charset`. Contohnya digit full-width (`７５０２…`), digit Arab-Indic, dan karakter zero-width. Di layar kelihatannya sama, tapi isinya beda, jadi lebih aman ditolak daripada diterima diam-diam.
 
-## Membersihkan teks tempelan dengan `normalize`
+## Bersihkan teks tempelan dengan `normalize`
 
-Jika input berasal dari copy-paste, panggil `normalize` secara eksplisit sebelum validasi. Fungsi ini mengubah ASCII full-width, digit Arab-Indic, spasi dan strip Unicode menjadi ASCII, membuang karakter zero-width dan soft hyphen, lalu memangkas spasi di ujung. Go dan TypeScript memakai tabel yang persis sama.
+Kalau input datang dari copy-paste, panggil `normalize` dulu sebelum validasi. Fungsi ini mengubah karakter full-width, digit Arab-Indic, serta spasi dan strip Unicode jadi ASCII, membuang karakter zero-width dan soft hyphen, lalu merapikan spasi di ujung. Tabelnya sama persis di Go dan TypeScript.
 
 <Example name="normalize" />
 
 ## Masking
 
-Mask hanya menampilkan bagian yang biasanya dibutuhkan tim layanan:
+Mask cuma menyisakan bagian yang biasanya dibutuhkan tim layanan:
 
-| Jenis                                | Bagian yang terlihat       | Contoh             |
+| Jenis                                | Yang terlihat              | Contoh             |
 | ------------------------------------ | -------------------------- | ------------------ |
 | NIK, NPWP, NIP, NISN, nomor rekening | 4 digit terakhir           | `************9583` |
 | Nomor HP                             | `+62` dan 3 digit terakhir | `+62*******171`    |
 
-Digit awal NIK memuat wilayah dan tanggal lahir, jadi tidak pernah ditampilkan. Lihat [`mask`](/reference/mask/) untuk redaksi teks bebas, redaksi objek, dan handler `slog` di Go.
+Digit depan NIK berisi wilayah dan tanggal lahir, jadi tidak pernah ditampilkan. Untuk teks bebas, objek, dan handler `slog` di Go, lihat [`mask`](/reference/mask/).
 
 ## Yang tidak pernah dilakukan NusaIndex
 
-- Tidak ada request jaringan dari library, CLI, maupun server MCP. Data wilayah, libur, dan bank sudah tertanam.
-- Tidak me-log, menyimpan, atau mengirim input. Pesan error hanya berisi kode, tidak pernah nilainya.
-- Tidak mencari siapa pemilik NIK, NPWP, plat, atau nomor HP, dan tidak memverifikasi ke Dukcapil atau DJP. Lihat [non-goal](/project/non-goals/).
+- Tidak ada request jaringan dari library, CLI, maupun server MCP. Data wilayah, libur, dan bank sudah ikut tertanam.
+- Tidak me-log, menyimpan, atau mengirim input. Pesan error cuma berisi kode, bukan nilainya.
+- Tidak mencari siapa pemilik NIK, NPWP, plat, atau nomor HP, dan tidak mengecek ke Dukcapil atau DJP. Lihat [non-goal](/project/non-goals/).
 
-Valid berarti strukturnya benar. Sebuah NIK bisa lolos semua pengecekan tetapi tetap bukan milik siapa pun.
+Valid artinya strukturnya benar. NIK bisa lolos semua pengecekan tapi tetap bukan milik siapa pun.

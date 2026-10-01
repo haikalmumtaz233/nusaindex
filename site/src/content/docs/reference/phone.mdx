@@ -8,7 +8,7 @@ import Example from "../../../components/Example.astro";
 
 <Anatomy kind="phone" />
 
-Menerima `08…`, `628…`, `+62 8…`, dan telepon tetap dengan kode area seperti `(021) 3456 789`. Prefix seluler dan kode area telepon tetap mengikuti Permenkominfo 14/2018.
+Bisa menerima `08…`, `628…`, `+62 8…`, dan telepon tetap dengan kode area seperti `(021) 3456 789`. Prefix seluler dan kode area mengikuti Permenkominfo 14/2018.
 
 ## Fungsi
 
@@ -24,17 +24,17 @@ Pemisah yang diterima: spasi, `-`, `.`, `(`, dan `)`.
 
 ## Field hasil parse
 
-| Field (JSON) | Contoh          | Catatan                                                                               |
-| ------------ | --------------- | ------------------------------------------------------------------------------------- |
-| `e164`       | `+628595257171` |                                                                                       |
-| `national`   | `08595257171`   |                                                                                       |
-| `type`       | `mobile`        | `mobile` atau `fixed`                                                                 |
-| `prefix`     | `0859`          | Hanya seluler                                                                         |
-| `brand`      | `XL`            | Hanya seluler: Telkomsel, IM3, Tri, XL, AXIS, atau Smartfren                          |
-| `operator`   | `XLSmart`       | Hanya seluler: Telkomsel, Indosat Ooredoo Hutchison, atau XLSmart                     |
-| `areaCode`   | `021`           | Hanya telepon tetap; lihat [`region.ByAreaCode`](/reference/region/) untuk wilayahnya |
+| Field (JSON) | Contoh          | Catatan                                                                           |
+| ------------ | --------------- | --------------------------------------------------------------------------------- |
+| `e164`       | `+628595257171` |                                                                                   |
+| `national`   | `08595257171`   |                                                                                   |
+| `type`       | `mobile`        | `mobile` atau `fixed`                                                             |
+| `prefix`     | `0859`          | Hanya seluler                                                                     |
+| `brand`      | `XL`            | Hanya seluler: Telkomsel, IM3, Tri, XL, AXIS, atau Smartfren                      |
+| `operator`   | `XLSmart`       | Hanya seluler: Telkomsel, Indosat Ooredoo Hutchison, atau XLSmart                 |
+| `areaCode`   | `021`           | Khusus telepon tetap, wilayahnya ada di [`region.ByAreaCode`](/reference/region/) |
 
-Nomor seluler punya 9 sampai 12 digit setelah `0` di depan; telepon tetap 8 sampai 11 digit termasuk kode area. Prefix yang dicabut atau tidak pernah dialokasikan, seperti `0827`, `0828`, dan `0879`, gagal dengan `prefix`.
+Nomor seluler punya 9 sampai 12 digit setelah `0` di depan. Telepon tetap punya 8 sampai 11 digit termasuk kode area. Prefix yang sudah dicabut atau tidak pernah dialokasikan, seperti `0827`, `0828`, dan `0879`, gagal dengan `prefix`.
 
 ## Error
 

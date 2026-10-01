@@ -8,7 +8,7 @@ import Example from "../../../components/Example.astro";
 
 <Live tool="mask" />
 
-`mask` menjauhkan NIK, NPWP, nomor HP, dan nomor identitas lain dari log, layar, dan tiket layanan, misalnya untuk memenuhi prinsip minimalisasi data UU Pelindungan Data Pribadi (UU PDP).
+`mask` menjaga NIK, NPWP, nomor HP, dan nomor identitas lain supaya tidak bocor ke log, layar, atau tiket layanan. Berguna untuk prinsip minimalisasi data di UU Pelindungan Data Pribadi (UU PDP).
 
 ## Fungsi
 
@@ -22,13 +22,13 @@ import Example from "../../../components/Example.astro";
 | `mask.Phone(s)`         | `mask.phone(s)`   | `+62` dan 3 digit terakhir terlihat                        |
 | `mask.Text(s)`          | `mask.text(s)`    | Teks bebas dengan setiap deret 10 digit atau lebih di-mask |
 | `mask.Redact(v)`        | `mask.redact(v)`  | Salinan objek, array, atau nilai yang sudah diredaksi      |
-| `mask.NewHandler(next)` | —                 | Handler `log/slog` yang meredaksi sebelum `next`           |
+| `mask.NewHandler(next)` | Khusus Go         | Handler `log/slog` yang meredaksi sebelum `next`           |
 
 Fungsi per jenis sama dengan `nik.Mask`, `phone.Mask`, dan seterusnya, dikumpulkan di satu tempat.
 
 ## Teks bebas
 
-`Text` mencari angka yang mirip nomor identitas (10 digit atau lebih, boleh dengan pemisah umum) dan me-mask masing-masing dengan aturan jenisnya: nomor HP menyisakan `+62` dan 3 digit, lainnya 4 digit. Pemindaiannya linear dan menerima sampai 1 MiB (`MaxText` / `MAX_TEXT`); input lebih panjang gagal dengan `length`.
+`Text` mencari angka yang mirip nomor identitas (10 digit atau lebih, boleh dengan pemisah umum) dan me-mask masing-masing sesuai jenisnya. Nomor HP menyisakan `+62` dan 3 digit, lainnya 4 digit. Pemindaiannya linear dan menerima sampai 1 MiB (`MaxText` / `MAX_TEXT`). Input yang lebih panjang gagal dengan `length`.
 
 ## Objek
 

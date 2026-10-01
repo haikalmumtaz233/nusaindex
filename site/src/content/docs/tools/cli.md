@@ -1,9 +1,9 @@
 ---
 title: Command line
-description: Validasi, mask, dan cari data Indonesia dari terminal, satu nilai atau satu CSV sekaligus.
+description: Cek, mask, dan cari data Indonesia dari terminal, satu nilai atau satu file CSV sekaligus.
 ---
 
-Paket `nusaindex` memasang perintah `nusaindex` dengan alias pendek `nusa`. Butuh Node.js 22.18 atau lebih baru dan tanpa dependensi.
+Paket `nusaindex` sudah termasuk perintah `nusaindex`, atau singkatnya `nusa`. Cukup Node.js 22.18 ke atas.
 
 <img src="/demos/cli.svg" width="760" height="554" alt="Sesi terminal: nusa nik membaca isi NIK, nusa phone menemukan merek XL, nusa rupiah terbilang mengeja 1.500.000,50, dan nusa mask text menyembunyikan NIK dan nomor HP di dalam kalimat." />
 
@@ -19,7 +19,7 @@ npx nusaindex --help
 | `nusaindex <nik\|npwp\|phone\|plate\|nip\|nisn> <nilai>`       | Validasi dan parse satu nilai                             |
 | `nusaindex mask <jenis\|text> <nilai>`                         | Mask nomor identitas (termasuk `account`) atau teks bebas |
 | `nusaindex rupiah format\|parse\|terbilang <nilai>`            | Format, parse, atau terbilang nominal Rupiah              |
-| `nusaindex region get\|resolve\|children\|search\|nik <nilai>` | Cari wilayah; `resolve` mengikuti kode yang berubah       |
+| `nusaindex region get\|resolve\|children\|search\|nik <nilai>` | Cari wilayah, `resolve` mengikuti kode yang berubah       |
 | `nusaindex holiday <tahun>`                                    | Libur dan cuti bersama dalam setahun                      |
 | `nusaindex bank <kode\|bic\|list>`                             | Cari bank dari kode transfer atau BIC                     |
 | `nusaindex workday is\|add\|count …`                           | Perhitungan hari kerja                                    |
@@ -33,11 +33,11 @@ nusaindex workday add 2026-08-14 3
 nusaindex fake nik --seed 7 --region 31.71 --count 5
 ```
 
-Jalankan `nusaindex --help` untuk semua opsi.
+Semua opsi ada di `nusaindex --help`.
 
 ## Pemrosesan batch
 
-Argumen command line tersimpan di riwayat shell, jadi kirim data asli lewat standard input:
+Argumen command line ikut tersimpan di riwayat shell. Kalau datanya asli, kirim lewat standard input:
 
 ```sh
 nusaindex nik --stdin < niks.txt
@@ -47,11 +47,11 @@ nusaindex mask nik --csv --column nik < customers.csv > masked.csv
 ```
 
 - `--stdin` membaca satu nilai per baris (maksimal 1 MiB per baris).
-- `--csv --column <nama>` membaca CSV dengan header. Validasi menambah kolom `<kolom>_valid` dan `<kolom>_error`; `mask` dan `rupiah` mengganti isi sel. Setiap record harus muat dalam satu baris.
+- `--csv --column <nama>` membaca CSV yang punya header. Validasi menambah kolom `<kolom>_valid` dan `<kolom>_error`, sedangkan `mask` dan `rupiah` mengganti isi selnya. Satu record harus muat di satu baris.
 
 ## Keluaran dan exit code
 
-Tambahkan `--json` untuk keluaran yang bisa dibaca mesin. Pesan error memuat kode error, tidak pernah nilainya.
+Tambahkan `--json` kalau keluarannya mau dibaca program lain. Pesan error cuma berisi kode error, bukan nilainya.
 
 | Exit code | Arti                                                   |
 | --------- | ------------------------------------------------------ |

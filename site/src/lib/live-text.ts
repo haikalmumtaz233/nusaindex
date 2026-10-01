@@ -134,7 +134,7 @@ const id: LiveText = {
     district: "Kecamatan",
     village: "Desa/kelurahan",
   },
-  note: "Berjalan di browser Anda.",
+  note: "Jalan di browser kamu.",
   skipped: (weekendDays, holidays, locale) => {
     const parts = [
       ...(weekendDays > 0 ? [`${String(weekendDays)} hari akhir pekan`] : []),

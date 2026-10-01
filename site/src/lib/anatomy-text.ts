@@ -103,8 +103,8 @@ const uis: Readonly<Record<Locale, Ui>> = {
     },
     generate: "Buat contoh lain",
     valid: "Strukturnya benar",
-    empty: "Tempel nilai untuk didekode.",
-    note: "Didekode di browser. Apa pun yang Anda ketik tidak dikirim ke mana pun.",
+    empty: "Tempel nomornya di sini.",
+    note: "Dicek langsung di browser. Yang kamu ketik tidak dikirim ke mana pun.",
     choose: "Jenis nomor",
   },
 };

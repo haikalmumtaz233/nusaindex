@@ -1,6 +1,6 @@
 ---
 title: Mulai
-description: Pasang NusaIndex untuk Go atau TypeScript dan jalankan pengecekan pertama.
+description: Pasang NusaIndex di Go atau TypeScript dan coba pengecekan pertama.
 ---
 
 import { Steps } from "@astrojs/starlight/components";
@@ -9,7 +9,7 @@ import ModuleGrid from "../../components/ModuleGrid.astro";
 
 <Steps>
 
-1. Pasang paketnya. Go 1.25 atau lebih baru hanya memakai standard library; TypeScript berjalan di Node.js 22.18 atau lebih baru, Bun, Deno, edge runtime, dan browser modern (hanya ESM).
+1. Pasang paketnya. Versi Go butuh Go 1.25 ke atas dan cuma memakai standard library. Versi TypeScript jalan di Node.js 22.18 ke atas, Bun, Deno, edge runtime, dan browser modern.
 
    ```sh title="Go"
    go get github.com/haikalmumtaz233/nusaindex
@@ -19,11 +19,11 @@ import ModuleGrid from "../../components/ModuleGrid.astro";
    npm install nusaindex
    ```
 
-2. Jalankan pengecekan pertama. Contoh ini dijalankan setiap build, di kedua bahasa, dan keluarannya harus sama.
+2. Coba pengecekan pertama. Contoh ini ikut dijalankan setiap build di kedua bahasa, dan hasilnya harus sama.
 
    <Example name="quickstart" />
 
-3. Import seperlunya. Setiap modul adalah paket Go (`github.com/haikalmumtaz233/nusaindex/<nama>`) dan subpath TypeScript (`nusaindex/<nama>`) tersendiri. `nusaindex/nik` menambah kurang dari 2 KB gzip ke bundle browser, dan data wilayah dimuat per provinsi.
+3. Import yang kamu perlu saja. Tiap modul punya paket Go (`github.com/haikalmumtaz233/nusaindex/<nama>`) dan subpath TypeScript (`nusaindex/<nama>`) sendiri. `nusaindex/nik` cuma menambah kurang dari 2 KB gzip ke bundle browser, dan data wilayah dimuat per provinsi.
 
 </Steps>
 
@@ -40,14 +40,15 @@ import ModuleGrid from "../../components/ModuleGrid.astro";
 | Normalisasi | `Format(s) (string, error)` | `format(s): Result<string>` |
 | Mask        | `Mask(s) string`            | `mask(s): string`           |
 
-Nama mengikuti konvensi tiap bahasa (`WhatsAppLink`, `whatsappLink`). Test vector bersama dijalankan di kedua implementasi, jadi hasilnya identik. Di TypeScript, `fake`, `zod`, dan `valibot` hanya tersedia lewat subpath.
+Nama fungsinya mengikuti gaya tiap bahasa (`WhatsAppLink` di Go, `whatsappLink` di TypeScript). Kedua implementasi diuji dengan test vector yang sama, jadi hasilnya identik. Di TypeScript, `fake`, `zod`, dan `valibot` cuma tersedia lewat subpath.
 
 :::note[Data contoh]
-Nomor di situs ini dibuat dengan generator [`fake`](/reference/fake/). Jangan pernah menempelkan data pribadi asli ke contoh, issue, atau chat AI.
+Semua nomor di situs ini dibuat dengan [`fake`](/reference/fake/). Jangan tempel data pribadi asli ke contoh, issue, atau chat AI.
 :::
 
 ## Langkah berikutnya
 
+- [Kegunaan](/use-cases/): contoh pemakaian di aplikasi nyata.
 - [Hasil dan error](/guides/results-and-errors/): cara kegagalan dilaporkan.
 - [Input dan privasi](/guides/input-and-privacy/): karakter yang diterima, Unicode, dan masking.
-- [Command line](/tools/cli/) dan [server MCP](/tools/mcp/) jika Anda tidak menulis kode.
+- [Command line](/tools/cli/) dan [server MCP](/tools/mcp/) kalau kamu tidak menulis kode.

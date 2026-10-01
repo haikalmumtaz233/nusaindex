@@ -8,7 +8,7 @@ import Example from "../../../components/Example.astro";
 
 <Anatomy kind="npwp" />
 
-Tiga format diterima (PMK 112/2022 sebagaimana diubah PMK 136/2023):
+Ada tiga format yang diterima (PMK 112/2022 sebagaimana diubah PMK 136/2023):
 
 - **15 digit**, format lama (`02.973.675.8-100.600`).
 - **16 digit**, berupa `0` diikuti 15 digit lama, atau NIK untuk wajib pajak orang pribadi penduduk.
@@ -38,7 +38,7 @@ Pemisah yang diterima: spasi, `.`, dan `-`.
 | `taxOffice`     | Bukan NIK          | Kode KPP 3 digit               |
 | `status`        | Bukan NIK          | Status 3 digit (`000` = pusat) |
 
-DJP tidak menerbitkan check digit resmi untuk NPWP, jadi NusaIndex hanya mengecek struktur. Wajib pajak baru sejak 2024 menerima NPWP 16 digit tanpa struktur publik.
+DJP tidak pernah menerbitkan aturan check digit NPWP, jadi NusaIndex cuma mengecek strukturnya. Wajib pajak baru sejak 2024 dapat NPWP 16 digit yang strukturnya tidak dipublikasikan.
 
 ## Error
 

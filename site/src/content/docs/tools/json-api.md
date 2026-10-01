@@ -3,16 +3,16 @@ title: API JSON statis
 description: File JSON read-only untuk libur, provinsi, dan kabupaten/kota, dibuat saat situs di-build.
 ---
 
-Untuk proyek yang tidak bisa memakai library Go atau TypeScript, situs ini menerbitkan data referensi sebagai file JSON statis. File dibuat dari data yang sama saat situs di-build: tanpa server, tanpa query parameter, dan tanpa batasan selain caching biasa.
+Kalau proyekmu tidak bisa memakai library Go atau TypeScript, data referensinya juga tersedia sebagai file JSON statis. File dibuat dari data yang sama saat build. Tidak ada server, query parameter, atau rate limit.
 
-| Path                                | Isi                                                                      |
-| ----------------------------------- | ------------------------------------------------------------------------ |
-| `/api/v1/index.json`                | Versi data dan daftar endpoint                                           |
-| `/api/v1/holidays/{year}.json`      | Libur nasional dan cuti bersama dalam setahun (2020 sampai 2027)         |
-| `/api/v1/provinces.json`            | 38 provinsi                                                              |
-| `/api/v1/regencies/{province}.json` | Kabupaten/kota dalam satu provinsi, misalnya `/api/v1/regencies/31.json` |
+| Path                                | Isi                                                                   |
+| ----------------------------------- | --------------------------------------------------------------------- |
+| `/api/v1/index.json`                | Versi data dan daftar endpoint                                        |
+| `/api/v1/holidays/{year}.json`      | Libur nasional dan cuti bersama setahun (2020 sampai 2027)            |
+| `/api/v1/provinces.json`            | 38 provinsi                                                           |
+| `/api/v1/regencies/{province}.json` | Kabupaten/kota di satu provinsi, misalnya `/api/v1/regencies/31.json` |
 
-Setiap file memakai amplop yang sama:
+Semua file punya bentuk yang sama:
 
 ```json
 {
@@ -28,6 +28,6 @@ Setiap file memakai amplop yang sama:
 }
 ```
 
-Item memakai field yang sama dengan library: [`Holiday`](/reference/holiday/) dan [`Region`](/reference/region/). `dataVersion` berubah setiap ada dataset yang berubah.
+Field-nya sama dengan di library: [`Holiday`](/reference/holiday/) dan [`Region`](/reference/region/). `dataVersion` berubah setiap ada dataset yang berubah.
 
-Respons mengizinkan request lintas origin. Untuk kecamatan, desa, pencarian, dan apa pun yang melibatkan data pribadi, pakai library agar data tidak pernah keluar dari proses Anda.
+Request lintas origin diizinkan. Untuk kecamatan, desa, pencarian, atau apa pun yang menyangkut data pribadi, pakai library supaya datanya tidak keluar dari aplikasimu.
