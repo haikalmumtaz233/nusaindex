@@ -3,11 +3,14 @@ title: Test data (fake)
 description: Generate structurally valid NIK, NPWP, phone numbers, NIP, NISN, and plates from a seed, identically in Go and TypeScript.
 ---
 
+import Live from "../../../components/Live.astro";
 import Example from "../../../components/Example.astro";
 
 :::danger[For tests only]
 Generated numbers are well-formed and may belong to real people. Never use them outside tests, demos and fixtures, and never present them as real.
 :::
+
+<Live tool="fake" />
 
 Every generator takes a 32-bit seed (`uint32` in Go, an integer from 0 to 4,294,967,295 in TypeScript). The same seed and options return the same value in Go and TypeScript, so fixtures can be shared between a Go backend and a TypeScript frontend.
 

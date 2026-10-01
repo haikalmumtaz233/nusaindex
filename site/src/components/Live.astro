@@ -1,0 +1,486 @@
+---
+import { localeOf } from "../lib/anatomy-text";
+import { fakeValues, maskParts, regionMatches, rupiahView, workdayView } from "../lib/live";
+import { fakeKinds, texts, type Tool } from "../lib/live-text";
+
+interface Props {
+  tool: Tool;
+}
+
+const { tool } = Astro.props;
+const locale = localeOf(Astro.currentLocale);
+const t = texts(locale);
+
+const defaults = {
+  rupiah: "Rp1.500.000,50",
+  mask: "Refund untuk NIK 3273275705901349, HP 0859-5257-171, rekening 1234567890.",
+  region: "gambir",
+  workdayDate: "2026-08-14",
+  workdayDays: 3,
+  fakeSeed: 42,
+};
+
+const rupiah = tool === "rupiah" ? rupiahView(defaults.rupiah) : undefined;
+const masked = tool === "mask" ? maskParts(defaults.mask) : [];
+const fakes = tool === "fake" ? await fakeValues("nik", defaults.fakeSeed, 5) : [];
+const work = tool === "workday" ? workdayView(defaults.workdayDate, defaults.workdayDays) : undefined;
+const regions = tool === "region" ? await regionMatches(defaults.region, 6) : undefined;
+---
+
+<section class="live not-content" data-tool={tool} data-locale={locale}>
+  {
+    tool === "rupiah" && (
+      <>
+        <label class="field">
+          <span>{t.rupiahInput}</span>
+          <input name="text" type="text" value={defaults.rupiah} maxlength="64" autocomplete="off" />
+        </label>
+        <div class="out" role="status" aria-live="polite">
+          {rupiah?.ok === true && (
+            <dl>
+              <div>
+                <dt>{t.amount}</dt>
+                <dd class="num">{String(rupiah.amount)}</dd>
+              </div>
+              <div>
+                <dt>{t.formatted}</dt>
+                <dd class="num">{rupiah.formatted}</dd>
+              </div>
+              <div class="wide">
+                <dt>{t.words}</dt>
+                <dd class="words">{rupiah.words}</dd>
+              </div>
+            </dl>
+          )}
+        </div>
+      </>
+    )
+  }
+  {
+    tool === "mask" && (
+      <>
+        <label class="field">
+          <span>{t.maskInput}</span>
+          <textarea name="text" rows="3" maxlength="2000" spellcheck="false" set:text={defaults.mask} />
+        </label>
+        <p class="out masked" role="status" aria-live="polite">
+          {masked.map((p) => (p.masked ? <mark>{p.text}</mark> : p.text))}
+        </p>
+      </>
+    )
+  }
+  {
+    tool === "fake" && (
+      <>
+        <div class="row">
+          <label class="field">
+            <span>{t.kind}</span>
+            <select name="kind">
+              {fakeKinds.map((k) => (
+                <option value={k}>{t.fakeKinds[k]}</option>
+              ))}
+            </select>
+          </label>
+          <label class="field">
+            <span>{t.seed}</span>
+            <input name="seed" type="number" min="0" max="4294967295" value={defaults.fakeSeed} />
+          </label>
+          <button type="button" name="reseed">
+            {t.newSeed}
+          </button>
+        </div>
+        <ol class="out values" role="status" aria-live="polite">
+          {fakes.map((v) => (
+            <li>{v}</li>
+          ))}
+        </ol>
+        <p class="hint">{t.fakeHint}</p>
+      </>
+    )
+  }
+  {
+    tool === "workday" && (
+      <>
+        <div class="row">
+          <label class="field">
+            <span>{t.start}</span>
+            <input name="date" type="date" value={defaults.workdayDate} />
+          </label>
+          <label class="field">
+            <span>{t.days}</span>
+            <input name="days" type="number" min="-365" max="365" value={defaults.workdayDays} />
+          </label>
+        </div>
+        <div class="out" role="status" aria-live="polite">
+          {work?.ok === true && (
+            <>
+              <p class="big num">{work.date}</p>
+              <p class="hint">{t.skipped(work.weekendDays, work.holidays, locale)}</p>
+            </>
+          )}
+        </div>
+      </>
+    )
+  }
+  {
+    tool === "region" && (
+      <>
+        <label class="field">
+          <span>{t.regionInput}</span>
+          <input name="query" type="search" value={defaults.region} maxlength="64" autocomplete="off" />
+        </label>
+        <ul class="out results" role="status" aria-live="polite">
+          {regions?.ok === true &&
+            regions.value.map((r) => (
+              <li>
+                <span class="name">{r.name}</span>
+                <span class="level">{t.levels[r.level]}</span>
+                <code>{r.code}</code>
+                {r.parents.length > 0 && <span class="path">{r.parents.join(" › ")}</span>}
+              </li>
+            ))}
+        </ul>
+      </>
+    )
+  }
+  <p class="note">{t.note}</p>
+</section>
+
+<style is:global>
+  .live {
+    display: grid;
+    gap: 1rem;
+    margin-block: 1.5rem 2rem;
+    padding: 1.25rem;
+    border: 1px solid var(--surface-line);
+    border-radius: 0.75rem;
+    background: var(--surface);
+  }
+  .live .row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    align-items: end;
+  }
+  .live .field {
+    display: grid;
+    flex: 1 1 10rem;
+    gap: 0.35rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 600;
+    color: var(--sl-color-gray-2);
+  }
+  .live :is(input, select, textarea, button) {
+    min-height: 2.75rem;
+    padding: 0.5rem 0.75rem;
+    font: inherit;
+    font-size: var(--sl-text-base);
+    font-weight: 500;
+    color: var(--sl-color-white);
+    background: var(--sl-color-black);
+    border: 1px solid var(--surface-line);
+    border-radius: 0.5rem;
+  }
+  .live textarea {
+    resize: vertical;
+  }
+  .live button {
+    cursor: pointer;
+    font-weight: 600;
+    border-radius: 999px;
+  }
+  .live :is(input, select, textarea, button):focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+  }
+  .live .out {
+    margin: 0;
+  }
+  .live dl {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 12rem), 1fr));
+    gap: 0.75rem 1.5rem;
+    margin: 0;
+  }
+  .live dl .wide {
+    grid-column: 1 / -1;
+  }
+  .live dt {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .live dd {
+    margin: 0.15rem 0 0;
+    font-weight: 600;
+    color: var(--sl-color-white);
+  }
+  .live .num {
+    font-variant-numeric: tabular-nums;
+  }
+  .live .words,
+  .live .big {
+    font-size: var(--sl-text-xl);
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--kunyit);
+  }
+  .live .big {
+    margin: 0;
+    font-size: var(--sl-text-3xl);
+  }
+  .live .masked {
+    font-size: var(--sl-text-lg);
+    line-height: 1.6;
+    color: var(--sl-color-white);
+    overflow-wrap: anywhere;
+  }
+  .live mark {
+    padding-inline: 0.1em;
+    border-radius: 0.2em;
+    color: var(--sl-color-black);
+    background: var(--kunyit);
+  }
+  .live .values {
+    display: grid;
+    gap: 0.35rem;
+    padding-inline-start: 1.5rem;
+    font-size: var(--sl-text-lg);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--sl-color-white);
+  }
+  .live .results {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0;
+    list-style: none;
+  }
+  .live .results li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
+    align-items: baseline;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--surface-line);
+  }
+  .live .results .name {
+    font-weight: 700;
+    color: var(--sl-color-white);
+  }
+  .live .results .level {
+    font-size: var(--sl-text-xs);
+    font-weight: 600;
+    color: var(--laut);
+  }
+  .live .results code {
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-2);
+  }
+  .live .results .path {
+    flex-basis: 100%;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .live .hint,
+  .live .note {
+    margin: 0;
+    font-size: var(--sl-text-sm);
+    color: var(--sl-color-gray-3);
+  }
+  .live .note {
+    font-size: var(--sl-text-xs);
+  }
+  .live .error {
+    margin: 0;
+    font-weight: 600;
+    color: var(--soga);
+  }
+</style>
+
+<script>
+  import { localeOf, type Locale } from "../lib/anatomy-text";
+  import {
+    fakeValues,
+    maskParts,
+    regionMatches,
+    rupiahView,
+    workdayView,
+    type WorkdayView,
+  } from "../lib/live";
+  import { texts } from "../lib/live-text";
+  import { isKind } from "../lib/playground";
+
+  function node<K extends keyof HTMLElementTagNameMap>(
+    tag: K,
+    className: string,
+    text?: string,
+  ): HTMLElementTagNameMap[K] {
+    const el = document.createElement(tag);
+    if (className !== "") {
+      el.className = className;
+    }
+    if (text !== undefined) {
+      el.textContent = text;
+    }
+    return el;
+  }
+
+  function errorNode(locale: Locale, code: string): HTMLElement {
+    return node("p", "error", texts(locale).error(code));
+  }
+
+  function field<T extends Element>(root: HTMLElement, selector: string): T | null {
+    return root.querySelector<T>(selector);
+  }
+
+  function setupRupiah(root: HTMLElement, locale: Locale): void {
+    const t = texts(locale);
+    const input = field<HTMLInputElement>(root, "input");
+    const out = field<HTMLElement>(root, ".out");
+    if (!input || !out) {
+      return;
+    }
+    input.addEventListener("input", () => {
+      const view = rupiahView(input.value);
+      if (!view.ok) {
+        out.replaceChildren(errorNode(locale, view.error));
+        return;
+      }
+      const list = node("dl", "");
+      const add = (label: string, value: string, className: string, wide = false): void => {
+        const item = node("div", wide ? "wide" : "");
+        item.append(node("dt", "", label), node("dd", className, value));
+        list.append(item);
+      };
+      add(t.amount, String(view.amount), "num");
+      add(t.formatted, view.formatted, "num");
+      add(t.words, view.words, "words", true);
+      out.replaceChildren(list);
+    });
+  }
+
+  function setupMask(root: HTMLElement): void {
+    const input = field<HTMLTextAreaElement>(root, "textarea");
+    const out = field<HTMLElement>(root, ".out");
+    if (!input || !out) {
+      return;
+    }
+    input.addEventListener("input", () => {
+      out.replaceChildren(
+        ...maskParts(input.value).map((p) => (p.masked ? node("mark", "", p.text) : p.text)),
+      );
+    });
+  }
+
+  function setupFake(root: HTMLElement): void {
+    const kind = field<HTMLSelectElement>(root, "select");
+    const seed = field<HTMLInputElement>(root, "input[name=seed]");
+    const reseed = field<HTMLButtonElement>(root, "button[name=reseed]");
+    const out = field<HTMLElement>(root, ".out");
+    if (!kind || !seed || !reseed || !out) {
+      return;
+    }
+    let shown = 0;
+    const update = (): void => {
+      const k = kind.value;
+      const s = Number.parseInt(seed.value, 10);
+      if (!isKind(k) || !Number.isInteger(s) || s < 0) {
+        return;
+      }
+      const ticket = ++shown;
+      void fakeValues(k, s, 5).then((values) => {
+        if (ticket === shown) {
+          out.replaceChildren(...values.map((v) => node("li", "", v)));
+        }
+      });
+    };
+    kind.addEventListener("change", update);
+    seed.addEventListener("input", update);
+    reseed.addEventListener("click", () => {
+      seed.value = String(crypto.getRandomValues(new Uint32Array(1))[0] ?? 0);
+      update();
+    });
+  }
+
+  function setupWorkday(root: HTMLElement, locale: Locale): void {
+    const t = texts(locale);
+    const date = field<HTMLInputElement>(root, "input[name=date]");
+    const days = field<HTMLInputElement>(root, "input[name=days]");
+    const out = field<HTMLElement>(root, ".out");
+    if (!date || !days || !out) {
+      return;
+    }
+    const update = (): void => {
+      const n = Number.parseInt(days.value, 10);
+      const invalid: WorkdayView = { ok: false, error: "options" };
+      const view = Number.isInteger(n) ? workdayView(date.value, n) : invalid;
+      if (!view.ok) {
+        out.replaceChildren(errorNode(locale, view.error));
+        return;
+      }
+      out.replaceChildren(
+        node("p", "big num", view.date),
+        node("p", "hint", t.skipped(view.weekendDays, view.holidays, locale)),
+      );
+    };
+    date.addEventListener("input", update);
+    days.addEventListener("input", update);
+  }
+
+  function setupRegion(root: HTMLElement, locale: Locale): void {
+    const t = texts(locale);
+    const input = field<HTMLInputElement>(root, "input");
+    const out = field<HTMLElement>(root, ".out");
+    if (!input || !out) {
+      return;
+    }
+    let shown = 0;
+    input.addEventListener("input", () => {
+      const ticket = ++shown;
+      void regionMatches(input.value, 6).then((found) => {
+        if (ticket !== shown) {
+          return;
+        }
+        if (!found.ok) {
+          out.replaceChildren(errorNode(locale, found.error));
+          return;
+        }
+        out.replaceChildren(
+          ...found.value.map((r) => {
+            const item = node("li", "");
+            item.append(
+              node("span", "name", r.name),
+              node("span", "level", t.levels[r.level]),
+              node("code", "", r.code),
+            );
+            if (r.parents.length > 0) {
+              item.append(node("span", "path", r.parents.join(" › ")));
+            }
+            return item;
+          }),
+        );
+      });
+    });
+  }
+
+  for (const root of document.querySelectorAll<HTMLElement>(".live")) {
+    const locale = localeOf(root.dataset.locale);
+    switch (root.dataset.tool) {
+      case "rupiah":
+        setupRupiah(root, locale);
+        break;
+      case "mask":
+        setupMask(root);
+        break;
+      case "fake":
+        setupFake(root);
+        break;
+      case "workday":
+        setupWorkday(root, locale);
+        break;
+      case "region":
+        setupRegion(root, locale);
+        break;
+    }
+  }
+</script>
