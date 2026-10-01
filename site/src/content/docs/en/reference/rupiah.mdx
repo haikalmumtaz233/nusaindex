@@ -20,7 +20,7 @@ import Example from "../../../../components/Example.astro";
 ## Amounts
 
 - **Go** uses `rupiah.Amount`, an `int64` in sen, so arithmetic is exact: `150_000 * rupiah.Rupiah + 50 * rupiah.Sen`.
-- **TypeScript** uses a `number` in rupiah. Amounts with sen are limited to below 10 trillion (`MAX_SEN_AMOUNT`) so they stay exact; whole amounts go up to 999 trillion (`MAX_AMOUNT`).
+- **TypeScript** uses a `number` in rupiah. Amounts with sen are limited to below 10 trillion (`MAX_SEN_AMOUNT`) so they stay exact. Whole amounts go up to 999 trillion (`MAX_AMOUNT`).
 
 ## Format options
 

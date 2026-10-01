@@ -22,13 +22,13 @@ import Example from "../../../../components/Example.astro";
 | `mask.Phone(s)`         | `mask.phone(s)`   | `+62` and the last 3 digits visible                  |
 | `mask.Text(s)`          | `mask.text(s)`    | Free text with every run of 10 or more digits masked |
 | `mask.Redact(v)`        | `mask.redact(v)`  | A redacted deep copy of an object, array or value    |
-| `mask.NewHandler(next)` | —                 | A `log/slog` handler that redacts before `next`      |
+| `mask.NewHandler(next)` | Go only           | A `log/slog` handler that redacts before `next`      |
 
 The per-kind functions are the same as `nik.Mask`, `phone.Mask` and so on, collected in one place.
 
 ## Free text
 
-`Text` finds identifier-like numbers (10 or more digits, allowing the usual separators) and masks each one with the same rule as its kind: phone numbers keep `+62` and 3 digits, everything else keeps 4. It scans in linear time and accepts up to 1 MiB (`MaxText` / `MAX_TEXT`); longer input fails with `length`.
+`Text` finds identifier-like numbers (10 or more digits, allowing the usual separators) and masks each one with the same rule as its kind: phone numbers keep `+62` and 3 digits, everything else keeps 4. It scans in linear time and accepts up to 1 MiB (`MaxText` / `MAX_TEXT`). Longer input fails with `length`.
 
 ## Objects
 

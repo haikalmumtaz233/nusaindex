@@ -8,14 +8,14 @@ description: How NusaIndex protects the personal data that passes through it and
 - **Offline**: the libraries, CLI and MCP server make no network requests. All reference data is embedded.
 - **No logging or storage**: input is never logged, stored or sent. Error messages contain a code, never the value.
 - **Bounded input**: identifiers are limited to 64 characters, searches to 256, free text to 1 MiB, and CLI batch lines to 1 MiB, checked before any other work.
-- **Linear-time parsing**: no backtracking regular expressions; every parser is fuzz tested in Go.
+- **Linear-time parsing**: no backtracking regular expressions. Every parser is fuzz tested in Go.
 - **Strict characters**: only ASCII digits and listed separators are accepted, so look-alike Unicode digits cannot slip through. Use `normalize` explicitly when you want to accept pasted text.
 - **Safe redaction**: `mask.redact` never mutates input, never calls getters, ignores prototype keys, and survives cycles and deep nesting.
 
 ## This website
 
 - Static pages with no server, cookies, analytics, or third-party scripts and fonts.
-- A strict Content Security Policy: scripts and styles only from this site, pinned by hash for inline code; no framing.
+- A strict Content Security Policy: scripts and styles only from this site, pinned by hash for inline code. No framing.
 - The [playground](/en/playground/) runs entirely in your browser.
 
 ## Supply chain

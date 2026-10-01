@@ -19,7 +19,7 @@ npx nusaindex --help
 | `nusaindex <nik\|npwp\|phone\|plate\|nip\|nisn> <value>`       | Validate and parse one value                        |
 | `nusaindex mask <kind\|text> <value>`                          | Mask an identifier (`account` too) or free text     |
 | `nusaindex rupiah format\|parse\|terbilang <value>`            | Format, parse or spell a Rupiah amount              |
-| `nusaindex region get\|resolve\|children\|search\|nik <value>` | Look up regions; `resolve` follows renumbered codes |
+| `nusaindex region get\|resolve\|children\|search\|nik <value>` | Look up regions, `resolve` follows renumbered codes |
 | `nusaindex holiday <year>`                                     | Holidays and collective leave in a year             |
 | `nusaindex bank <code\|bic\|list>`                             | Look up banks by transfer code or BIC               |
 | `nusaindex workday is\|add\|count …`                           | Working-day arithmetic                              |
@@ -47,7 +47,7 @@ nusaindex mask nik --csv --column nik < customers.csv > masked.csv
 ```
 
 - `--stdin` reads one value per line (up to 1 MiB per line).
-- `--csv --column <name>` reads a CSV with a header. Validation adds `<column>_valid` and `<column>_error` columns; `mask` and `rupiah` replace the cell. Records must fit on one line.
+- `--csv --column <name>` reads a CSV with a header. Validation adds `<column>_valid` and `<column>_error` columns, while `mask` and `rupiah` replace the cell. Records must fit on one line.
 
 ## Output and exit codes
 
