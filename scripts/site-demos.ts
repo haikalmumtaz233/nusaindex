@@ -28,7 +28,7 @@ const mcp = join("packages", "mcp", "dist", "main.js");
 
 const width = 760;
 const padX = 24;
-const top = 56;
+const top = 76;
 const lineHeight = 22;
 const charWidth = 8.4;
 const fontSize = 14;
@@ -179,10 +179,10 @@ function mcpFrames(): Frame[] {
   const tool = (text: string): Row => ({ pieces: [{ text, tone: "tool" }], bubble: "tool" });
   const result = (text: string): Row => ({ pieces: [{ text, tone: "value" }], indent: 2 });
   return [
-    { at: 0.4, lines: [user("Make 3 test NIKs: Kota Bandung, born 1990-05-17, female")] },
+    { at: 0.4, lines: [user("Buatin 3 NIK uji: Kota Bandung, lahir 1990-05-17, perempuan")] },
     { at: 1.6, lines: [tool("fake  kind=nik count=3 region=32.73 sex=female seed=42")] },
     { at: 2.4, lines: asStrings(niks).map(result) },
-    { at: 4.4, lines: [user("Is 0859-5257-171 a valid phone number?")] },
+    { at: 4.4, lines: [user("Nomor 0859-5257-171 ini valid nggak?")] },
     { at: 5.6, lines: [tool("parse  kind=phone")] },
     {
       at: 6.4,
@@ -278,8 +278,8 @@ function render(title: string, frames: readonly Frame[], spacing: number): strin
 }
 
 const demos: readonly { file: string; svg: () => string }[] = [
-  { file: "cli.svg", svg: () => render("nusa: the NusaIndex command line", cliFrames(), 6) },
-  { file: "mcp.svg", svg: () => render("nusaindex-mcp in an MCP client", mcpFrames(), 10) },
+  { file: "cli.svg", svg: () => render("nusa di terminal", cliFrames(), 6) },
+  { file: "mcp.svg", svg: () => render("nusaindex-mcp di klien MCP", mcpFrames(), 10) },
 ];
 
 const stale: string[] = [];
