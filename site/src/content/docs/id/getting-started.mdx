@@ -3,82 +3,33 @@ title: Mulai
 description: Pasang NusaIndex untuk Go atau TypeScript dan jalankan pengecekan pertama.
 ---
 
-import { Tabs, TabItem } from "@astrojs/starlight/components";
+import { Steps } from "@astrojs/starlight/components";
+import Example from "../../../components/Example.astro";
+import ModuleGrid from "../../../components/ModuleGrid.astro";
 
-## Instalasi
+<Steps>
 
-<Tabs syncKey="language">
-  <TabItem label="Go">
-    Go 1.25 atau lebih baru. Modul ini tidak memakai dependensi di luar standard library.
+1. Pasang paketnya. Go 1.25 atau lebih baru hanya memakai standard library; TypeScript berjalan di Node.js 22.18 atau lebih baru, Bun, Deno, edge runtime, dan browser modern (hanya ESM).
 
-    ```sh
-    go get github.com/haikalmumtaz233/nusaindex
-    ```
+   ```sh title="Go"
+   go get github.com/haikalmumtaz233/nusaindex
+   ```
 
-  </TabItem>
-  <TabItem label="TypeScript">
-    Node.js 22.18 atau lebih baru, Bun, Deno, edge runtime, atau browser modern. Hanya ESM, tanpa
-    dependensi runtime.
+   ```sh title="TypeScript"
+   npm install nusaindex
+   ```
 
-    ```sh
-    npm install nusaindex
-    ```
+2. Jalankan pengecekan pertama. Contoh ini dijalankan setiap build, di kedua bahasa, dan keluarannya harus sama.
 
-  </TabItem>
-</Tabs>
+   <Example name="quickstart" />
 
-## Pengecekan pertama
+3. Import seperlunya. Setiap modul adalah paket Go (`github.com/haikalmumtaz233/nusaindex/<nama>`) dan subpath TypeScript (`nusaindex/<nama>`) tersendiri. `nusaindex/nik` menambah kurang dari 2 KB gzip ke bundle browser, dan data wilayah dimuat per provinsi.
 
-<Tabs syncKey="language">
-  <TabItem label="Go">
+</Steps>
 
-```go
-package main
+## Modul
 
-import (
-	"fmt"
-
-	"github.com/haikalmumtaz233/nusaindex/nik"
-)
-
-func main() {
-	parsed, err := nik.Parse("7502010706599583")
-	if err != nil {
-		fmt.Println("invalid:", err)
-		return
-	}
-	fmt.Println(parsed.BirthDate, parsed.Sex)
-}
-```
-
-  </TabItem>
-  <TabItem label="TypeScript">
-
-```ts
-import * as nik from "nusaindex/nik";
-
-const parsed = nik.parse("7502010706599583");
-if (parsed.ok) {
-  console.log(parsed.value.birthDate, parsed.value.sex);
-} else {
-  console.log("invalid:", parsed.error.code);
-}
-```
-
-  </TabItem>
-</Tabs>
-
-Nomor contoh di situs ini dibuat dengan generator [`fake`](/id/reference/fake/). Jangan pernah menempelkan data pribadi asli ke contoh, issue, atau chat AI.
-
-## Import
-
-| Paket Go                                      | TypeScript                                          |
-| --------------------------------------------- | --------------------------------------------------- |
-| `github.com/haikalmumtaz233/nusaindex/<nama>` | `nusaindex/<nama>`, atau namespace dari `nusaindex` |
-
-Setiap modul adalah paket Go dan subpath TypeScript tersendiri, jadi yang ikut ter-bundle hanya yang Anda import. Import `nusaindex/nik` menambah kurang dari 2 KB gzip ke bundle browser; data wilayah dimuat per provinsi hanya saat Anda memanggil `region`.
-
-Di TypeScript, `fake`, `zod`, dan `valibot` hanya tersedia lewat subpath dan tidak ada di export root `nusaindex`.
+<ModuleGrid />
 
 ## API sama, dua bahasa
 
@@ -89,10 +40,14 @@ Di TypeScript, `fake`, `zod`, dan `valibot` hanya tersedia lewat subpath dan tid
 | Normalisasi | `Format(s) (string, error)` | `format(s): Result<string>` |
 | Mask        | `Mask(s) string`            | `mask(s): string`           |
 
-Nama mengikuti konvensi tiap bahasa (`WhatsAppLink` dan `whatsappLink`, `FromNIK` dan `fromNik`). Hasilnya identik: setiap fungsi diuji dengan test vector bersama yang dijalankan di kedua implementasi.
+Nama mengikuti konvensi tiap bahasa (`WhatsAppLink`, `whatsappLink`). Test vector bersama dijalankan di kedua implementasi, jadi hasilnya identik. Di TypeScript, `fake`, `zod`, dan `valibot` hanya tersedia lewat subpath.
+
+:::note[Data contoh]
+Nomor di situs ini dibuat dengan generator [`fake`](/id/reference/fake/). Jangan pernah menempelkan data pribadi asli ke contoh, issue, atau chat AI.
+:::
 
 ## Langkah berikutnya
 
 - [Hasil dan error](/id/guides/results-and-errors/): cara kegagalan dilaporkan.
 - [Input dan privasi](/id/guides/input-and-privacy/): karakter yang diterima, Unicode, dan masking.
-- [CLI](/id/tools/cli/) dan [server MCP](/id/tools/mcp/) jika Anda tidak menulis kode.
+- [Command line](/id/tools/cli/) dan [server MCP](/id/tools/mcp/) jika Anda tidak menulis kode.
