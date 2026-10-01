@@ -75,11 +75,13 @@ const regions = tool === "region" ? await regionMatches(defaults.region, 6) : un
         <div class="row">
           <label class="field">
             <span>{t.kind}</span>
-            <select name="kind">
-              {fakeKinds.map((k) => (
-                <option value={k}>{t.fakeKinds[k]}</option>
-              ))}
-            </select>
+            <span class="nx-select">
+              <select name="kind">
+                {fakeKinds.map((k) => (
+                  <option value={k}>{t.fakeKinds[k]}</option>
+                ))}
+              </select>
+            </span>
           </label>
           <label class="field">
             <span>{t.seed}</span>
@@ -174,7 +176,7 @@ const regions = tool === "region" ? await regionMatches(defaults.region, 6) : un
     font-weight: 600;
     color: var(--sl-color-gray-2);
   }
-  .live :is(input, select, textarea, button) {
+  .live :is(input, textarea, button) {
     min-height: 2.75rem;
     padding: 0.5rem 0.75rem;
     font: inherit;
@@ -193,7 +195,7 @@ const regions = tool === "region" ? await regionMatches(defaults.region, 6) : un
     font-weight: 600;
     border-radius: 999px;
   }
-  .live :is(input, select, textarea, button):focus-visible {
+  .live :is(input, textarea, button):focus-visible {
     outline: 2px solid var(--sl-color-accent);
     outline-offset: 2px;
   }
