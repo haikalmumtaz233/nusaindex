@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Documentation site: every identifier page opens with a live decoder that colours each digit by what it means (region, birth date, operator, tax office and more) and explains errors in plain words. Holidays show on a year calendar, regions on a level diagram with live search, and the Rupiah, masking, test data and working-day pages have small tools that run in the browser. The home page and the CLI and MCP pages show animated demos generated from real output, and the site uses a self-hosted Plus Jakarta Sans font.
+
 ## [0.9.0-rc.1] - 2026-10-01
 
 Release candidate for 1.0.0. No changes since 0.5.0.
