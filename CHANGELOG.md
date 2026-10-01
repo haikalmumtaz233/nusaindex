@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Added
+
+- CLI `nusaindex` (alias `nusa`) in the `nusaindex` package: validate and parse NIK, NPWP, phone numbers, plates, NIP and NISN; mask values and free text; format, parse and spell Rupiah; look up regions, holidays and working days; and generate test data with `fake`. `--stdin` processes one value per line (up to 1 MiB each) and `--csv --column` checks or rewrites one CSV column; `--json` prints JSON. Exit code `0` means valid, `1` invalid and `2` a usage error. Error messages never repeat the input.
+
 ## [0.3.0] - 2026-10-01
 
 ### Added
