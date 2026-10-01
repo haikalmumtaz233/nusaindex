@@ -26,7 +26,9 @@
     "data:build": "node scripts/data-build.ts",
     "data:watch": "node scripts/data-watch.ts",
     "pkg:check": "pnpm --filter nusaindex run pkg:check && pnpm --filter nusaindex-mcp run pkg:check",
+    "pack:local": "pnpm build && pnpm --filter nusaindex --filter nusaindex-mcp exec pnpm pack",
     "size": "pnpm --filter nusaindex run size",
+    "budget": "pnpm build && node scripts/budget.ts",
     "audit:deps": "pnpm audit --audit-level high",
     "verify": "pnpm format:check && pnpm comments:check && pnpm version:check && pnpm data:check && pnpm lint && pnpm check && pnpm test && pnpm go:vet && pnpm go:lint && pnpm go:test && pnpm build && pnpm size && pnpm pkg:check && pnpm audit:deps && pnpm go:vuln"
   },
