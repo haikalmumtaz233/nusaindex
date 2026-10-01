@@ -14,7 +14,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Changed
 
 - MCP `region_get` adds `resolved` with the code asked for and the current code when it follows a renumbered code, so agents can tell users the code has changed.
+- Documentation site and README: Indonesian is now the default language. English pages move to `/en/` and the English README to `README.en.md`. The Indonesian text is shorter and more casual, and a new use cases page shows where NusaIndex helps, from local government and school forms to payroll, logistics and AI agents.
 - Documentation site: every identifier page opens with a live decoder that colours each digit by what it means (region, birth date, operator, tax office and more) and explains errors in plain words. Holidays show on a year calendar, regions on a level diagram with live search, and the Rupiah, masking, test data and working-day pages have small tools that run in the browser. The home page and the CLI and MCP pages show animated demos generated from real output, and the site uses a self-hosted Plus Jakarta Sans font.
+
+### Fixed
+
+- Documentation site: dropdown arrows no longer sit on the edge of their field, the theme and language selects fit Indonesian labels, all dropdowns share one style, and the table of contents marks the last section when a page is scrolled to the end.
 
 ## [0.9.0-rc.1] - 2026-10-01
 
