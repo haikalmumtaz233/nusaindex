@@ -6,6 +6,8 @@ NIK, NPWP (including the 16-digit format and NITKU), phone numbers, vehicle plat
 
 > Unofficial. Not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any Indonesian government agency.
 
+![Terminal session: nusa nik decodes a NIK into its fields, nusa phone finds the XL brand, nusa rupiah terbilang spells 1,500,000.50 in words, and nusa mask text hides a NIK and a phone number in a sentence.](site/public/demos/cli.svg)
+
 ## Features
 
 - Native Go and TypeScript libraries with the same API and identical behavior, checked by shared test vectors
@@ -57,6 +59,8 @@ Arguments can end up in your shell history, so pass real data with `--stdin` or 
 ```
 
 Anything typed into an AI chat has already been sent to the AI provider before it reaches the local server, so use the `fake` tool for demos.
+
+![MCP client: asked for three test NIKs in Kota Bandung, the fake tool returns three NIKs; asked about 0859-5257-171, the parse tool returns +628595257171, a mobile number from XL (XLSmart).](site/public/demos/mcp.svg)
 
 ## Validation libraries
 
