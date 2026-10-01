@@ -163,9 +163,27 @@ describe("cli reference data", () => {
     expect((await cli(["region", "nik", FAKE_NIK])).out.join("\n")).toContain("31.71.01 Gambir");
   });
 
+  it("resolves old region codes and says which code it followed", async () => {
+    const moved = await cli(["region", "resolve", "91.04"]);
+    expect(moved.code).toBe(0);
+    expect(moved.out).toContain("code          94.01");
+    expect(moved.out).toContain("resolvedFrom  91.04");
+    const json = await cli(["region", "resolve", "9104", "--json"]);
+    expect(JSON.parse(json.out[0] ?? "")).toMatchObject({
+      ok: true,
+      value: { code: "94.01", resolvedFrom: "9104" },
+    });
+    for (const code of ["31.71", "3171"]) {
+      const current = await cli(["region", "resolve", code]);
+      expect(current.out.join("\n")).not.toContain("resolvedFrom");
+    }
+    expect((await cli(["region", "resolve", "99"])).code).toBe(1);
+  });
+
   it.each([
     [["region"]],
     [["region", "get", "31", "32"]],
+    [["region", "resolve"]],
     [["region", "search", "x", "--level", "city"]],
     [["region", "search", "x", "--limit", "0"]],
     [["holiday", "abc"]],
