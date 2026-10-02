@@ -1,0 +1,109 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Verify
+    uses: $/.github/workflows/verify.yml
+    permissions:
+      contents: read
+
+  publish:
+    name: Publish to npm
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: release
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - uses: pnpm/action-setup@ea17c68df8912ef543352723c149a84f56e3d413
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check the tag against the package version
+        env:
+          TAG: ${{ github.ref_name }}
+        run: pnpm version:check && node scripts/release-notes.ts dist-tag "$TAG"
+
+      - name: Build and pack
+        run: |
+          pnpm build
+          pnpm --filter nusaindex --filter nusaindex-mcp exec pnpm pack --pack-destination "$RUNNER_TEMP/packs"
+
+      - name: Publish with provenance
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          version="${TAG#v}"
+          dist_tag="$(node scripts/release-notes.ts dist-tag "$TAG")"
+          npm publish "$RUNNER_TEMP/packs/nusaindex-$version.tgz" --provenance --access public --tag "$dist_tag"
+          npm publish "$RUNNER_TEMP/packs/nusaindex-mcp-$version.tgz" --provenance --access public --tag "$dist_tag"
+
+  github-release:
+    name: GitHub Release
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+          package-manager-cache: false
+
+      - name: Create the release from the changelog
+        env:
+          TAG: ${{ github.ref_name }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node scripts/release-notes.ts notes "$TAG" > "$RUNNER_TEMP/notes.md"
+          flags=()
+          if [[ "$TAG" == *-* ]]; then
+            flags+=(--prerelease)
+          fi
+          gh release create "$TAG" --verify-tag --title "$TAG" --notes-file "$RUNNER_TEMP/notes.md" "${flags[@]}"
+
+  go-proxy:
+    name: Warm the Go module proxy
+    needs: publish
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e
+        with:
+          go-version: stable
+          cache: false
+
+      - name: Request the tagged module from proxy.golang.org
+        env:
+          TAG: ${{ github.ref_name }}
+          GOPROXY: https://proxy.golang.org
+        run: go list -m "github.com/haikalmumtaz233/nusaindex@$TAG"
