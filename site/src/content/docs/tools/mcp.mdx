@@ -3,29 +3,119 @@ title: Server MCP
 description: Tool read-only dan offline untuk agent AI, mulai dari nomor identitas, wilayah, libur, hari kerja, sampai Rupiah.
 ---
 
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
 `nusaindex-mcp` adalah server [Model Context Protocol](https://modelcontextprotocol.io) yang jalan lokal lewat stdio. Semua tool-nya cuma membaca, tanpa akses ke file system, shell, atau jaringan.
 
-<img src="/demos/mcp.svg" width="760" height="386" alt="Klien MCP: diminta tiga NIK uji di Kota Bandung, tool fake mengembalikan tiga NIK. Ditanya soal 0859-5257-171, tool parse menjawab +628595257171, nomor seluler XL (XLSmart)." />
+<img
+  src="/demos/mcp.svg"
+  width="760"
+  height="386"
+  alt="Klien MCP: diminta tiga NIK uji di Kota Bandung, tool fake mengembalikan tiga NIK. Ditanya soal 0859-5257-171, tool parse menjawab +628595257171, nomor seluler XL (XLSmart)."
+/>
 
 ## Setup
 
-Konfigurasi ini bisa dipakai di kebanyakan klien MCP (Claude Desktop, Claude Code, Cursor, VS Code):
+Butuh Node.js 22.18 ke atas. Servernya jalan di komputer kamu sendiri dan siap dalam kurang dari 300 ms. Pilih aplikasi yang kamu pakai.
 
-```json
-{
-  "mcpServers": {
-    "nusaindex": { "command": "npx", "args": ["-y", "nusaindex-mcp"] }
-  }
-}
-```
+<Tabs syncKey="mcp-client">
+  <TabItem label="Claude Code">
 
-Di Claude Code, bisa juga pakai perintah ini:
+Jalankan perintah ini di terminal:
 
 ```sh
 claude mcp add nusaindex -- npx -y nusaindex-mcp
 ```
 
-Butuh Node.js 22.18 ke atas, dan server siap dalam kurang dari 300 ms.
+Cek dengan `claude mcp list`. Kalau berhasil, statusnya `✔ Connected`.
+
+  </TabItem>
+  <TabItem label="Claude Desktop">
+
+Buka **Settings → Developer → Edit Config**, lalu tambahkan:
+
+```json
+{
+  "mcpServers": {
+    "nusaindex": {
+      "command": "npx",
+      "args": ["-y", "nusaindex-mcp"]
+    }
+  }
+}
+```
+
+Tutup Claude Desktop sampai benar-benar keluar (Quit dari tray), lalu buka lagi.
+
+  </TabItem>
+  <TabItem label="Cursor">
+
+Simpan di `~/.cursor/mcp.json` supaya aktif di semua proyek, atau di `.cursor/mcp.json` kalau cuma untuk satu proyek:
+
+```json
+{
+  "mcpServers": {
+    "nusaindex": {
+      "command": "npx",
+      "args": ["-y", "nusaindex-mcp"]
+    }
+  }
+}
+```
+
+Buka pengaturan MCP di Cursor. `nusaindex` harus muncul dengan 10 tool.
+
+  </TabItem>
+  <TabItem label="VS Code">
+
+Copilot di VS Code memakai kunci `servers`, bukan `mcpServers`. Simpan di `.vscode/mcp.json`:
+
+```json
+{
+  "servers": {
+    "nusaindex": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "nusaindex-mcp"]
+    }
+  }
+}
+```
+
+Buka Copilot Chat dalam mode **Agent**, lalu nyalakan `nusaindex` lewat tombol tools.
+
+  </TabItem>
+  <TabItem label="Codex">
+
+Jalankan perintah ini di terminal:
+
+```sh
+codex mcp add nusaindex -- npx -y nusaindex-mcp
+```
+
+Atau tulis sendiri di `~/.codex/config.toml`:
+
+```toml
+[mcp_servers.nusaindex]
+command = "npx"
+args = ["-y", "nusaindex-mcp"]
+```
+
+  </TabItem>
+  <TabItem label="Lainnya">
+
+Windsurf (`~/.codeium/windsurf/mcp_config.json`) dan Gemini CLI (`~/.gemini/settings.json`) memakai format `mcpServers` yang sama dengan Claude Desktop. Aplikasi lain yang mendukung server MCP lokal (stdio) biasanya juga bisa pakai format itu.
+
+  </TabItem>
+</Tabs>
+
+:::note[Windows]
+Kalau aplikasinya gagal menjalankan `npx`, ganti `"command": "npx"` jadi `"command": "cmd"`, lalu isi `args` dengan `["/c", "npx", "-y", "nusaindex-mcp"]`.
+:::
+
+:::note[Versi web]
+Grok, ChatGPT, dan Claude versi web cuma bisa tersambung ke server MCP online. `nusaindex-mcp` sengaja jalan lokal saja supaya data yang kamu cek tidak lewat server siapa pun. Jadi pakai aplikasi desktop atau CLI.
+:::
 
 ## Tool
 
