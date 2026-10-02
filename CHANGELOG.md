@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - CLI: `nusaindex bank <code|bic|list>` looks up banks by transfer code or BIC, and `nusaindex region resolve <code>` follows codes renumbered by the 2012 and 2022 region splits and prints `resolvedFrom` with the code it was given.
 - MCP: a `bank` tool for bank codes and BICs, and a `mask` tool that masks values of one kind or every identifier-like number in free text.
+- Documentation site: a copyright line with the MIT License in the footer of every page.
 
 ### Changed
 
@@ -20,6 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 ### Fixed
 
 - Documentation site: dropdown arrows no longer sit on the edge of their field, the theme and language selects fit Indonesian labels, all dropdowns share one style, and the table of contents marks the last section when a page is scrolled to the end.
+- Documentation site: the sidebar scrolls the current page into view, so links low in the list such as Playground stay visible when opened from the home page. The number decoder no longer repeats the in-browser note.
 
 ## [0.9.0-rc.1] - 2026-10-01
 
