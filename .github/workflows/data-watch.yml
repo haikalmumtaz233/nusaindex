@@ -1,0 +1,54 @@
+name: Data watch
+
+on:
+  schedule:
+    - cron: "17 2 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: data-watch
+  cancel-in-progress: false
+
+jobs:
+  watch:
+    name: Watch official sources
+    if: ${{ !github.event.repository.private }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020
+        with:
+          node-version: 24
+
+      - name: Compare data with official sources
+        run: node scripts/data-watch.ts --write | tee -a "$GITHUB_STEP_SUMMARY"
+
+      - name: Push a data branch for review
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REPOSITORY: ${{ github.repository }}
+        run: |
+          if git diff --quiet -- data; then
+            echo "No data changes." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          branch="data/watch-$(date -u +%Y-%m-%d)"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch -c "$branch"
+          git add data
+          git commit -m "data: refresh sources from the weekly data watch"
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${REPOSITORY}.git" "$branch"
+          echo "Pushed \`$branch\`. Review the diff, add aliases for removed codes, then open a pull request." >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Check the refreshed data
+        run: node scripts/data-check.ts
