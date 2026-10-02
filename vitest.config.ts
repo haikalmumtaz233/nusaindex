@@ -8,7 +8,11 @@ export default defineConfig({
     alias: [{ find: /^nusaindex\/(.+)$/, replacement: `${librarySource}$1/index.ts` }],
   },
   test: {
-    include: ["packages/*/test/**/*.test.ts", "site/test/**/*.test.ts"],
+    include: [
+      "packages/*/test/**/*.test.ts",
+      "site/test/**/*.test.ts",
+      "scripts/test/**/*.test.ts",
+    ],
     coverage: {
       provider: "v8",
       include: ["packages/*/src/**/*.ts"],
