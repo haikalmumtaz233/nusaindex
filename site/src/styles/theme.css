@@ -158,3 +158,8 @@ body {
     display: none;
   }
 }
+
+starlight-tabs [role="tab"] {
+  padding-inline: 0.75rem;
+  white-space: nowrap;
+}
