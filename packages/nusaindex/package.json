@@ -1,6 +1,6 @@
 {
   "name": "nusaindex",
-  "version": "0.9.0-rc.1",
+  "version": "1.0.0",
   "description": "Validate, parse, and format Indonesian data, with reference data that stays current.",
   "license": "MIT",
   "author": "Haikal Mumtaz",

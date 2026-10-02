@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-10-02
+
+First public release. The Go module, the `nusaindex` library and CLI, and the `nusaindex-mcp` server are now public, and the public API follows Semantic Versioning from this release on. Data updates for new regulations ship as patch releases.
+
 ### Added
 
 - CLI: `nusaindex bank <code|bic|list>` looks up banks by transfer code or BIC, and `nusaindex region resolve <code>` follows codes renumbered by the 2012 and 2022 region splits and prints `resolvedFrom` with the code it was given.
