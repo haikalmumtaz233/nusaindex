@@ -10,9 +10,13 @@ Server MCP untuk [NusaIndex](https://github.com/haikalmumtaz233/nusaindex). Cek 
 }
 ```
 
+Di Claude Code: `claude mcp add nusaindex -- npx -y nusaindex-mcp`. Kalau Claude Desktop di Windows gagal menjalankan `npx`, pakai `"command": "cmd"` dengan `"args": ["/c", "npx", "-y", "nusaindex-mcp"]`.
+
 Tool: `validate`, `parse`, `region_search`, `region_get`, `holidays`, `workdays`, `rupiah`, `bank`, `mask`, `fake`.
 
 Privasi: apa pun yang kamu ketik di chat AI sudah terkirim ke penyedia AI sebelum sampai ke server ini. Pakai tool `fake` untuk demo. Server tidak pernah me-log atau menyimpan input.
+
+Panduan lengkap: [nusaindex.haikalmumtaz.com/tools/mcp](https://nusaindex.haikalmumtaz.com/tools/mcp/).
 
 Valid artinya strukturnya benar. NusaIndex tidak bisa memastikan nomor itu asli atau siapa pemiliknya. Tidak resmi dan tidak berafiliasi dengan instansi pemerintah mana pun.
 
