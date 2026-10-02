@@ -10,7 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - CLI: `nusaindex bank <code|bic|list>` looks up banks by transfer code or BIC, and `nusaindex region resolve <code>` follows codes renumbered by the 2012 and 2022 region splits and prints `resolvedFrom` with the code it was given.
 - MCP: a `bank` tool for bank codes and BICs, and a `mask` tool that masks values of one kind or every identifier-like number in free text.
-- Documentation site: a copyright line with the MIT License in the footer of every page.
+- Documentation site: a copyright line in the footer of every page.
 
 ### Changed
 
