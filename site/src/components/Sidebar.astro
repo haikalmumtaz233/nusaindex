@@ -1,0 +1,28 @@
+---
+import Default from "@astrojs/starlight/components/Sidebar.astro";
+---
+
+<Default />
+
+<script>
+  import { revealScrollTop } from "../lib/sidebar";
+
+  function revealCurrentPage(): void {
+    const scroller = document.getElementById("starlight__sidebar");
+    const link = scroller?.querySelector<HTMLElement>('a[aria-current="page"]');
+    if (!scroller || !link || !matchMedia("(min-width: 50em)").matches) {
+      return;
+    }
+    const offset = scroller.getBoundingClientRect().top - scroller.scrollTop;
+    const box = link.getBoundingClientRect();
+    const target = revealScrollTop(
+      { top: box.top - offset, bottom: box.bottom - offset },
+      { scrollTop: scroller.scrollTop, height: scroller.clientHeight },
+    );
+    if (target !== null) {
+      scroller.scrollTop = target;
+    }
+  }
+
+  revealCurrentPage();
+</script>
