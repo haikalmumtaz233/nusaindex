@@ -27,6 +27,7 @@ export default defineConfig({
       ],
       customCss: ["./src/styles/theme.css"],
       components: {
+        Footer: "./src/components/Footer.astro",
         Hero: "./src/components/Hero.astro",
         TableOfContents: "./src/components/TableOfContents.astro",
       },
