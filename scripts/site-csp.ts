@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
+import { scriptElement, styleElement } from "./html-tags.ts";
 
 const distDir = join("site", "dist");
 const metaMarker = '<meta http-equiv="content-security-policy"';
@@ -16,8 +17,6 @@ const baseDirectives = [
   "style-src-attr 'unsafe-inline'",
 ];
 
-const inlineScript = /<script\b([^>]*)>([\s\S]*?)<\/script>/g;
-const inlineStyle = /<style\b[^>]*>([\s\S]*?)<\/style>/g;
 const eventHandler = /<[a-z][^>]*\son[a-z]+\s*=/i;
 const javascriptUrl = /(?:href|src|action)\s*=\s*["']?\s*javascript:/i;
 const externalResource =
@@ -42,10 +41,10 @@ function unique(values: string[]): string[] {
 }
 
 function policyFor(html: string): string {
-  const scripts = [...html.matchAll(inlineScript)]
+  const scripts = [...html.matchAll(scriptElement)]
     .filter(([, attrs = ""]) => !/\ssrc\s*=/.test(attrs))
     .map(([, , body = ""]) => hash(body));
-  const styles = [...html.matchAll(inlineStyle)].map(([, body = ""]) => hash(body));
+  const styles = [...html.matchAll(styleElement)].map(([, , body = ""]) => hash(body));
   return [
     ...baseDirectives,
     ["script-src 'self' 'wasm-unsafe-eval'", ...unique(scripts)].join(" "),
