@@ -1,13 +1,10 @@
 ---
 import Default from "@astrojs/starlight/components/Footer.astro";
-import { localeOf } from "../lib/anatomy-text";
 import { copyright } from "../lib/footer";
-
-const locale = localeOf(Astro.currentLocale);
 ---
 
 <Default />
-<p class="nx-copyright">{copyright(locale)}</p>
+<p class="nx-copyright">{copyright}</p>
 
 <style>
   .nx-copyright {
