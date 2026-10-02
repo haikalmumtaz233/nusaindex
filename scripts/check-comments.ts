@@ -1,6 +1,7 @@
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 import ts from "typescript";
+import { scriptElement } from "./html-tags.ts";
 
 interface Finding {
   file: string;
@@ -126,13 +127,11 @@ function astroComments(file: string, text: string): number[] {
   if (frontmatter) {
     lines.push(...offsetLines(scriptComments(`${file}.ts`, frontmatter[1] ?? ""), 1));
   }
-  for (const block of text.matchAll(/<script[^>]*>([\s\S]*?)<\/script>/g)) {
+  for (const block of text.matchAll(scriptElement)) {
     const offset = lineOf(text, block.index + block[0].indexOf(">") + 1) - 1;
-    lines.push(...offsetLines(scriptComments(`${file}.ts`, block[1] ?? ""), offset));
+    lines.push(...offsetLines(scriptComments(`${file}.ts`, block[2] ?? ""), offset));
   }
-  const template = text.replace(/<script[^>]*>[\s\S]*?<\/script>/g, (s) =>
-    s.replace(/[^\n]/g, " "),
-  );
+  const template = text.replace(scriptElement, (s) => s.replace(/[^\n]/g, " "));
   lines.push(...markerComments(template, ["<!--", "{/*", "/*"]));
   return [...new Set(lines)].sort((a, b) => a - b);
 }
