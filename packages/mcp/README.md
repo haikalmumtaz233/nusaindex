@@ -16,7 +16,7 @@ Tool: `validate`, `parse`, `region_search`, `region_get`, `holidays`, `workdays`
 
 Privasi: apa pun yang kamu ketik di chat AI sudah terkirim ke penyedia AI sebelum sampai ke server ini. Pakai tool `fake` untuk demo. Server tidak pernah me-log atau menyimpan input.
 
-Panduan lengkap: [nusaindex.haikalmumtaz.com/tools/mcp](https://nusaindex.haikalmumtaz.com/tools/mcp/).
+Cara pasang di Cursor, VS Code, Codex, dan aplikasi lain: [nusaindex.haikalmumtaz.com/tools/mcp](https://nusaindex.haikalmumtaz.com/tools/mcp/).
 
 Valid artinya strukturnya benar. NusaIndex tidak bisa memastikan nomor itu asli atau siapa pemiliknya. Tidak resmi dan tidak berafiliasi dengan instansi pemerintah mana pun.
 
