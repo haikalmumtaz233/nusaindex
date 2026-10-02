@@ -108,7 +108,7 @@ In Claude Code it is one command:
 claude mcp add nusaindex -- npx -y nusaindex-mcp
 ```
 
-If Claude Desktop on Windows cannot start `npx`, use `"command": "cmd"` with `"args": ["/c", "npx", "-y", "nusaindex-mcp"]`.
+Setup for Cursor, VS Code, Codex, and other apps is in the [MCP setup guide](https://nusaindex.haikalmumtaz.com/en/tools/mcp/). If Claude Desktop on Windows cannot start `npx`, use `"command": "cmd"` with `"args": ["/c", "npx", "-y", "nusaindex-mcp"]`.
 
 Anything typed into an AI chat has already been sent to the AI provider before it reaches the local server, so use the `fake` tool for demos.
 

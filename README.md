@@ -108,7 +108,7 @@ Di Claude Code cukup satu perintah:
 claude mcp add nusaindex -- npx -y nusaindex-mcp
 ```
 
-Kalau Claude Desktop di Windows gagal menjalankan `npx`, pakai `"command": "cmd"` dengan `"args": ["/c", "npx", "-y", "nusaindex-mcp"]`.
+Cara pasang di Cursor, VS Code, Codex, dan aplikasi lain ada di [panduan setup MCP](https://nusaindex.haikalmumtaz.com/tools/mcp/). Kalau Claude Desktop di Windows gagal menjalankan `npx`, pakai `"command": "cmd"` dengan `"args": ["/c", "npx", "-y", "nusaindex-mcp"]`.
 
 Apa pun yang kamu ketik di chat AI sudah terkirim ke penyedia AI sebelum sampai ke server lokal ini, jadi pakai tool `fake` untuk demo.
 
