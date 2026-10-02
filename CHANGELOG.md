@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Fixed
+
+- Documentation site: the MCP page shows setup for Claude Code, Claude Desktop, Cursor, VS Code, Codex, and other apps in tabs. VS Code uses a `servers` key, so the old claim that it accepts the `mcpServers` config was wrong. The page also covers the Windows `cmd /c npx` workaround and why web apps cannot connect.
+
 ## [1.0.0] - 2026-10-02
 
 First public release. The Go module, the `nusaindex` library and CLI, and the `nusaindex-mcp` server are now public, and the public API follows Semantic Versioning from this release on. Data updates for new regulations ship as patch releases.
