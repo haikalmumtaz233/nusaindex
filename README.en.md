@@ -2,9 +2,17 @@
 
 [Bahasa Indonesia](https://github.com/haikalmumtaz233/nusaindex/blob/main/README.md) | **English**
 
+[![npm](https://img.shields.io/npm/v/nusaindex)](https://www.npmjs.com/package/nusaindex)
+[![Go Reference](https://pkg.go.dev/badge/github.com/haikalmumtaz233/nusaindex.svg)](https://pkg.go.dev/github.com/haikalmumtaz233/nusaindex)
+[![CI](https://github.com/haikalmumtaz233/nusaindex/actions/workflows/ci.yml/badge.svg)](https://github.com/haikalmumtaz233/nusaindex/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/haikalmumtaz233/nusaindex/badge)](https://scorecard.dev/viewer/?uri=github.com/haikalmumtaz233/nusaindex)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/haikalmumtaz233/nusaindex/blob/main/LICENSE)
+
 Validate, parse, and format Indonesian data, with reference data that stays current. For Go, TypeScript, and AI agents.
 
 NIK, NPWP (including the 16-digit format and NITKU), phone numbers, vehicle plates, NIP, NISN, bank codes, regions down to village level, national holidays and collective leave, working days, and Rupiah.
+
+Full documentation and a playground live at **[nusaindex.haikalmumtaz.com/en](https://nusaindex.haikalmumtaz.com/en/)**.
 
 > Unofficial. Not affiliated with Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, or any Indonesian government agency.
 
@@ -20,18 +28,54 @@ NIK, NPWP (including the 16-digit format and NITKU), phone numbers, vehicle plat
 - Rupiah formatting and spelling in words, PII masking for logs, and realistic test data
 - Zod and Valibot schemas, a CLI, and an MCP server for AI agents
 
+## Use cases
+
+Public service and local government forms, school enrolment, fintech and e-commerce, HR and payroll, logistics, PDP Law compliance, testing, and chatbots. See the [use cases page](https://nusaindex.haikalmumtaz.com/en/use-cases/) for details.
+
 ## What it does not do
 
 It checks that a number is well-formed. It cannot tell you whether a NIK, NPWP, plate, or phone number is real, or who it belongs to. Use the official verification services for that.
 
+## Install
+
+Go 1.25 or later:
+
+```sh
+go get github.com/haikalmumtaz233/nusaindex
+```
+
+Node.js 22.18 or later, Bun, Deno, edge runtimes, or a modern browser:
+
+```sh
+npm install nusaindex
+pnpm add nusaindex
+bun add nusaindex
+deno add npm:nusaindex
+```
+
+## Quick start
+
+```go
+person, err := nik.Parse("3273275705901349")
+if err == nil {
+	fmt.Println(person.BirthDate, person.Sex)
+}
+```
+
+```ts
+import * as nik from "nusaindex/nik";
+
+const person = nik.parse("3273275705901349");
+if (person.ok) {
+  console.log(person.value.birthDate, person.value.sex);
+}
+```
+
+Both print `1990-05-17 female`. Nothing throws on invalid input: Go returns an `error` and TypeScript returns `{ ok: false, error }`. Every number in this README comes from `fake`.
+
 ## Status
 
-In active development. Not ready for general use yet.
-
-## Requirements
-
-- Go 1.25 or later, or
-- Node.js 22.18 or later, a modern browser, Bun, or Deno
+Stable since v1.0.0. The public API follows [Semantic Versioning](https://semver.org/), and data updates for new regulations ship as patch releases.
 
 ## Command line
 
@@ -59,6 +103,14 @@ Arguments can end up in your shell history, so pass real data with `--stdin` or 
   }
 }
 ```
+
+In Claude Code it is one command:
+
+```sh
+claude mcp add nusaindex -- npx -y nusaindex-mcp
+```
+
+If Claude Desktop on Windows cannot start `npx`, use `"command": "cmd"` with `"args": ["/c", "npx", "-y", "nusaindex-mcp"]`.
 
 Anything typed into an AI chat has already been sent to the AI provider before it reaches the local server, so use the `fake` tool for demos.
 
@@ -93,3 +145,11 @@ type Customer struct {
 ## Test data
 
 `fake` (Go package, TypeScript `nusaindex/fake`) generates valid-looking NIK, NPWP, phone numbers, NIP, NISN and plates from a seed, with the same output in Go and TypeScript. It is for tests only: generated numbers can belong to real people.
+
+## Security
+
+Report vulnerabilities privately with the **Report a vulnerability** button on the Security tab. See [SECURITY.md](https://github.com/haikalmumtaz233/nusaindex/blob/main/SECURITY.md).
+
+## License
+
+[MIT](https://github.com/haikalmumtaz233/nusaindex/blob/main/LICENSE) for both code and data. The source and regulation behind each dataset are listed in [NOTICE](https://github.com/haikalmumtaz233/nusaindex/blob/main/NOTICE) and `data/manifest.json`.

@@ -2,9 +2,17 @@
 
 **Bahasa Indonesia** | [English](https://github.com/haikalmumtaz233/nusaindex/blob/main/README.en.md)
 
+[![npm](https://img.shields.io/npm/v/nusaindex)](https://www.npmjs.com/package/nusaindex)
+[![Go Reference](https://pkg.go.dev/badge/github.com/haikalmumtaz233/nusaindex.svg)](https://pkg.go.dev/github.com/haikalmumtaz233/nusaindex)
+[![CI](https://github.com/haikalmumtaz233/nusaindex/actions/workflows/ci.yml/badge.svg)](https://github.com/haikalmumtaz233/nusaindex/actions/workflows/ci.yml)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/haikalmumtaz233/nusaindex/badge)](https://scorecard.dev/viewer/?uri=github.com/haikalmumtaz233/nusaindex)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/haikalmumtaz233/nusaindex/blob/main/LICENSE)
+
 Cek, baca, dan format data Indonesia, lengkap dengan data referensi yang selalu terbaru. Untuk Go, TypeScript, terminal, dan agent AI.
 
 NIK, NPWP (termasuk format 16 digit dan NITKU), nomor HP, plat nomor, NIP, NISN, kode bank, wilayah sampai desa, libur nasional dan cuti bersama, hari kerja, dan Rupiah.
+
+Dokumentasi lengkap dan playground ada di **[nusaindex.haikalmumtaz.com](https://nusaindex.haikalmumtaz.com)**.
 
 > Tidak resmi. Tidak berafiliasi dengan Dukcapil, DJP, Komdigi, Polri, Bank Indonesia, atau instansi pemerintah mana pun.
 
@@ -22,20 +30,52 @@ NIK, NPWP (termasuk format 16 digit dan NITKU), nomor HP, plat nomor, NIP, NISN,
 
 ## Dipakai untuk apa
 
-Formulir layanan publik dan website pemda, pendaftaran sekolah, fintech dan e-commerce, HR dan penggajian, logistik, kepatuhan UU PDP, pengujian, sampai chatbot. Contoh lengkapnya ada di halaman Kegunaan di situs dokumentasi.
+Formulir layanan publik dan website pemda, pendaftaran sekolah, fintech dan e-commerce, HR dan penggajian, logistik, kepatuhan UU PDP, pengujian, sampai chatbot. Contoh lengkapnya ada di halaman [Kegunaan](https://nusaindex.haikalmumtaz.com/use-cases/).
 
 ## Yang tidak dilakukan
 
 NusaIndex cuma mengecek apakah sebuah nomor strukturnya benar. Ia tidak bisa memastikan NIK, NPWP, plat, atau nomor HP itu asli, apalagi siapa pemiliknya. Untuk itu pakai layanan verifikasi resmi.
 
+## Instalasi
+
+Go 1.25 ke atas:
+
+```sh
+go get github.com/haikalmumtaz233/nusaindex
+```
+
+Node.js 22.18 ke atas, Bun, Deno, edge runtime, atau browser modern:
+
+```sh
+npm install nusaindex
+pnpm add nusaindex
+bun add nusaindex
+deno add npm:nusaindex
+```
+
+## Mulai cepat
+
+```go
+person, err := nik.Parse("3273275705901349")
+if err == nil {
+	fmt.Println(person.BirthDate, person.Sex)
+}
+```
+
+```ts
+import * as nik from "nusaindex/nik";
+
+const person = nik.parse("3273275705901349");
+if (person.ok) {
+  console.log(person.value.birthDate, person.value.sex);
+}
+```
+
+Dua-duanya mencetak `1990-05-17 female`. Fungsi yang gagal tidak pernah melempar exception. Go mengembalikan `error`, TypeScript mengembalikan `{ ok: false, error }`. Semua nomor di README ini dibuat dengan `fake`.
+
 ## Status
 
-Masih dalam pengembangan aktif dan belum siap dipakai umum.
-
-## Kebutuhan
-
-- Go 1.25 ke atas, atau
-- Node.js 22.18 ke atas, browser modern, Bun, atau Deno
+Stabil sejak v1.0.0. API publik mengikuti [Semantic Versioning](https://semver.org/lang/id/), dan pembaruan data karena regulasi baru dirilis sebagai versi patch.
 
 ## Command line
 
@@ -63,6 +103,14 @@ Argumen bisa tersimpan di riwayat shell, jadi kirim data asli lewat `--stdin` at
   }
 }
 ```
+
+Di Claude Code cukup satu perintah:
+
+```sh
+claude mcp add nusaindex -- npx -y nusaindex-mcp
+```
+
+Kalau Claude Desktop di Windows gagal menjalankan `npx`, pakai `"command": "cmd"` dengan `"args": ["/c", "npx", "-y", "nusaindex-mcp"]`.
 
 Apa pun yang kamu ketik di chat AI sudah terkirim ke penyedia AI sebelum sampai ke server lokal ini, jadi pakai tool `fake` untuk demo.
 
@@ -97,3 +145,11 @@ type Customer struct {
 ## Data uji
 
 `fake` (paket Go, atau `nusaindex/fake` di TypeScript) membuat NIK, NPWP, nomor HP, NIP, NISN, dan plat yang strukturnya valid dari sebuah seed, dengan hasil yang sama di Go dan TypeScript. Cuma untuk pengujian, karena nomornya bisa saja milik orang sungguhan.
+
+## Keamanan
+
+Laporkan celah keamanan secara privat lewat tombol **Report a vulnerability** di tab Security. Detailnya ada di [SECURITY.md](https://github.com/haikalmumtaz233/nusaindex/blob/main/SECURITY.md).
+
+## Lisensi
+
+[MIT](https://github.com/haikalmumtaz233/nusaindex/blob/main/LICENSE), untuk kode maupun data. Sumber dan regulasi tiap dataset tercatat di [NOTICE](https://github.com/haikalmumtaz233/nusaindex/blob/main/NOTICE) dan `data/manifest.json`.
