@@ -19,7 +19,7 @@ jobs:
       contents: read
 
   publish:
-    name: Publish to npm
+    name: Stage on npm
     needs: verify
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -52,14 +52,22 @@ jobs:
           pnpm build
           pnpm --filter nusaindex --filter nusaindex-mcp exec pnpm pack --pack-destination "$RUNNER_TEMP/packs"
 
-      - name: Publish with provenance
+      - name: Install an npm that can stage releases
+        run: npm install --global npm@11.21.0
+
+      - name: Stage on npm with provenance
         env:
           TAG: ${{ github.ref_name }}
         run: |
           version="${TAG#v}"
           dist_tag="$(node scripts/release-notes.ts dist-tag "$TAG")"
-          npm publish "$RUNNER_TEMP/packs/nusaindex-$version.tgz" --provenance --access public --tag "$dist_tag"
-          npm publish "$RUNNER_TEMP/packs/nusaindex-mcp-$version.tgz" --provenance --access public --tag "$dist_tag"
+          for name in nusaindex nusaindex-mcp; do
+            dir="$RUNNER_TEMP/stage/$name"
+            mkdir -p "$dir"
+            tar -xzf "$RUNNER_TEMP/packs/$name-$version.tgz" -C "$dir" --strip-components=1
+            (cd "$dir" && npm stage publish . --provenance --access public --tag "$dist_tag" --ignore-scripts)
+          done
+          echo "Staged $TAG. Approve nusaindex first, then nusaindex-mcp, with 2FA on npmjs.com or npm stage approve." >> "$GITHUB_STEP_SUMMARY"
 
   github-release:
     name: GitHub Release
