@@ -4,8 +4,6 @@
 
 [![npm](https://img.shields.io/npm/v/nusaindex)](https://www.npmjs.com/package/nusaindex)
 [![Go Reference](https://pkg.go.dev/badge/github.com/haikalmumtaz233/nusaindex.svg)](https://pkg.go.dev/github.com/haikalmumtaz233/nusaindex)
-[![CI](https://github.com/haikalmumtaz233/nusaindex/actions/workflows/ci.yml/badge.svg)](https://github.com/haikalmumtaz233/nusaindex/actions/workflows/ci.yml)
-[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/haikalmumtaz233/nusaindex/badge)](https://scorecard.dev/viewer/?uri=github.com/haikalmumtaz233/nusaindex)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/haikalmumtaz233/nusaindex/blob/main/LICENSE)
 
 Validate, parse, and format Indonesian data, with reference data that stays current. For Go, TypeScript, and AI agents.
