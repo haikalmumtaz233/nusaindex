@@ -72,7 +72,6 @@ interface Ui {
   readonly generate: string;
   readonly valid: string;
   readonly empty: string;
-  readonly note: string;
   readonly choose: string;
 }
 
@@ -89,7 +88,6 @@ const uis: Readonly<Record<Locale, Ui>> = {
     generate: "Generate another",
     valid: "Well-formed",
     empty: "Paste a value to decode it.",
-    note: "Decoded in your browser. Nothing you type is sent anywhere.",
     choose: "Identifier",
   },
   id: {
@@ -104,7 +102,6 @@ const uis: Readonly<Record<Locale, Ui>> = {
     generate: "Buat contoh lain",
     valid: "Strukturnya benar",
     empty: "Tempel nomornya di sini.",
-    note: "Dicek langsung di browser. Yang kamu ketik tidak dikirim ke mana pun.",
     choose: "Jenis nomor",
   },
 };

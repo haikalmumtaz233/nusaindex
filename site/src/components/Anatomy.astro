@@ -75,7 +75,6 @@ const inputId = `anatomy-${active}`;
     }
   </dl>
   <p class="status" role="status" aria-live="polite">{text.valid}</p>
-  <p class="note">{text.note}</p>
 </section>
 
 <style is:global>
@@ -226,11 +225,6 @@ const inputId = `anatomy-${active}`;
   }
   .anatomy[data-state="invalid"] .status {
     color: var(--soga);
-  }
-  .anatomy .note {
-    margin: 0;
-    font-size: var(--sl-text-xs);
-    color: var(--sl-color-gray-3);
   }
   .anatomy:has(.item:hover) :is(.seg, .item) {
     opacity: 0.35;
