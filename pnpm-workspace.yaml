@@ -8,3 +8,6 @@ onlyBuiltDependencies: []
 
 ignoredOptionalDependencies:
   - sharp
+
+overrides:
+  postcss-nested>postcss-selector-parser: ^7.1.6
