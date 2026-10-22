@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-22
+
+Patch release with a security update for the MCP server and a fix to the MCP setup guide.
+
 ### Fixed
 
 - Documentation site: the MCP page shows setup for Claude Code, Claude Desktop, Cursor, VS Code, Codex, and other apps in tabs. VS Code uses a `servers` key, so the old claim that it accepts the `mcpServers` config was wrong. The page also covers the Windows `cmd /c npx` workaround and why web apps cannot connect.
