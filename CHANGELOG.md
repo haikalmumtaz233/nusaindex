@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 - Documentation site: the MCP page shows setup for Claude Code, Claude Desktop, Cursor, VS Code, Codex, and other apps in tabs. VS Code uses a `servers` key, so the old claim that it accepts the `mcpServers` config was wrong. The page also covers the Windows `cmd /c npx` workaround and why web apps cannot connect.
 
+### Security
+
+- MCP: the bundled `@modelcontextprotocol/server` SDK moves to 2.3.1 for GHSA-jm63-cq47-j5jp, GHSA-46jr-4wx8-v453 and GHSA-rvq5-wwqv-78pq, and a tool call whose arguments hold more than 1,000 array elements and object keys is rejected before validation. The server only runs over stdio and has no bearer auth, so these advisories did not affect it, but the fixed code now ships in the package.
+
 ## [1.0.0] - 2026-10-02
 
 First public release. The Go module, the `nusaindex` library and CLI, and the `nusaindex-mcp` server are now public, and the public API follows Semantic Versioning from this release on. Data updates for new regulations ship as patch releases.
