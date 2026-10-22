@@ -53,6 +53,29 @@ describe("mcp server", () => {
     });
   });
 
+  it("rejects oversized tool arguments before validation and keeps the largest valid input", async () => {
+    const request = await connect();
+    const oversized = await request({
+      method: "tools/call",
+      params: {
+        name: "validate",
+        arguments: { kind: "nik", values: Array.from({ length: 1_001 }, () => FAKE_NIK) },
+      },
+    });
+    expect(oversized).toMatchObject({ result: { isError: true } });
+    expect(JSON.stringify(oversized)).toContain("more than the maximum");
+    expect(JSON.stringify(oversized)).not.toContain(FAKE_NIK);
+    const largest = await request({
+      method: "tools/call",
+      params: {
+        name: "mask",
+        arguments: { kind: "nik", values: Array.from({ length: 100 }, () => FAKE_NIK) },
+      },
+    });
+    expect(largest).toMatchObject({ result: { structuredContent: { ok: true } } });
+    expect(largest).not.toMatchObject({ result: { isError: true } });
+  });
+
   it("warns about privacy where personal data goes in", () => {
     for (const tool of [tools.validate, tools.parse, tools.masks]) {
       expect(tool.description).toContain("already been sent to the AI provider");

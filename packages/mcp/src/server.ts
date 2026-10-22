@@ -6,6 +6,8 @@ const INSTRUCTIONS =
   "NusaIndex validates and parses Indonesian identifiers (NIK, NPWP, phone, plate, NIP, NISN), looks up regions, holidays, working days and bank codes, masks identifiers, and formats Rupiah, fully offline. " +
   "Results are structural checks, not proof that a number is real. Unofficial; not affiliated with any Indonesian government agency.";
 
+const MAX_TOOL_INPUT_ELEMENTS = 1_000;
+
 function register(server: McpServer, tool: ToolDefinition, ctx: ToolContext): void {
   server.registerTool(
     tool.name,
@@ -30,7 +32,11 @@ function register(server: McpServer, tool: ToolDefinition, ctx: ToolContext): vo
 export function createServer(ctx: ToolContext): McpServer {
   const server = new McpServer(
     { name: "nusaindex", version: pkg.version },
-    { capabilities: { tools: {} }, instructions: INSTRUCTIONS },
+    {
+      capabilities: { tools: {} },
+      instructions: INSTRUCTIONS,
+      maxToolInputElements: MAX_TOOL_INPUT_ELEMENTS,
+    },
   );
   for (const tool of Object.values(tools)) {
     register(server, tool, ctx);
