@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+## [1.0.2] - 2026-10-30
+
+Patch release with a security update for the MCP server.
+
 ### Security
 
 - MCP: the bundled `zod` moves to 4.6.7 for GHSA-mrhx-c7xc-m3w5. Tool calls with more than 1,000 array elements and object keys were already rejected before validation, which limited the impact, but the fixed code now ships in the package.
