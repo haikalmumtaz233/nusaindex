@@ -8,5 +8,5 @@ export default defineConfig({
   dts: false,
   clean: true,
   fixedExtension: false,
-  noExternal: ["@modelcontextprotocol/server", "@modelcontextprotocol/core", "zod"],
+  deps: { alwaysBundle: ["@modelcontextprotocol/server", "@modelcontextprotocol/core", "zod"] },
 });
