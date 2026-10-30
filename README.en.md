@@ -73,7 +73,7 @@ Both print `1990-05-17 female`. Nothing throws on invalid input: Go returns an `
 
 ## Status
 
-Stable since v1.0.0. The public API follows [Semantic Versioning](https://semver.org/), and data updates for new regulations ship as patch releases.
+Latest release v1.0.2, stable since v1.0.0. The public API follows [Semantic Versioning](https://semver.org/), and data updates for new regulations ship as patch releases.
 
 ## Command line
 
