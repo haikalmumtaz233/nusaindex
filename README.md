@@ -73,7 +73,7 @@ Dua-duanya mencetak `1990-05-17 female`. Fungsi yang gagal tidak pernah melempar
 
 ## Status
 
-Versi terbaru v1.0.2, stabil sejak v1.0.0. API publik mengikuti [Semantic Versioning](https://semver.org/lang/id/), dan pembaruan data karena regulasi baru dirilis sebagai versi patch.
+Versi terbaru v1.0.3, stabil sejak v1.0.0. API publik mengikuti [Semantic Versioning](https://semver.org/lang/id/), dan pembaruan data karena regulasi baru dirilis sebagai versi patch.
 
 ## Command line
 
