@@ -14,7 +14,6 @@ import {
 const allowedHosts = new Set([
   "raw.githubusercontent.com",
   "peraturan.bpk.go.id",
-  "jdih.kemenkoinfra.go.id",
   "www.kemenkopmk.go.id",
   "kemenkopmk.go.id",
   "pustaka.bca.co.id",
