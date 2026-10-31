@@ -1,6 +1,6 @@
 {
   "name": "nusaindex-mcp",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "MCP server for NusaIndex: validate Indonesian identifiers, look up regions and holidays, and work with Rupiah offline.",
   "license": "MIT",
   "author": "Haikal Mumtaz",
