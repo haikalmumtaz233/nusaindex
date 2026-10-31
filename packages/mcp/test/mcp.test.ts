@@ -215,7 +215,7 @@ describe("mcp bank and mask tools", () => {
       value: { code: "014" },
     });
     const all = await tools.banks.call({}, ctx);
-    expect(Reflect.get(all, "value")).toHaveLength(125);
+    expect(Reflect.get(all, "value")).toHaveLength(124);
     expect(await tools.banks.call({ code: "014", bic: "CENAIDJA" }, ctx)).toEqual({
       ok: false,
       error: { code: "options" },

@@ -17,7 +17,7 @@ const allowedHosts = new Set([
   "jdih.kemenkoinfra.go.id",
   "www.kemenkopmk.go.id",
   "kemenkopmk.go.id",
-  "www.bca.co.id",
+  "pustaka.bca.co.id",
 ]);
 const regionSource = "https://raw.githubusercontent.com/cahyadsn/wilayah/master/db/wilayah.sql";
 const regionRow = /\('(\d{2}(?:\.\d{2}(?:\.\d{2}(?:\.\d{4})?)?)?)','((?:[^']|'')*)'\)/g;

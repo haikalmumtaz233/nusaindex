@@ -1,5 +1,5 @@
 {
-  "dataVersion": "2026.10.5",
+  "dataVersion": "2026.10.6",
   "datasets": {
     "regions.csv": {
       "source": [
@@ -89,14 +89,14 @@
     },
     "banks.csv": {
       "source": [
-        "https://www.bca.co.id/-/media/Files/2023/sandi-bank-bi"
+        "https://pustaka.bca.co.id/bisnis/layanan/e-banking-bisnis/klikbca-bisnis/data-bank-update-31-maret-2026.pdf"
       ],
-      "regulation": "Tabel Sandi Bank (terbitan PT Bank Central Asia Tbk, pembaruan 01-11-2024); bukan terbitan Bank Indonesia",
-      "retrievedAt": "2026-10-01",
-      "sha256": "67494bfbeeccd7a9d1e1da939168003e992b8f16def439012f2a3263e18a1947",
-      "rows": 125,
+      "regulation": "Tabel Sandi Bank (terbitan PT Bank Central Asia Tbk, pembaruan 31-03-2026); bukan terbitan Bank Indonesia",
+      "retrievedAt": "2026-10-31",
+      "sha256": "a739c07a6edd9895f70a4ee1fc30817d6dfd7e5034ab467b6680d86527d6804b",
+      "rows": 124,
       "sourceSha256": {
-        "https://www.bca.co.id/-/media/Files/2023/sandi-bank-bi": "09af2a95b0d42377aaad06247b420924ccfdca45839d0b940adc2fad7fc1992c"
+        "https://pustaka.bca.co.id/bisnis/layanan/e-banking-bisnis/klikbca-bisnis/data-bank-update-31-maret-2026.pdf": "419296fb153822f21154e31116b56ab81565a0284289273426d89aa765af8bbe"
       }
     }
   }

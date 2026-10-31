@@ -185,7 +185,7 @@ describe("cli reference data", () => {
     expect(byCode.code).toBe(0);
     expect(byCode.out[0]).toContain("CENAIDJA");
     expect((await cli(["bank", "cenaidja"])).out).toContain("shortName   BCA");
-    expect((await cli(["bank", "list"])).out).toHaveLength(125);
+    expect((await cli(["bank", "list"])).out).toHaveLength(124);
     expect((await cli(["bank", "999"])).code).toBe(1);
     expect((await cli(["bank", "014", "--json"])).out[0]).toContain('"shortName":"BCA"');
   });

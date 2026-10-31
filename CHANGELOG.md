@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Changed
+
+- Reference data `2026.10.6`: bank codes follow the BCA bank code table updated 31 March 2026 (124 banks). Eight BICs changed: Bank of India Indonesia (146), Bank Sulselbar (126), BPD NTT (130), Bank SBI Indonesia (498), BCA Digital (501), BCA Syariah (536), hibank (553) and Allo Bank (567). Six banks have their new names: KB Indonesia (441), Bank Saqu (472), Bank Syariah Nasional (405), Bank Nagari (118), BPD Sulut Gorontalo (127) and BPD Maluku dan Maluku Utara (131). The BTN sharia unit (200, `SYBTIDJ1`) is gone from the table, so `bank.byCode("200")` now returns only BTN.
+
 ## [1.0.2] - 2026-10-30
 
 Patch release with a security update for the MCP server.
