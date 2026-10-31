@@ -16,7 +16,7 @@ Semua file punya bentuk yang sama:
 
 ```json
 {
-  "dataVersion": "2026.10.5",
+  "dataVersion": "2026.10.6",
   "data": [
     {
       "code": "31.71",

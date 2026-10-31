@@ -12,7 +12,7 @@ Setiap dataset disimpan sebagai CSV di `data/`. Sumber, regulasi, tanggal ambil,
 | Kode plat               | 514    | Perpol 7 Tahun 2021, ditambah kode Korlantas 2024 untuk provinsi baru di Papua                                    |
 | Kode area telepon tetap | 387    | Permenkominfo 14 Tahun 2018                                                                                       |
 | Libur                   | 194    | SKB 3 Menteri 2020 sampai 2027 dan semua perubahannya, plus Keppres 22 Tahun 2020, 10 Tahun 2024, 33 Tahun 2024   |
-| Bank                    | 125    | Tabel sandi bank dari PT Bank Central Asia Tbk (1 November 2024), bukan terbitan Bank Indonesia                   |
+| Bank                    | 124    | Tabel sandi bank dari PT Bank Central Asia Tbk (31 Maret 2026) , bukan terbitan Bank Indonesia                    |
 
 Prefix seluler dan susunan NIK, NPWP, serta NIP mengikuti regulasi yang disebut di halaman referensinya masing-masing.
 
