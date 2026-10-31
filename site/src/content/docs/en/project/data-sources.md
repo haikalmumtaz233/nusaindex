@@ -12,7 +12,7 @@ Every dataset lives as a CSV file in `data/` with its source documents, regulati
 | Plate codes             | 514    | Perpol 7 Tahun 2021, Korlantas 2024 codes for the new Papua provinces                                      |
 | Fixed-line area codes   | 387    | Permenkominfo 14 Tahun 2018                                                                                |
 | Holidays                | 194    | SKB 3 Menteri 2020 to 2027 with every amendment, Keppres 22 Tahun 2020, 10 Tahun 2024, 33 Tahun 2024       |
-| Banks                   | 125    | Bank code table published by PT Bank Central Asia Tbk (1 November 2024), not by Bank Indonesia             |
+| Banks                   | 124    | Bank code table published by PT Bank Central Asia Tbk (31 March 2026) , not by Bank Indonesia              |
 
 Mobile prefixes and the layouts of NIK, NPWP and NIP come from the regulations named on each reference page.
 

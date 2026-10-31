@@ -16,7 +16,7 @@ Every file has the same envelope:
 
 ```json
 {
-  "dataVersion": "2026.10.5",
+  "dataVersion": "2026.10.6",
   "data": [
     {
       "code": "31.71",
